@@ -4,3 +4,7 @@
 # design no início do projeto). Nunca faz parte do site publicado, e não
 # precisa de histórico de versão — fica só localmente.
 assets/templates/
+
+# Permissões locais do Claude Code nesta máquina — não é segredo, mas é
+# configuração de máquina, não do projeto.
+.claude/settings.local.json

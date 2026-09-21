@@ -1,0 +1,61 @@
+# Publica o site no GitHub Pages a cada push na branch "main".
+#
+# Por que isso existe: este repositório guarda mais coisa do que o site em si
+# (rascunhos na raiz, este próprio CLAUDE.md/aprendizados.md, a pasta .claude/).
+# Em vez de publicar o repositório inteiro, este workflow monta uma cópia
+# limpa só com o que o index.html realmente usa, e publica só essa cópia.
+# Ver CLAUDE.md, seção "Ao publicar", para a lista exata do que entra.
+#
+# Depois de configurado uma vez (Settings > Pages > Source > "GitHub Actions"),
+# ninguém precisa tocar neste arquivo de novo: basta dar "git push" e em
+# menos de um minuto o link público já mostra a versão nova.
+
+name: Publicar site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # botão "Run workflow" na aba Actions, para republicar
+                        # sem precisar de um commit novo
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Montar a pasta pública (só o que o site usa)
+        run: |
+          set -e
+          mkdir -p _site/assets
+          cp index.html _site/
+          cp -R assets/design-system-2 _site/assets/
+          cp -R assets/site           _site/assets/
+          cp -R assets/imagens        _site/assets/
+          cp -R assets/logos          _site/assets/
+
+      - name: Empacotar para o Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

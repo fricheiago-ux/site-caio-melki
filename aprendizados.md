@@ -57,4 +57,25 @@ Estrutura) como "nunca publicar".
 
 ---
 
+## 2026-09-22 — A "hospedagem contratada" era só o domínio
+
+**O que aconteceu:** o pedido inicial partiu de "domínio e hospedagem já
+contratados na Hostinger". Ao investigar juntos onde ficava a função Git, veio à
+tona que só o domínio existe — a conta nunca teve uma hospedagem ativa (a prova
+foi a própria Hostinger mostrar a vitrine de venda de planos ao clicar em
+"Sites", tela que só aparece quando não há nenhuma hospedagem contratada).
+
+**O que eu entendi:** premissa dada como fato no início de uma tarefa também
+merece ser conferida, mesmo vindo de mim — nesse caso a checagem levou uns
+poucos prints de tela e evitou configurar deploy para um destino que não existia.
+
+**Vale generalizar para o CLAUDE.md global?** Sim, é o mesmo espírito da regra
+global 6 ("não afirmar de memória o que dá para checar"), só que aplicado ao
+contrário: quando o *usuário* afirma um fato de infraestrutura (domínio,
+hospedagem, conta já configurada), vale confirmar com uma evidência concreta
+antes de construir algo em cima dele, em vez de seguir direto para a
+configuração.
+
+---
+
 <!-- próximas entradas vão aqui -->

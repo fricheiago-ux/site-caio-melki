@@ -4,8 +4,10 @@ Complementa o `CLAUDE.md` global. Onde houver conflito, **este arquivo vence**.
 
 Site institucional do Dr. Caio Ribeiro Melki, médico de família e comunidade em
 Belo Horizonte. Estático, sem etapa de build — é `index.html` puro com CSS e JS
-próprios. Domínio e hospedagem já contratados na Hostinger; endereço final e forma
-de publicação **ainda em definição** (ver seção "Ao publicar").
+próprios. Domínio **caiomelkimfc.com.br** já registrado na Hostinger; a
+hospedagem em si **ainda não foi contratada** (checado em 22/09/2026 — ver
+`memoria.md`). Forma de publicação **ainda em definição** (ver seção
+"Ao publicar").
 
 ---
 
