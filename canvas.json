@@ -1,0 +1,34 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1123,
+      "h": 794,
+      "title": "ACLS · American Heart Association",
+      "print": "fixed"
+    },
+    {
+      "file": "Conduct.dc.html",
+      "x": 1243,
+      "y": 0,
+      "w": 1123,
+      "h": 794,
+      "title": "CONDUCT",
+      "print": "fixed"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "nota-placeholders",
+      "x": 0,
+      "y": -168,
+      "w": 520,
+      "text": "Peças ilustrativas — não são documentos emitidos.\nEm vermelho: o que falta você me passar (ano de cada certificação, instituição emissora do CONDUCT e quem assina)."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}

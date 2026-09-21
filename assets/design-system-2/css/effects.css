@@ -1,0 +1,180 @@
+/* ============================================================
+   EFEITOS DE FUNDO E CURSOR — Proposta 2 (tema claro)
+   .cursor-dot / .cursor-outline / .hovered ......... ref-5
+   .particle-canvas ................................. ref-5
+   .noise-overlay ................................... ref-5
+   .flashlight-card / .glass-panel .................. ref-7
+   .parallax-img .................................... ref-4
+   ============================================================ */
+
+/* ---------- Cursor customizado (ref-5) ---------- */
+.cursor-dot,
+.cursor-outline {
+position: fixed;
+top: 0;
+left: 0;
+transform: translate(-50%, -50%);
+border-radius: 50%;
+z-index: 9999;
+pointer-events: none;
+/* cursor.js posiciona por transform, então o movimento fica no compositor */
+will-change: transform;
+}
+.cursor-dot {
+width: 5px;
+height: 5px;
+background-color: var(--sage-700);
+}
+.cursor-outline {
+width: 34px;
+height: 34px;
+border: 1px solid rgba(79, 115, 85, 0.45);
+transition: width 0.25s var(--ease-out-expo),
+height 0.25s var(--ease-out-expo),
+background-color 0.25s ease,
+border-color 0.25s ease;
+}
+.cursor-outline.hovered {
+width: 66px;
+height: 66px;
+background-color: rgba(79, 115, 85, 0.08);
+border-color: var(--sage-600);
+}
+
+/* ---------- Cursor sobre fundo escuro ----------
+   Em sálvia, musgo ou tinta o cursor verde some dentro do fundo. Aqui ele
+   vira creme. Quem decide não é uma lista de seções: cursor.js mede a
+   luminância do que está de fato sob o ponteiro, gradiente incluído, e
+   acende esta classe. Seção nova escura já nasce funcionando. */
+.cursor-dot { transition: background-color 0.22s ease; }
+.cursor-dot.em-fundo-escuro { background-color: var(--paper-100); }
+.cursor-outline.em-fundo-escuro { border-color: rgba(251, 250, 247, 0.55); }
+.cursor-outline.em-fundo-escuro.hovered {
+background-color: rgba(251, 250, 247, 0.10);
+border-color: var(--paper-100);
+}
+
+/* ---------- Grão de papel (ref-5, invertido para tema claro) ---------- */
+.noise-overlay {
+position: fixed;
+inset: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 60;
+opacity: 0.045;
+mix-blend-mode: multiply;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Canvas de partículas (ref-5) ---------- */
+.particle-canvas {
+position: fixed;
+inset: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 0;
+opacity: 0.6;
+}
+
+/* ---------- Malha técnica ---------- */
+.grid-bg {
+background-image:
+linear-gradient(to right, rgba(31, 36, 32, 0.055) 1px, transparent 1px),
+linear-gradient(to bottom, rgba(31, 36, 32, 0.055) 1px, transparent 1px);
+background-size: 72px 72px;
+-webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 45%, transparent 100%);
+mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 45%, transparent 100%);
+}
+
+/* ---------- Curvas orgânicas de fundo ---------- */
+.contour-bg {
+background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' viewBox='0 0 1200 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 420C140 360 260 470 400 420C540 370 660 470 800 420C940 370 1060 470 1200 420' stroke='rgba(79,115,85,0.10)' stroke-width='1.2' fill='none'/%3E%3Cpath d='M0 470C140 410 260 520 400 470C540 420 660 520 800 470C940 420 1060 520 1200 470' stroke='rgba(31,36,32,0.055)' stroke-width='1' fill='none'/%3E%3Cpath d='M0 370C140 310 260 420 400 370C540 320 660 420 800 370C940 320 1060 420 1200 370' stroke='rgba(205,191,162,0.35)' stroke-width='1.2' fill='none'/%3E%3C/svg%3E");
+background-size: 1200px 800px;
+background-repeat: repeat;
+}
+
+/* ---------- Auroras suaves (luz natural) ---------- */
+.aurora {
+position: absolute;
+border-radius: 50%;
+filter: blur(110px);
+pointer-events: none;
+will-change: transform;
+}
+.aurora--sage { background: radial-gradient(circle, rgba(127, 163, 130, 0.46), transparent 66%); }
+.aurora--sand { background: radial-gradient(circle, rgba(232, 223, 205, 0.85), transparent 66%); }
+.aurora--sky { background: radial-gradient(circle, rgba(127, 163, 184, 0.34), transparent 66%); }
+
+/* ---------- Painel translúcido (ref-7, tema claro) ---------- */
+.glass-panel {
+background: rgba(251, 250, 247, 0.72);
+backdrop-filter: blur(18px);
+-webkit-backdrop-filter: blur(18px);
+border: 1px solid var(--line);
+box-shadow: var(--shadow-md);
+}
+.glass-panel--dark {
+background: rgba(42, 48, 42, 0.55);
+border-color: var(--line-light);
+}
+
+/* ---------- Lanterna que segue o mouse (ref-7) ---------- */
+.flashlight-card {
+position: relative;
+overflow: hidden;
+}
+.flashlight-card::before {
+content: "";
+position: absolute;
+inset: 0;
+background: radial-gradient(
+520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+rgba(79, 115, 85, 0.10),
+transparent 44%
+);
+opacity: 0;
+transition: opacity 0.5s ease;
+pointer-events: none;
+z-index: 2;
+}
+.flashlight-card:hover::before { opacity: 1; }
+
+/* ---------- Zoom de imagem no hover (ref-6) ---------- */
+.img-wrap { overflow: hidden; }
+.img-wrap img { transition: transform 1s var(--ease-out-expo), filter 1s ease; }
+.group:hover .img-wrap img { transform: scale(1.07); }
+
+/* ---------- Parallax por scroll (ref-4) ---------- */
+.parallax-img { will-change: transform; }
+
+/* ---------- Filete luminoso ---------- */
+.hairline { height: 1px; width: 100%; background: var(--grad-hairline); }
+
+/* ---------- Varredura de luz sobre a seção ---------- */
+.sweep {
+position: absolute;
+left: 0;
+right: 0;
+height: 180px;
+background: linear-gradient(to bottom, transparent, rgba(232, 223, 205, 0.5), transparent);
+animation: sweep 11s linear infinite;
+pointer-events: none;
+mix-blend-mode: multiply;
+}
+
+/* ---------- Moldura com gradiente (ref-7) ---------- */
+[style*="--border-gradient"] { position: relative; }
+[style*="--border-gradient"]::after {
+content: "";
+position: absolute;
+inset: 0;
+padding: 1px;
+border-radius: inherit;
+-webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+-webkit-mask-composite: xor;
+mask-composite: exclude;
+background: var(--border-gradient);
+pointer-events: none;
+}

@@ -1,0 +1,161 @@
+/* ============================================================
+   CERTIFICADOS — continuação da seção Experiência profissional
+   As peças são as mesmas do canvas de design (1123x794), servidas
+   aqui como HTML e reduzidas por escala: nada de imagem achatada,
+   o texto continua nítido em qualquer tamanho de tela.
+   O fator de escala é calculado em certificados.js e reaplicado a
+   cada mudança de largura por ResizeObserver.
+   ============================================================ */
+
+.cert-divisa {
+display: flex;
+align-items: center;
+gap: var(--sp-5);
+margin: var(--sp-24) 0 var(--sp-8);
+}
+.cert-divisa__rotulo {
+display: inline-flex;
+align-items: center;
+gap: var(--sp-2);
+flex: none;
+}
+.cert-divisa__linha {
+flex: 1;
+height: 1px;
+background: var(--grad-hairline);
+}
+
+/* As peças são apoio, não o assunto da seção: ficam bem menores que o
+   carrossel e centradas, com a largura travada. */
+.cert-grade {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: var(--sp-8);
+max-width: 780px;
+margin-inline: auto;
+}
+
+.cert-peca {
+margin: 0;
+display: flex;
+flex-direction: column;
+gap: var(--sp-4);
+}
+
+/* O palco fixa a proporção da folha; a escala vem do certificados.js */
+.cert-palco {
+position: relative;
+width: 100%;
+aspect-ratio: 1123 / 794;
+overflow: hidden;
+border-radius: var(--r-lg);
+box-shadow: var(--shadow-md);
+transition: transform var(--dur-base) var(--ease-out-expo), box-shadow var(--dur-base) ease;
+}
+.cert-peca:hover .cert-palco {
+transform: translateY(-4px);
+box-shadow: var(--shadow-lg);
+}
+
+/* A folha em tamanho real, encolhida para a largura do palco.
+   O fator vai por JS: scale() só aceita número, e calc(100cqw / 1123)
+   devolve comprimento — a regra era descartada em silêncio. */
+.cert-folha {
+position: absolute;
+top: 0;
+left: 0;
+width: 1123px;
+height: 794px;
+transform-origin: top left;
+}
+
+.cert-legenda {
+display: flex;
+flex-direction: column;
+gap: var(--sp-1);
+}
+.cert-legenda__titulo {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-h6);
+letter-spacing: -0.01em;
+color: var(--ink-900);
+}
+.cert-legenda__fonte {
+font-family: var(--font-sans);
+font-size: var(--fs-body-sm);
+color: var(--ink-500);
+}
+
+/* Fecho da seção: o Lattes como barra larga */
+.cert-lattes {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: var(--sp-6);
+margin-top: var(--sp-12);
+padding: var(--sp-8) var(--sp-12);
+border: 1px solid var(--line);
+border-radius: var(--r-xl);
+background: var(--grad-paper);
+box-shadow: var(--shadow-sm);
+text-decoration: none;
+cursor: none;
+transition: border-color var(--dur-base) ease, box-shadow var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo);
+}
+.cert-lattes:hover {
+border-color: var(--line-strong);
+box-shadow: var(--shadow-md);
+transform: translateY(-2px);
+}
+.cert-lattes__texto { display: flex; flex-direction: column; gap: var(--sp-2); }
+.cert-lattes__titulo {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-h5);
+letter-spacing: -0.016em;
+color: var(--ink-900);
+}
+.cert-lattes__apoio {
+font-family: var(--font-sans);
+font-size: var(--fs-body-sm);
+color: var(--ink-500);
+max-width: 62ch;
+}
+.cert-lattes__seta {
+display: flex;
+align-items: center;
+justify-content: center;
+flex: none;
+width: 52px;
+height: 52px;
+border-radius: var(--r-full);
+background: var(--sage-700);
+color: var(--paper-100);
+transition: transform var(--dur-base) var(--ease-out-expo);
+}
+.cert-lattes:hover .cert-lattes__seta { transform: translate(3px, -3px); }
+
+/* ---------- Respiro ----------
+   Abaixo de 900px as peças empilham, uma por linha, ainda em largura
+   cheia. No celular a folha vira miniatura: nome e título continuam
+   legíveis, as linhas miúdas não — é o preço de mostrar um documento
+   em paisagem num telefone. */
+@media (max-width: 900px) {
+.cert-grade { grid-template-columns: minmax(0, 1fr); gap: var(--sp-12); max-width: 420px; }
+.cert-divisa { margin-top: var(--sp-16); }
+}
+
+@media (max-width: 640px) {
+.cert-lattes {
+flex-direction: column;
+align-items: flex-start;
+padding: var(--sp-6);
+border-radius: var(--r-lg);
+}
+.cert-peca:hover .cert-palco { transform: none; box-shadow: var(--shadow-md); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.cert-palco, .cert-lattes, .cert-lattes__seta { transition: none; }
+}

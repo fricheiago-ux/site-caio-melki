@@ -1,0 +1,320 @@
+/* ============================================================
+   HERO DO SITE — Dr. Caio Melki
+   Estende o Design System 2. Só o que é específico da hero mora aqui.
+   Layout: foto à esquerda (pedido no brief) + fala + busca de condições.
+   ============================================================ */
+
+.hero-site {
+position: relative;
+min-height: 100svh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+overflow: hidden;
+padding-block: calc(var(--sp-12) + 44px) var(--sp-6);
+}
+
+.hero-grid {
+display: grid;
+grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+gap: var(--sp-16);
+align-items: center;
+position: relative;
+z-index: 10;
+}
+
+/* ---------- Retrato (banqueta) ---------- */
+.hero-foto {
+position: relative;
+border-radius: var(--r-xl);
+overflow: hidden;
+aspect-ratio: 4 / 5;
+box-shadow: var(--shadow-lg);
+border: 1px solid var(--line);
+}
+.hero-foto img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: center 22%;
+}
+.hero-foto::after {
+content: "";
+position: absolute;
+inset: 0;
+background: linear-gradient(to top, rgba(31, 36, 32, 0.42), transparent 42%);
+}
+.hero-foto__selo {
+position: absolute;
+left: var(--sp-5);
+right: var(--sp-5);
+bottom: var(--sp-5);
+z-index: 2;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+gap: var(--sp-4);
+}
+
+/* ---------- Coluna da fala ---------- */
+.hero-fala { min-width: 0; }
+
+.hero-frase {
+font-size: clamp(1.75rem, 3.1vw, 2.85rem);
+line-height: 1.12;
+letter-spacing: -0.042em;
+font-weight: 500;
+margin: 0 0 var(--sp-5);
+}
+/* A terceira frase explica — entra mais leve, sem competir com a apresentação */
+.hero-frase__quieta { color: var(--ink-500); font-weight: 400; }
+
+/* ============================================================
+   REVELAÇÃO DE TEXTO DA HERO (hero-type.js)
+
+   Dois efeitos, cada um no bloco certo:
+   - .type-reveal (a manchete) digita: quebra em palavras e revela uma
+     por vez em corte seco, com um cursor acompanhando a última palavra.
+     Letra a letra refluiria a linha a cada caractere, e há imagens no
+     meio da frase — por isso a unidade é a palavra, não o caractere.
+   - .blur-reveal (a subhead) não digita: as palavras entram juntas,
+     desfocadas, cada uma indo para o foco com um pequeno atraso — o
+     efeito "animationIn" da ref-7, aplicado palavra a palavra. É apoio
+     da manchete, não fala por si, e um segundo cursor ali competiria
+     com o da linha de cima.
+   ============================================================ */
+.type-reveal { position: relative; }
+
+.type-reveal .tw { opacity: 0; }
+.type-reveal .tw.is-on { opacity: 1; }
+
+/* As imagens não aparecem, elas assentam: um pulo curto de escala avisa
+   que ali existe um objeto no meio da frase, e não mais uma palavra. */
+.type-reveal img.tw {
+display: inline-block;
+vertical-align: middle;
+transform: scale(0.84);
+}
+.type-reveal img.tw.is-on {
+animation: slotPousa 0.36s var(--ease-out-expo) forwards;
+}
+@keyframes slotPousa {
+from { opacity: 0; transform: scale(0.84); }
+62%  { opacity: 1; transform: scale(1.05); }
+to   { opacity: 1; transform: scale(1); }
+}
+
+/* Cursor: bloco cheio, como o do Terminal — o filete de 2px lia como
+   detalhe de interface, e o bloco lê como escrita acontecendo.
+   Largura, altura e posição vêm do JS, fora do fluxo, para que ele possa
+   andar sem empurrar uma única palavra. */
+.tw-cursor {
+position: absolute;
+width: 0.5em;
+border-radius: 1px;
+background: var(--sage-600);
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+}
+.tw-cursor.is-on { animation: twPisca 0.86s steps(1, end) infinite; }
+@keyframes twPisca {
+0%, 50% { opacity: 1; }
+51%, 100% { opacity: 0.12; }
+}
+
+/* ---------- Desfoque → foco, por palavra (subhead) ----------
+   Mesma ideia da ref-7 (animationIn), só que em vez de revelar um bloco
+   inteiro de uma vez, cada palavra carrega o próprio atraso — gravado
+   pelo JS em animation-delay — e todas nascem juntas quando a classe
+   is-on liga a animação no bloco. Sem cursor: a subhead é lida de
+   relance, não digitada. */
+.blur-reveal .tw {
+display: inline-block;
+opacity: 0;
+filter: blur(8px);
+transform: translateY(0.2em);
+}
+.blur-reveal.is-on .tw {
+animation-name: bwIn;
+animation-duration: 0.62s;
+animation-timing-function: var(--ease-out-soft);
+animation-fill-mode: both;
+}
+@keyframes bwIn {
+to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+.blur-reveal img.tw { display: inline-block; vertical-align: middle; }
+
+@media (prefers-reduced-motion: reduce) {
+.type-reveal .tw { opacity: 1; }
+.type-reveal img.tw { transform: none; animation: none; }
+.tw-cursor { display: none; }
+.blur-reveal .tw { opacity: 1; filter: none; transform: none; animation: none; }
+}
+
+/* ============================================================
+   AGENDAMENTO — botões com a marca de cada canal
+   ============================================================ */
+.hero-agendar {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: var(--sp-3);
+margin-top: var(--sp-8);
+padding-top: var(--sp-6);
+border-top: 1px solid var(--line);
+}
+
+.btn-canal {
+display: inline-flex;
+align-items: center;
+gap: var(--sp-3);
+padding: 0.55rem 1.35rem 0.55rem 0.55rem;
+border-radius: var(--r-full);
+border: 1px solid transparent;
+font-family: var(--font-sans);
+font-size: var(--fs-body-sm);
+font-weight: 500;
+letter-spacing: -0.012em;
+position: relative;
+overflow: hidden;
+transition: transform var(--dur-fast) var(--ease-out-expo),
+box-shadow var(--dur-base) ease,
+filter var(--dur-fast) ease;
+}
+.btn-canal:hover { transform: translateY(-2px); }
+.btn-canal:active { transform: scale(0.98); }
+.btn-canal:focus-visible { outline: 2px solid var(--ink-900); outline-offset: 3px; }
+
+.btn-canal__marca {
+display: grid;
+place-items: center;
+width: 34px;
+height: 34px;
+border-radius: 50%;
+overflow: hidden;
+background: var(--paper-100);
+flex-shrink: 0;
+}
+.btn-canal__marca img { width: 100%; height: 100%; object-fit: cover; }
+.btn-canal__texto { display: flex; flex-direction: column; line-height: 1.15; text-align: left; }
+.btn-canal__texto small {
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+opacity: 0.72;
+}
+
+/* Particular — verde do sistema */
+.btn-canal--particular { background: var(--sage-600); color: var(--paper-100); }
+.btn-canal--particular:hover { background: var(--sage-700); box-shadow: var(--glow-sage); }
+
+/* Unimed — verde da operadora */
+.btn-canal--unimed { background: #00965A; color: #fff; }
+.btn-canal--unimed:hover { background: #007E4B; box-shadow: 0 0 26px rgba(0, 150, 90, 0.32); }
+
+/* ============================================================
+   FAIXA DE INSTITUIÇÕES
+   ============================================================ */
+.instituicoes {
+position: relative;
+z-index: 10;
+margin-top: var(--sp-8);
+padding-top: var(--sp-5);
+border-top: 1px solid var(--line);
+}
+.instituicoes__lista {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+gap: var(--sp-3);
+margin-top: var(--sp-4);
+}
+
+.escudo {
+position: relative;
+display: flex;
+align-items: center;
+gap: var(--sp-3);
+padding: 0.5rem 0.9rem 0.5rem 0.6rem;
+border-radius: var(--r-full);
+border: 1px solid var(--line);
+background: var(--paper-100);
+transition: border-color var(--dur-fast) ease, transform var(--dur-base) var(--ease-out-expo), box-shadow var(--dur-base) ease;
+cursor: none;
+}
+.escudo:hover { border-color: var(--sage-400); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.escudo__marca {
+display: grid;
+place-items: center;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+background: var(--sage-100);
+color: var(--sage-700);
+font-family: var(--font-sans);
+font-size: 0.66rem;
+font-weight: 600;
+letter-spacing: -0.02em;
+flex-shrink: 0;
+}
+.escudo__nome { font-size: var(--fs-caption); font-weight: 500; color: var(--ink-700); white-space: nowrap; }
+
+/* Descrição que abre no hover — ideia do brief, herdada da ref-1 */
+.escudo__desc {
+position: absolute;
+bottom: calc(100% + 10px);
+left: 0;
+width: max(260px, 100%);
+padding: var(--sp-4);
+border-radius: var(--r-md);
+background: var(--ink-900);
+color: var(--paper-100);
+box-shadow: var(--shadow-lg);
+opacity: 0;
+visibility: hidden;
+transform: translateY(6px);
+transition: opacity var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out-expo), visibility var(--dur-fast) ease;
+z-index: 25;
+pointer-events: none;
+}
+.escudo:hover .escudo__desc { opacity: 1; visibility: visible; transform: translateY(0); }
+.escudo__desc p { margin: 0; font-size: var(--fs-caption); line-height: 1.5; color: rgba(251, 250, 247, 0.82); }
+.escudo__desc strong { color: var(--paper-100); font-weight: 600; }
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width: 1080px) {
+.hero-grid { grid-template-columns: 1fr; gap: var(--sp-8); }
+.hero-foto { aspect-ratio: 16 / 10; max-height: 300px; }
+.hero-site { min-height: auto; padding-block: calc(var(--sp-16) + 44px) var(--sp-16); }
+}
+@media (max-width: 640px) {
+.busca-campo { padding-left: 1rem; }
+.busca-campo input { font-size: var(--fs-body); }
+.escudo__desc { width: 240px; }
+}
+
+/* ---------- Slot em emoji (Apple no macOS/iOS, nativo nas demais) ---------- */
+.hero-slot--emoji {
+display: inline-flex;
+align-items: center;
+justify-content: center;
+width: auto;
+aspect-ratio: auto;
+height: 0.92em;
+font-size: 0.78em;
+line-height: 1;
+background: none;
+border: none;
+box-shadow: none;
+border-radius: 0;
+font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+.hero-slot--emoji:hover {
+transform: translateY(-0.06em) scale(1.14) rotate(-4deg);
+box-shadow: none;
+}

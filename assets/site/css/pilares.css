@@ -1,0 +1,355 @@
+/* ============================================================
+   OS CINCO PILARES — baralho que se abre em destaque + régua
+   Porte do componente GSAP Flip (21st.dev / Hyperiux Vault) de
+   React+Tailwind para JS puro sobre o nosso design system.
+   O posicionamento dos cards é calculado em JS (pilares.js); aqui
+   ficam só a pele e os estados.
+   ============================================================ */
+
+/* O fundo não é chapado: um halo de sálvia atrás do título levanta a
+   head, e a vertical vai escurecendo até o pé da seção. Isso dá relevo
+   às cartas, que são claras, e peso ao texto, que fica na parte alta. */
+.pilares {
+position: relative;
+min-height: 100svh;
+display: flex;
+flex-direction: column;
+justify-content: center;
+overflow: hidden;
+/* Recuo pequeno dos dois lados — só pra sobrar page (clara) o
+   suficiente pro arredondamento aparecer. A seção continua quase de
+   ponta a ponta, não virou um cartão flutuante. */
+margin-inline: clamp(12px, 2.5vw, 32px);
+margin-block: clamp(12px, 2.2vw, 28px);
+border-radius: clamp(20px, 2.6vw, 40px);
+background:
+radial-gradient(130% 88% at 50% -12%, rgba(127, 163, 130, 0.20) 0%, rgba(127, 163, 130, 0) 58%),
+linear-gradient(180deg, #333B34 0%, #2A302A 44%, #222722 100%);
+color: var(--paper-100);
+padding-block: var(--sp-16);
+}
+
+/* ---------- Cabeçalho fixo, fora do palco ----------
+   Hierarquia da ref original: título grande em duas linhas, subtítulo
+   em cinza logo abaixo dele, e só então o parágrafo de corpo. */
+.pilares__topo {
+position: relative;
+z-index: 40;
+max-width: 62ch;
+margin-inline: auto;
+margin-bottom: var(--sp-10, 2.5rem);
+text-align: center;
+}
+/* A numeração segue a das outras seções do site: vem acima do título */
+.pilares__num { display: block; color: rgba(232, 223, 205, 0.6); }
+.pilares__titulo {
+color: var(--paper-100);
+margin: var(--sp-3) 0 0;
+line-height: 1.04;
+letter-spacing: -0.045em;
+text-wrap: balance;
+}
+.pilares__intro {
+margin: var(--sp-5) auto 0;
+max-width: 54ch;
+font-size: var(--fs-body-lg);
+font-weight: 300;
+line-height: 1.55;
+color: rgba(251, 250, 247, 0.78);
+text-wrap: pretty;
+}
+
+/* ---------- Partículas de fundo ----------
+   Canvas próprio da seção — ver pilares-particulas.js. Sem z-index: a
+   ordem no DOM (depois de aurora/contour-bg, antes do selo e de
+   .wrap-wide) já garante a posição certa na pilha. */
+.pilares__particulas {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+}
+
+/* ---------- Selo giratório ----------
+   Texto correndo em volta de um círculo, com o miolo parado. A rotação
+   mora num <g> próprio: tudo que não pode girar fica fora dele.
+
+   Dois desvios do código de referência, ambos por bug real:
+
+   1. O <svg> do anel ganhou a classe .pilares__selo-disco. A regra original
+      era `.pilares__selo svg { width:100% }`, mas o lucide troca o <i> do
+      miolo por um <svg> — que é filho do mesmo .pilares__selo e seria
+      esticado para 150px junto. Com classe própria não há disputa.
+
+   2. O texto ganhou textLength na marcação. A frase escolhida ocupa cerca
+      de dois terços da circunferência: uma repetição deixa um buraco, duas
+      estouram e a segunda é cortada. O textLength distribui a sobra entre
+      as letras, então a volta fecha certinho sem espremer nem cortar nada.
+      Medido, não estimado — ver a nota de verificação abaixo. */
+/* O top vem do JS (posicionarSelo em pilares.js): o selo cola no teto do
+   palco, então sobe e desce com a altura do cabeçalho. O valor aqui é só
+   o estado inicial antes do JS rodar — sem ele, sem JS, o selo cairia
+   direto no topo da seção, que é o bug que a régua dinâmica corrige. */
+.pilares__selo { position: absolute; top: 0; left: 50px; width: 150px; height: 150px; z-index: 3; }
+.pilares__selo-disco { width: 100%; height: 100%; display: block; }
+.pilares__selo-anel {
+animation: pilares-selo-gira 20s linear infinite;
+transform-box: view-box;
+transform-origin: 150px 150px;
+}
+.pilares__selo-texto {
+font-family: var(--font-sans);
+font-weight: 700;
+font-size: 23px;
+letter-spacing: 2px;
+fill: var(--sand-300);
+}
+/* O miolo é irmão do <svg>, e não filho do <g>: não tem como girar junto */
+.pilares__selo-miolo {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 32px;
+height: 32px;
+color: var(--sand-300);
+stroke-width: 1.5;
+}
+
+@keyframes pilares-selo-gira { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ---------- Palco ---------- */
+.pilares__palco {
+position: relative;
+width: 100%;
+flex: 1;
+min-height: 620px;
+}
+
+/* Contador 01 / 05 */
+/* Posição (left/top) vem do JS: o contador se alinha à coluna de
+   miniaturas, e não ao canto do palco. */
+.pilares__contador {
+position: absolute;
+top: 0;
+left: 0;
+z-index: 40;
+font-family: var(--font-sans);
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.16em;
+opacity: 0;
+transition: opacity 0.45s ease;
+}
+.pilares.is-pronto .pilares__contador { opacity: 1; }
+.pilares__contador b { color: var(--paper-100); font-weight: 600; }
+.pilares__contador span { color: rgba(232, 223, 205, 0.6); }
+
+/* ---------- Painel de texto (troca a cada card) ---------- */
+/* Largura e topo vêm do JS. O topo se alinha ao topo da carta em
+   destaque, em vez de centralizar o bloco: centralizado, um título de
+   uma linha e outro de duas deslocavam o texto inteiro para cima e para
+   baixo a cada troca de card. Ancorado no topo, nada se mexe. */
+.pilares__painel {
+position: absolute;
+top: 50%;
+z-index: 30;
+pointer-events: none;
+opacity: 0;
+transition: opacity 0.45s ease;
+}
+/* is-pronto, e não is-open: enquanto o baralho ainda está se abrindo as
+   cartas passam por cima do vão onde este texto mora, e o parágrafo
+   aparecia escrito por cima das fotos. Só entra com tudo já no lugar. */
+.pilares.is-pronto .pilares__painel { opacity: 1; }
+
+.pilares__n {
+display: block;
+font-family: var(--font-mono);
+font-size: var(--fs-caption);
+letter-spacing: 0.04em;
+color: var(--sand-300);
+margin-bottom: var(--sp-3);
+}
+/* Duas linhas reservadas sempre: com um título de uma linha só, os
+   parágrafos abaixo subiriam e o bloco dançaria a cada troca de card. */
+.pilares__h {
+font-family: var(--font-sans);
+font-size: clamp(1.45rem, 2.25vw, 2.1rem);
+line-height: 1.1;
+min-height: 2.2em;
+letter-spacing: -0.038em;
+font-weight: 500;
+color: var(--paper-100);
+margin: 0 0 var(--sp-5);
+}
+.pilares__p {
+font-size: var(--fs-body);
+font-weight: 300;
+line-height: 1.65;
+color: rgba(251, 250, 247, 0.82);
+margin: 0;
+}
+/* O segundo parágrafo recua de peso: é desdobramento, não manchete */
+.pilares__p--2 {
+margin-top: var(--sp-4);
+font-size: var(--fs-body-sm);
+line-height: 1.7;
+color: rgba(251, 250, 247, 0.6);
+}
+
+/* Troca de conteúdo: desfoque -> foco, a assinatura do site */
+.pilares__troca { animation: animationIn 0.6s var(--ease-out-soft) both; }
+
+/* ---------- Cards ---------- */
+.pilar-card {
+position: absolute;
+padding: 0;
+border: none;
+overflow: hidden;
+background: var(--moss-700);
+box-shadow: 0 24px 50px -28px rgba(0, 0, 0, 0.75);
+cursor: none;
+-webkit-tap-highlight-color: transparent;
+}
+.pilar-card img {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+border-radius: inherit;
+}
+.pilar-card::after {
+content: "";
+position: absolute;
+inset: 0;
+border-radius: inherit;
+box-shadow: inset 0 0 0 1px rgba(251, 250, 247, 0.14);
+pointer-events: none;
+}
+
+/* Véu que escurece as miniaturas, para o destaque ganhar peso */
+.pilar-card__veu {
+position: absolute;
+inset: 0;
+border-radius: inherit;
+background: linear-gradient(180deg, rgba(42, 48, 42, 0.3), rgba(42, 48, 42, 0.72));
+opacity: 1;
+transition: opacity var(--dur-base) ease;
+pointer-events: none;
+}
+.pilar-card.is-hero .pilar-card__veu { opacity: 0; }
+.pilares.is-open .pilar-card:not(.is-hero):hover .pilar-card__veu { opacity: 0.45; }
+
+/* Número impresso na miniatura */
+.pilar-card__n {
+position: absolute;
+left: 0;
+right: 0;
+bottom: 10px;
+z-index: 2;
+text-align: center;
+font-family: var(--font-mono);
+font-size: var(--fs-caption);
+color: var(--paper-100);
+opacity: 0;
+transition: opacity var(--dur-base) ease;
+pointer-events: none;
+}
+.pilares.is-pronto .pilar-card:not(.is-hero) .pilar-card__n { opacity: 0.85; }
+
+/* Corte instantâneo ao fechar: ver o comentário em fechar() no JS. Sem
+   isso, o fade de 0,45s do painel e dos números sobrevive ao snap dos
+   cards, e o texto passa por cima da pilha já fechada. */
+.pilares--sem-transicao .pilares__painel,
+.pilares--sem-transicao .pilares__contador,
+.pilares--sem-transicao .pilar-card__n { transition: none !important; }
+
+/* Dica na pilha fechada */
+.pilares__dica {
+position: absolute;
+left: 50%;
+bottom: var(--sp-8);
+transform: translateX(-50%);
+z-index: 40;
+display: inline-flex;
+align-items: center;
+gap: var(--sp-2);
+font-family: var(--font-sans);
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: rgba(232, 223, 205, 0.7);
+transition: opacity var(--dur-base) ease;
+}
+.pilares.is-open .pilares__dica { opacity: 0; pointer-events: none; }
+
+/* ============================================================
+   EMPILHADO EM COLUNA — abaixo de 768px o Flip sai de cena
+   ============================================================ */
+.pilares__mobile { display: none; }
+
+@media (max-width: 767px) {
+.pilares { min-height: 0; padding-block: var(--sp-16); }
+.pilares__palco, .pilares__dica { display: none; }
+.pilares__mobile { display: flex; flex-direction: column; gap: var(--sp-6); }
+
+.pilar-m {
+border-radius: var(--r-lg);
+overflow: hidden;
+background: var(--moss-700);
+border: 1px solid rgba(251, 250, 247, 0.12);
+}
+.pilar-m__foto { position: relative; aspect-ratio: 16 / 10; }
+.pilar-m__foto img { width: 100%; height: 100%; object-fit: cover; }
+.pilar-m__corpo { padding: var(--sp-5); }
+.pilar-m__n {
+font-family: var(--font-mono);
+font-size: var(--fs-caption);
+color: var(--sand-300);
+}
+.pilar-m__t {
+font-size: var(--fs-h5);
+line-height: 1.2;
+letter-spacing: -0.02em;
+font-weight: 500;
+color: var(--paper-100);
+margin: var(--sp-2) 0 var(--sp-3);
+}
+.pilar-m__d { font-size: var(--fs-body-sm); line-height: 1.6; color: rgba(251, 250, 247, 0.7); margin: 0 0 var(--sp-3); }
+.pilar-m__d:last-child { margin-bottom: 0; color: rgba(251, 250, 247, 0.55); }
+}
+
+/* Selo menor antes de encostar no cabeçalho.
+   O corte era 900px, mas medindo a colisão real ela começa em ~1032px:
+   o .pilares__topo é uma coluna centrada, então a borda esquerda dele
+   anda meio pixel para dentro a cada pixel que a janela perde. Entre 901
+   e 1032 o selo grande ficava por cima do título. Corte em 1140 deixa
+   margem em vez de raspar no limite. */
+@media (max-width: 1140px) {
+.pilares__selo { width: 90px; height: 90px; left: 0; }
+.pilares__selo-miolo { width: 20px; height: 20px; }
+}
+
+/* No empilhado o selo fica logo acima do rótulo da seção: a 90px sobravam
+   6px entre os dois, folga que qualquer mudança de fonte comeria.
+
+   O texto do anel cai para 5,5px aqui, e isso é intencional: nesse tamanho
+   ele é marca gráfica, não palavra. Decidido assim porque o selo é
+   decorativo e aria-hidden — não carrega informação que alguém precise ler.
+   Não "conserte" aumentando a fonte: a tinta já está a 5,5 unidades da
+   borda do viewBox de 300 e passaria a ser cortada. */
+@media (max-width: 767px) {
+.pilares__selo { width: 72px; height: 72px; }
+.pilares__selo-miolo { width: 16px; height: 16px; }
+}
+
+/* Sem movimento: o Flip é desligado no JS; aqui só garantimos leitura */
+@media (prefers-reduced-motion: reduce) {
+.pilares__painel, .pilares__contador { opacity: 1 !important; transition: none; }
+.pilares__troca { animation: none; }
+.pilares__selo-anel { animation: none; }
+}

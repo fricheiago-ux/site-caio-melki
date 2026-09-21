@@ -1,0 +1,502 @@
+/* ============================================================
+   02 — "MAS DOUTOR, O QUE SERÁ QUE EU TENHO?"
+   A ideia é do próprio brief: "a galera geralmente busca no google
+   algo como 'médico que trata x doença'". Então a entrada não é a
+   doença, é o sintoma — a palavra que a pessoa realmente digita.
+
+   Nuvem de palavras (pesos 2 a 5) → campo de busca → painel que
+   desce com as possíveis causas, agrupadas pelas 13 áreas da lista
+   do Caio. Motor em site/js/sintomas.js.
+   ============================================================ */
+
+.sint-intro { max-width: 760px; margin-top: var(--sp-6); }
+.sint-intro p { margin: 0; font-size: var(--fs-body-lg); line-height: 1.6; color: var(--ink-500); }
+.sint-intro strong { color: var(--ink-900); font-weight: 500; }
+
+/* ------------------------------------------------------------
+   A nuvem
+   Uma nuvem de verdade não é uma grade: as palavras se encaixam
+   pelo tamanho. Aqui isso é um flex que alinha pela base, com
+   respiro proporcional ao peso de cada palavra.
+   ------------------------------------------------------------ */
+.sint-nuvem {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: baseline;
+gap: var(--sp-3) var(--sp-5);
+max-width: 1080px;
+margin: var(--sp-16) auto var(--sp-12);
+padding-inline: var(--sp-2);
+}
+
+.sint-palavra {
+position: relative;
+display: inline-block;
+padding: 0.06em 0.18em;
+border-radius: var(--r-md);
+font-family: var(--font-sans);
+line-height: 1.05;
+color: var(--ink-700);
+cursor: none;
+transition:
+color var(--dur-fast) ease,
+opacity var(--dur-base) ease,
+transform var(--dur-base) var(--ease-out-expo),
+background-color var(--dur-fast) ease,
+filter var(--dur-base) ease;
+}
+
+/* pesos — o 5 é o tamanho de um h3, o 2 é quase texto corrido */
+.sint-palavra[data-peso="5"] { font-size: clamp(1.9rem, 4.1vw, 3.1rem); font-weight: 500; letter-spacing: -0.045em; }
+.sint-palavra[data-peso="4"] { font-size: clamp(1.4rem, 2.8vw, 2.15rem); font-weight: 500; letter-spacing: -0.035em; }
+.sint-palavra[data-peso="3"] { font-size: clamp(1.05rem, 1.9vw, 1.5rem); font-weight: 500; letter-spacing: -0.02em; }
+.sint-palavra[data-peso="2"] { font-size: clamp(0.875rem, 1.35vw, 1.0625rem); font-weight: 500; letter-spacing: -0.008em; }
+
+/* tons — o mesmo truque das nuvens de referência: variar o peso da
+   tinta para a mancha não ficar chapada */
+.sint-palavra[data-tom="forte"] { color: var(--ink-900); }
+.sint-palavra[data-tom="sage"]  { color: var(--sage-600); }
+.sint-palavra[data-tom="claro"] { color: var(--ink-300); }
+.sint-palavra[data-tom="musgo"] { color: var(--sage-700); }
+
+.sint-palavra:hover { color: var(--sage-700); transform: translateY(-3px); }
+.sint-palavra:focus-visible { outline: 2px solid var(--sage-600); outline-offset: 3px; }
+
+.sint-palavra.is-ativa,
+.sint-palavra[aria-expanded="true"] {
+color: var(--paper-100);
+background: var(--sage-600);
+transform: translateY(-3px);
+box-shadow: var(--glow-sage);
+}
+
+/* filtragem pela busca: o que não casa recua, não some */
+.sint-nuvem.is-filtrando .sint-palavra { opacity: 0.14; filter: blur(1.5px); transform: scale(0.96); }
+.sint-nuvem.is-filtrando .sint-palavra.is-achada { opacity: 1; filter: none; transform: none; color: var(--sage-700); }
+.sint-nuvem.is-filtrando .sint-palavra.is-achada:hover { transform: translateY(-3px); }
+
+/* ------------------------------------------------------------
+   Campo de busca
+   ------------------------------------------------------------ */
+.sint-busca { position: relative; z-index: 20; max-width: 640px; margin-inline: auto; }
+
+.sint-campo {
+display: flex;
+align-items: center;
+gap: var(--sp-3);
+background: var(--paper-100);
+border: 1px solid var(--line-strong);
+border-radius: var(--r-full);
+padding: 0.4rem 0.45rem 0.4rem 1.25rem;
+box-shadow: var(--shadow-md);
+transition: border-color var(--dur-fast) ease, box-shadow var(--dur-base) ease;
+}
+.sint-campo:focus-within {
+border-color: var(--sage-600);
+box-shadow: 0 0 0 4px rgba(79, 115, 85, 0.14), var(--shadow-md);
+}
+.sint-campo__icone { display: grid; place-items: center; color: var(--sage-600); flex-shrink: 0; }
+
+.sint-campo input {
+flex: 1;
+min-width: 0;
+border: none;
+background: none;
+outline: none;
+font-family: var(--font-sans);
+font-size: var(--fs-body);
+letter-spacing: -0.012em;
+color: var(--ink-900);
+padding-block: 0.7rem;
+cursor: none;
+}
+.sint-campo input::placeholder { color: var(--ink-300); }
+
+.sint-campo__limpar {
+display: grid;
+place-items: center;
+width: 34px;
+height: 34px;
+border-radius: 50%;
+color: var(--ink-300);
+flex-shrink: 0;
+opacity: 0;
+visibility: hidden;
+transition: all var(--dur-fast) ease;
+cursor: none;
+}
+.sint-campo__limpar.is-visivel { opacity: 1; visibility: visible; }
+.sint-campo__limpar:hover { background: var(--paper-300); color: var(--ink-900); }
+
+/* resultados */
+.sint-resultados {
+position: absolute;
+top: calc(100% + 10px);
+left: 0;
+right: 0;
+z-index: 30;
+max-height: 340px;
+overflow-y: auto;
+background: var(--paper-100);
+border: 1px solid var(--line);
+border-radius: var(--r-lg);
+box-shadow: var(--shadow-lg);
+padding: var(--sp-3);
+opacity: 0;
+visibility: hidden;
+transform: translateY(-8px);
+transition:
+opacity var(--dur-fast) ease,
+transform var(--dur-base) var(--ease-out-expo),
+visibility var(--dur-fast) ease;
+}
+.sint-resultados.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.sint-res {
+display: flex;
+align-items: baseline;
+justify-content: space-between;
+gap: var(--sp-4);
+width: 100%;
+text-align: left;
+padding: 0.55rem 0.7rem;
+border-radius: var(--r-md);
+cursor: none;
+transition: background-color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out-expo);
+}
+.sint-res:hover,
+.sint-res.is-active { background: var(--sage-100); transform: translateX(3px); }
+.sint-res__nome { font-size: var(--fs-body-sm); font-weight: 500; color: var(--ink-900); letter-spacing: -0.008em; }
+.sint-res__nome mark { background: rgba(79, 115, 85, 0.22); color: inherit; border-radius: 3px; padding: 0 2px; }
+.sint-res__via {
+font-family: var(--font-mono);
+font-size: var(--fs-label);
+color: var(--ink-300);
+flex-shrink: 0;
+}
+.sint-vazio { padding: var(--sp-4) var(--sp-3); }
+.sint-vazio p { margin: 0 0 var(--sp-2); font-size: var(--fs-body-sm); color: var(--ink-500); }
+.sint-vazio p:last-child { margin-bottom: 0; }
+
+/* ------------------------------------------------------------
+   Painel que desce
+   ------------------------------------------------------------ */
+.sint-painel {
+height: 0;
+overflow: hidden;
+margin-top: var(--sp-6);
+transition: height var(--dur-base) var(--ease-out-expo);
+}
+.sint-painel__caixa {
+opacity: 0;
+transform: translateY(-10px);
+transition: opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo);
+padding-top: var(--sp-6);
+}
+.sint-painel.is-open .sint-painel__caixa { opacity: 1; transform: translateY(0); }
+
+.sint-ficha {
+position: relative;
+border: 1px solid var(--line);
+border-radius: var(--r-xl);
+background: var(--paper-100);
+box-shadow: var(--shadow-md);
+padding: var(--sp-8);
+overflow: hidden;
+}
+.sint-ficha::before {
+content: '';
+position: absolute;
+inset: 0 0 auto;
+height: 3px;
+background: var(--grad-sage);
+}
+
+.sint-ficha__topo {
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+gap: var(--sp-6);
+padding-bottom: var(--sp-5);
+border-bottom: 1px solid var(--line);
+}
+.sint-ficha__rotulo {
+display: inline-flex;
+align-items: center;
+gap: var(--sp-2);
+font-family: var(--font-mono);
+font-size: var(--fs-label);
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: var(--sage-600);
+}
+.sint-ficha__nome { margin: var(--sp-2) 0 0; }
+
+.sint-ficha__recolher {
+display: inline-flex;
+align-items: center;
+gap: var(--sp-2);
+padding: 0.45rem 0.9rem;
+border-radius: var(--r-full);
+border: 1px solid var(--line-strong);
+font-size: var(--fs-caption);
+font-weight: 500;
+color: var(--ink-500);
+flex-shrink: 0;
+cursor: none;
+transition: all var(--dur-fast) ease;
+}
+.sint-ficha__recolher:hover { background: var(--ink-900); border-color: var(--ink-900); color: var(--paper-100); }
+
+.sint-ficha__resumo {
+margin: var(--sp-6) 0 0;
+max-width: 74ch;
+font-size: var(--fs-body-lg);
+line-height: 1.6;
+color: var(--ink-700);
+}
+.sint-ficha__resumo strong { color: var(--ink-900); font-weight: 500; }
+
+/* as áreas e suas condições */
+/* multi-coluna em vez de grade: as áreas têm tamanhos muito diferentes
+   e a grade deixava buraco na última linha. Assim elas se empacotam. */
+.sint-grupos {
+columns: 240px 4;
+column-gap: var(--sp-8);
+margin-top: var(--sp-8);
+}
+.sint-grupo {
+break-inside: avoid;
+-webkit-column-break-inside: avoid;
+padding-bottom: var(--sp-8);
+}
+.sint-grupo__area {
+display: block;
+padding-bottom: var(--sp-3);
+border-bottom: 1px solid var(--line-strong);
+font-size: var(--fs-label);
+font-weight: 600;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-900);
+}
+.sint-grupo ul { margin-top: var(--sp-3); }
+.sint-grupo li {
+position: relative;
+padding: 0.3rem 0 0.3rem var(--sp-4);
+font-size: var(--fs-body-sm);
+line-height: 1.5;
+color: var(--ink-500);
+}
+.sint-grupo li::before {
+content: '';
+position: absolute;
+left: 0;
+top: 0.78em;
+width: 5px;
+height: 5px;
+border-radius: 50%;
+background: var(--sage-400);
+}
+
+/* sinal de alerta */
+.sint-alerta {
+display: flex;
+align-items: flex-start;
+gap: var(--sp-4);
+margin-top: var(--sp-8);
+padding: var(--sp-5) var(--sp-6);
+border-radius: var(--r-lg);
+border: 1px solid rgba(176, 85, 69, 0.3);
+background: rgba(176, 85, 69, 0.06);
+}
+.sint-alerta__icone { color: var(--danger); flex-shrink: 0; margin-top: 2px; }
+.sint-alerta p { margin: 0; font-size: var(--fs-body-sm); line-height: 1.6; color: var(--ink-700); }
+.sint-alerta strong { color: var(--danger); font-weight: 600; }
+
+/* rodapé da ficha */
+.sint-ficha__pe {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: var(--sp-6);
+flex-wrap: wrap;
+margin-top: var(--sp-8);
+padding-top: var(--sp-6);
+border-top: 1px solid var(--line);
+}
+.sint-ficha__pe p {
+margin: 0;
+max-width: 62ch;
+font-size: var(--fs-caption);
+line-height: 1.65;
+color: var(--ink-500);
+}
+
+/* ------------------------------------------------------------
+   Aviso permanente — a lista orienta, não diagnostica
+   ------------------------------------------------------------ */
+.sint-nota {
+display: flex;
+align-items: flex-start;
+gap: var(--sp-4);
+max-width: 760px;
+margin: var(--sp-12) auto 0;
+padding: var(--sp-5) var(--sp-6);
+border-radius: var(--r-lg);
+border: 1px solid var(--line);
+background: var(--paper-100);
+}
+.sint-nota__icone { color: var(--sage-600); flex-shrink: 0; margin-top: 2px; }
+.sint-nota p { margin: 0; font-size: var(--fs-body-sm); line-height: 1.65; color: var(--ink-500); }
+.sint-nota strong { color: var(--ink-900); font-weight: 600; }
+
+/* ------------------------------------------------------------
+   Aura que segue o mouse
+   Uma poca de luz verde que persegue o cursor. Fica na camada 1,
+   abaixo do conteudo (camada 2), entao passa POR BAIXO das palavras
+   da nuvem — ali ela nao revela nada, so da profundidade.
+
+   A posicao do centro vive no proprio <section> (--aura-mx/--aura-my),
+   e nao na camada de luz: assim as palavras escondidas logo abaixo
+   leem a MESMA coordenada e as duas camadas nunca se desencontram.
+
+   Em tela de toque nao existe mousemove: a aura nunca acende e a
+   secao fica identica ao que ja era.
+   ------------------------------------------------------------ */
+.sint-aura {
+position: absolute;
+inset: 0;
+z-index: 1;
+pointer-events: none;
+opacity: 0;
+transition: opacity 0.3s ease;
+background-image: radial-gradient(
+circle 290px at var(--aura-mx, 50%) var(--aura-my, 50%),
+var(--sage-100) 0%,
+var(--sage-100) 45%,
+transparent 80%
+);
+}
+.sint-secao.is-aura .sint-aura { opacity: 1; }
+
+/* ------------------------------------------------------------
+   Palavras escondidas — so fora da nuvem
+   Elas existem o tempo todo no HTML, mas a camada e recortada por
+   uma mascara do tamanho da aura: so aparece o pedaco que esta
+   dentro do facho.
+
+   A referencia fazia isso pintando a palavra com a cor exata do
+   fundo. Aqui nao daria: esta secao tem auroras e curvas de nivel
+   por baixo, entao o "fundo" muda de tom de um ponto para o outro
+   e as palavras vazariam como fantasma em alguns lugares. Com
+   mascara o recorte e exato em qualquer fundo — e de quebra a
+   palavra pode ter a cor que quiser.
+
+   As posicoes foram medidas nos vaos livres da secao: faixa de cima,
+   ao lado do texto de abertura, as duas margens ao lado da nuvem, ao
+   lado do campo de busca e em volta do aviso. As de baixo ancoram
+   pelo rodape (bottom), nao pelo topo, para nao sairem do lugar
+   quando a ficha de um sintoma abre e empurra a secao para baixo.
+   ------------------------------------------------------------ */
+.sint-ocultas {
+position: absolute;
+inset: 0;
+z-index: 1;
+overflow: hidden;
+pointer-events: none;
+user-select: none;
+opacity: 0;
+transition: opacity 0.3s ease;
+-webkit-mask-image: radial-gradient(circle 250px at var(--aura-mx, 50%) var(--aura-my, 50%), #000 0%, #000 45%, transparent 78%);
+mask-image: radial-gradient(circle 250px at var(--aura-mx, 50%) var(--aura-my, 50%), #000 0%, #000 45%, transparent 78%);
+}
+.sint-secao.is-aura .sint-ocultas { opacity: 1; }
+
+.sint-ocultas span {
+position: absolute;
+white-space: nowrap;
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: clamp(16px, 1.6vw, 26px);
+letter-spacing: -0.02em;
+color: var(--sage-400);
+}
+.sint-ocultas span.g { font-size: clamp(22px, 2.6vw, 40px); }
+
+/* As posicoes NAO podem ser em porcentagem: a nuvem, a busca e o aviso
+   tem largura maxima fixa e ficam centrados, entao a margem livre ao
+   lado deles encolhe junto com a tela — a 1024px as palavras invadiam
+   o conteudo. Cada uma e ancorada na borda real do vizinho:
+
+     nuvem  max-width 1080 -> borda em 50% +/- 540 (+12 de respiro)
+     busca  max-width  640 -> borda em 50% +/- 320 (+16)
+     aviso  max-width  760 -> borda em 50% +/- 380 (+12)
+
+   Assim elas nunca encostam no conteudo em largura nenhuma; nas telas
+   estreitas saem de quadro e o overflow da secao corta. As faixas de
+   cima e de baixo sao o padding da secao, sempre vazias em qualquer
+   largura, entao la porcentagem serve. */
+
+/* faixa de cima */
+.sint-ocultas span:nth-child(1)  { top: 38px;  left: 6%; }
+.sint-ocultas span:nth-child(2)  { top: 66px;  right: 8%; }
+/* a direita do texto de abertura, que ocupa so a metade esquerda */
+.sint-ocultas span:nth-child(3)  { top: 288px; left: calc(50% + 280px); }
+/* respiro entre o texto de abertura e a nuvem */
+.sint-ocultas span:nth-child(4)  { top: 356px; right: 10%; }
+/* margem esquerda da nuvem */
+.sint-ocultas span:nth-child(5)  { top: 440px; right: calc(50% + 552px); }
+.sint-ocultas span:nth-child(6)  { top: 576px; right: calc(50% + 552px); }
+.sint-ocultas span:nth-child(7)  { top: 712px; right: calc(50% + 552px); }
+/* margem direita da nuvem */
+.sint-ocultas span:nth-child(8)  { top: 470px; left: calc(50% + 552px); }
+.sint-ocultas span:nth-child(9)  { top: 620px; left: calc(50% + 552px); }
+.sint-ocultas span:nth-child(10) { top: 772px; left: calc(50% + 552px); }
+/* ao lado do campo de busca */
+.sint-ocultas span:nth-child(11) { top: 906px; right: calc(50% + 336px); }
+.sint-ocultas span:nth-child(12) { top: 918px; left: calc(50% + 336px); }
+/* dai para baixo, ancoradas no rodape: a ficha de um sintoma abre entre
+   a busca e o aviso e empurra tudo que vem depois para baixo */
+.sint-ocultas span:nth-child(13) { bottom: 152px; right: calc(50% + 392px); }
+.sint-ocultas span:nth-child(14) { bottom: 168px; left: calc(50% + 392px); }
+/* faixa de baixo */
+.sint-ocultas span:nth-child(15) { bottom: 46px; left: 15%; }
+.sint-ocultas span:nth-child(16) { bottom: 60px; right: 17%; }
+
+/* Duas razoes para sumir com a camada inteira abaixo de 1280px:
+
+   1. Sem mouse nao ha aura, e sem aura essas palavras nunca apareceriam
+      — viram peso morto no HTML.
+   2. As coordenadas verticais sao px fixos, calibrados no layout largo.
+      Quando a tela estreita, a nuvem quebra em mais linhas, a secao
+      cresce e a busca e o aviso descem: os px param de corresponder ao
+      vao que mediram. Conferido palavra por palavra em 1280, 1366,
+      1440 e 1920, com ficha aberta e fechada; abaixo disso as margens
+      da nuvem ja nem existem. */
+@media (max-width: 1279px), (hover: none) {
+.sint-ocultas { display: none; }
+}
+
+/* ------------------------------------------------------------
+   Telas pequenas
+   ------------------------------------------------------------ */
+@media (max-width: 860px) {
+.sint-nuvem { gap: var(--sp-2) var(--sp-4); margin: var(--sp-12) auto var(--sp-8); }
+.sint-campo { padding-left: 1rem; }
+.sint-campo input { font-size: var(--fs-body-sm); }
+.sint-ficha { padding: var(--sp-6) var(--sp-5); }
+.sint-ficha__topo { flex-direction: column; gap: var(--sp-4); }
+.sint-ficha__recolher { align-self: flex-start; }
+.sint-grupos { columns: 1; margin-top: var(--sp-6); }
+.sint-grupo { padding-bottom: var(--sp-6); }
+.sint-ficha__pe { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.sint-palavra,
+.sint-painel,
+.sint-painel__caixa,
+.sint-resultados { transition-duration: 1ms; }
+}

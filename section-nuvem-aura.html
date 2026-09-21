@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nuvem revelada pela aura — seção clonada</title>
+
+<!--
+TOKEN MAPPING
+Efeito clonado: nuvem de palavras invisíveis revelada por um facho de luz que
+persegue o mouse. Estrutura, posições, tamanhos, timing e lógica de JS vieram
+da referência sem alteração; só cor e família tipográfica foram trocadas.
+
+original: #FAFFF5 (--white, cor das palavras da nuvem)      -> mine: var(--paper-200)
+original: rgb(250,255,245) (fundo da página atrás da nuvem)  -> mine: var(--paper-200)
+original: #f4f4f4 (cor do facho no radial-gradient)          -> mine: var(--paper-300)
+original: "Bizmo", sans-serif (--f-display)                  -> mine: var(--font-sans)
+original: #1D1C1E (--dark, texto do conteúdo por cima)       -> mine: var(--ink-900)
+original: rgba(29,28,30,.62) (--muted-on-light)              -> mine: var(--ink-500)
+original: --cf-mx / --cf-my (posição do facho)               -> mine: --aura-mx / --aura-my
+original: classes cf-* (iniciais da referência)              -> mine: aura-* / nuvem-*
+
+POR QUE A COR DA PALAVRA E A DO FUNDO VIRARAM A MESMA VARIÁVEL
+Na referência esses dois valores são iguais por coincidência (--white é também o
+fundo do body) — é disso que o efeito depende: a palavra some porque tem
+exatamente a cor do fundo. Como aqui os dois papéis existem separados no design
+system, amarrei os dois na mesma variável local (--nuvem-fundo). Se algum dia um
+mudar sem o outro, o efeito quebra em silêncio; assim não tem como divergir.
+
+SEM EQUIVALENTE NO MEU DESIGN SYSTEM (valor original mantido, conforme a regra 7):
+- font-weight: 800 — a Inter deste projeto carrega no máximo 700, então o 800 cai
+  para 700 no navegador. Mantido o valor original; ver comentário no CSS.
+- transition de 0.3s do facho — meus tokens de duração são 220ms e 450ms, nenhum
+  bate com 300ms. Timing de animação não pode mudar, então ficou o original.
+- clamp() dos tamanhos das palavras — são medidas próprias do efeito, não
+  conflitam com nenhuma escala tipográfica minha, então vieram inalteradas.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
+
+<link rel="stylesheet" href="assets/design-system-2/css/tokens.css"/>
+<link rel="stylesheet" href="assets/design-system-2/css/components.css"/>
+
+<style>
+/* ============================================================
+   A ZONA DA AURA
+   Na referência este wrapper envolve DUAS seções, e o facho é um só,
+   compartilhado entre elas — a fronteira de verdade é o topo e a base
+   do wrapper, não a emenda entre as seções. Aqui sobrou uma seção só;
+   para usar em duas, é só colocar as duas dentro deste mesmo wrapper.
+   ============================================================ */
+.aura-zona {
+/* o efeito inteiro depende de a palavra ter EXATAMENTE a cor do fundo */
+--nuvem-fundo: var(--paper-200);
+background: var(--nuvem-fundo);
+}
+
+.aura-luz {
+position: absolute;
+inset: 0;
+pointer-events: none;
+opacity: 0;
+transition: opacity 0.3s; /* SEM EQUIVALENTE — 300ms não existe nos meus tokens */
+background-image: radial-gradient(
+circle 380px at var(--aura-mx, 50%) var(--aura-my, 50%),
+var(--paper-300) 0%,
+var(--paper-300) 45%,
+transparent 80%
+);
+}
+.aura-luz.is-active { opacity: 1; }
+
+/* ============================================================
+   A NUVEM ESCONDIDA
+   pointer-events:none de propósito: ela não pode roubar o mouse do
+   conteúdo real, que fica numa camada acima (position:relative).
+   ============================================================ */
+.nuvem-secao { padding: 100px 40px; }
+
+.nuvem-oculta {
+position: absolute;
+inset: 0;
+overflow: hidden;
+pointer-events: none;
+user-select: none;
+}
+.nuvem-oculta span {
+position: absolute;
+font-family: var(--font-sans);
+font-weight: 800; /* SEM EQUIVALENTE — a Inter daqui vai até 700 */
+text-transform: uppercase;
+color: var(--nuvem-fundo);
+white-space: nowrap;
+font-size: clamp(22px, 2.8vw, 40px);
+}
+
+/* posições — copiadas uma a uma da referência */
+.nuvem-oculta__pin {
+top: 24px;
+left: 50%;
+transform: translateX(-50%);
+font-size: clamp(22px, 2.8vw, 40px) !important;
+}
+.nuvem-oculta span:nth-child(2)  { top: 6%;  left: 4%; }
+.nuvem-oculta span:nth-child(3)  { top: 8%;  right: 4%;  font-size: clamp(30px, 3.6vw, 52px); }
+.nuvem-oculta span:nth-child(4)  { top: 34%; left: 6%;   font-size: clamp(30px, 3.6vw, 52px); }
+.nuvem-oculta span:nth-child(5)  { top: 36%; right: 6%; }
+.nuvem-oculta span:nth-child(6)  { top: 54%; left: 16%;  font-size: clamp(30px, 3.6vw, 52px); }
+.nuvem-oculta span:nth-child(7)  { top: 56%; right: 16%; }
+.nuvem-oculta span:nth-child(8)  { top: 40%; left: 22%; }
+.nuvem-oculta span:nth-child(9)  { top: 43%; right: 18%; font-size: clamp(30px, 3.6vw, 52px); }
+.nuvem-oculta span:nth-child(10) { top: 63%; left: 0%; }
+
+/* ============================================================
+   CAMADA DE CONTEÚDO
+   PLACEHOLDER — na referência aqui moram o título e os cards de
+   serviço. O que importa para o efeito é só o position:relative,
+   que põe o conteúdo acima da nuvem. Troque o miolo pelo seu.
+   ============================================================ */
+.nuvem-conteudo {
+position: relative;
+max-width: 1886px;
+margin: 0 auto;
+padding: 0 15px;
+text-align: center;
+}
+.nuvem-conteudo h2 {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: clamp(24px, 3vw, 38px);
+line-height: 1.2;
+letter-spacing: -0.04em;
+color: var(--ink-900);
+margin: 0;
+}
+.nuvem-conteudo p {
+margin: var(--sp-4) auto 0;
+max-width: 52ch;
+font-size: var(--fs-body);
+line-height: 1.6;
+color: var(--ink-500);
+}
+.nuvem-vaga {
+min-height: 420px;
+margin-top: var(--sp-12);
+border: 1px dashed var(--line-strong);
+border-radius: var(--r-lg);
+display: grid;
+place-items: center;
+font-family: var(--font-mono);
+font-size: var(--fs-label);
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: var(--ink-300);
+}
+
+@media (max-width: 900px) {
+.nuvem-secao { padding-top: 50px; padding-left: 0; padding-right: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="aura-zona" style="position:relative;overflow:hidden;">
+<div class="aura-luz" id="aura-compartilhada"></div>
+
+<section id="nuvem-aura" class="nuvem-secao" style="position:relative;z-index:1;">
+
+<!-- PLACEHOLDER: as 10 palavras vieram da referência. São só conteúdo —
+     troque pelas suas sem mexer em mais nada. A primeira é a fixada no
+     topo (.nuvem-oculta__pin); as outras nove são posicionadas por
+     nth-child na ordem em que aparecem aqui. -->
+<div class="nuvem-oculta" id="nuvem-oculta">
+<span class="nuvem-oculta__pin">Compartilhar</span>
+<span>Experimentar</span>
+<span>Interagir</span>
+<span>Envolver</span>
+<span>Celebrar</span>
+<span>Relacionar</span>
+<span>Viver</span>
+<span>Imaginar</span>
+<span>Construir</span>
+<span>Transformar</span>
+</div>
+
+<div class="nuvem-conteudo">
+<!-- PLACEHOLDER: substituir pelo conteúdo real da seção -->
+<h2>Passe o mouse por aqui</h2>
+<p>As palavras estão todas nesta tela, na mesma cor do papel. Só aparecem dentro do facho de luz que segue o cursor com um passo de atraso.</p>
+<div class="nuvem-vaga">Conteúdo da seção</div>
+</div>
+
+</section>
+</div>
+
+<script>
+/* Aura no mouse — lógica copiada da referência sem alteração: mesmo lerp de
+   0.1 para perseguir o cursor com atraso suave, mesmo limiar de 0.5px para
+   encerrar o requestAnimationFrame, mesmos três eventos na zona.
+
+   O facho é escopado no wrapper (.aura-zona), não na seção: assim, quando o
+   wrapper abriga mais de uma seção, existe uma fronteira só — o topo e a base
+   dele. Com uma instância por seção, cada uma "congelava" perto da própria
+   borda ao perder o mouse, e na passagem entre seções apareciam duas ao mesmo
+   tempo. */
+(function(){
+  var aura = document.getElementById('aura-compartilhada');
+  if(!aura) return;
+  var zone = aura.closest('.aura-zona');
+  if(!zone) return;
+  var targetX = null, targetY = null, curX = null, curY = null, rafId = null;
+  function tick(){
+    curX += (targetX - curX) * .1;
+    curY += (targetY - curY) * .1;
+    aura.style.setProperty('--aura-mx', curX.toFixed(1) + 'px');
+    aura.style.setProperty('--aura-my', curY.toFixed(1) + 'px');
+    if (Math.abs(targetX - curX) > .5 || Math.abs(targetY - curY) > .5) {
+      rafId = requestAnimationFrame(tick);
+    } else {
+      rafId = null;
+    }
+  }
+  zone.addEventListener('mousemove', function(e){
+    var rect = zone.getBoundingClientRect();
+    targetX = e.clientX - rect.left;
+    targetY = e.clientY - rect.top;
+    if (curX === null){ curX = targetX; curY = targetY; }
+    if (rafId === null) rafId = requestAnimationFrame(tick);
+  });
+  zone.addEventListener('mouseenter', function(){ aura.classList.add('is-active'); });
+  zone.addEventListener('mouseleave', function(){ aura.classList.remove('is-active'); });
+})();
+</script>
+
+</body>
+</html>

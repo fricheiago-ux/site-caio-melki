@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dr. Caio Melki — Médico de Família e Comunidade | Belo Horizonte</title>
+<meta name="description" content="Dr. Caio Ribeiro Melki, médico de família e comunidade em Belo Horizonte (CRM-MG 78461, RQE 57161). Veja se o seu problema de saúde é acompanhado por um médico de família."/>
+
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
+
+<!-- design system -->
+<link rel="stylesheet" href="assets/design-system-2/css/tokens.css?v=55"/>
+<link rel="stylesheet" href="assets/design-system-2/css/animations.css?v=55"/>
+<link rel="stylesheet" href="assets/design-system-2/css/effects.css?v=55"/>
+<link rel="stylesheet" href="assets/design-system-2/css/components.css?v=55"/>
+<!-- específico do site -->
+<!-- hero.css: retrato à esquerda, busca de condições e faixa de instituições -->
+<!-- intro.css: loader reutilizável, portas de abertura e a marca como máscara -->
+<link rel="stylesheet" href="assets/site/css/intro.css?v=55"/>
+<link rel="stylesheet" href="assets/site/css/hero.css?v=55"/>
+<!-- especialidade.css: tríptico da seção A especialidade -->
+<link rel="stylesheet" href="assets/site/css/especialidade.css?v=55"/>
+<link rel="stylesheet" href="assets/site/css/sintomas.css?v=55"/>
+<!-- fechamento.css: minicurrículo, canais de agendamento e rodapé -->
+<link rel="stylesheet" href="assets/site/css/fechamento.css?v=55"/>
+<!-- instituicoes.css: cards com dobradiça 3D (logo vira descrição) -->
+<!-- pilares.css: baralho GSAP Flip da seção 02 -->
+<link rel="stylesheet" href="assets/site/css/pilares.css?v=55"/>
+<link rel="stylesheet" href="assets/site/css/instituicoes.css?v=55"/>
+<!-- atuacao.css: carrossel da seção Minha trajetória profissional -->
+<link rel="stylesheet" href="assets/site/css/atuacao.css?v=55"/>
+<!-- certificados.css: as peças de certificado no fim da seção de experiência -->
+<link rel="stylesheet" href="assets/site/css/certificados.css?v=55"/>
+</head>
+<body>
+
+
+<!-- loader padrão do site (reutilizável: .loader--mini para blocos) -->
+<div class="loader" role="status" aria-live="polite" aria-label="Carregando">
+<div class="loader__mark">
+<span class="loader__icones">
+<i data-lucide="stethoscope" style="width:30px;height:30px"></i>
+<i data-lucide="heart-pulse" style="width:30px;height:30px"></i>
+<i data-lucide="activity" style="width:30px;height:30px"></i>
+<i data-lucide="brain" style="width:30px;height:30px"></i>
+<i data-lucide="pill" style="width:30px;height:30px"></i>
+<i data-lucide="baby" style="width:30px;height:30px"></i>
+<i data-lucide="shield-check" style="width:30px;height:30px"></i>
+<i data-lucide="heart-handshake" style="width:30px;height:30px"></i>
+</span>
+</div>
+<p class="loader__texto">Preparando o cuidado</p>
+<div class="loader__line"><i></i></div>
+</div>
+
+<!-- cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<!-- background-layers -->
+<canvas class="particle-canvas"></canvas>
+<div class="noise-overlay"></div>
+
+<!-- navbar -->
+<header class="navbar nav-load">
+<div class="wrap navbar__inner">
+<a href="#hero" aria-label="Dr. Caio Melki — início">
+<span class="marca marca--header"></span>
+</a>
+<nav class="navbar__links">
+<a class="nav-link" href="#especialidade">A especialidade</a>
+<a class="nav-link" href="#sintomas">O que eu trato</a>
+<a class="nav-link" href="#pilares">Os pilares</a>
+<a class="nav-link" href="#formacao">Formação</a>
+<a class="nav-link" href="#trajetoria">Experiência</a>
+</nav>
+<div class="btn-halo">
+<a class="btn btn--primary" href="https://calendly.com/caio-melki" target="_blank" rel="noopener"><span class="btn__shine"></span>Agendar consulta<i data-lucide="arrow-right" class="btn__arrow" style="width:15px;height:15px"></i></a>
+</div>
+</div>
+</header>
+
+<!-- hero -->
+<div class="abertura" data-portas="on">
+
+<div class="hero-portas" aria-hidden="true">
+<i class="porta porta--esq"><span class="porta__conteudo">
+<span class="porta__dr">dr.</span>
+<span class="porta__nome">Caio</span>
+</span></i>
+<i class="porta porta--dir"><span class="porta__conteudo">
+<span class="porta__nome">Melki</span>
+<span class="porta__mfc">mfc</span>
+</span></i>
+</div>
+
+<section id="hero" class="hero-site">
+<div style="position:absolute;inset:0;background:var(--grad-dawn);opacity:.5"></div>
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.75"></div>
+<div class="grid-bg animate-grid" style="position:absolute;inset:0"></div>
+<div class="aurora aurora--sage animate-aurora" style="width:600px;height:600px;top:-18%;left:-12%"></div>
+<div class="aurora aurora--sand animate-aurora-slow" style="width:680px;height:680px;bottom:-30%;right:-10%"></div>
+<div class="aurora aurora--sky animate-pulse" style="width:420px;height:420px;top:40%;left:38%"></div>
+<div class="sweep" style="top:0"></div>
+
+<div class="wrap-wide">
+<div class="hero-grid">
+
+<div class="reveal">
+<div class="hero-foto">
+<img src="assets/imagens/fotos-caio/foto-principal-caio.jpeg" alt="Dr. Caio Ribeiro Melki, médico de família e comunidade"/>
+<div class="hero-foto__selo">
+<div class="on-dark">
+<p class="label" style="margin-bottom:2px">Belo Horizonte · MG</p>
+<p class="h5" style="color:var(--paper-100)">Dr. Caio Ribeiro Melki</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="hero-fala">
+<div class="hero-badge" style="margin-bottom:var(--sp-5)">
+<span class="badge badge--sage"><span class="badge__dot"><span></span><span></span></span>CRM-MG 78461 · RQE 57161</span>
+</div>
+
+<h1 id="hero-title" class="hero-frase type-reveal" style="margin-bottom:var(--sp-6)">Oi, sou o Caio<img class="hero-slot" data-slot="1" src="assets/imagens/slot-1-caio.jpeg?v=55" alt="Retrato do Dr. Caio Ribeiro Melki" draggable="false"/>, médico de família e comunidade.<img class="hero-slot hero-slot--cine" data-slot="2" src="assets/imagens/slot-2-comunidade.jpeg?v=55" alt="Fachadas de casas simples numa rua residencial" draggable="false"/> <span class="hero-frase__quieta">Busco tratar as pessoas por inteiro<img class="hero-slot hero-slot--tall" data-slot="3" src="assets/imagens/slot-3-inteiro.jpeg?v=55" alt="Uma pessoa de corpo inteiro no vão de uma porta" draggable="false"/>, não apenas pelos&nbsp;seus sintomas.</span></h1>
+
+<div class="blur-reveal" style="margin-bottom:var(--sp-6)">
+<p class="body-lg" style="max-width:56ch;margin:0">Com a sua história, a sua família e a sua rotina na equação, a maior parte dos problemas se resolvem antes de envolver outro médico.</p>
+</div>
+
+<div class="hero-agendar reveal delay-700">
+<a class="btn-canal btn-canal--particular" href="https://calendly.com/caio-melki" target="_blank" rel="noopener">
+<span class="btn-canal__marca" style="background:var(--paper-100)"><i data-lucide="calendar-check" style="width:17px;height:17px;color:var(--sage-700)"></i></span>
+<span class="btn-canal__texto"><small>Agendar</small>Consulta particular</span>
+</a>
+<button class="btn-canal btn-canal--unimed" type="button" data-modal-open aria-label="Como agendar pela Unimed-BH">
+<span class="btn-canal__marca"><img src="assets/logos/unimed-icone.png" alt="Unimed"/></span>
+<span class="btn-canal__texto"><small>Pelo app</small>Unimed-BH</span>
+</button>
+</div>
+</div>
+
+</div>
+
+</div>
+</section>
+
+</div>
+
+<!-- ============================================================
+     A ESPECIALIDADE — tríptico, estrutura da seção "O Caminho" da ref-6
+     ============================================================ -->
+<section id="especialidade" class="section">
+<div class="aurora aurora--sage animate-aurora" style="width:520px;height:520px;top:-12%;left:-10%;opacity:.45"></div>
+<div class="aurora aurora--sand animate-aurora-slow" style="width:600px;height:600px;bottom:-26%;right:-12%;opacity:.5"></div>
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.5"></div>
+<div class="sweep" style="top:0"></div>
+
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 01 A especialidade</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">O que faz o médico de família e comunidade?</h2>
+</div>
+<span class="label">[ 13 áreas ]</span>
+</div>
+
+<div class="esp-triptico reveal delay-100">
+
+<!-- retrato com a citação -->
+<figure class="esp-retrato" style="margin:0">
+<!-- corpo em nuvem de pontos: monta-se conforme a seção entra (corpo-3d.js) -->
+<canvas class="esp-corpo" data-corpo aria-hidden="true"></canvas>
+<figcaption class="esp-retrato__veu">
+<p class="esp-citacao">"É mais importante saber que tipo de pessoa tem a doença do que que tipo de doença a pessoa tem."</p>
+<div class="esp-autor"><i data-lucide="quote" style="width:13px;height:13px"></i>Hipócrates</div>
+</figcaption>
+</figure>
+
+<!-- a fala -->
+<div class="esp-meio">
+<div>
+<p class="esp-declaracao">O MFC é um médico <strong>especialista em coordenar o cuidado da pessoa</strong>. Quem coordena sabe o que já foi tentado, o que funcionou e o que não vale repetir.</p>
+<p class="body-sm" style="color:var(--ink-500);margin:0">Na formação, aprendemos a olhar a pessoa como um todo, em seu contexto pessoal, social e familiar, para direcionar investigações e tratamentos de forma verdadeiramente individualizada.</p>
+</div>
+
+<!-- tira de apoio, ~4:1 — ocupa a folga da coluna e encolhe com ela -->
+<div class="esp-apoio">
+<img src="assets/imagens/esp-apoio.jpeg?v=55" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy"/>
+</div>
+
+<div class="esp-nota">
+<span class="esp-nota__rotulo"><i data-lucide="git-merge" style="width:13px;height:13px"></i>Gerente do cuidado</span>
+<p>O papel do médico de família não é substituir o especialista focal, e sim conduzir. Quando o caso pede intervenção, o encaminhamento é direcionado e o acompanhamento segue em conjunto.</p>
+</div>
+</div>
+
+<!-- painel escuro: a estatística vira contador, e o card inteiro é um
+     atalho para a nuvem de sintomas da seção seguinte -->
+<a class="esp-painel" href="#sintomas" data-painel-vivo aria-label="Pesquisar o que você está sentindo">
+<div class="esp-painel__eco"><i data-lucide="stethoscope" style="width:150px;height:150px"></i></div>
+<div class="esp-painel__halo" aria-hidden="true"></div>
+
+<div class="esp-painel__vivo"><span class="esp-painel__ponto"></span><span>Alcance da especialidade</span></div>
+
+<div class="esp-painel__corpo">
+<p class="esp-numero"><em>+</em><b data-contador data-ate="80">0</b><i>%</i></p>
+<p class="esp-painel__legenda">dos casos se resolvem na própria consulta, sem envolver outro médico.</p>
+
+<div class="esp-giro" aria-hidden="true">
+<span class="esp-giro__rotulo">Trato sintomas como</span>
+<span class="esp-giro__palavra" data-giro>ansiedade</span>
+</div>
+
+<span class="esp-painel__cta">
+Pesquise o que você está sentindo
+<i data-lucide="arrow-down" style="width:15px;height:15px"></i>
+</span>
+</div>
+</a>
+</div>
+
+</div>
+
+
+</div>
+</section>
+
+
+<!-- ============================================================
+     02 — "MAS DOUTOR, O QUE SERÁ QUE EU TENHO?"
+     A entrada da lista de condições não é a doença, é o sintoma:
+     a palavra que a pessoa digita no Google antes de procurar médico.
+     Nuvem → busca → ficha com as possíveis causas. site/js/sintomas.js
+     ============================================================ -->
+<section id="sintomas" class="section sint-secao" style="background:var(--paper-200)" data-sintomas>
+<div class="aurora aurora--sand animate-aurora" style="width:560px;height:560px;top:-16%;right:-10%;opacity:.5"></div>
+<div class="aurora aurora--sage animate-aurora-slow" style="width:520px;height:520px;bottom:-20%;left:-12%;opacity:.35"></div>
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.4"></div>
+<div class="sweep" style="top:0"></div>
+
+<!-- poca de luz que segue o mouse: fica acima das auroras decorativas e
+     abaixo do conteudo, entao passa POR BAIXO das palavras da nuvem -->
+<div class="sint-aura" data-aura aria-hidden="true"></div>
+
+<!-- palavras que so existem dentro do facho: outros sintomas, posicionados
+     nos vaos livres da secao, nunca por cima da nuvem -->
+<div class="sint-ocultas" aria-hidden="true">
+<span class="g">Enjoo</span>
+<span>Suor noturno</span>
+<span class="g">Falta de apetite</span>
+<span>Boca seca</span>
+<span>Tremor</span>
+<span>C&atilde;ibra</span>
+<span>Solu&ccedil;o</span>
+<span>Sede</span>
+<span>Rouquid&atilde;o</span>
+<span>Pele seca</span>
+<span>Vis&atilde;o emba&ccedil;ada</span>
+<span>Zumbido</span>
+<span>Unhas fracas</span>
+<span>Perda de peso</span>
+<span class="g">Mau h&aacute;lito</span>
+<span>Suor frio</span>
+</div>
+
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 02 O que eu trato</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">&ldquo;Mas doutor, o que será que eu tenho?&rdquo;</h2>
+</div>
+<span class="label">[ 38 sintomas · 13 áreas ]</span>
+</div>
+
+<div class="sint-intro reveal delay-100">
+<p>Clique numa das palavras abaixo — ou use o campo de busca — para <strong>pesquisar o que você está sentindo</strong> e entender as possíveis causas.</p>
+</div>
+
+<!-- a nuvem: o peso é o quanto a queixa aparece no consultório -->
+<div class="sint-nuvem reveal delay-200" data-nuvem role="group" aria-label="Sintomas mais comuns">
+<button class="sint-palavra" type="button" data-sintoma="insonia" data-peso="4" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Insônia</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-de-cabeca" data-peso="5" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Dor de cabeça</button>
+<button class="sint-palavra" type="button" data-sintoma="tosse" data-peso="4" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Tosse</button>
+<button class="sint-palavra" type="button" data-sintoma="azia" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Azia</button>
+<button class="sint-palavra" type="button" data-sintoma="pernas-inchadas" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Pernas inchadas</button>
+<button class="sint-palavra" type="button" data-sintoma="ansiedade" data-peso="5" data-tom="musgo" aria-expanded="false" aria-controls="sint-painel">Ansiedade</button>
+<button class="sint-palavra" type="button" data-sintoma="febre" data-peso="4" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Febre</button>
+<button class="sint-palavra" type="button" data-sintoma="formigamento" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Formigamento</button>
+<button class="sint-palavra" type="button" data-sintoma="pressao-alta" data-peso="4" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Pressão alta</button>
+<button class="sint-palavra" type="button" data-sintoma="tontura" data-peso="4" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Tontura</button>
+<button class="sint-palavra" type="button" data-sintoma="cansaco" data-peso="5" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Cansaço</button>
+<button class="sint-palavra" type="button" data-sintoma="colesterol-alto" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Colesterol alto</button>
+<button class="sint-palavra" type="button" data-sintoma="coceira" data-peso="3" aria-expanded="false" aria-controls="sint-painel">Coceira</button>
+<button class="sint-palavra" type="button" data-sintoma="corrimento" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Corrimento</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-de-garganta" data-peso="3" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Dor de garganta</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-nas-costas" data-peso="5" data-tom="musgo" aria-expanded="false" aria-controls="sint-painel">Dor nas costas</button>
+<button class="sint-palavra" type="button" data-sintoma="ronco" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Ronco</button>
+<button class="sint-palavra" type="button" data-sintoma="diarreia" data-peso="3" aria-expanded="false" aria-controls="sint-painel">Diarreia</button>
+<button class="sint-palavra" type="button" data-sintoma="queda-de-cabelo" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Queda de cabelo</button>
+<button class="sint-palavra" type="button" data-sintoma="falta-de-ar" data-peso="4" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Falta de ar</button>
+<button class="sint-palavra" type="button" data-sintoma="esquecimento" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Esquecimento</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-de-barriga" data-peso="4" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Dor de barriga</button>
+<button class="sint-palavra" type="button" data-sintoma="olho-vermelho" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Olho vermelho</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-nas-juntas" data-peso="3" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Dor nas juntas</button>
+<button class="sint-palavra" type="button" data-sintoma="desanimo" data-peso="4" data-tom="musgo" aria-expanded="false" aria-controls="sint-painel">Desânimo</button>
+<button class="sint-palavra" type="button" data-sintoma="ganho-de-peso" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Ganho de peso</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-de-ouvido" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Dor de ouvido</button>
+<button class="sint-palavra" type="button" data-sintoma="acucar-alto" data-peso="3" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Açúcar alto</button>
+<button class="sint-palavra" type="button" data-sintoma="palpitacao" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Palpitação</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-no-peito" data-peso="4" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Dor no peito</button>
+<button class="sint-palavra" type="button" data-sintoma="nariz-entupido" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Nariz entupido</button>
+<button class="sint-palavra" type="button" data-sintoma="colica-menstrual" data-peso="3" aria-expanded="false" aria-controls="sint-painel">Cólica menstrual</button>
+<button class="sint-palavra" type="button" data-sintoma="ardencia-para-urinar" data-peso="3" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Ardência para urinar</button>
+<button class="sint-palavra" type="button" data-sintoma="manchas-na-pele" data-peso="3" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Manchas na pele</button>
+<button class="sint-palavra" type="button" data-sintoma="intestino-preso" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Intestino preso</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-no-joelho" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Dor no joelho</button>
+<button class="sint-palavra" type="button" data-sintoma="dificuldade-de-erecao" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Dificuldade de ereção</button>
+<button class="sint-palavra" type="button" data-sintoma="crianca-doente" data-peso="2" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Criança doente</button>
+</div>
+
+<!-- o campo -->
+<div class="sint-busca reveal delay-300">
+<div class="sint-campo">
+<span class="sint-campo__icone"><i data-lucide="search" style="width:19px;height:19px"></i></span>
+<input type="search" data-busca
+autocomplete="off" autocapitalize="off" spellcheck="false"
+role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="sint-resultados"
+aria-label="Pesquise o que você está sentindo"
+placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
+<button class="sint-campo__limpar" type="button" data-limpar aria-label="Limpar busca">
+<i data-lucide="x" style="width:16px;height:16px"></i>
+</button>
+</div>
+<div class="sint-resultados" id="sint-resultados" data-resultados role="listbox" aria-label="Sintomas encontrados"></div>
+</div>
+
+<!-- a ficha que desce -->
+<div class="sint-painel" id="sint-painel" data-painel role="region" aria-live="polite" aria-hidden="true"></div>
+
+<div class="sint-nota reveal">
+<span class="sint-nota__icone"><i data-lucide="info" style="width:19px;height:19px"></i></span>
+<p><strong>Isto orienta, não diagnostica.</strong> A mesma queixa tem causas diferentes em pessoas diferentes — e é justamente esse o trabalho do médico de família: olhar a sua história inteira antes de nomear o que você tem. Em caso de sintoma grave ou súbito, procure um pronto-socorro ou ligue 192.</p>
+</div>
+
+</div>
+</section>
+
+
+<!-- ============================================================
+     03 — OS QUATRO PILARES
+     Baralho que se abre sozinho e troca o destaque no clique.
+     Porte em JS puro do componente GSAP Flip (21st.dev).
+     VAGA — as 4 imagens são placeholders do componente original.
+     ============================================================ -->
+<section id="pilares" class="pilares" tabindex="-1" aria-label="Os cinco princípios que mudam o cuidado">
+<div class="aurora aurora--sage animate-aurora" style="width:620px;height:620px;top:-18%;left:-10%;opacity:.18"></div>
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.12"></div>
+
+<!-- Partículas locais: porte fiel do fundo WebGL da hero de
+     mirelle-fashion.aura.build (nuvem de pontos em Three.js, sem linha
+     nenhuma entre eles — ver pilares-particulas.js pro porquê da tentativa
+     anterior ter saído errada). Canvas PRÓPRIO da seção, não fixed: pinta
+     atrás do conteúdo central dela, e não só nas margens. -->
+<canvas class="pilares__particulas" aria-hidden="true"></canvas>
+
+<!-- Selo giratorio: so o <g> do anel gira. O miolo e irmao do <svg>, entao
+     fica de fora da rotacao por construcao, e nao por posicionamento. -->
+<div class="pilares__selo" aria-hidden="true">
+<svg class="pilares__selo-disco" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<path id="selo-trilha" d="M150,150 m-122,0 a122,122 0 1,1 244,0 a122,122 0 1,1 -244,0"></path>
+</defs>
+<g class="pilares__selo-anel">
+<text class="pilares__selo-texto">
+<textPath href="#selo-trilha" startOffset="0%" textLength="766.5" lengthAdjust="spacing">MEDICINA DE FAMÍLIA E COMUNIDADE&nbsp;•&nbsp;</textPath>
+</text>
+</g>
+</svg>
+<i class="pilares__selo-miolo" data-lucide="house"></i>
+</div>
+
+<div class="wrap-wide" style="position:relative;z-index:2;display:flex;flex-direction:column;flex:1">
+<div class="pilares__topo reveal">
+<span class="label pilares__num">/ 03 Os princípios</span>
+<h2 class="h2 pilares__titulo">Os 05 princípios que mudam o cuidado</h2>
+<p class="pilares__intro">Não são valores soltos: é o raciocínio por trás de cada decisão dentro da consulta, da primeira pergunta ao encaminhamento.</p>
+</div>
+
+<div class="pilares__palco">
+<div class="pilares__contador"><b>01</b><span> / 05</span></div>
+
+<div class="pilares__painel">
+<span class="pilares__n">01</span>
+<h3 class="pilares__h">O histórico, não só a queixa de hoje</h3>
+<p class="pilares__p">Continuidade é acompanhar a mesma pessoa por anos, não resolver um problema isolado por vez. Isso muda o que se enxerga numa queixa simples.</p>
+<p class="pilares__p pilares__p--2">Quem já te atendeu sabe o que você já tentou, o que funcionou e o que piora com estresse. Uma consulta nova não começa do zero.</p>
+</div>
+
+<button class="pilar-card" type="button" data-n="01" data-titulo="O histórico, não só a queixa de hoje" data-texto="Continuidade é acompanhar a mesma pessoa por anos, não resolver um problema isolado por vez. Isso muda o que se enxerga numa queixa simples." data-texto2="Quem já te atendeu sabe o que você já tentou, o que funcionou e o que piora com estresse. Uma consulta nova não começa do zero." aria-label="Pilar 01 — O histórico, não só a queixa de hoje">
+<img src="assets/imagens/card-1.jpeg" alt="Uma mulher conversa com a vizinha no portão de casa" draggable="false"/>
+<span class="pilar-card__veu"></span>
+<span class="pilar-card__n">01</span>
+</button>
+<button class="pilar-card" type="button" data-n="02" data-titulo="A conversa como técnica" data-texto="Comunicação, apoio à mudança de hábitos e adesão ao cuidado são estudados a fundo na formação. Não é jeito bom com as pessoas, é treino." data-texto2="Um plano de cuidado só funciona se couber na sua vida. Por isso ele é construído junto, e não entregue pronto no fim da consulta." aria-label="Pilar 02 — A conversa como técnica">
+<img src="assets/imagens/card-2.jpeg" alt="Um homem escuta a explicação do médico numa consulta" draggable="false"/>
+<span class="pilar-card__veu"></span>
+<span class="pilar-card__n">02</span>
+</button>
+<button class="pilar-card" type="button" data-n="03" data-titulo="O mais comum de todas as áreas" data-texto="Proficiência no diagnóstico e na conduta dos problemas de saúde mais frequentes de todas as especialidades, e não os de uma só." data-texto2="A profundidade não está em um órgão, e sim na largura do que aparece de verdade num consultório: da pressão alta à ansiedade, da dor nas costas à tireoide." aria-label="Pilar 03 — O mais comum de todas as áreas">
+<img src="assets/imagens/card-3.jpeg" alt="Pessoas de idades diferentes aguardam numa sala de espera" draggable="false"/>
+<span class="pilar-card__veu"></span>
+<span class="pilar-card__n">03</span>
+</button>
+<button class="pilar-card" type="button" data-n="04" data-titulo="Resolver sem precisar de outro médico" data-texto="De 80 a 90% dos casos se resolvem ali mesmo, na consulta. É o resultado dos três primeiros pilares, e não um atalho." data-texto2="Menos encaminhamento por reflexo, menos fila de espera, menos exame pedido para ganhar tempo. Você sai com uma conduta, e não com uma lista de próximos passos." aria-label="Pilar 04 — Resolver sem precisar de outro médico">
+<img src="assets/imagens/card-4.jpeg" alt="Uma mulher desce a escada de uma unidade de saúde de mãos dadas com o filho" draggable="false"/>
+<span class="pilar-card__veu"></span>
+<span class="pilar-card__n">04</span>
+</button>
+<button class="pilar-card" type="button" data-n="05" data-titulo="O encaminhamento certo, e o que vem depois" data-texto="Quando o especialista focal precisa entrar, você sabe quando e qual. O encaminhamento é direcionado, e não um chute na direção de uma agenda qualquer." data-texto2="E o médico de família não sai de cena. Ele segue como gerente do cuidado, acompanhando em conjunto e juntando as pontas do que cada especialista recomenda." aria-label="Pilar 05 — O encaminhamento certo, e o que vem depois">
+<img src="assets/imagens/card-5.jpeg" alt="Duas mãos seguram a mesma folha sobre uma mesa" draggable="false"/>
+<span class="pilar-card__veu"></span>
+<span class="pilar-card__n">05</span>
+</button>
+
+<div class="pilares__dica"><i data-lucide="hand-pointer" style="width:14px;height:14px"></i>Clique para abrir</div>
+</div>
+
+<div class="pilares__mobile">
+<article class="pilar-m">
+<div class="pilar-m__foto"><img src="assets/imagens/card-1.jpeg" alt="Uma mulher conversa com a vizinha no portão de casa" loading="lazy"/></div>
+<div class="pilar-m__corpo">
+<span class="pilar-m__n">01</span>
+<h3 class="pilar-m__t">O histórico, não só a queixa de hoje</h3>
+<p class="pilar-m__d">Continuidade é acompanhar a mesma pessoa por anos, não resolver um problema isolado por vez. Isso muda o que se enxerga numa queixa simples.</p>
+<p class="pilar-m__d">Quem já te atendeu sabe o que você já tentou, o que funcionou e o que piora com estresse. Uma consulta nova não começa do zero.</p>
+</div>
+</article>
+<article class="pilar-m">
+<div class="pilar-m__foto"><img src="assets/imagens/card-2.jpeg" alt="Um homem escuta a explicação do médico numa consulta" loading="lazy"/></div>
+<div class="pilar-m__corpo">
+<span class="pilar-m__n">02</span>
+<h3 class="pilar-m__t">A conversa como técnica</h3>
+<p class="pilar-m__d">Comunicação, apoio à mudança de hábitos e adesão ao cuidado são estudados a fundo na formação. Não é jeito bom com as pessoas, é treino.</p>
+<p class="pilar-m__d">Um plano de cuidado só funciona se couber na sua vida. Por isso ele é construído junto, e não entregue pronto no fim da consulta.</p>
+</div>
+</article>
+<article class="pilar-m">
+<div class="pilar-m__foto"><img src="assets/imagens/card-3.jpeg" alt="Pessoas de idades diferentes aguardam numa sala de espera" loading="lazy"/></div>
+<div class="pilar-m__corpo">
+<span class="pilar-m__n">03</span>
+<h3 class="pilar-m__t">O mais comum de todas as áreas</h3>
+<p class="pilar-m__d">Proficiência no diagnóstico e na conduta dos problemas de saúde mais frequentes de todas as especialidades, e não os de uma só.</p>
+<p class="pilar-m__d">A profundidade não está em um órgão, e sim na largura do que aparece de verdade num consultório: da pressão alta à ansiedade, da dor nas costas à tireoide.</p>
+</div>
+</article>
+<article class="pilar-m">
+<div class="pilar-m__foto"><img src="assets/imagens/card-4.jpeg" alt="Uma mulher desce a escada de uma unidade de saúde de mãos dadas com o filho" loading="lazy"/></div>
+<div class="pilar-m__corpo">
+<span class="pilar-m__n">04</span>
+<h3 class="pilar-m__t">Resolver sem precisar de outro médico</h3>
+<p class="pilar-m__d">De 80 a 90% dos casos se resolvem ali mesmo, na consulta. É o resultado dos três primeiros pilares, e não um atalho.</p>
+<p class="pilar-m__d">Menos encaminhamento por reflexo, menos fila de espera, menos exame pedido para ganhar tempo. Você sai com uma conduta, e não com uma lista de próximos passos.</p>
+</div>
+</article>
+<article class="pilar-m">
+<div class="pilar-m__foto"><img src="assets/imagens/card-5.jpeg" alt="Duas mãos seguram a mesma folha sobre uma mesa" loading="lazy"/></div>
+<div class="pilar-m__corpo">
+<span class="pilar-m__n">05</span>
+<h3 class="pilar-m__t">O encaminhamento certo, e o que vem depois</h3>
+<p class="pilar-m__d">Quando o especialista focal precisa entrar, você sabe quando e qual. O encaminhamento é direcionado, e não um chute na direção de uma agenda qualquer.</p>
+<p class="pilar-m__d">E o médico de família não sai de cena. Ele segue como gerente do cuidado, acompanhando em conjunto e juntando as pontas do que cada especialista recomenda.</p>
+</div>
+</article>
+</div>
+</div>
+</section>
+
+<!-- formação acadêmica -->
+<section id="formacao" class="section" style="background:var(--paper-200)">
+<div class="aurora aurora--sage animate-aurora" style="width:560px;height:560px;top:-14%;right:-10%;opacity:.5"></div>
+<div class="aurora aurora--sand animate-aurora-slow" style="width:620px;height:620px;bottom:-24%;left:-12%;opacity:.6"></div>
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.55"></div>
+<div class="sweep" style="top:0"></div>
+
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 04 Formação</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Minha formação acadêmica</h2>
+</div>
+<span class="label">[ 5 instituições ]</span>
+</div>
+
+<div class="inst-grid reveal delay-100">
+
+<div class="inst-item">
+<div class="inst-card" tabindex="0">
+<div class="inst-card__face inst-card__face--logo">
+<img class="inst-card__logo" src="assets/site/img/ufmg.png" alt="Faculdade de Medicina da UFMG"/>
+<span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
+</div>
+<div class="inst-card__face inst-card__face--desc">
+<span class="inst-card__papel">Graduação</span>
+<p class="inst-card__texto">Médico pela <strong>segunda melhor faculdade de medicina do país</strong> na avaliação do mercado.</p>
+<a class="inst-card__fonte" href="https://ruf.folha.uol.com.br/2025/ranking-de-cursos/medicina/" target="_blank" rel="noopener">RUF/Folha 2025<i data-lucide="arrow-up-right" style="width:11px;height:11px"></i></a>
+</div>
+</div>
+<p class="inst-nome">Faculdade de Medicina UFMG</p>
+<p class="body-sm inst-toque">Graduação — segunda melhor faculdade de medicina do país.</p>
+</div>
+
+<div class="inst-item">
+<div class="inst-card" tabindex="0">
+<div class="inst-card__face inst-card__face--logo">
+<img class="inst-card__logo" src="assets/site/img/hertfordshire.png" alt="University of Hertfordshire"/>
+<span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
+</div>
+<div class="inst-card__face inst-card__face--desc">
+<span class="inst-card__papel">Intercâmbio</span>
+<p class="inst-card__texto"><strong>Um ano de graduação sanduíche</strong> no Reino Unido. Guardian Top 50 University.</p>
+<a class="inst-card__fonte" href="http://herts.ac.uk/" target="_blank" rel="noopener">herts.ac.uk<i data-lucide="arrow-up-right" style="width:11px;height:11px"></i></a>
+</div>
+</div>
+<p class="inst-nome">University of Hertfordshire</p>
+<p class="body-sm inst-toque">Intercâmbio — um ano de graduação sanduíche no Reino Unido.</p>
+</div>
+
+<div class="inst-item">
+<div class="inst-card" tabindex="0">
+<div class="inst-card__face inst-card__face--logo">
+<img class="inst-card__logo" src="assets/site/img/mcgill.png" alt="McGill University"/>
+<span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
+</div>
+<div class="inst-card__face inst-card__face--desc">
+<span class="inst-card__papel">Residência</span>
+<p class="inst-card__texto">Estágio optativo na <strong>melhor universidade do Canadá</strong> e 30ª melhor do mundo.</p>
+<a class="inst-card__fonte" href="https://www.topuniversities.com/universities/mcgill-university" target="_blank" rel="noopener">QS Rankings<i data-lucide="arrow-up-right" style="width:11px;height:11px"></i></a>
+</div>
+</div>
+<p class="inst-nome">McGill University</p>
+<p class="body-sm inst-toque">Residência — estágio optativo na melhor universidade do Canadá.</p>
+</div>
+
+<div class="inst-item">
+<div class="inst-card" tabindex="0">
+<div class="inst-card__face inst-card__face--logo">
+<img class="inst-card__logo" src="assets/site/img/hc-ufmg.png" alt="Hospital das Clínicas da UFMG"/>
+<span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
+</div>
+<div class="inst-card__face inst-card__face--desc">
+<span class="inst-card__papel">Residência médica</span>
+<p class="inst-card__texto">Estágios e residência no <strong>único hospital 100% SUS</strong> no ranking dos melhores do mundo.</p>
+<a class="inst-card__fonte" href="https://www3.ufmg.br/comunicacao/noticias/hc-ufmg-entra-na-lista-dos-melhores-hospitais-do-mundo" target="_blank" rel="noopener">UFMG Notícias<i data-lucide="arrow-up-right" style="width:11px;height:11px"></i></a>
+</div>
+</div>
+<p class="inst-nome">HC-UFMG</p>
+<p class="body-sm inst-toque">Residência médica — único hospital 100% SUS no ranking mundial.</p>
+</div>
+
+<div class="inst-item">
+<div class="inst-card" tabindex="0">
+<div class="inst-card__face inst-card__face--logo">
+<img class="inst-card__logo" src="assets/site/img/cruzeiro.png" alt="Cruzeiro Esporte Clube"/>
+<span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
+</div>
+<div class="inst-card__face inst-card__face--desc">
+<span class="inst-card__papel">Extracurricular</span>
+<p class="inst-card__texto"><strong>Dois anos de estágio</strong> no reconhecido departamento médico do clube.</p>
+</div>
+</div>
+<p class="inst-nome">Cruzeiro Esporte Clube</p>
+<p class="body-sm inst-toque">Extracurricular — dois anos no departamento médico do clube.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- ============================================================
+     04 — TRAJETÓRIA PROFISSIONAL
+     Carrossel: roda de pílulas à esquerda, baralho de cards à direita.
+     As imagens usam a marca do site como provisório até as logos
+     das instituições chegarem (assets/site/css/atuacao.css).
+     ============================================================ -->
+<section id="trajetoria" class="section">
+<div class="aurora aurora--sage animate-aurora" style="width:600px;height:600px;bottom:-22%;left:-12%;opacity:.45"></div>
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.45"></div>
+<div class="sweep" style="top:0"></div>
+
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 05 Experiência</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Experiência profissional e certificados</h2>
+</div>
+<span class="label">[ 6 frentes · 2 certificações ]</span>
+</div>
+
+<div class="atuacao reveal delay-100" data-atuacao>
+<div class="atuacao__quadro">
+
+<!-- roda de pílulas -->
+<div class="atuacao__trilho">
+<div class="atuacao__roda" role="list">
+<div class="atuacao__item" role="listitem">
+<button class="atuacao__chip" type="button"><i data-lucide="heart-pulse" style="width:17px;height:17px"></i><span>Alice Saúde</span></button>
+</div>
+<div class="atuacao__item" role="listitem">
+<button class="atuacao__chip" type="button"><i data-lucide="clipboard-list" style="width:17px;height:17px"></i><span>UNIFAP</span></button>
+</div>
+<div class="atuacao__item" role="listitem">
+<button class="atuacao__chip" type="button"><i data-lucide="book-open" style="width:17px;height:17px"></i><span>PUC-MG · Faseh · Uni-BH</span></button>
+</div>
+<div class="atuacao__item" role="listitem">
+<button class="atuacao__chip" type="button"><i data-lucide="users" style="width:17px;height:17px"></i><span>Mais Médicos</span></button>
+</div>
+<div class="atuacao__item" role="listitem">
+<button class="atuacao__chip" type="button"><i data-lucide="stethoscope" style="width:17px;height:17px"></i><span>Unimed-BH</span></button>
+</div>
+<div class="atuacao__item" role="listitem">
+<button class="atuacao__chip" type="button"><i data-lucide="monitor-play" style="width:17px;height:17px"></i><span>NESCON UFMG</span></button>
+</div>
+</div>
+</div>
+
+<!-- baralho de cards -->
+<div class="atuacao__palco">
+<div class="atuacao__baralho">
+
+<div class="atuacao__card">
+<div class="atuacao__marca"><img src="assets/imagens/logos-secao-profissional/logo-alice.png" alt="Alice Saúde"/></div>
+<div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
+<div class="atuacao__legenda">
+<span class="atuacao__selo">01 • Alice Saúde</span>
+<p class="atuacao__frase">Médico de família em uma healthtech que também é operadora de saúde.</p>
+</div>
+</div>
+
+<div class="atuacao__card">
+<div class="atuacao__marca"><img src="assets/imagens/logos-secao-profissional/logo-unifap.png" alt="UNIFAP"/></div>
+<div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
+<div class="atuacao__legenda">
+<span class="atuacao__selo">02 • UNIFAP</span>
+<p class="atuacao__frase">Coordenador pedagógico da residência de medicina de família e comunidade.</p>
+</div>
+</div>
+
+<div class="atuacao__card">
+<div class="atuacao__marca"><img src="assets/imagens/logos-secao-profissional/logo-faseh-puc-unibh.png" alt="Faseh, PUC Minas e Uni-BH"/></div>
+<div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
+<div class="atuacao__legenda">
+<span class="atuacao__selo">03 • PUC-MG · Faseh · Uni-BH</span>
+<p class="atuacao__frase">Professor e preceptor em três escolas médicas de Minas.</p>
+</div>
+</div>
+
+<div class="atuacao__card">
+<div class="atuacao__marca"><img src="assets/imagens/logos-secao-profissional/logo-mais-medicos.png" alt="Mais Médicos"/></div>
+<div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
+<div class="atuacao__legenda">
+<span class="atuacao__selo">04 • Mais Médicos</span>
+<p class="atuacao__frase">Supervisor de tutoria e tutor na especialização em medicina de família e comunidade.</p>
+</div>
+</div>
+
+<div class="atuacao__card">
+<div class="atuacao__marca"><img src="assets/imagens/logos-secao-profissional/logo-unimed.png" alt="Unimed-BH"/></div>
+<div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
+<div class="atuacao__legenda">
+<span class="atuacao__selo">05 • Unimed-BH</span>
+<p class="atuacao__frase">Atendimento em medicina de família e comunidade pela operadora.</p>
+</div>
+</div>
+
+<div class="atuacao__card">
+<div class="atuacao__marca"><img src="assets/imagens/logos-secao-profissional/logo-nescon.png" alt="NESCON UFMG"/></div>
+<div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
+<div class="atuacao__legenda">
+<span class="atuacao__selo">06 • NESCON UFMG</span>
+<p class="atuacao__frase">Supervisor de tutoria e coordenador adjunto das atividades síncronas.</p>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<!-- certificados: gerado por sincronizar-certificados.py a partir de
+     Main.dc.html e Conduct.dc.html — não editar à mão -->
+<!-- certificados:inicio -->
+<div class="cert-divisa reveal">
+<span class="label cert-divisa__rotulo"><i data-lucide="badge-check" style="width:13px;height:13px"></i>Certificações</span>
+<span class="cert-divisa__linha"></span>
+</div>
+
+<div class="cert-grade reveal delay-100">
+
+<figure class="cert-peca">
+<div class="cert-palco">
+<div class="cert-folha">
+<div style="position: relative; width: 1123px; height: 794px; overflow: hidden; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #B41824; background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.06) 0 1px, rgba(255, 255, 255, 0) 1px 13px), radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.11), rgba(0, 0, 0, 0) 62%), linear-gradient(180deg, #B41824, #8E1019);">
+
+  <div style="position: absolute; top: 20px; right: 20px; bottom: 20px; left: 20px; background: #FBFAF7; border-radius: 3px; box-shadow: 0 18px 50px -24px rgba(58, 6, 10, 0.55);"></div>
+  <div style="position: absolute; top: 38px; right: 38px; bottom: 38px; left: 38px; border: 1px solid rgba(180, 24, 36, 0.32); border-radius: 2px;"></div>
+  <div style="position: absolute; top: 44px; right: 44px; bottom: 44px; left: 44px; border: 1px solid rgba(31, 36, 32, 0.12);"></div>
+
+  <div style="position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; box-sizing: border-box; padding: 76px 104px 66px;">
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 22px;">
+      <div style="display: flex; align-items: center; gap: 9px; padding: 7px 15px; border: 1px solid rgba(180, 24, 36, 0.40); border-radius: 9999px; background: rgba(180, 24, 36, 0.07);">
+        <span style="display: block; width: 6px; height: 6px; border-radius: 9999px; background: #B41824;"></span>
+        <span style="font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #B41824;">Representação ilustrativa</span>
+      </div>
+      <div style="font-size: 13px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #6E766C;">American Heart Association</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 13px; text-align: center;">
+      <div style="font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-style: italic; font-size: 24px; line-height: 1.2; color: #6E766C;">Certificamos que</div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 11px;">
+        <div style="font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-size: 70px; line-height: 1.02; letter-spacing: -0.02em; color: #1F2420;">Caio Ribeiro Melki</div>
+        <div style="font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #9DA49A;">CRM-MG 78461 &nbsp;·&nbsp; RQE 57161</div>
+      </div>
+
+      <div style="width: 132px; height: 1px; margin: 10px 0 2px; background: rgba(180, 24, 36, 0.38);"></div>
+
+      <div style="font-size: 17px; font-weight: 300; line-height: 1.6; color: #3D453E;">concluiu a formação e está habilitado como</div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 7px;">
+        <div style="font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-size: 44px; line-height: 1.1; letter-spacing: -0.015em; color: #B41824;">Instrutor de ACLS</div>
+        <div style="font-size: 16px; font-weight: 300; letter-spacing: -0.005em; color: #6E766C;">Suporte Avançado de Vida em Cardiologia</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 22px; width: 100%;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; width: 100%;">
+
+        <div style="display: flex; flex-direction: column; gap: 7px; width: 250px;">
+          <div style="font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #9DA49A;">Emissão</div>
+          <div style="font-size: 16px; font-weight: 400; color: #3D453E; width: 148px; height: 22px">Belo Horizonte&nbsp;&nbsp;</div>
+        </div>
+
+        <img loading="lazy" decoding="async" src="assets/imagens/certificados/logo-acls.jpg" alt="ACLS — Advanced Cardiovascular Life Support" style="flex: none; width: 108px; height: 108px; border-radius: 9999px; box-shadow: 0 0 0 1px rgba(180, 24, 36, 0.30), 0 8px 22px -12px rgba(58, 6, 10, 0.60);">
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; width: 250px;">
+          <svg width="200" height="54" viewBox="0 0 200 54" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <path d="M8 42 C 18 14, 34 10, 40 24 C 46 38, 34 48, 28 40 C 22 32, 36 18, 52 24 C 66 30, 62 44, 74 40 C 86 36, 84 18, 96 20 C 106 22, 100 44, 112 42 C 124 40, 126 20, 138 22 C 150 24, 146 42, 158 40 C 170 38, 176 24, 192 31" stroke="#1F2420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M16 49 C 62 57, 132 55, 184 46" stroke="#1F2420" stroke-width="1.4" stroke-linecap="round"></path>
+          </svg>
+          <div style="width: 100%; height: 1px; background: rgba(31, 36, 32, 0.22);"></div>
+          <div style="font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #9DA49A;">Assinatura</div>
+        </div>
+
+      </div>
+
+      <div style="font-size: 12px; font-weight: 400; letter-spacing: 0.01em; color: #9DA49A; text-align: center;">Peça ilustrativa criada para o site — não é um documento emitido por nenhuma instituição.</div>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+<figcaption class="cert-legenda">
+<span class="cert-legenda__titulo">Instrutor de ACLS</span>
+<span class="cert-legenda__fonte">American Heart Association · Suporte Avançado de Vida em Cardiologia</span>
+</figcaption>
+</figure>
+
+<figure class="cert-peca">
+<div class="cert-palco">
+<div class="cert-folha">
+<div style="position: relative; width: 1123px; height: 794px; overflow: hidden; font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; background-color: #B41824; background-image: repeating-linear-gradient(60deg, rgba(255, 255, 255, 0.055) 0 1px, rgba(255, 255, 255, 0) 1px 24px), repeating-linear-gradient(-60deg, rgba(255, 255, 255, 0.055) 0 1px, rgba(255, 255, 255, 0) 1px 24px), radial-gradient(circle at 50% 38%, rgba(255, 255, 255, 0.10), rgba(0, 0, 0, 0) 64%), linear-gradient(180deg, #B41824, #8E1019);">
+
+  <div style="position: absolute; top: 20px; right: 20px; bottom: 20px; left: 20px; background: #FBFAF7; border-radius: 3px; box-shadow: 0 18px 50px -24px rgba(58, 6, 10, 0.55);"></div>
+  <div style="position: absolute; top: 38px; right: 38px; bottom: 38px; left: 38px; border: 1px solid rgba(180, 24, 36, 0.32); border-radius: 2px;"></div>
+  <div style="position: absolute; top: 44px; right: 44px; bottom: 44px; left: 44px; border: 1px solid rgba(31, 36, 32, 0.12);"></div>
+
+  <div style="position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-between; height: 100%; box-sizing: border-box; padding: 76px 104px 66px;">
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 22px;">
+      <div style="display: flex; align-items: center; gap: 9px; padding: 7px 15px; border: 1px solid rgba(180, 24, 36, 0.40); border-radius: 9999px; background: rgba(180, 24, 36, 0.07);">
+        <span style="display: block; width: 6px; height: 6px; border-radius: 9999px; background: #B41824;"></span>
+        <span style="font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase; color: #B41824;">Representação ilustrativa</span>
+      </div>
+      <div style="font-size: 13px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: #B41824;">[INSTITUIÇÃO EMISSORA]</div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 13px; text-align: center;">
+      <div style="font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-style: italic; font-size: 24px; line-height: 1.2; color: #6E766C;">Certificamos que</div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 11px;">
+        <div style="font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-size: 70px; line-height: 1.02; letter-spacing: -0.02em; color: #1F2420;">Caio Ribeiro Melki</div>
+        <div style="font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #9DA49A;">CRM-MG 78461 &nbsp;·&nbsp; RQE 57161</div>
+      </div>
+
+      <div style="width: 132px; height: 1px; margin: 10px 0 2px; background: rgba(180, 24, 36, 0.38);"></div>
+
+      <div style="font-size: 17px; font-weight: 300; line-height: 1.6; color: #3D453E;">concluiu a formação e está habilitado como</div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 7px;">
+        <div style="font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-size: 44px; line-height: 1.1; letter-spacing: -0.015em; color: #B41824;">Instrutor do CONDUCT®</div>
+        <div style="font-size: 16px; font-weight: 300; letter-spacing: -0.005em; color: #6E766C;">Principais prescrições na urgência e emergência</div>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 22px; width: 100%;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; width: 100%;">
+
+        <div style="display: flex; flex-direction: column; gap: 7px; width: 250px;">
+          <div style="font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #9DA49A;">Emissão</div>
+          <div style="font-size: 16px; font-weight: 400; color: #3D453E;">Belo Horizonte&nbsp;&nbsp;</div>
+        </div>
+
+        <img loading="lazy" decoding="async" src="assets/imagens/certificados/logo-conduct.jpg" alt="CONDUCT — Principais prescrições na urgência" style="flex: none; width: 236px; height: 86px; border-radius: 4px; box-shadow: 0 0 0 1px rgba(180, 24, 36, 0.30), 0 8px 22px -12px rgba(58, 6, 10, 0.60);">
+
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; width: 250px;">
+          <svg width="200" height="54" viewBox="0 0 200 54" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: block;">
+            <path d="M10 44 L 24 15 L 33 44 L 47 13 C 53 31, 61 41, 71 34 C 81 27, 74 15, 85 18 C 95 21, 90 41, 103 40 C 117 39, 112 17, 125 22 C 137 27, 130 45, 145 40 C 159 35, 160 19, 177 26 L 193 19" stroke="#1F2420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M20 51 C 72 59, 134 53, 186 45" stroke="#1F2420" stroke-width="1.4" stroke-linecap="round"></path>
+          </svg>
+          <div style="width: 100%; height: 1px; background: rgba(31, 36, 32, 0.22);"></div>
+          <div style="font-family: 'Courier Prime', 'Courier New', Courier, monospace; font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: #9DA49A;">Assinatura</div>
+        </div>
+
+      </div>
+
+      <div style="font-size: 12px; font-weight: 400; letter-spacing: 0.01em; color: #9DA49A; text-align: center;">Peça ilustrativa criada para o site — não é um documento emitido por nenhuma instituição.</div>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+<figcaption class="cert-legenda">
+<span class="cert-legenda__titulo">Instrutor do CONDUCT®</span>
+<span class="cert-legenda__fonte">Principais prescrições na urgência e emergência</span>
+</figcaption>
+</figure>
+
+</div>
+<!-- certificados:fim -->
+
+<a class="cert-lattes reveal delay-100" href="http://lattes.cnpq.br/8572145937659438" target="_blank" rel="noopener">
+<span class="cert-lattes__texto">
+<span class="cert-lattes__titulo">Currículo Lattes completo</span>
+<span class="cert-lattes__apoio">Produção acadêmica, orientações e histórico de formação em detalhe, na base do CNPq.</span>
+</span>
+<span class="cert-lattes__seta"><i data-lucide="arrow-up-right" style="width:20px;height:20px"></i></span>
+</a>
+
+</div>
+</div>
+</section>
+
+
+<!-- ============================================================
+     REMOVIDO — a antiga seção 06 (Certificações e currículo completo)
+     foi absorvida acima: os certificados viraram peças da seção de
+     experiência e o Lattes virou o fecho dela.
+     ============================================================ -->
+
+<!-- ============================================================
+     04 — AGENDAR E FALAR
+     ============================================================ -->
+<section id="agendar" class="section" style="background:var(--paper-200)">
+<div class="aurora aurora--sage animate-aurora" style="width:560px;height:560px;bottom:-24%;left:-8%;opacity:.5"></div>
+<div class="grid-bg animate-grid" style="position:absolute;inset:0;opacity:.6"></div>
+<div class="sweep" style="top:0"></div>
+
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 06 Agendar</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Vamos conversar</h2>
+</div>
+<span class="label">[ Belo Horizonte · MG ]</span>
+</div>
+
+<div class="canais reveal delay-100">
+
+<div class="canal">
+<span class="canal__marca"><i data-lucide="calendar-check" style="width:20px;height:20px"></i></span>
+<h3>Consulta particular</h3>
+<p>Agenda aberta no Calendly. Você escolhe o horário e recebe a confirmação na hora.</p>
+<div class="canal__acao">
+<a class="btn btn--primary" href="https://calendly.com/caio-melki" target="_blank" rel="noopener"><span class="btn__shine"></span>Abrir a agenda<i data-lucide="arrow-up-right" class="btn__arrow" style="width:15px;height:15px"></i></a>
+</div>
+</div>
+
+<div class="canal">
+<span class="canal__marca"><img src="assets/logos/unimed-icone.png" alt="Unimed"/></span>
+<h3>Unimed-BH</h3>
+<p>Pelo aplicativo da Unimed, na aba Consultas. Procure por Caio Ribeiro Melki e agende por lá.</p>
+<div class="canal__acao">
+<button class="btn btn--ghost" type="button" data-modal-open><span class="btn__shine"></span>Ver o passo a passo</button>
+</div>
+</div>
+
+<div class="canal">
+<span class="canal__marca"><i data-lucide="message-circle" style="width:20px;height:20px"></i></span>
+<h3>Falar direto</h3>
+<p>Dúvidas sobre encaixe, convênio ou se o seu caso é para um médico de família.</p>
+<div class="canal__acao flex gap-3 wrapf">
+<a class="btn btn--ghost" href="mailto:caio.melki@gmail.com"><span class="btn__shine"></span>E-mail</a>
+<span class="pendente"><i data-lucide="triangle-alert" style="width:12px;height:12px"></i>WhatsApp a definir</span>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ============================================================
+     RODAPÉ
+     ============================================================ -->
+<footer class="rodape">
+<div class="wrap-wide">
+
+<div class="rodape__topo">
+
+<div>
+<span class="marca marca--rodape"></span>
+<p class="rodape__fala">Médico de família e comunidade em Belo Horizonte. Especialista em coordenar o cuidado da pessoa em sua integralidade.</p>
+<div class="rodape__registro">
+<span class="rodape__selo">CRM-MG 78461</span>
+<span class="rodape__selo">RQE 57161</span>
+</div>
+</div>
+
+<div>
+<p class="rodape__titulo">Navegar</p>
+<div class="rodape__links">
+<a class="rodape__link" href="#especialidade">A especialidade</a>
+<a class="rodape__link" href="#formacao">Formação</a>
+<a class="rodape__link" href="#trajetoria">Experiência</a>
+</div>
+</div>
+
+<div>
+<p class="rodape__titulo">Contato</p>
+<div class="rodape__links">
+<a class="rodape__link" href="https://calendly.com/caio-melki" target="_blank" rel="noopener"><i data-lucide="calendar-check" style="width:14px;height:14px"></i>Agendar consulta</a>
+<a class="rodape__link" href="mailto:caio.melki@gmail.com"><i data-lucide="mail" style="width:14px;height:14px"></i>caio.melki@gmail.com</a>
+<a class="rodape__link" href="http://lattes.cnpq.br/8572145937659438" target="_blank" rel="noopener"><i data-lucide="file-text" style="width:14px;height:14px"></i>Currículo Lattes</a>
+<span class="rodape__link" style="color:rgba(251,250,247,.4)"><i data-lucide="triangle-alert" style="width:14px;height:14px"></i>WhatsApp a definir</span>
+</div>
+</div>
+
+</div>
+
+<p class="rodape__aviso">As informações deste site são de caráter informativo e não substituem uma consulta médica. Em caso de emergência, procure um serviço de urgência ou ligue para o SAMU no 192.</p>
+
+<div class="rodape__base">
+<span>© <span id="ano-agora">2026</span> Dr. Caio Ribeiro Melki</span>
+<span>Belo Horizonte · Minas Gerais</span>
+</div>
+
+</div>
+</footer>
+
+<!-- como agendar pela Unimed -->
+<div class="modal-overlay" id="modal-unimed">
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-unimed-titulo">
+<div class="flex between center" style="margin-bottom:var(--sp-4)">
+<span class="btn-canal__marca" style="width:40px;height:40px"><img src="assets/logos/unimed-icone.png" alt="Unimed"/></span>
+<button class="btn btn--icon" data-modal-close aria-label="Fechar"><i data-lucide="x" style="width:16px;height:16px"></i></button>
+</div>
+<h3 class="h3" id="modal-unimed-titulo" style="margin-bottom:var(--sp-3)">Agendar pela Unimed-BH</h3>
+<p class="body" style="margin-bottom:var(--sp-6)">O agendamento acontece dentro do app da Unimed:</p>
+<ol class="flex col gap-3" style="margin-bottom:var(--sp-8);counter-reset:passo">
+<li class="flex gap-3" style="align-items:flex-start"><span class="number-badge" style="width:28px;height:28px">1</span><span class="body-sm">Abra o app da Unimed e vá na aba <strong>Consultas</strong>.</span></li>
+<li class="flex gap-3" style="align-items:flex-start"><span class="number-badge" style="width:28px;height:28px">2</span><span class="body-sm">Busque por <strong>Caio Ribeiro Melki</strong>.</span></li>
+<li class="flex gap-3" style="align-items:flex-start"><span class="number-badge" style="width:28px;height:28px">3</span><span class="body-sm">Escolha o horário e confirme por lá mesmo.</span></li>
+</ol>
+<div class="flex gap-3 wrapf">
+<button class="btn btn--primary" data-modal-close><span class="btn__shine"></span>Entendi</button>
+<a class="btn btn--ghost" href="https://calendly.com/caio-melki" target="_blank" rel="noopener"><span class="btn__shine"></span>Prefiro particular</a>
+</div>
+</div>
+</div>
+
+<!-- js -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<!-- GSAP + Flip: motor do baralho dos pilares -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<!-- design system -->
+<script src="assets/design-system-2/js/reveal.js?v=55"></script>
+<script src="assets/design-system-2/js/cursor.js?v=55"></script>
+<script src="assets/design-system-2/js/particles.js?v=55"></script>
+<script src="assets/design-system-2/js/interactions.js?v=55"></script>
+<!-- hero-type.js: surgimento palavra a palavra do título e da subhead -->
+<script src="assets/site/js/hero-type.js?v=55"></script>
+<!-- esp-painel.js: contador e sintomas girando no card da especialidade -->
+<script src="assets/site/js/esp-painel.js?v=55"></script>
+<!-- corpo-3d.js: nuvem de pontos que se registra na seção A especialidade -->
+<script src="assets/site/js/corpo-3d.js?v=55"></script>
+<!-- intro.js: loader, portas que abrem no clique e o aviso portas:abertas -->
+<script src="assets/site/js/intro.js?v=55"></script>
+<script>document.getElementById("ano-agora").textContent = new Date().getFullYear();</script>
+<script src="assets/site/js/pilares.js?v=55"></script>
+<script src="assets/site/js/pilares-particulas.js?v=55"></script>
+<!-- atuacao.js: roda de pílulas + baralho da trajetória profissional -->
+<script src="assets/site/js/sintomas.js?v=55"></script>
+<script src="assets/site/js/atuacao.js?v=55"></script>
+<!-- certificados.js: escala das peças de certificado -->
+<script src="assets/site/js/certificados.js?v=55"></script>
+</body></html>

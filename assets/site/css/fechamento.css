@@ -1,0 +1,211 @@
+/* ============================================================
+   FECHAMENTO DO SITE
+   04 — Minicurrículo     (texto do brief, organizado em blocos)
+   05 — Agendar e falar   (Calendly · Unimed · contato direto)
+   Rodapé                 (marca em creme, registro e avisos)
+   ============================================================ */
+
+/* ============================================================
+   04 — MINICURRÍCULO
+   Narrativa à esquerda, ficha estruturada à direita.
+   ============================================================ */
+.curr-grid {
+display: grid;
+grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+gap: var(--sp-16);
+align-items: start;
+}
+.curr-texto p { margin: 0 0 var(--sp-5); max-width: 60ch; }
+.curr-texto p:last-child { margin-bottom: 0; }
+.curr-texto strong { color: var(--ink-900); font-weight: 600; }
+
+.curr-ficha {
+display: flex;
+flex-direction: column;
+border: 1px solid var(--line);
+border-radius: var(--r-xl);
+background: var(--paper-100);
+overflow: hidden;
+box-shadow: var(--shadow-sm);
+}
+.curr-bloco { padding: var(--sp-6); border-bottom: 1px solid var(--line); }
+.curr-bloco:last-child { border-bottom: none; }
+.curr-bloco__rotulo {
+display: flex;
+align-items: center;
+gap: var(--sp-2);
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: var(--sage-700);
+margin-bottom: var(--sp-4);
+}
+.curr-linha {
+display: flex;
+gap: var(--sp-3);
+padding-block: var(--sp-2);
+font-size: var(--fs-body-sm);
+line-height: 1.5;
+color: var(--ink-700);
+}
+.curr-linha::before {
+content: "";
+flex-shrink: 0;
+width: 5px;
+height: 5px;
+margin-top: 0.5em;
+border-radius: 50%;
+background: var(--sand-500);
+}
+.curr-linha strong { font-weight: 600; color: var(--ink-900); }
+.curr-linha span { color: var(--ink-500); }
+
+.curr-lattes {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: var(--sp-4);
+padding: var(--sp-5) var(--sp-6);
+background: var(--sage-100);
+color: var(--sage-700);
+font-size: var(--fs-body-sm);
+font-weight: 500;
+cursor: none;
+transition: background var(--dur-fast) ease;
+}
+.curr-lattes:hover { background: var(--sage-200, #DCE6DC); }
+
+/* ============================================================
+   05 — AGENDAR E FALAR
+   ============================================================ */
+.canais {
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: var(--sp-6);
+}
+.canal {
+display: flex;
+flex-direction: column;
+gap: var(--sp-4);
+padding: var(--sp-8);
+border-radius: var(--r-xl);
+border: 1px solid var(--line);
+background: var(--paper-100);
+transition: transform var(--dur-base) var(--ease-out-expo), box-shadow var(--dur-base) ease, border-color var(--dur-fast) ease;
+}
+.canal:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--sage-400); }
+.canal__marca {
+display: grid;
+place-items: center;
+width: 44px;
+height: 44px;
+border-radius: 50%;
+background: var(--sage-100);
+color: var(--sage-700);
+overflow: hidden;
+}
+.canal__marca img { width: 100%; height: 100%; object-fit: cover; }
+.canal h3 { margin: 0; font-size: var(--fs-h5); font-weight: 500; letter-spacing: -0.02em; }
+.canal p { margin: 0; font-size: var(--fs-body-sm); line-height: 1.6; color: var(--ink-500); flex: 1; }
+.canal__acao { margin-top: var(--sp-2); }
+
+/* Marcador do que ainda falta definir (número de WhatsApp, logo Calendly) */
+.pendente {
+display: inline-flex;
+align-items: center;
+gap: var(--sp-2);
+padding: 0.3rem 0.6rem;
+border-radius: var(--r-sm);
+border: 1px dashed var(--warning);
+font-family: var(--font-mono);
+font-size: var(--fs-label);
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: var(--warning);
+}
+
+/* ============================================================
+   RODAPÉ
+   ============================================================ */
+.rodape {
+position: relative;
+z-index: 2;
+background: var(--ink-900);
+color: var(--paper-100);
+padding-block: var(--sp-16) var(--sp-8);
+}
+.rodape__topo {
+display: grid;
+grid-template-columns: minmax(0, 1.1fr) repeat(2, minmax(0, 0.75fr));
+gap: var(--sp-12);
+padding-bottom: var(--sp-12);
+border-bottom: 1px solid rgba(251, 250, 247, 0.14);
+}
+.rodape__fala {
+margin: var(--sp-6) 0 0;
+max-width: 38ch;
+font-size: var(--fs-body-sm);
+line-height: 1.65;
+color: rgba(251, 250, 247, 0.66);
+}
+.rodape__titulo {
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.2em;
+text-transform: uppercase;
+color: rgba(232, 223, 205, 0.6);
+margin-bottom: var(--sp-4);
+}
+.rodape__links { display: flex; flex-direction: column; gap: var(--sp-3); }
+.rodape__link {
+display: inline-flex;
+align-items: center;
+gap: var(--sp-2);
+font-size: var(--fs-body-sm);
+color: rgba(251, 250, 247, 0.82);
+cursor: none;
+transition: color var(--dur-fast) ease, gap var(--dur-fast) var(--ease-out-expo);
+}
+.rodape__link:hover { color: var(--paper-100); gap: var(--sp-3); }
+
+.rodape__registro {
+display: flex;
+flex-wrap: wrap;
+gap: var(--sp-2);
+margin-top: var(--sp-4);
+}
+.rodape__selo {
+padding: 0.35rem 0.7rem;
+border-radius: var(--r-full);
+border: 1px solid rgba(251, 250, 247, 0.18);
+font-family: var(--font-mono);
+font-size: var(--fs-label);
+letter-spacing: 0.12em;
+color: rgba(251, 250, 247, 0.72);
+}
+
+.rodape__aviso {
+margin: var(--sp-8) 0 0;
+padding: var(--sp-5);
+border-radius: var(--r-lg);
+background: rgba(251, 250, 247, 0.05);
+font-size: var(--fs-caption);
+line-height: 1.6;
+color: rgba(251, 250, 247, 0.6);
+}
+.rodape__base {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+gap: var(--sp-4);
+margin-top: var(--sp-8);
+font-size: var(--fs-caption);
+color: rgba(251, 250, 247, 0.45);
+}
+
+@media (max-width: 1000px) {
+.curr-grid { grid-template-columns: 1fr; gap: var(--sp-8); }
+.canais { grid-template-columns: 1fr; }
+.rodape__topo { grid-template-columns: 1fr; gap: var(--sp-8); }
+}

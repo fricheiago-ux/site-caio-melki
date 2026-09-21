@@ -1,0 +1,114 @@
+/* ============================================================
+   BUSCA DE CONDIÇÕES
+   Saiu da hero (ficou poluída) e fica guardada aqui para a
+   seção "o que eu trato". O motor está em site/js/condition-search.js
+   ============================================================ */
+
+.busca { position: relative; z-index: 20; }
+
+.busca-campo {
+position: relative;
+display: flex;
+align-items: center;
+gap: var(--sp-3);
+background: var(--paper-100);
+border: 1px solid var(--line-strong);
+border-radius: var(--r-full);
+padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+box-shadow: var(--shadow-md);
+transition: border-color var(--dur-fast) ease, box-shadow var(--dur-base) ease;
+}
+.busca-campo:focus-within {
+border-color: var(--sage-600);
+box-shadow: 0 0 0 4px rgba(79, 115, 85, 0.14), var(--shadow-md);
+}
+.busca-campo__icone { color: var(--sage-600); flex-shrink: 0; display: grid; place-items: center; }
+
+.busca-campo input {
+flex: 1;
+min-width: 0;
+border: none;
+background: none;
+outline: none;
+font-family: var(--font-sans);
+font-size: var(--fs-body-lg);
+font-weight: 400;
+letter-spacing: -0.012em;
+color: var(--ink-900);
+padding-block: 0.65rem;
+cursor: none;
+}
+.busca-campo input::placeholder { color: var(--ink-300); }
+
+/* ---------- Painel de resultados ---------- */
+.busca-resultados {
+position: absolute;
+top: calc(100% + 10px);
+left: 0;
+right: 0;
+z-index: 30;
+max-height: 420px;
+overflow-y: auto;
+background: var(--paper-100);
+border: 1px solid var(--line);
+border-radius: var(--r-lg);
+box-shadow: var(--shadow-lg);
+padding: var(--sp-4);
+opacity: 0;
+visibility: hidden;
+transform: translateY(-8px);
+filter: blur(6px);
+transition: opacity var(--dur-base) ease,
+transform var(--dur-base) var(--ease-out-expo),
+filter var(--dur-base) ease,
+visibility var(--dur-base) ease;
+}
+.busca-resultados.is-open { opacity: 1; visibility: visible; transform: translateY(0); filter: blur(0); }
+
+.busca-titulo { display: block; margin-bottom: var(--sp-3); }
+.busca-rodape { margin: var(--sp-3) 0 0; padding-top: var(--sp-3); border-top: 1px solid var(--line); }
+
+.busca-item {
+display: flex;
+flex-direction: column;
+gap: 2px;
+width: 100%;
+text-align: left;
+padding: 0.6rem 0.75rem;
+border-radius: var(--r-md);
+transition: background-color var(--dur-fast) ease, transform var(--dur-fast) var(--ease-out-expo);
+}
+.busca-item:hover,
+.busca-item.is-active { background: var(--sage-100); transform: translateX(3px); }
+.busca-item__nome {
+font-size: var(--fs-body-sm);
+font-weight: 500;
+color: var(--ink-900);
+letter-spacing: -0.008em;
+}
+.busca-item__nome mark { background: rgba(79, 115, 85, 0.22); color: inherit; border-radius: 3px; padding: 0 2px; }
+.busca-item__cat {
+font-family: var(--font-sans);
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--ink-300);
+}
+
+.busca-vazio { display: flex; flex-direction: column; gap: var(--sp-3); align-items: flex-start; padding: var(--sp-2); }
+
+/* ---------- Sugestões rápidas ---------- */
+.busca-sugestoes { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; margin-top: var(--sp-4); }
+.chip-sugestao {
+padding: 0.35rem 0.8rem;
+border-radius: var(--r-full);
+border: 1px solid var(--line-strong);
+background: transparent;
+font-size: var(--fs-caption);
+color: var(--ink-500);
+transition: all var(--dur-fast) ease;
+cursor: none;
+}
+.chip-sugestao:hover { background: var(--sage-600); border-color: var(--sage-600); color: var(--paper-100); }
+

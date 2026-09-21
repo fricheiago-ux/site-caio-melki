@@ -1,0 +1,282 @@
+/* ============================================================
+   ABERTURA DO SITE — loader + portas
+   Mecânica herdada da ref-11 (KUROGANE):
+   - loader com marca girando, linha de progresso e saída para cima
+   - duas portas que deslizam com a rolagem e revelam a hero
+   Aqui sem GSAP: a rolagem alimenta a variável --abrir (0 → 1).
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. MARCA — a logo é creme sobre escuro. Em fundo claro ela é
+   usada como máscara, assim assume a cor do contexto (currentColor).
+   ------------------------------------------------------------ */
+/* O caminho fica aqui, e não numa custom property inline: url() dentro de
+   variável resolve relativo à folha de estilo, não ao HTML. */
+.marca {
+display: block;
+background-color: currentColor;
+-webkit-mask-image: url('../../logos/logo-sem-fundo.png');
+mask-image: url('../../logos/logo-sem-fundo.png');
+-webkit-mask-repeat: no-repeat;
+mask-repeat: no-repeat;
+-webkit-mask-position: left center;
+mask-position: left center;
+-webkit-mask-size: contain;
+mask-size: contain;
+}
+.marca--header { width: 118px; height: 50px; color: var(--ink-900); }
+.marca--rodape { width: 180px; height: 54px; color: var(--paper-100); }
+
+/* ============================================================
+   2. LOADER — mesma tela das portas
+   O fundo é idêntico ao das portas, então a saída não parece
+   "outra página": o conteúdo do loader some com blur (transição
+   animationIn da ref-7) e os nomes surgem no mesmo lugar.
+   ============================================================ */
+.loader {
+position: fixed;
+inset: 0;
+z-index: 9998;
+display: grid;
+place-content: center;
+justify-items: center;
+gap: var(--sp-5);
+background: linear-gradient(115deg, #4F7355 0%, #446249 100%);
+transition: opacity 0.7s var(--ease-out-soft), visibility 0s linear 0.7s;
+}
+.loader.is-done { opacity: 0; visibility: hidden; pointer-events: none; }
+
+/* O conteúdo sai desfocando, no lugar — sem deslizar para cima */
+.loader__mark,
+.loader__texto,
+.loader__line {
+transition: opacity 0.5s var(--ease-out-soft), filter 0.5s var(--ease-out-soft), transform 0.5s var(--ease-out-soft);
+}
+.loader.is-closing .loader__mark,
+.loader.is-closing .loader__texto,
+.loader.is-closing .loader__line {
+opacity: 0;
+filter: blur(10px);
+transform: scale(0.96);
+}
+
+.loader__mark {
+display: grid;
+place-items: center;
+width: 92px;
+height: 92px;
+border: 1px solid rgba(247, 246, 242, 0.3);
+transform: rotate(45deg);
+}
+.loader__mark > * { transform: rotate(-45deg); color: #F7F2E6; }
+
+.loader__texto {
+font-family: var(--font-sans);
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.32em;
+text-transform: uppercase;
+color: rgba(247, 246, 242, 0.66);
+margin: 0;
+}
+
+.loader__line {
+width: 180px;
+height: 1px;
+background: rgba(247, 246, 242, 0.18);
+overflow: hidden;
+}
+.loader__line i {
+display: block;
+width: 100%;
+height: 100%;
+background: #F7F2E6;
+transform: scaleX(0);
+transform-origin: left;
+transition: transform 1.05s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.loader.is-loading .loader__line i { transform: scaleX(1); }
+
+/* ---------- Miniatura reutilizável ---------- */
+.loader--mini {
+position: relative;
+inset: auto;
+z-index: 1;
+background: transparent;
+padding: var(--sp-8);
+gap: var(--sp-3);
+transition: none;
+}
+.loader--mini .loader__mark {
+width: 40px;
+height: 40px;
+border-color: var(--line-strong);
+animation: marcaGira 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+.loader--mini .loader__mark > * { color: var(--sage-600); }
+.loader--mini .loader__texto { color: var(--ink-300); letter-spacing: 0.2em; }
+.loader--mini .loader__line { width: 110px; background: var(--paper-300); }
+.loader--mini .loader__line i { background: var(--sage-600); animation: marcaBarra 1.4s ease-in-out infinite; }
+@keyframes marcaGira {
+0% { transform: rotate(45deg) scale(1); }
+50% { transform: rotate(225deg) scale(0.82); }
+100% { transform: rotate(405deg) scale(1); }
+}
+@keyframes marcaBarra {
+0% { transform: scaleX(0); transform-origin: left; }
+50% { transform: scaleX(1); transform-origin: left; }
+51% { transform: scaleX(1); transform-origin: right; }
+100% { transform: scaleX(0); transform-origin: right; }
+}
+
+/* ============================================================
+   3. PORTAS — abrem com um clique, de uma vez só
+
+   Antes a abertura era puxada pela rolagem, o que exigia um trilho de
+   uma tela e meia e a hero presa no topo. Isso criava a sensação de um
+   scroll gigante e em falso logo na primeira seção. Agora as portas são
+   um botão: um clique e elas correm sozinhas até o fim.
+
+   Enquanto estão fechadas a página não rola, então não existe curso
+   nenhum para atravessar. Depois que abrem, a hero é uma seção comum.
+   ============================================================ */
+.abertura { position: relative; }
+.abertura[data-portas="off"] .hero-portas { display: none; }
+
+/* Página travada enquanto as portas cobrem a tela */
+body.portas-fechadas { overflow: hidden; }
+
+.hero-portas {
+position: fixed;
+inset: 0;
+height: 100svh;
+z-index: 60;
+display: grid;
+grid-template-columns: 1fr 1fr;
+overflow: hidden;
+pointer-events: none;
+}
+.hero-portas[data-aberto="1"] { display: none; }
+
+.porta {
+position: relative;
+display: grid;
+place-items: center;
+height: 100%;
+background: linear-gradient(115deg, #4F7355 0%, #446249 100%);
+will-change: transform;
+transform: translate3d(0, 0, 0);
+}
+.porta--esq { border-right: 1px solid rgba(247, 246, 242, 0.22); }
+.porta--dir { background: linear-gradient(115deg, #446249 0%, #4F7355 100%); border-left: 1px solid rgba(247, 246, 242, 0.22); }
+
+/* ---------- Movimento ----------
+   Transição simples de transform, disparada por uma classe. Roda no
+   compositor e dura o mesmo tempo nos dois lados, então as duas folhas
+   saem juntas. A dica some antes, para não viajar junto com a porta. */
+.porta {
+transition: transform 1.05s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.hero-portas.is-abrindo .porta--esq { transform: translate3d(-102%, 0, 0); }
+.hero-portas.is-abrindo .porta--dir { transform: translate3d(102%, 0, 0); }
+
+.hero-portas.is-abrindo .porta__conteudo {
+transition: opacity 0.4s var(--ease-out-soft), filter 0.4s var(--ease-out-soft);
+opacity: 0;
+filter: blur(6px);
+}
+
+/* ------------------------------------------------------------
+   Enquanto as portas cobrem a tela, o fundo da hero não aparece.
+   Pausar as camadas animadas devolve o orçamento de quadro
+   inteiro para o movimento das portas.
+   ------------------------------------------------------------ */
+body.portas-fechadas .aurora,
+body.portas-fechadas .contour-bg,
+body.portas-fechadas .grid-bg,
+body.portas-fechadas .sweep { animation-play-state: paused; }
+body.portas-fechadas .particle-canvas { visibility: hidden; }
+/* A navbar fica atrás das portas: escondê-la tira um backdrop-filter
+   de largura total de cada quadro da abertura. */
+body.portas-fechadas .navbar { visibility: hidden; }
+
+/* ------------------------------------------------------------
+   Nomes em texto vivo, na serifa do design system.
+   A grade de 3 linhas é idêntica nas duas portas, então CAIO e
+   MELKI caem exatamente na mesma linha de base.
+   ------------------------------------------------------------ */
+.porta__conteudo {
+display: grid;
+grid-template-rows: 1.15em auto 1.15em;
+align-items: center;
+row-gap: 0;
+}
+.porta--esq .porta__conteudo { justify-items: start; justify-self: end; margin-right: 6%; }
+.porta--dir .porta__conteudo { justify-items: end; justify-self: start; margin-left: 6%; }
+
+.porta__nome {
+grid-row: 2;
+font-family: var(--font-serif);
+font-style: normal;
+font-weight: 400;
+font-size: clamp(2.6rem, 7.2vw, 6.5rem);
+line-height: 1;
+letter-spacing: 0.01em;
+color: #F7F2E6;
+text-transform: uppercase;
+}
+.porta__dr {
+grid-row: 1;
+align-self: end;
+font-family: var(--font-serif);
+font-size: clamp(1rem, 2.1vw, 1.9rem);
+line-height: 1;
+color: rgba(247, 242, 230, 0.9);
+padding-left: 0.12em;
+}
+.porta__mfc {
+grid-row: 3;
+align-self: start;
+font-family: var(--font-serif);
+font-size: clamp(0.95rem, 1.9vw, 1.7rem);
+line-height: 1;
+letter-spacing: 0.16em;
+color: rgba(247, 242, 230, 0.9);
+text-transform: uppercase;
+padding-right: 0.12em;
+}
+
+/* Entrada dos nomes: blur → foco (animationIn da ref-7) */
+.porta__conteudo { opacity: 0; }
+.hero-portas.is-revelado .porta__conteudo { animation: animationIn 1s var(--ease-out-soft) 0.05s both; }
+
+@media (prefers-reduced-motion: reduce) {
+.hero-portas { display: none; }
+.porta { transition: none; }
+.loader { display: none; }
+}
+
+
+/* ============================================================
+   4. ÍCONES QUE SE ALTERNAM NO LOADER (ideia da ref-12 / Centauro)
+   Todos ficam empilhados e só um aparece por vez.
+   ============================================================ */
+.loader__icones {
+position: relative;
+display: grid;
+place-items: center;
+width: 34px;
+height: 34px;
+}
+.loader__icones > * {
+grid-area: 1 / 1;
+opacity: 0;
+transform: scale(0.7) translateY(4px);
+transition: opacity 0.32s var(--ease-out-soft), transform 0.32s var(--ease-out-expo);
+}
+.loader__icones > .is-active {
+opacity: 1;
+transform: scale(1) translateY(0);
+}
+.loader--mini .loader__icones { width: 18px; height: 18px; }
+.loader--mini .loader__icones svg { width: 18px; height: 18px; }

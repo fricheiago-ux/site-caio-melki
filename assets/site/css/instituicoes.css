@@ -1,0 +1,171 @@
+/* ============================================================
+   INSTITUIÇÕES NA TRAJETÓRIA
+   Padrão herdado da ref-1: card com dobradiça 3D — a face da logo
+   tomba para trás enquanto a face da descrição desce no mesmo eixo.
+   Na ref-1 isso é feito por JS do Webflow (rotateX -90deg → 0);
+   aqui é CSS puro, com as duas faces girando na mesma linha de dobra.
+   ============================================================ */
+
+.inst-grid {
+display: grid;
+grid-template-columns: repeat(5, minmax(0, 1fr));
+gap: var(--sp-4);
+}
+
+.inst-card {
+position: relative;
+outline-offset: 4px;
+height: 190px;
+perspective: 900px;
+cursor: none;
+}
+
+.inst-card__face {
+position: absolute;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: var(--sp-5);
+border-radius: var(--r-lg);
+border: 1px solid var(--line);
+backface-visibility: hidden;
+-webkit-backface-visibility: hidden;
+transform-origin: 50% 100%;
+transition: transform 0.62s var(--ease-out-expo), box-shadow var(--dur-base) ease, border-color var(--dur-base) ease;
+}
+
+/* Face da frente — a logo sobre verde */
+.inst-card__face--logo {
+background: linear-gradient(160deg, var(--sage-600), var(--sage-700));
+border-color: rgba(62, 92, 68, 0.9);
+box-shadow: var(--shadow-sm);
+transform: rotateX(0deg);
+}
+.inst-card:hover .inst-card__face--logo { box-shadow: var(--shadow-md); }
+.inst-card:hover .inst-card__face--logo,
+.inst-card:focus-visible .inst-card__face--logo,
+.inst-card.is-open .inst-card__face--logo { transform: rotateX(-90deg); }
+
+/* Face de trás — a descrição */
+.inst-card__face--desc {
+background: linear-gradient(160deg, var(--sand-300), var(--sand-500));
+border-color: rgba(205, 191, 162, 0.9);
+flex-direction: column;
+align-items: flex-start;
+justify-content: center;
+gap: var(--sp-2);
+text-align: left;
+transform: rotateX(90deg);
+box-shadow: var(--shadow-md);
+/* Em repouso a face fica perpendicular à tela; com perspective isso
+   projeta uma cunha visível abaixo do card. Zerar a opacidade some
+   com essa borda e com a sombra dela. */
+opacity: 0;
+transition: transform 0.62s var(--ease-out-expo), opacity 0.22s ease;
+}
+.inst-card:hover .inst-card__face--desc,
+.inst-card:focus-visible .inst-card__face--desc,
+.inst-card.is-open .inst-card__face--desc { transform: rotateX(0deg); opacity: 1; }
+
+/* ---------- Logo ---------- */
+.inst-card__logo {
+max-width: 100%;
+max-height: 96px;
+width: auto;
+height: auto;
+object-fit: contain;
+mix-blend-mode: screen;
+/* Logos são marcas escuras sobre fundo branco. Sobre o verde principal,
+   multiply as apagaria — então invertemos para branco e usamos screen,
+   mesma técnica da ref-1. Valores calibrados para as cinco ficarem
+   com o mesmo peso (~5.4:1 de contraste contra o verde). */
+filter: grayscale(1) invert(1) brightness(1.6) contrast(1.25);
+opacity: 1;
+transition: filter var(--dur-base) ease, opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo);
+}
+.inst-card:hover .inst-card__logo,
+.inst-card:focus-visible .inst-card__logo,
+.inst-card.is-open .inst-card__logo { opacity: 1; transform: scale(1.04); }
+
+/* ---------- Conteúdo da descrição ---------- */
+.inst-card__papel {
+font-family: var(--font-sans);
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: var(--sage-700);
+}
+.inst-card__texto {
+margin: 0;
+font-size: var(--fs-body-sm);
+line-height: 1.5;
+letter-spacing: -0.008em;
+color: var(--ink-700);
+}
+.inst-card__texto strong { color: var(--ink-900); font-weight: 600; }
+
+.inst-card__fonte {
+display: inline-flex;
+align-items: center;
+gap: 5px;
+margin-top: var(--sp-1);
+font-size: var(--fs-caption);
+color: var(--sage-700);
+border-bottom: 1px solid rgba(62, 92, 68, 0.4);
+padding-bottom: 1px;
+transition: border-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+.inst-card__fonte:hover { color: var(--moss-900); border-color: var(--moss-900); }
+
+/* Dica de que o card vira */
+.inst-card__dica {
+position: absolute;
+top: var(--sp-3);
+right: var(--sp-3);
+display: grid;
+place-items: center;
+width: 22px;
+height: 22px;
+border-radius: 50%;
+border: 1px solid rgba(251, 250, 247, 0.35);
+color: var(--paper-100);
+opacity: 0.6;
+transition: opacity var(--dur-base) ease, background-color var(--dur-base) ease;
+}
+.inst-card:hover .inst-card__dica,
+.inst-card:focus-visible .inst-card__dica { opacity: 1; background: rgba(251, 250, 247, 0.16); }
+
+/* ---------- Legenda sob a grade ---------- */
+.inst-nome {
+margin-top: var(--sp-3);
+font-size: var(--fs-caption);
+font-weight: 500;
+color: var(--ink-500);
+text-align: center;
+transition: color var(--dur-fast) ease;
+}
+.inst-item:hover .inst-nome { color: var(--sage-700); }
+
+/* ============================================================
+   RESPONSIVO
+   ============================================================ */
+@media (max-width: 1080px) {
+.inst-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+.inst-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3); }
+.inst-card { height: 160px; }
+.inst-card__logo { max-height: 72px; }
+.inst-card__face { padding: var(--sp-4); }
+}
+
+/* Sem hover (toque): a descrição vira a face visível ao tocar */
+@media (hover: none) {
+.inst-card__face--logo { transform: rotateX(0deg) !important; }
+.inst-card__face--desc { display: none; }
+.inst-card__dica { display: none; }
+.inst-toque { display: block; }
+}
+.inst-toque { display: none; margin-top: var(--sp-2); }

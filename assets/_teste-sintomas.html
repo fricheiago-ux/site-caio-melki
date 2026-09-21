@@ -1,0 +1,125 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>teste sintomas</title>
+<!-- este arquivo vive dentro de assets/, entao os caminhos nao levam o prefixo "assets/" -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="design-system-2/css/tokens.css"/>
+<link rel="stylesheet" href="design-system-2/css/animations.css"/>
+<link rel="stylesheet" href="design-system-2/css/effects.css"/>
+<link rel="stylesheet" href="design-system-2/css/components.css"/>
+<link rel="stylesheet" href="site/css/sintomas.css"/>
+<style>.reveal{opacity:1!important;transform:none!important;filter:none!important}body{cursor:auto}*{cursor:auto!important}</style>
+</head><body>
+<section id="sintomas" class="section sint-secao" style="background:var(--paper-200)" data-sintomas>
+<div class="aurora aurora--sand animate-aurora" style="width:560px;height:560px;top:-16%;right:-10%;opacity:.5"></div>
+<div class="aurora aurora--sage animate-aurora-slow" style="width:520px;height:520px;bottom:-20%;left:-12%;opacity:.35"></div>
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.4"></div>
+<div class="sweep" style="top:0"></div>
+
+<!-- poca de luz que segue o mouse: fica acima das auroras decorativas e
+     abaixo do conteudo, entao passa POR BAIXO das palavras da nuvem -->
+<div class="sint-aura" data-aura aria-hidden="true"></div>
+
+<!-- palavras que so existem dentro do facho: outros sintomas, posicionados
+     nos vaos livres da secao, nunca por cima da nuvem -->
+<div class="sint-ocultas" aria-hidden="true">
+<span class="g">Enjoo</span>
+<span>Suor noturno</span>
+<span class="g">Falta de apetite</span>
+<span>Boca seca</span>
+<span>Tremor</span>
+<span>C&atilde;ibra</span>
+<span>Solu&ccedil;o</span>
+<span>Sede</span>
+<span>Rouquid&atilde;o</span>
+<span>Pele seca</span>
+<span>Vis&atilde;o emba&ccedil;ada</span>
+<span>Zumbido</span>
+<span>Unhas fracas</span>
+<span>Perda de peso</span>
+<span class="g">Mau h&aacute;lito</span>
+<span>Suor frio</span>
+</div>
+
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 02 O que eu trato</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">&ldquo;Mas doutor, o que será que eu tenho?&rdquo;</h2>
+</div>
+<span class="label">[ 38 sintomas · 13 áreas ]</span>
+</div>
+
+<div class="sint-intro reveal delay-100">
+<p>Clique numa das palavras abaixo — ou use o campo de busca — para <strong>pesquisar o que você está sentindo</strong> e entender as possíveis causas.</p>
+</div>
+
+<!-- a nuvem: o peso é o quanto a queixa aparece no consultório -->
+<div class="sint-nuvem reveal delay-200" data-nuvem role="group" aria-label="Sintomas mais comuns">
+<button class="sint-palavra" type="button" data-sintoma="insonia" data-peso="4" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Insônia</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-de-cabeca" data-peso="5" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Dor de cabeça</button>
+<button class="sint-palavra" type="button" data-sintoma="tosse" data-peso="4" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Tosse</button>
+<button class="sint-palavra" type="button" data-sintoma="azia" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Azia</button>
+<button class="sint-palavra" type="button" data-sintoma="pernas-inchadas" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Pernas inchadas</button>
+<button class="sint-palavra" type="button" data-sintoma="ansiedade" data-peso="5" data-tom="musgo" aria-expanded="false" aria-controls="sint-painel">Ansiedade</button>
+<button class="sint-palavra" type="button" data-sintoma="febre" data-peso="4" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Febre</button>
+<button class="sint-palavra" type="button" data-sintoma="formigamento" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Formigamento</button>
+<button class="sint-palavra" type="button" data-sintoma="pressao-alta" data-peso="4" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Pressão alta</button>
+<button class="sint-palavra" type="button" data-sintoma="tontura" data-peso="4" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Tontura</button>
+<button class="sint-palavra" type="button" data-sintoma="cansaco" data-peso="5" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Cansaço</button>
+<button class="sint-palavra" type="button" data-sintoma="colesterol-alto" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Colesterol alto</button>
+<button class="sint-palavra" type="button" data-sintoma="coceira" data-peso="3" aria-expanded="false" aria-controls="sint-painel">Coceira</button>
+<button class="sint-palavra" type="button" data-sintoma="corrimento" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Corrimento</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-de-garganta" data-peso="3" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Dor de garganta</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-nas-costas" data-peso="5" data-tom="musgo" aria-expanded="false" aria-controls="sint-painel">Dor nas costas</button>
+<button class="sint-palavra" type="button" data-sintoma="ronco" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Ronco</button>
+<button class="sint-palavra" type="button" data-sintoma="diarreia" data-peso="3" aria-expanded="false" aria-controls="sint-painel">Diarreia</button>
+<button class="sint-palavra" type="button" data-sintoma="queda-de-cabelo" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Queda de cabelo</button>
+<button class="sint-palavra" type="button" data-sintoma="falta-de-ar" data-peso="4" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Falta de ar</button>
+<button class="sint-palavra" type="button" data-sintoma="esquecimento" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Esquecimento</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-de-barriga" data-peso="4" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Dor de barriga</button>
+<button class="sint-palavra" type="button" data-sintoma="olho-vermelho" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Olho vermelho</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-nas-juntas" data-peso="3" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Dor nas juntas</button>
+<button class="sint-palavra" type="button" data-sintoma="desanimo" data-peso="4" data-tom="musgo" aria-expanded="false" aria-controls="sint-painel">Desânimo</button>
+<button class="sint-palavra" type="button" data-sintoma="ganho-de-peso" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Ganho de peso</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-de-ouvido" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Dor de ouvido</button>
+<button class="sint-palavra" type="button" data-sintoma="acucar-alto" data-peso="3" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Açúcar alto</button>
+<button class="sint-palavra" type="button" data-sintoma="palpitacao" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Palpitação</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-no-peito" data-peso="4" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Dor no peito</button>
+<button class="sint-palavra" type="button" data-sintoma="nariz-entupido" data-peso="3" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Nariz entupido</button>
+<button class="sint-palavra" type="button" data-sintoma="colica-menstrual" data-peso="3" aria-expanded="false" aria-controls="sint-painel">Cólica menstrual</button>
+<button class="sint-palavra" type="button" data-sintoma="ardencia-para-urinar" data-peso="3" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Ardência para urinar</button>
+<button class="sint-palavra" type="button" data-sintoma="manchas-na-pele" data-peso="3" data-tom="forte" aria-expanded="false" aria-controls="sint-painel">Manchas na pele</button>
+<button class="sint-palavra" type="button" data-sintoma="intestino-preso" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Intestino preso</button>
+<button class="sint-palavra" type="button" data-sintoma="dor-no-joelho" data-peso="2" aria-expanded="false" aria-controls="sint-painel">Dor no joelho</button>
+<button class="sint-palavra" type="button" data-sintoma="dificuldade-de-erecao" data-peso="2" data-tom="claro" aria-expanded="false" aria-controls="sint-painel">Dificuldade de ereção</button>
+<button class="sint-palavra" type="button" data-sintoma="crianca-doente" data-peso="2" data-tom="sage" aria-expanded="false" aria-controls="sint-painel">Criança doente</button>
+</div>
+
+<!-- o campo -->
+<div class="sint-busca reveal delay-300">
+<div class="sint-campo">
+<span class="sint-campo__icone"><i data-lucide="search" style="width:19px;height:19px"></i></span>
+<input type="search" data-busca
+autocomplete="off" autocapitalize="off" spellcheck="false"
+role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="sint-resultados"
+aria-label="Pesquise o que você está sentindo"
+placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
+<button class="sint-campo__limpar" type="button" data-limpar aria-label="Limpar busca">
+<i data-lucide="x" style="width:16px;height:16px"></i>
+</button>
+</div>
+<div class="sint-resultados" id="sint-resultados" data-resultados role="listbox" aria-label="Sintomas encontrados"></div>
+</div>
+
+<!-- a ficha que desce -->
+<div class="sint-painel" id="sint-painel" data-painel role="region" aria-live="polite" aria-hidden="true"></div>
+
+<div class="sint-nota reveal">
+<span class="sint-nota__icone"><i data-lucide="info" style="width:19px;height:19px"></i></span>
+<p><strong>Isto orienta, não diagnostica.</strong> A mesma queixa tem causas diferentes em pessoas diferentes — e é justamente esse o trabalho do médico de família: olhar a sua história inteira antes de nomear o que você tem. Em caso de sintoma grave ou súbito, procure um pronto-socorro ou ligue 192.</p>
+</div>
+
+</div>
+</section>
+<script src="https://unpkg.com/lucide@latest"></script><script>lucide.createIcons();</script>
+<script src="site/js/sintomas.js"></script></body></html>

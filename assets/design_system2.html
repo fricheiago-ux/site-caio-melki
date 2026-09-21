@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Design System 2 — Dr. Caio Melki</title>
+<meta name="description" content="Proposta 2 de sistema de design para o site do Dr. Caio Ribeiro Melki — Médico de Família e Comunidade."/>
+
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
+
+<!-- css -->
+<!-- tokens.css: paleta clara (papel, tinta, sálvia, areia, céu), escala tipográfica em Inter e reset -->
+<link rel="stylesheet" href="design-system-2/css/tokens.css"/>
+<!-- animations.css: .reveal/.active e revelado mascarado da ref-4, animationIn da ref-7, Ken Burns, marquee e flutuações -->
+<link rel="stylesheet" href="design-system-2/css/animations.css"/>
+<!-- effects.css: cursor customizado, partículas, grão de papel, auroras, curvas de nível e lanterna dos cards -->
+<link rel="stylesheet" href="design-system-2/css/effects.css"/>
+<!-- components.css: botões, campos, cards, navbar, badges, tooltips, modal, FAQ e utilitários de grade -->
+<link rel="stylesheet" href="design-system-2/css/components.css"/>
+</head>
+<body>
+
+<!-- cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+
+<!-- background-layers -->
+<canvas class="particle-canvas"></canvas>
+<div class="noise-overlay"></div>
+
+<!-- navbar -->
+<header class="navbar nav-load">
+<div class="wrap navbar__inner">
+<a href="#hero" class="flex center gap-3">
+<span style="display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--sage-600);color:var(--paper-100)"><i data-lucide="heart-handshake" style="width:17px;height:17px"></i></span>
+<span style="font-weight:600;font-size:1.0625rem;letter-spacing:-0.03em">Dr. Caio Melki</span>
+</a>
+<nav class="navbar__links">
+<a class="nav-link" href="#tipografia">Tipografia</a>
+<a class="nav-link" href="#cores">Cores</a>
+<a class="nav-link" href="#componentes">Componentes</a>
+<a class="nav-link" href="#caminho">O Caminho</a>
+<a class="nav-link" href="#icones">Ícones</a>
+<a class="nav-link" href="#animacoes">Animações</a>
+</nav>
+<div class="btn-halo">
+<button class="btn btn--primary"><span class="btn__shine"></span>Agendar consulta<i data-lucide="arrow-right" class="btn__arrow" style="width:15px;height:15px"></i></button>
+</div>
+</div>
+</header>
+
+<!-- hero -->
+<section id="hero" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding-block:calc(var(--sp-12) + 44px) var(--sp-8)">
+<div style="position:absolute;inset:0;background:var(--grad-dawn);opacity:.55"></div>
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.8"></div>
+<div class="grid-bg animate-grid" style="position:absolute;inset:0"></div>
+<div class="aurora aurora--sage animate-aurora" style="width:620px;height:620px;top:-16%;left:-10%"></div>
+<div class="aurora aurora--sand animate-aurora-slow" style="width:700px;height:700px;bottom:-28%;right:-8%"></div>
+<div class="aurora aurora--sky animate-pulse" style="width:440px;height:440px;top:38%;left:42%"></div>
+<div class="sweep" style="top:0"></div>
+
+<div class="wrap-wide" style="position:relative;z-index:10">
+
+<div class="hero-badge" style="margin-bottom:var(--sp-6)">
+<span class="badge badge--sage"><span class="badge__dot"><span></span><span></span></span>CRM-MG 78461 · RQE 57161</span>
+</div>
+
+<h1 id="hero-title" class="display hero-title" style="margin-bottom:var(--sp-8);font-size:clamp(2.1rem,4.7vw,4.25rem);max-width:none">
+<span class="text-reveal-wrapper"><span class="text-reveal-content">Oi, sou o Caio<img class="hero-slot" data-slot="1" src="fotos-caio/foto-4-caio.jpeg" alt="Retrato do Dr. Caio Melki"/>,</span></span>
+<span class="text-reveal-wrapper"><span class="text-reveal-content delay-100">médico de família<img class="hero-slot hero-slot--wide" data-slot="2" src="fotos-caio/foto-principal-caio.jpeg" alt="Dr. Caio Melki no consultório"/>e comunidade</span></span>
+<span class="text-reveal-wrapper"><span class="text-reveal-content delay-200">que acompanha você<img class="hero-slot" data-slot="3" src="fotos-caio/foto-7-caio.jpeg" alt="Dr. Caio Melki"/><span class="text-sage">a vida toda.</span></span></span>
+</h1>
+
+<div class="hero-base">
+<div class="reveal delay-300">
+<p class="body-lg" style="max-width:46ch;margin:0 0 var(--sp-6)">Medicina de Família e Comunidade é a especialidade de olhar a pessoa no seu contexto — pessoal, social e familiar — e coordenar o cuidado ao longo do tempo, não só no episódio.</p>
+<div class="flex wrapf gap-4 center">
+<div class="btn-halo">
+<button class="btn btn--primary" style="padding:.95rem 1.9rem"><span class="btn__shine"></span>Marcar avaliação<i data-lucide="arrow-up-right" class="btn__arrow" style="width:16px;height:16px"></i></button>
+</div>
+<button class="btn btn--ghost" style="padding:.95rem 1.6rem"><span class="btn__shine"></span><i data-lucide="play" style="width:15px;height:15px"></i>Conhecer a especialidade</button>
+</div>
+</div>
+
+<div class="reveal delay-500 hero-panel">
+<div class="glass-panel animate-float" style="border-radius:var(--r-lg);padding:var(--sp-5)">
+<div class="flex between center gap-3" style="margin-bottom:var(--sp-4)">
+<span class="label">Vínculo ao longo do tempo</span>
+<span class="badge badge--success" style="padding:.15rem .45rem"><span class="badge__dot"><span></span><span></span></span>Ativo</span>
+</div>
+<div class="flex col gap-3">
+<div>
+<div class="flex between" style="margin-bottom:6px"><span class="caption">Escuta e contexto</span><span class="caption mono text-sage">96%</span></div>
+<div class="meter"><div class="meter__fill" data-value="96%" style="width:0"></div></div>
+</div>
+<div>
+<div class="flex between" style="margin-bottom:6px"><span class="caption">Prevenção quaternária</span><span class="caption mono text-sage">88%</span></div>
+<div class="meter"><div class="meter__fill" data-value="88%" style="width:0"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="wrap-wide" style="position:relative;z-index:10;margin-top:var(--sp-8)">
+<div class="hero-rail">
+<div class="hero-stat">
+<div class="stat-value">80<span class="text-sage">–</span>90%</div>
+<p class="label" style="margin-top:var(--sp-2)">Resolutividade sem outros médicos</p>
+</div>
+<div class="hero-stat delay-100">
+<div class="stat-value">4</div>
+<p class="label" style="margin-top:var(--sp-2)">Países na formação</p>
+</div>
+<div class="hero-stat delay-200">
+<div class="stat-value">UFMG</div>
+<p class="label" style="margin-top:var(--sp-2)">Graduação e residência</p>
+</div>
+<div class="hero-stat delay-300">
+<div class="stat-value">15<span class="text-sage">min</span></div>
+<p class="label" style="margin-top:var(--sp-2)">De escuta que muda a hipótese</p>
+</div>
+</div>
+</div>
+
+</section>
+
+<!-- marquee -->
+<section id="marquee" style="position:relative;padding-block:var(--sp-8);border-block:1px solid var(--line);background:var(--paper-200)">
+<div class="marquee-shell">
+<div class="marquee-container">
+<div class="marquee-content">
+<span class="marquee-item">Escuta ativa</span><span class="marquee-dot"></span>
+<span class="marquee-item marquee-item--accent">Longitudinalidade</span><span class="marquee-dot"></span>
+<span class="marquee-item">Prevenção quaternária</span><span class="marquee-dot"></span>
+<span class="marquee-item marquee-item--accent">Integralidade</span><span class="marquee-dot"></span>
+<span class="marquee-item">Vínculo</span><span class="marquee-dot"></span>
+<span class="marquee-item marquee-item--accent">Coordenação do cuidado</span><span class="marquee-dot"></span>
+</div>
+<div class="marquee-content" aria-hidden="true">
+<span class="marquee-item">Escuta ativa</span><span class="marquee-dot"></span>
+<span class="marquee-item marquee-item--accent">Longitudinalidade</span><span class="marquee-dot"></span>
+<span class="marquee-item">Prevenção quaternária</span><span class="marquee-dot"></span>
+<span class="marquee-item marquee-item--accent">Integralidade</span><span class="marquee-dot"></span>
+<span class="marquee-item">Vínculo</span><span class="marquee-dot"></span>
+<span class="marquee-item marquee-item--accent">Coordenação do cuidado</span><span class="marquee-dot"></span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- tipografia -->
+<section id="tipografia" class="section">
+<div class="aurora aurora--sage animate-aurora" style="width:520px;height:520px;top:-12%;right:-8%;opacity:.5"></div>
+<div class="wrap" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 01 Fundamentos</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Tipografia</h2>
+</div>
+<span class="label">[ 01 ]</span>
+</div>
+
+<div class="grid g-3 reveal delay-100" style="margin-bottom:var(--sp-12)">
+<div class="bento-card flashlight-card card-pad">
+<span class="label">Primária · interface e títulos</span>
+<p style="font-weight:500;font-size:3.5rem;line-height:1;letter-spacing:-.055em;margin:var(--sp-3) 0">Inter</p>
+<p class="body-sm">A fonte da ref-4. Pesos 300–700 pelo Google Fonts, com tracking negativo firme nos tamanhos grandes (−0.055em no display).</p>
+<p class="caption mono" style="margin-top:var(--sp-4);color:var(--ink-300)">system-ui → Segoe UI → Helvetica → Arial</p>
+</div>
+<div class="bento-card flashlight-card card-pad">
+<span class="label">Editorial · citações</span>
+<p class="quote" style="margin:var(--sp-3) 0">Instrument Serif</p>
+<p class="body-sm">Itálico reservado a depoimentos e citações. Nunca em interface — só onde a voz é humana.</p>
+<p class="caption mono" style="margin-top:var(--sp-4);color:var(--ink-300)">Iowan Old Style → Georgia → serif</p>
+</div>
+<div class="bento-card flashlight-card card-pad">
+<span class="label">Mono · só valores técnicos</span>
+<p class="mono" style="font-size:1.75rem;line-height:1.15;margin:var(--sp-3) 0">Courier Prime</p>
+<p class="body-sm">Reservada a valores de token, hex e tabelas — textura de receituário datilografado, não de terminal. Os rótulos migraram para Inter.</p>
+<p class="caption mono" style="margin-top:var(--sp-4);color:var(--ink-300)">Courier New → Courier → monospace</p>
+</div>
+</div>
+
+<div class="reveal delay-200" style="overflow-x:auto;margin-bottom:var(--sp-12)">
+<table class="spec-table">
+<thead><tr><th>Papel</th><th>Família</th><th>Peso</th><th>Tamanho</th><th>Entrelinha</th><th>Tracking</th><th>Caixa</th></tr></thead>
+<tbody>
+<tr><td class="text-ink">display</td><td>Inter</td><td>500</td><td>clamp(3.5rem, 11vw, 10rem)</td><td>0.92</td><td>−0.055em</td><td>none</td></tr>
+<tr><td class="text-ink">h1</td><td>Inter</td><td>500</td><td>clamp(2.5rem, 6vw, 5rem)</td><td>1.02</td><td>−0.05em</td><td>none</td></tr>
+<tr><td class="text-ink">h2</td><td>Inter</td><td>500</td><td>clamp(2rem, 4vw, 3.25rem)</td><td>1.08</td><td>−0.04em</td><td>none</td></tr>
+<tr><td class="text-ink">h3</td><td>Inter</td><td>500</td><td>clamp(1.5rem, 2.4vw, 2.125rem)</td><td>1.16</td><td>−0.03em</td><td>none</td></tr>
+<tr><td class="text-ink">h4</td><td>Inter</td><td>500</td><td>1.4375rem</td><td>1.26</td><td>−0.022em</td><td>none</td></tr>
+<tr><td class="text-ink">h5</td><td>Inter</td><td>500</td><td>1.1875rem</td><td>1.36</td><td>−0.016em</td><td>none</td></tr>
+<tr><td class="text-ink">h6</td><td>Inter</td><td>600</td><td>1.0625rem</td><td>1.42</td><td>−0.01em</td><td>none</td></tr>
+<tr><td class="text-ink">body-lg</td><td>Inter</td><td>300</td><td>1.1875rem</td><td>1.62</td><td>−0.012em</td><td>none</td></tr>
+<tr><td class="text-ink">body</td><td>Inter</td><td>400</td><td>1rem</td><td>1.60</td><td>−0.008em</td><td>none</td></tr>
+<tr><td class="text-ink">body-sm</td><td>Inter</td><td>400</td><td>0.875rem</td><td>1.56</td><td>−0.005em</td><td>none</td></tr>
+<tr><td class="text-ink">caption</td><td>Inter</td><td>400</td><td>0.8125rem</td><td>1.45</td><td>0</td><td>none</td></tr>
+<tr><td class="text-ink">label</td><td>Inter</td><td>500</td><td>0.6875rem</td><td>1.20</td><td>0.16em</td><td>uppercase</td></tr>
+<tr><td class="text-ink">helper</td><td>Inter</td><td>400</td><td>0.8125rem</td><td>1.45</td><td>0</td><td>none</td></tr>
+<tr><td class="text-ink">mono (valores)</td><td>Courier Prime</td><td>400</td><td>herda do contexto</td><td>herda</td><td>−0.02em</td><td>none</td></tr>
+<tr><td class="text-ink">quote</td><td>Instrument Serif</td><td>400 itálico</td><td>clamp(1.5rem, 3vw, 2.5rem)</td><td>1.24</td><td>−0.02em</td><td>none</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="grid g-2 reveal delay-300">
+<div class="bento-card card-pad">
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Escala viva</span>
+<h1 style="margin-bottom:var(--sp-3)">Cuidar de gente</h1>
+<h2 style="margin-bottom:var(--sp-3)">Cuidar de gente</h2>
+<h3 style="margin-bottom:var(--sp-3)">Cuidar de gente</h3>
+<h4 style="margin-bottom:var(--sp-3)">Cuidar de gente</h4>
+<h5 style="margin-bottom:var(--sp-3)">Cuidar de gente</h5>
+<h6>Cuidar de gente</h6>
+</div>
+<div class="bento-card card-pad">
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Carregamento e corpo de texto</span>
+<p class="body-lg" style="margin:0 0 var(--sp-3)">body-lg — abertura de seção e parágrafos de destaque.</p>
+<p class="body" style="margin:0 0 var(--sp-3)">body — as três famílias vêm do Google Fonts em uma única requisição, com <span class="mono text-sage">display=swap</span>: Inter 300–700, Instrument Serif itálico e Courier Prime 400/700.</p>
+<p class="body-sm" style="margin:0 0 var(--sp-3)">body-sm — apoio dentro de cards e listas.</p>
+<p class="caption" style="margin:0 0 var(--sp-3)">caption — legendas de imagem e notas.</p>
+<p class="helper" style="margin:0 0 var(--sp-4)">helper — texto auxiliar sob campos de formulário.</p>
+<span class="label">label — metadados e numeração</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- cores -->
+<section id="cores" class="section" style="background:var(--paper-200)">
+<div class="aurora aurora--sand animate-aurora-slow" style="width:600px;height:600px;bottom:-20%;left:-10%;opacity:.7"></div>
+<div class="sweep" style="top:0"></div>
+<div class="wrap" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 02 Fundamentos</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Sistema de cores</h2>
+</div>
+<span class="label">[ 02 ]</span>
+</div>
+
+<p class="body-lg reveal delay-100" style="max-width:64ch;margin-bottom:var(--sp-12)">Papel quente como base, tinta esverdeada no texto e sálvia como cor de ação. Areia e céu entram só para aquecer ou esfriar um bloco — nunca competindo com o conteúdo.</p>
+
+<span class="label reveal" style="display:block;margin-bottom:var(--sp-4)">Neutras · papel e tinta</span>
+<div class="grid g-4 reveal delay-100" style="margin-bottom:var(--sp-12)">
+<div class="swatch"><div class="swatch__chip" style="background:#FBFAF7;border-bottom:1px solid var(--line)"></div><div class="swatch__meta"><p class="h6">paper-100</p><p class="caption mono">#FBFAF7</p><p class="caption mono">rgb(251 250 247)</p><p class="caption mono">hsl(45 33% 98%)</p><p class="helper" style="margin-top:var(--sp-2)">Fundo da página · neutral</p></div></div>
+<div class="swatch"><div class="swatch__chip" style="background:#F4F2EC"></div><div class="swatch__meta"><p class="h6">paper-200</p><p class="caption mono">#F4F2EC</p><p class="caption mono">rgb(244 242 236)</p><p class="caption mono">hsl(45 27% 94%)</p><p class="helper" style="margin-top:var(--sp-2)">Seções alternadas · neutral</p></div></div>
+<div class="swatch"><div class="swatch__chip" style="background:#1F2420"></div><div class="swatch__meta"><p class="h6">ink-900</p><p class="caption mono">#1F2420</p><p class="caption mono">rgb(31 36 32)</p><p class="caption mono">hsl(132 7% 13%)</p><p class="helper" style="margin-top:var(--sp-2)">Texto primário · 15.8:1 AAA</p></div></div>
+<div class="swatch"><div class="swatch__chip" style="background:#6E766C"></div><div class="swatch__meta"><p class="h6">ink-500</p><p class="caption mono">#6E766C</p><p class="caption mono">rgb(110 118 108)</p><p class="caption mono">hsl(108 4% 44%)</p><p class="helper" style="margin-top:var(--sp-2)">Texto secundário · 4.6:1 AA</p></div></div>
+</div>
+
+<span class="label reveal" style="display:block;margin-bottom:var(--sp-4)">Acentos · ação e atmosfera</span>
+<div class="grid g-4 reveal delay-100" style="margin-bottom:var(--sp-12)">
+<div class="swatch"><div class="swatch__chip" style="background:#4F7355"></div><div class="swatch__meta"><p class="h6">sage-600 <span class="badge badge--sage" style="padding:.1rem .4rem">primary</span></p><p class="caption mono">#4F7355</p><p class="caption mono">rgb(79 115 85)</p><p class="caption mono">hsl(130 19% 38%)</p><p class="helper" style="margin-top:var(--sp-2)">Botões, links, foco · 5.1:1 AA</p></div></div>
+<div class="swatch"><div class="swatch__chip" style="background:#E8DFCD"></div><div class="swatch__meta"><p class="h6">sand-300 <span class="badge badge--sand" style="padding:.1rem .4rem">secondary</span></p><p class="caption mono">#E8DFCD</p><p class="caption mono">rgb(232 223 205)</p><p class="caption mono">hsl(40 39% 86%)</p><p class="helper" style="margin-top:var(--sp-2)">Blocos quentes · decorative</p></div></div>
+<div class="swatch"><div class="swatch__chip" style="background:#7FA3B8"></div><div class="swatch__meta"><p class="h6">sky-400 <span class="badge badge--sky" style="padding:.1rem .4rem">accent</span></p><p class="caption mono">#7FA3B8</p><p class="caption mono">rgb(127 163 184)</p><p class="caption mono">hsl(202 30% 61%)</p><p class="helper" style="margin-top:var(--sp-2)">Informação e dados · decorative</p></div></div>
+<div class="swatch"><div class="swatch__chip" style="background:#2A302A"></div><div class="swatch__meta"><p class="h6">moss-900</p><p class="caption mono">#2A302A</p><p class="caption mono">rgb(42 48 42)</p><p class="caption mono">hsl(120 7% 18%)</p><p class="helper" style="margin-top:var(--sp-2)">Seções escuras de respiro</p></div></div>
+</div>
+
+<span class="label reveal" style="display:block;margin-bottom:var(--sp-4)">Feedback</span>
+<div class="grid g-3 reveal delay-100" style="margin-bottom:var(--sp-12)">
+<div class="swatch"><div class="swatch__chip" style="background:#4F7355"></div><div class="swatch__meta"><p class="h6">success</p><p class="caption mono">#4F7355 · hsl(130 19% 38%)</p><p class="helper" style="margin-top:var(--sp-2)">Confirmações e estados saudáveis</p></div></div>
+<div class="swatch"><div class="swatch__chip" style="background:#C08A3E"></div><div class="swatch__meta"><p class="h6">warning</p><p class="caption mono">#C08A3E · hsl(35 51% 50%)</p><p class="helper" style="margin-top:var(--sp-2)">Atenção e pendências</p></div></div>
+<div class="swatch"><div class="swatch__chip" style="background:#B05545"></div><div class="swatch__meta"><p class="h6">danger</p><p class="caption mono">#B05545 · hsl(9 44% 48%)</p><p class="helper" style="margin-top:var(--sp-2)">Erro de formulário e alertas</p></div></div>
+</div>
+
+<div class="grid g-2 reveal delay-200">
+<div class="bento-card card-pad">
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Variações de opacidade — sage-600</span>
+<div class="flex gap-2" style="margin-bottom:var(--sp-4)">
+<div style="flex:1"><div style="height:56px;border-radius:var(--r-sm);background:rgba(79,115,85,1)"></div><p class="caption mono" style="margin-top:var(--sp-2)">100%</p></div>
+<div style="flex:1"><div style="height:56px;border-radius:var(--r-sm);background:rgba(79,115,85,.6)"></div><p class="caption mono" style="margin-top:var(--sp-2)">60%</p></div>
+<div style="flex:1"><div style="height:56px;border-radius:var(--r-sm);background:rgba(79,115,85,.35)"></div><p class="caption mono" style="margin-top:var(--sp-2)">35%</p></div>
+<div style="flex:1"><div style="height:56px;border-radius:var(--r-sm);background:rgba(79,115,85,.16)"></div><p class="caption mono" style="margin-top:var(--sp-2)">16%</p></div>
+<div style="flex:1"><div style="height:56px;border-radius:var(--r-sm);background:rgba(79,115,85,.08)"></div><p class="caption mono" style="margin-top:var(--sp-2)">8%</p></div>
+</div>
+<p class="body-sm">100% em botões e ícones; 35% em bordas ativas; 16% no anel de foco; 8% em fundos de estado.</p>
+</div>
+<div class="bento-card card-pad">
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Gradientes do sistema</span>
+<div class="flex col gap-3">
+<div><div style="height:44px;border-radius:var(--r-sm);background:var(--grad-sage)"></div><p class="caption mono" style="margin-top:var(--sp-2)">--grad-sage · barras de progresso</p></div>
+<div><div style="height:44px;border-radius:var(--r-sm);background:var(--grad-dawn)"></div><p class="caption mono" style="margin-top:var(--sp-2)">--grad-dawn · fundo do hero</p></div>
+<div><div style="height:44px;border-radius:var(--r-sm);background:var(--grad-sand)"></div><p class="caption mono" style="margin-top:var(--sp-2)">--grad-sand · blocos de destaque</p></div>
+</div>
+</div>
+</div>
+
+<div class="reveal delay-300" style="margin-top:var(--sp-12);overflow-x:auto">
+<table class="spec-table">
+<thead><tr><th>Contexto</th><th>Repouso</th><th>Hover</th><th>Ativo</th><th>Desabilitado</th></tr></thead>
+<tbody>
+<tr><td class="text-ink">Texto</td><td>ink-900</td><td>sage-700</td><td>sage-600</td><td>ink-300</td></tr>
+<tr><td class="text-ink">Fundo</td><td>paper-100</td><td>sage-100</td><td>sage-600</td><td>paper-300</td></tr>
+<tr><td class="text-ink">Borda</td><td>rgba(ink,.11)</td><td>sage-400</td><td>sage-600</td><td>rgba(ink,.06)</td></tr>
+<tr><td class="text-ink">Sombra</td><td>shadow-sm</td><td>shadow-md</td><td>glow-sage</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<!-- componentes -->
+<section id="componentes" class="section">
+<div class="aurora aurora--sky animate-aurora" style="width:560px;height:560px;top:6%;right:-12%;opacity:.6"></div>
+<div class="wrap" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 03 Biblioteca</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Componentes</h2>
+</div>
+<span class="label">[ 03 ]</span>
+</div>
+
+<span class="label reveal" style="display:block;margin-bottom:var(--sp-4)">Botões — brilho no hover, halo inferior e seta que avança</span>
+<div class="demo-box reveal delay-100" style="margin-bottom:var(--sp-12)">
+<div class="btn-halo"><button class="btn btn--primary"><span class="btn__shine"></span>Primário<i data-lucide="arrow-right" class="btn__arrow" style="width:15px;height:15px"></i></button></div>
+<button class="btn btn--ink"><span class="btn__shine"></span>Tinta</button>
+<button class="btn btn--ghost"><span class="btn__shine"></span>Fantasma</button>
+<button class="btn btn--sand"><span class="btn__shine"></span>Areia</button>
+<button class="btn btn--icon"><i data-lucide="calendar" style="width:17px;height:17px"></i></button>
+<button class="btn btn--link">Link com sublinhado</button>
+<button class="btn btn--primary btn--disabled">Desabilitado</button>
+</div>
+
+<div class="grid g-2 reveal delay-100" style="margin-bottom:var(--sp-12)">
+<div>
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Campos de formulário</span>
+<div class="bento-card card-pad flex col gap-6">
+<div class="field">
+<label class="label" for="f-nome">Nome completo</label>
+<input class="input" id="f-nome" type="text" placeholder="Como você prefere ser chamado"/>
+<span class="helper">Usamos esse nome na primeira consulta.</span>
+</div>
+<div class="field">
+<label class="label" for="f-email">E-mail</label>
+<input class="input input--error" id="f-email" type="email" value="caio@"/>
+<span class="helper" style="color:var(--danger)">Endereço de e-mail incompleto.</span>
+</div>
+<div class="field">
+<label class="label" for="f-msg">Motivo do contato</label>
+<textarea class="textarea" id="f-msg" placeholder="Conte, em poucas linhas, o que te trouxe até aqui."></textarea>
+</div>
+<div class="flex center gap-6 wrapf">
+<label class="flex center gap-3"><input class="checkbox" type="checkbox" checked=""/><span class="body-sm">Retorno por WhatsApp</span></label>
+<label class="flex center gap-3"><button class="switch" role="switch" aria-checked="true"></button><span class="body-sm">Lembrete 24h antes</span></label>
+</div>
+</div>
+</div>
+<div>
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Cards — lanterna que segue o mouse</span>
+<div class="flex col gap-6">
+<div class="bento-card flashlight-card card-pad">
+<div class="flex center gap-3" style="margin-bottom:var(--sp-4)">
+<span class="icon-container" style="width:42px;height:42px;border-radius:var(--r-md);color:var(--sage-600);border-color:var(--sage-400)"><i data-lucide="stethoscope" style="width:19px;height:19px"></i></span>
+<div><h5 class="h5">Consulta longitudinal</h5><p class="caption">50 min · presencial ou on-line</p></div>
+</div>
+<p class="body-sm">Card padrão: papel sobre papel, borda de 1px que acende em sálvia no hover, elevação de 5px e a lanterna radial acompanhando o cursor.</p>
+</div>
+<div class="bento-card bento-card--sand card-pad">
+<span class="badge badge--sage" style="margin-bottom:var(--sp-3)">Variante quente</span>
+<h5 class="h5">Card em areia</h5>
+<p class="body-sm" style="margin-top:var(--sp-2);color:var(--ink-700)">Para blocos de acolhimento e chamadas suaves, sem borda.</p>
+</div>
+<div class="bento-card flashlight-card" style="padding:0;overflow:hidden">
+<div class="group img-wrap" style="height:190px">
+<img src="fotos-caio/foto-9-caio.jpeg" alt="Dr. Caio Melki" style="width:100%;height:100%;object-fit:cover;object-position:center 22%"/>
+</div>
+<div class="card-pad">
+<h5 class="h5">Card com mídia</h5>
+<p class="body-sm" style="margin-top:var(--sp-2)">A imagem escala 1.07 em 1s no hover, contida por <span class="mono">.img-wrap</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="grid g-3 reveal delay-200" style="margin-bottom:var(--sp-12)">
+<div>
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Badges e tags</span>
+<div class="demo-box" style="padding:var(--sp-6)">
+<span class="badge"><span class="badge__dot"><span></span><span></span></span>Neutro</span>
+<span class="badge badge--sage">Primário</span>
+<span class="badge badge--sand">Secundário</span>
+<span class="badge badge--sky">Informação</span>
+<span class="badge badge--success">Sucesso</span>
+<span class="badge badge--warning">Atenção</span>
+<span class="badge badge--danger">Erro</span>
+<span class="tag">Hipertensão</span>
+<span class="tag">Diabetes</span>
+<span class="tag">Saúde mental</span>
+</div>
+</div>
+<div>
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Tooltip e modal</span>
+<div class="demo-box" style="padding:var(--sp-6)">
+<span class="tooltip"><button class="btn btn--ghost">Passe o mouse<i data-lucide="info" style="width:15px;height:15px"></i></button><span class="tooltip__bubble">RQE 57161 · MFC</span></span>
+<button class="btn btn--primary" data-modal-open=""><span class="btn__shine"></span>Abrir modal</button>
+</div>
+</div>
+<div>
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Navbar</span>
+<div class="demo-box col" style="padding:var(--sp-6);align-items:stretch">
+<div class="glass-panel flex between center" style="border-radius:var(--r-full);padding:.6rem 1rem">
+<span style="font-weight:600;letter-spacing:-.03em">Dr. Caio Melki</span>
+<div class="flex gap-4"><a class="nav-link" href="#componentes">Sobre</a><a class="nav-link" href="#componentes">Consultas</a></div>
+</div>
+<p class="body-sm" style="margin-top:var(--sp-4)">Fixa no topo, transparente no início e com <span class="mono">backdrop-blur</span> + filete inferior após 40px de rolagem. Entra com <span class="mono">.nav-load</span> no carregamento.</p>
+</div>
+</div>
+</div>
+
+<span class="label reveal" style="display:block;margin-bottom:var(--sp-4)">Slots de imagem no título — troque o <span class="mono">src</span> de cada <span class="mono">[data-slot]</span></span>
+<div class="grid g-2 reveal delay-100" style="margin-bottom:var(--sp-12);align-items:start">
+<div class="bento-card card-pad">
+<h3 class="h3" style="margin-bottom:var(--sp-4)">Com imagem<img class="hero-slot" data-slot="exemplo-1" src="fotos-caio/foto-6-caio.jpeg" alt="Exemplo de slot"/>e sem imagem<span class="hero-slot hero-slot--empty" data-slot="exemplo-2">slot</span>na mesma linha.</h3>
+<p class="body-sm">O slot acompanha o tamanho da fonte (altura em <span class="mono">em</span>), então funciona em h1, h2 ou h3 sem ajuste. No hover ele levanta, inclina 1,2° e a borda acende em sálvia.</p>
+</div>
+<div class="bento-card card-pad">
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Proporções disponíveis</span>
+<div class="flex wrapf gap-6 center" style="font-size:2.5rem;margin-bottom:var(--sp-6)">
+<span class="flex col center gap-2"><img class="hero-slot" src="fotos-caio/foto-4-caio.jpeg" alt="Quadrado"/><span class="caption mono">1 / 1</span></span>
+<span class="flex col center gap-2"><img class="hero-slot hero-slot--wide" src="fotos-caio/foto-principal-caio.jpeg" alt="Paisagem"/><span class="caption mono">3 / 2</span></span>
+<span class="flex col center gap-2"><img class="hero-slot hero-slot--tall" src="fotos-caio/foto-7-caio.jpeg" alt="Retrato"/><span class="caption mono">3 / 4</span></span>
+<span class="flex col center gap-2"><span class="hero-slot hero-slot--empty">slot</span><span class="caption mono">vazio</span></span>
+</div>
+<p class="body-sm">Padrão herdado da ref-9: a imagem vive dentro da frase, alinhada ao meio do texto.</p>
+</div>
+</div>
+
+<span class="label reveal" style="display:block;margin-bottom:var(--sp-4)">Carrossel com Ken Burns</span>
+<div class="grid g-2 reveal delay-100" style="margin-bottom:var(--sp-12);align-items:start">
+<div class="hero-media" style="height:320px">
+<div class="carousel-slide active"><img src="fotos-caio/foto-principal-caio.jpeg" alt="Dr. Caio Melki"/></div>
+<div class="carousel-slide"><img src="fotos-caio/foto-2-caio.jpeg" alt="Dr. Caio Melki"/></div>
+<div class="carousel-slide"><img src="fotos-caio/foto-9-caio.jpeg" alt="Dr. Caio Melki"/></div>
+</div>
+<div class="bento-card card-pad">
+<h5 class="h5" style="margin-bottom:var(--sp-3)">Troca cruzada + zoom lento</h5>
+<p class="body-sm" style="margin-bottom:var(--sp-4)">Cada slide fica 5s no ar enquanto a foto escala de 1 para 1.12 em 10s, criando movimento contínuo sem corte perceptível.</p>
+<p class="caption mono">.carousel-slide.active · opacity 1.5s · scale 10s</p>
+</div>
+</div>
+
+<span class="label reveal" style="display:block;margin-bottom:var(--sp-4)">Acordeão / FAQ</span>
+<div class="bento-card card-pad reveal delay-100">
+<div class="faq-item" style="margin-bottom:var(--sp-6)">
+<div class="toggle-faq" role="button" tabindex="0" aria-expanded="false"><h3 class="h5">O que faz o médico de família e comunidade?</h3><span class="icon-container"><i data-lucide="plus" style="width:15px;height:15px"></i></span></div>
+<div class="faq-content"><p class="body-sm" style="padding-top:var(--sp-4)">É o especialista em coordenar o cuidado da pessoa: olha o indivíduo como um todo, no seu contexto pessoal, social e familiar, e conduz de 80 a 90% dos casos sem precisar envolver outros médicos.</p></div>
+</div>
+<div class="faq-item" style="margin-bottom:var(--sp-6)">
+<div class="toggle-faq" role="button" tabindex="0" aria-expanded="false"><h3 class="h5">Preciso de encaminhamento para consultar?</h3><span class="icon-container"><i data-lucide="plus" style="width:15px;height:15px"></i></span></div>
+<div class="faq-content"><p class="body-sm" style="padding-top:var(--sp-4)">Não. O MFC costuma ser a porta de entrada do cuidado — e, quando um especialista focal for necessário, a orientação sobre qual procurar faz parte da consulta.</p></div>
+</div>
+<div class="faq-item">
+<div class="toggle-faq" role="button" tabindex="0" aria-expanded="false"><h3 class="h5">O atendimento pode ser on-line?</h3><span class="icon-container"><i data-lucide="plus" style="width:15px;height:15px"></i></span></div>
+<div class="faq-content"><p class="body-sm" style="padding-top:var(--sp-4)">Sim, para acompanhamento e para boa parte das demandas. Casos que exigem exame físico são direcionados ao presencial.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- caminho -->
+<section id="caminho" class="section" style="background:var(--paper-200)">
+<div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.7"></div>
+<div class="aurora aurora--sage animate-aurora" style="width:520px;height:520px;top:-10%;left:-10%;opacity:.5"></div>
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 04 Composição</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">O Caminho</h2>
+</div>
+<span class="label">[ 04 ]</span>
+</div>
+
+<div class="grid g-12" style="gap:var(--sp-6)">
+<div class="reveal" style="grid-column:span 4">
+<div class="group bento-card flashlight-card" style="position:relative;height:520px;overflow:hidden">
+<div class="img-wrap" style="position:absolute;inset:0">
+<img src="fotos-caio/foto-2-caio.jpeg" alt="Dr. Caio Melki" style="width:100%;height:100%;object-fit:cover"/>
+</div>
+<div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(31,36,32,.9), transparent 58%)"></div>
+<div class="on-dark" style="position:absolute;left:var(--sp-6);right:var(--sp-6);bottom:var(--sp-6);z-index:3">
+<p class="quote" style="color:var(--paper-100);font-size:1.5rem">"A pessoa antes da doença — e o contexto antes da conduta."</p>
+<div class="flex center gap-2" style="margin-top:var(--sp-4)">
+<i data-lucide="quote" style="width:14px;height:14px;color:var(--sand-300)"></i>
+<span class="label">Princípio da MFC</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="reveal delay-200 flex col between gap-8" style="grid-column:span 4">
+<div>
+<h3 class="h3" style="margin-bottom:var(--sp-6)"><span class="text-reveal-wrapper"><span class="text-reveal-content">Um cuidado que acompanha</span></span> <span class="text-reveal-wrapper"><span class="text-reveal-content delay-100">a vida inteira, não só</span></span> <span class="text-reveal-wrapper"><span class="text-reveal-content delay-200">o episódio.</span></span></h3>
+<p class="body">Longitudinalidade é o que diferencia: conhecer a história, a família e o território permite decidir melhor — com menos exames desnecessários e mais precisão no que importa.</p>
+</div>
+<div class="bento-card flashlight-card" style="flex:1;min-height:180px;position:relative;overflow:hidden">
+<div class="img-wrap group" style="position:absolute;inset:0">
+<img src="fotos-caio/foto-6-caio.jpeg" alt="Dr. Caio Melki" style="width:100%;height:100%;object-fit:cover;object-position:center 20%"/>
+</div>
+</div>
+<div class="flex between center gap-4">
+<p class="body-sm" style="max-width:22ch">Formação em quatro instituições de referência</p>
+<button class="btn btn--ghost"><span class="btn__shine"></span>Ver trajetória<i data-lucide="arrow-right" class="btn__arrow" style="width:15px;height:15px"></i></button>
+</div>
+</div>
+
+<div class="reveal delay-300" style="grid-column:span 4">
+<div class="bento-card bento-card--dark card-pad flex col between" style="min-height:520px;position:relative;overflow:hidden">
+<div style="position:absolute;top:-40px;right:-40px;opacity:.08"><i data-lucide="heart-pulse" style="width:220px;height:220px"></i></div>
+<div class="flex center gap-2" style="position:relative;z-index:2">
+<span class="badge__dot" style="color:var(--sand-300)"><span></span><span></span></span>
+<span class="label">Escuta como tecnologia</span>
+</div>
+<div style="position:relative;z-index:2">
+<p class="stat-value" style="color:var(--paper-100);margin-bottom:var(--sp-2)">15<span class="text-sand">min</span></p>
+<p class="body-sm" style="margin-bottom:var(--sp-8)">É o tempo médio que uma escuta bem conduzida precisa para mudar completamente a hipótese diagnóstica inicial.</p>
+<div class="flex col gap-4">
+<div>
+<div class="flex between center" style="margin-bottom:var(--sp-2)"><span class="caption">Vínculo com a pessoa</span><span class="caption mono" style="color:var(--sand-300)">94%</span></div>
+<div class="meter"><div class="meter__fill" data-value="94%" style="width:0"></div></div>
+</div>
+<div>
+<div class="flex between center" style="margin-bottom:var(--sp-2)"><span class="caption">Adesão ao tratamento</span><span class="caption mono" style="color:var(--sand-300)">81%</span></div>
+<div class="meter"><div class="meter__fill" data-value="81%" style="width:0"></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- pratica -->
+<section id="pratica" class="section">
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="reveal bento-card bento-card--dark" style="border-radius:var(--r-xl);padding:clamp(var(--sp-8), 5vw, var(--sp-24));position:relative;overflow:hidden">
+<div style="position:absolute;top:0;right:0;opacity:.06;pointer-events:none"><i data-lucide="wind" style="width:380px;height:380px"></i></div>
+
+<div class="section-head" style="border-color:var(--line-light);position:relative;z-index:2">
+<span class="label">/ 05 Prática</span>
+<span class="label">[ 05 ]</span>
+</div>
+
+<div class="grid g-2" style="gap:var(--sp-16);position:relative;z-index:2">
+<div class="flex col between gap-8">
+<div>
+<div class="flex between center gap-6" style="margin-bottom:var(--sp-8)">
+<h2 class="h2" style="max-width:16ch;color:var(--paper-100)"><span class="text-reveal-wrapper"><span class="text-reveal-content">Evidência aplicada a uma</span></span> <span class="text-reveal-wrapper"><span class="text-reveal-content delay-100">pessoa de cada vez.</span></span></h2>
+<span class="icon-container" style="width:52px;height:52px;flex-shrink:0;color:var(--sand-300);border-color:var(--line-light)"><i data-lucide="activity" style="width:22px;height:22px"></i></span>
+</div>
+<div class="flex wrapf gap-3">
+<span class="tag">Atenção primária</span>
+<span class="tag">Urgência e emergência</span>
+<span class="tag">ACLS · AHA</span>
+<span class="tag">Educação médica</span>
+<span class="tag">Preceptoria</span>
+</div>
+</div>
+
+<div class="glass-panel glass-panel--dark flex gap-6 center" style="border-radius:var(--r-lg);padding:var(--sp-6)">
+<img src="fotos-caio/foto-8-caio.jpeg" alt="Dr. Caio Melki" style="width:84px;height:84px;border-radius:var(--r-md);object-fit:cover"/>
+<div>
+<h5 class="h5" style="color:var(--paper-100)">Dr. Caio Ribeiro Melki</h5>
+<p class="caption" style="margin-bottom:var(--sp-2)">Médico de Família e Comunidade · HC-UFMG</p>
+<p class="body-sm" style="margin-bottom:var(--sp-4)">"Resolutividade não é fazer mais exames. É fazer a pergunta certa."</p>
+<button class="btn btn--sand" style="padding:.5rem .5rem .5rem 1rem;font-size:var(--fs-caption)"><span class="btn__shine"></span>Agendar<span style="display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--moss-900);color:var(--sand-300)"><i data-lucide="arrow-right" style="width:12px;height:12px"></i></span></button>
+</div>
+</div>
+</div>
+
+<div class="group" style="position:relative;border-radius:var(--r-lg);overflow:hidden;min-height:520px">
+<div class="img-wrap" style="position:absolute;inset:0">
+<img src="fotos-caio/foto-3-caio.jpeg" alt="Dr. Caio Melki em atendimento" style="width:100%;height:100%;object-fit:cover"/>
+</div>
+<div class="glass-panel glass-panel--dark" style="position:absolute;top:var(--sp-6);right:var(--sp-6);width:min(280px,72%);border-radius:var(--r-lg);padding:var(--sp-5);z-index:3">
+<div class="flex between center" style="padding-bottom:var(--sp-3);margin-bottom:var(--sp-4);border-bottom:1px solid var(--line-light)">
+<div>
+<span class="label">Estado da consulta</span>
+<p class="h4" style="margin-top:2px;color:var(--paper-100)">Escuta</p>
+</div>
+<div style="text-align:right">
+<span class="label">Ritmo</span>
+<p class="h4" style="margin-top:2px;color:var(--paper-100)">Calmo</p>
+</div>
+</div>
+<div class="flex between center gap-1" style="height:44px">
+<div style="width:7px;height:38%;border-radius:var(--r-full);background:rgba(251,250,247,.18)"></div>
+<div style="width:7px;height:52%;border-radius:var(--r-full);background:rgba(251,250,247,.18)"></div>
+<div style="width:7px;height:44%;border-radius:var(--r-full);background:rgba(251,250,247,.18)"></div>
+<div style="width:7px;height:64%;border-radius:var(--r-full);background:rgba(251,250,247,.18)"></div>
+<div style="width:7px;height:92%;border-radius:var(--r-full);background:var(--sand-300)"></div>
+<div style="width:7px;height:70%;border-radius:var(--r-full);background:rgba(251,250,247,.18)"></div>
+<div style="width:7px;height:58%;border-radius:var(--r-full);background:rgba(251,250,247,.18)"></div>
+<div style="width:7px;height:46%;border-radius:var(--r-full);background:rgba(251,250,247,.18)"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- lista-interativa -->
+<section class="section section--tight" style="background:var(--paper-200)">
+<div class="wrap-wide" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 06 Padrão de interação</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Lista que troca o destaque</h2>
+</div>
+<span class="label">[ 06 ]</span>
+</div>
+
+<div class="grid g-2" style="gap:var(--sp-12);align-items:start">
+<div class="reveal bento-card" style="position:relative;height:560px;overflow:hidden;border-radius:var(--r-lg)">
+<img id="class-display-image" src="fotos-caio/foto-5-caio.jpeg" alt="Frente de cuidado em destaque" style="width:100%;height:100%;object-fit:cover;transition:opacity .3s ease"/>
+<div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(31,36,32,.85), transparent 52%)"></div>
+<div class="glass-panel" style="position:absolute;left:var(--sp-6);right:var(--sp-6);bottom:var(--sp-6);border-radius:var(--r-md);padding:var(--sp-5);z-index:3">
+<p class="label text-sage" id="class-display-tag">Cuidado continuado</p>
+<h3 class="h3" id="class-display-title" style="margin-top:var(--sp-2)">Consulta longitudinal</h3>
+</div>
+</div>
+
+<div class="flex col gap-2 reveal delay-100">
+<div class="class-item is-active" data-image="fotos-caio/foto-5-caio.jpeg" data-tag="Cuidado continuado" data-title="Consulta longitudinal">
+<div class="flex gap-4" style="align-items:flex-start">
+<span class="number-badge">01</span>
+<div style="flex:1">
+<h4 class="h4">Consulta longitudinal</h4>
+<div class="item-desc"><p class="body-sm">O acompanhamento que se repete no tempo: a mesma pessoa, o mesmo médico, o histórico inteiro à disposição de cada decisão.</p></div>
+</div>
+</div>
+</div>
+<div class="class-item" data-image="fotos-caio/foto-principal-caio.jpeg" data-tag="Primeira vez" data-title="Avaliação inicial">
+<div class="flex gap-4" style="align-items:flex-start">
+<span class="number-badge">02</span>
+<div style="flex:1">
+<h4 class="h4">Avaliação inicial</h4>
+<div class="item-desc"><p class="body-sm">Uma hora dedicada a mapear história, contexto, hábitos e prioridades — antes de qualquer conduta.</p></div>
+</div>
+</div>
+</div>
+<div class="class-item" data-image="fotos-caio/foto-4-caio.jpeg" data-tag="Coordenação" data-title="Segunda opinião">
+<div class="flex gap-4" style="align-items:flex-start">
+<span class="number-badge">03</span>
+<div style="flex:1">
+<h4 class="h4">Segunda opinião</h4>
+<div class="item-desc"><p class="body-sm">Revisão de diagnósticos e prescrições já em curso, com foco em prevenção quaternária: evitar o excesso que não ajuda.</p></div>
+</div>
+</div>
+</div>
+<div class="class-item" data-image="fotos-caio/foto-9-caio.jpeg" data-tag="Educação médica" data-title="Preceptoria e ensino">
+<div class="flex gap-4" style="align-items:flex-start">
+<span class="number-badge">04</span>
+<div style="flex:1">
+<h4 class="h4">Preceptoria e ensino</h4>
+<div class="item-desc"><p class="body-sm">Supervisão de tutoria e coordenação pedagógica em programas de residência e especialização em MFC.</p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- icones -->
+<section id="icones" class="section">
+<div class="aurora aurora--sand animate-aurora-slow" style="width:520px;height:520px;bottom:-14%;right:-8%;opacity:.7"></div>
+<div class="wrap" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 07 Biblioteca</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Ícones</h2>
+</div>
+<span class="label">[ 07 ]</span>
+</div>
+
+<p class="body-lg reveal delay-100" style="max-width:64ch;margin-bottom:var(--sp-8)">Lucide, traço de 1.5px, herdando <span class="mono text-sage">currentColor</span>. Tamanhos canônicos: 14px (inline), 16px (botões), 22px (tiles) e 120px+ (marca d'água decorativa).</p>
+
+<div class="grid g-4 reveal delay-200" style="gap:var(--sp-3)">
+<div class="icon-tile"><i data-lucide="stethoscope"></i><span class="label">stethoscope</span></div>
+<div class="icon-tile"><i data-lucide="heart-handshake"></i><span class="label">heart-handshake</span></div>
+<div class="icon-tile"><i data-lucide="users"></i><span class="label">users</span></div>
+<div class="icon-tile"><i data-lucide="home"></i><span class="label">home</span></div>
+<div class="icon-tile"><i data-lucide="calendar"></i><span class="label">calendar</span></div>
+<div class="icon-tile"><i data-lucide="shield-check"></i><span class="label">shield-check</span></div>
+<div class="icon-tile"><i data-lucide="brain"></i><span class="label">brain</span></div>
+<div class="icon-tile"><i data-lucide="activity"></i><span class="label">activity</span></div>
+<div class="icon-tile"><i data-lucide="clipboard-list"></i><span class="label">clipboard-list</span></div>
+<div class="icon-tile"><i data-lucide="message-circle"></i><span class="label">message-circle</span></div>
+<div class="icon-tile"><i data-lucide="graduation-cap"></i><span class="label">graduation-cap</span></div>
+<div class="icon-tile"><i data-lucide="arrow-up-right"></i><span class="label">arrow-up-right</span></div>
+</div>
+</div>
+</section>
+
+<!-- animacoes -->
+<section id="animacoes" class="section" style="background:var(--paper-200)">
+<div class="sweep" style="top:0"></div>
+<div class="wrap" style="position:relative;z-index:2">
+<div class="section-head reveal">
+<div>
+<span class="label">/ 08 Movimento</span>
+<h2 class="h2" style="margin-top:var(--sp-3)">Animações</h2>
+</div>
+<span class="label">[ 08 ]</span>
+</div>
+
+<div class="grid g-3 reveal delay-100" style="margin-bottom:var(--sp-12)">
+<div class="bento-card flashlight-card card-pad">
+<span class="badge badge--sage" style="margin-bottom:var(--sp-4)">ref-4</span>
+<h5 class="h5">.reveal → .active</h5>
+<p class="body-sm" style="margin:var(--sp-2) 0 var(--sp-4)">O surgimento padrão de toda seção: sobe 2rem, sai do desfoque e ganha opacidade. Escalonado com <span class="mono">.delay-*</span>.</p>
+<p class="caption mono">opacity 0→1 · translateY 2rem→0 · blur 8px→0 · 1s</p>
+</div>
+<div class="bento-card flashlight-card card-pad">
+<span class="badge badge--sage" style="margin-bottom:var(--sp-4)">ref-4</span>
+<h5 class="h5">.text-reveal-content</h5>
+<p class="body-sm" style="margin:var(--sp-2) 0 var(--sp-4)">Cada linha do título sobe de dentro de uma máscara. Usado no hero e nos títulos de "O Caminho" e "Prática".</p>
+<p class="caption mono">translateY 110%→0 · 1.2s · ease-out-expo</p>
+</div>
+<div class="bento-card flashlight-card card-pad">
+<span class="badge badge--sky" style="margin-bottom:var(--sp-4)">ref-7</span>
+<h5 class="h5">animationIn</h5>
+<p class="body-sm" style="margin:var(--sp-2) 0 var(--sp-4)">A variante em keyframes do desfocado → focado, para elementos que precisam de <span class="mono">animation</span> em vez de transição.</p>
+<p class="caption mono">opacity 0→1 · translateY 30px→0 · blur 10px→0</p>
+</div>
+<div class="bento-card flashlight-card card-pad">
+<span class="badge badge--sand" style="margin-bottom:var(--sp-4)">ref-4</span>
+<h5 class="h5">Ken Burns + marquee</h5>
+<p class="body-sm" style="margin:var(--sp-2) 0 var(--sp-4)">O carrossel do hero troca a cada 5s enquanto a foto escala lentamente. A faixa de termos roda em loop infinito e pausa no hover.</p>
+<p class="caption mono">scale 1→1.12 em 10s · scroll 42s linear infinite</p>
+</div>
+<div class="bento-card flashlight-card card-pad">
+<span class="badge badge--sand" style="margin-bottom:var(--sp-4)">ref-7</span>
+<h5 class="h5">shimmer + lanterna</h5>
+<p class="body-sm" style="margin:var(--sp-2) 0 var(--sp-4)">Brilho diagonal atravessando os botões e gradiente radial de sálvia seguindo o mouse dentro dos cards.</p>
+<p class="caption mono">skewX(−15deg) · --mouse-x / --mouse-y</p>
+</div>
+<div class="bento-card flashlight-card card-pad">
+<span class="badge badge--sky" style="margin-bottom:var(--sp-4)">ref-5</span>
+<h5 class="h5">Partículas + cursor</h5>
+<p class="body-sm" style="margin:var(--sp-2) 0 var(--sp-4)">Malha de partículas conectadas no fundo, atraídas de leve pelo ponteiro, e o cursor de ponto + anel que cresce sobre elementos clicáveis.</p>
+<p class="caption mono">canvas 2D · .cursor-dot / .cursor-outline.hovered</p>
+</div>
+</div>
+
+<div class="reveal delay-200" style="overflow-x:auto">
+<table class="spec-table">
+<thead><tr><th>Token</th><th>Valor</th><th>Uso</th></tr></thead>
+<tbody>
+<tr><td class="text-ink">--dur-fast</td><td>220ms</td><td>Hover de botões, links, bordas</td></tr>
+<tr><td class="text-ink">--dur-base</td><td>450ms</td><td>Cards, modais, acordeão</td></tr>
+<tr><td class="text-ink">--dur-slow</td><td>1000ms</td><td>Surgimento de seções</td></tr>
+<tr><td class="text-ink">--ease-out-expo</td><td>cubic-bezier(0.16, 1, 0.3, 1)</td><td>Movimento com desaceleração longa</td></tr>
+<tr><td class="text-ink">--ease-out-soft</td><td>cubic-bezier(0, 0, 0.2, 1)</td><td>Surgimentos e opacidade</td></tr>
+<tr><td class="text-ink">stagger</td><td>100ms</td><td>Linhas de título · itens de lista</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="bento-card card-pad reveal delay-300" style="margin-top:var(--sp-8)">
+<div class="flex center gap-3" style="margin-bottom:var(--sp-3)"><i data-lucide="shield-check" class="text-sage" style="width:18px;height:18px"></i><h5 class="h5">Movimento reduzido</h5></div>
+<p class="body-sm">Com <span class="mono">prefers-reduced-motion: reduce</span>, todas as durações caem para 0.01ms, o cursor customizado é desligado e os textos aparecem já posicionados.</p>
+</div>
+</div>
+</section>
+
+<!-- footer -->
+<footer style="position:relative;padding-block:var(--sp-24) var(--sp-12);border-top:1px solid var(--line);overflow:hidden">
+<div class="aurora aurora--sage animate-aurora" style="width:680px;height:680px;bottom:-44%;left:22%;opacity:.45"></div>
+<div class="wrap" style="position:relative;z-index:2">
+<div class="grid g-4 reveal" style="margin-bottom:var(--sp-16)">
+<div style="grid-column:span 2">
+<h2 class="h2" style="margin-bottom:var(--sp-6);max-width:12ch">Cuidar é continuar.</h2>
+<div class="btn-halo"><button class="btn btn--primary"><span class="btn__shine"></span>Agendar consulta<i data-lucide="arrow-up-right" class="btn__arrow" style="width:15px;height:15px"></i></button></div>
+</div>
+<div>
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Sistema</span>
+<div class="flex col gap-3">
+<a class="nav-link" href="#tipografia">Tipografia</a>
+<a class="nav-link" href="#cores">Cores</a>
+<a class="nav-link" href="#componentes">Componentes</a>
+<a class="nav-link" href="#animacoes">Animações</a>
+</div>
+</div>
+<div>
+<span class="label" style="display:block;margin-bottom:var(--sp-4)">Registro</span>
+<p class="body-sm" style="margin-bottom:var(--sp-2)">CRM-MG 78461</p>
+<p class="body-sm" style="margin-bottom:var(--sp-2)">RQE 57161</p>
+<p class="body-sm">Belo Horizonte · MG</p>
+</div>
+</div>
+<div class="hairline" style="margin-bottom:var(--sp-6)"></div>
+<div class="flex between wrapf gap-4">
+<span class="label">Design System v2.0 · Proposta clara</span>
+<span class="label">Tipografia da ref-4 · estruturas da ref-6</span>
+</div>
+</div>
+</footer>
+
+<!-- modal -->
+<div class="modal-overlay" id="demo-modal">
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="flex between center" style="margin-bottom:var(--sp-4)">
+<span class="badge badge--sage">Componente</span>
+<button class="btn btn--icon" data-modal-close="" aria-label="Fechar"><i data-lucide="x" style="width:16px;height:16px"></i></button>
+</div>
+<h3 class="h3" id="modal-title" style="margin-bottom:var(--sp-3)">Modal do sistema</h3>
+<p class="body" style="margin-bottom:var(--sp-6)">Entra com desfoque e escala sobre um véu de tinta a 42%, e fecha no clique fora, no botão ou com a tecla Esc.</p>
+<div class="flex gap-3 wrapf">
+<button class="btn btn--primary" data-modal-close=""><span class="btn__shine"></span>Entendi</button>
+<button class="btn btn--ghost" data-modal-close="">Cancelar</button>
+</div>
+</div>
+</div>
+
+<!-- js -->
+<!-- Lucide: renderiza todo <i data-lucide="..."> como SVG herdando currentColor -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<!-- reveal.js: observer da ref-4 (.reveal/.active, .text-reveal-wrapper/.reveal-active, .hero-badge/.hero-stat, .nav-load) -->
+<script src="design-system-2/js/reveal.js"></script>
+<!-- cursor.js: cursor de ponto + anel que cresce sobre elementos interativos -->
+<script src="design-system-2/js/cursor.js"></script>
+<!-- particles.js: malha de partículas conectadas no fundo, com leve atração pelo mouse -->
+<script src="design-system-2/js/particles.js"></script>
+<!-- carousel.js: Ken Burns do hero (troca a cada 5s) e parallax por data-speed -->
+<script src="design-system-2/js/carousel.js"></script>
+<!-- interactions.js: lanterna dos cards, FAQ, lista de destaque, navbar, modal e barras de progresso -->
+<script src="design-system-2/js/interactions.js"></script>
+</body></html>

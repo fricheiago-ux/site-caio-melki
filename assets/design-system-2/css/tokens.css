@@ -1,0 +1,289 @@
+/* ============================================================
+   TOKENS — Proposta 2 · "Editorial Clínico"
+   Papel e tinta da ref-4 (#EAEAE5 / #1C1C1C) + musgo e areia da ref-6
+   (#4A4E46 / #E0D8C8 / #D6E0CC). Contraponto claro da Proposta 1.
+   ============================================================ */
+
+:root {
+/* ---------- Cor / superfícies (papel) ---------- */
+--paper-100: #FBFAF7;
+--paper-200: #F4F2EC;
+--paper-300: #E9E6DC;
+--paper-400: #D8D4C7;
+
+/* ---------- Cor / tinta ---------- */
+--ink-900: #1F2420;
+--ink-700: #3D453E;
+--ink-500: #6E766C;
+--ink-300: #9DA49A;
+--ink-200: #BFC4BB;
+
+/* ---------- Cor / acentos ---------- */
+--sage-700: #3E5C44;
+--sage-600: #4F7355;
+--sage-400: #7FA382;
+--sage-200: #C3D8C2;
+--sage-100: #E2EDE0;
+--moss-900: #2A302A;
+--moss-700: #39423A;
+--sand-300: #E8DFCD;
+--sand-500: #CDBFA2;
+--sky-400: #7FA3B8;
+--sky-200: #C7DAE4;
+
+/* ---------- Cor / feedback ---------- */
+--success: #4F7355;
+--warning: #C08A3E;
+--danger: #B05545;
+--info: #5A8299;
+
+/* ---------- Traços e véus ---------- */
+--line: rgba(31, 36, 32, 0.11);
+--line-strong: rgba(31, 36, 32, 0.22);
+--line-light: rgba(251, 250, 247, 0.18);
+--veil: rgba(251, 250, 247, 0.8);
+
+/* ---------- Gradientes ---------- */
+--grad-sage: linear-gradient(135deg, var(--sage-400), var(--sage-700));
+--grad-sand: linear-gradient(135deg, var(--sand-300), var(--sand-500));
+--grad-paper: linear-gradient(180deg, var(--paper-100), var(--paper-200));
+--grad-dawn: linear-gradient(135deg, var(--sage-100), var(--sand-300) 55%, var(--sky-200));
+--grad-hairline: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+
+/* ---------- Glows / sombras ---------- */
+--glow-sage: 0 0 28px rgba(79, 115, 85, 0.22);
+--glow-sand: 0 0 32px rgba(232, 223, 205, 0.8);
+--shadow-sm: 0 1px 2px rgba(31, 36, 32, 0.05);
+--shadow-md: 0 10px 30px -12px rgba(31, 36, 32, 0.18);
+--shadow-lg: 0 28px 70px -24px rgba(31, 36, 32, 0.28);
+
+/* ---------- Tipografia / famílias ---------- */
+--font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+--font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+--font-mono: 'Courier Prime', 'Courier New', Courier, monospace;
+
+/* ---------- Tipografia / escala ---------- */
+--fs-display: clamp(2.75rem, 6.5vw, 6rem);
+--fs-h1: clamp(2.5rem, 6vw, 5rem);
+--fs-h2: clamp(2rem, 4vw, 3.25rem);
+--fs-h3: clamp(1.5rem, 2.4vw, 2.125rem);
+--fs-h4: 1.4375rem;
+--fs-h5: 1.1875rem;
+--fs-h6: 1.0625rem;
+--fs-body-lg: 1.1875rem;
+--fs-body: 1rem;
+--fs-body-sm: 0.875rem;
+--fs-caption: 0.8125rem;
+--fs-label: 0.6875rem;
+
+/* ---------- Espaçamento ---------- */
+--sp-1: 0.25rem;
+--sp-2: 0.5rem;
+--sp-3: 0.75rem;
+--sp-4: 1rem;
+--sp-5: 1.25rem;
+--sp-6: 1.5rem;
+--sp-8: 2rem;
+--sp-12: 3rem;
+--sp-16: 4rem;
+--sp-24: 6rem;
+--sp-32: 8rem;
+
+/* ---------- Raios ---------- */
+--r-sm: 4px;
+--r-md: 10px;
+--r-lg: 18px;
+--r-xl: 28px;
+--r-full: 9999px;
+
+/* ---------- Movimento ---------- */
+--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+--ease-out-soft: cubic-bezier(0, 0, 0.2, 1);
+--dur-fast: 220ms;
+--dur-base: 450ms;
+--dur-slow: 1000ms;
+
+/* ---------- Layout ---------- */
+--wrap: 1240px;
+--wrap-wide: 1560px;
+}
+
+/* ============================================================
+   RESET / BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+margin: 0;
+background-color: var(--paper-100);
+color: var(--ink-900);
+font-family: var(--font-sans);
+font-size: var(--fs-body);
+line-height: 1.6;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+cursor: none;
+}
+
+img, svg, video, canvas { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: none; background: none; border: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+
+::selection { background: var(--sage-600); color: var(--paper-100); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paper-300); }
+::-webkit-scrollbar-thumb { background: var(--ink-300); border-radius: var(--r-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--sage-600); }
+
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.snap-x { scroll-snap-type: x mandatory; }
+.snap-center { scroll-snap-align: center; }
+
+/* ============================================================
+   PAPÉIS TIPOGRÁFICOS
+   Inter em todo o sistema (a fonte da ref-4), com tracking negativo
+   firme nos tamanhos grandes. Serifa apenas em citação editorial.
+   ============================================================ */
+.display {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-display);
+line-height: 0.92;
+letter-spacing: -0.055em;
+text-transform: none;
+}
+
+h1, .h1 {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-h1);
+line-height: 1.02;
+letter-spacing: -0.05em;
+margin: 0;
+}
+
+h2, .h2 {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-h2);
+line-height: 1.08;
+letter-spacing: -0.04em;
+margin: 0;
+}
+
+h3, .h3 {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-h3);
+line-height: 1.16;
+letter-spacing: -0.03em;
+margin: 0;
+}
+
+h4, .h4 {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-h4);
+line-height: 1.26;
+letter-spacing: -0.022em;
+margin: 0;
+}
+
+h5, .h5 {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-h5);
+line-height: 1.36;
+letter-spacing: -0.016em;
+margin: 0;
+}
+
+h6, .h6 {
+font-family: var(--font-sans);
+font-weight: 600;
+font-size: var(--fs-h6);
+line-height: 1.42;
+letter-spacing: -0.01em;
+margin: 0;
+}
+
+.body-lg {
+font-family: var(--font-sans);
+font-weight: 300;
+font-size: var(--fs-body-lg);
+line-height: 1.62;
+letter-spacing: -0.012em;
+color: var(--ink-700);
+}
+
+.body {
+font-family: var(--font-sans);
+font-weight: 400;
+font-size: var(--fs-body);
+line-height: 1.6;
+letter-spacing: -0.008em;
+color: var(--ink-700);
+}
+
+.body-sm {
+font-family: var(--font-sans);
+font-weight: 400;
+font-size: var(--fs-body-sm);
+line-height: 1.56;
+letter-spacing: -0.005em;
+color: var(--ink-500);
+}
+
+.caption {
+font-family: var(--font-sans);
+font-weight: 400;
+font-size: var(--fs-caption);
+line-height: 1.45;
+letter-spacing: 0;
+color: var(--ink-500);
+}
+
+.label {
+font-family: var(--font-sans);
+font-weight: 500;
+font-size: var(--fs-label);
+line-height: 1.2;
+letter-spacing: 0.16em;
+text-transform: uppercase;
+color: var(--ink-500);
+font-variant-numeric: tabular-nums;
+}
+
+.helper {
+font-family: var(--font-sans);
+font-weight: 400;
+font-size: var(--fs-caption);
+line-height: 1.45;
+letter-spacing: 0;
+color: var(--ink-300);
+}
+
+.quote {
+font-family: var(--font-serif);
+font-weight: 400;
+font-style: italic;
+font-size: clamp(1.5rem, 3vw, 2.5rem);
+line-height: 1.24;
+letter-spacing: -0.02em;
+color: var(--ink-900);
+}
+
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.text-sage { color: var(--sage-600); }
+.text-sand { color: var(--sand-500); }
+.text-ink { color: var(--ink-900); }
+.text-dim { color: var(--ink-500); }
+.on-dark { color: var(--paper-100); }
+.on-dark .body-sm, .on-dark .caption { color: rgba(247, 246, 242, 0.66); }
+.on-dark .label { color: rgba(232, 223, 205, 0.72); }
