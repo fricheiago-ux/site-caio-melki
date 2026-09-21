@@ -362,8 +362,94 @@ backdrop-filter: blur(16px);
 border-bottom-color: var(--line);
 }
 .navbar__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-6); }
-.navbar__links { display: none; gap: var(--sp-8); }
-@media (min-width: 940px) { .navbar__links { display: flex; } }
+/* Item de flex: z-index funciona mesmo sem position — precisa ficar
+   acima do painel do menu (ver nota em .navbar__links) */
+.navbar__inner > a:first-child { z-index: 2; }
+
+/* ---------- Abaixo de 940px: menu em painel de tela cheia ----------
+   Antes disto os links só existiam a partir de 940px — abaixo disso eles
+   simplesmente desapareciam, sem nenhum jeito de navegar entre seções no
+   celular. Agora o mesmo <nav> vira um painel cheio, aberto/fechado por um
+   botão de hambúrguer, sem duplicar nenhum link em outro lugar do HTML. */
+.navbar__toggle {
+display: grid;
+place-items: center;
+width: 40px;
+height: 40px;
+border: none;
+background: none;
+color: var(--ink-900);
+cursor: pointer;
+/* O painel (.navbar__links), ao ganhar transform no estado aberto, passa a
+   criar o próprio contexto de empilhamento — e sozinho isso já bastava
+   para cobrir o botão e a logo mesmo vindo antes deles no HTML. Um
+   z-index explícito aqui (e na logo, abaixo) tira qualquer dúvida. */
+position: relative;
+z-index: 2;
+}
+.navbar__toggle .navbar__icone-fechar { display: none; }
+.navbar.is-aberto .navbar__toggle .navbar__icone-abrir { display: none; }
+.navbar.is-aberto .navbar__toggle .navbar__icone-fechar { display: block; }
+
+.navbar__links {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: var(--sp-2);
+position: fixed;
+top: 0;
+left: 0;
+/* Largura/altura em unidade de viewport, e não por inset:0. O .navbar
+   tem transform:translateY(0) depois do fade-in de entrada (nav-load) —
+   uma transformação "parada" ainda conta como transformação, e QUALQUER
+   transform num ancestral vira o "containing block" de um descendente
+   fixed. Com inset:0 o painel ficava preso à altura do próprio .navbar
+   (~150px), não à tela. Em vh/dvw isso não acontece, porque essas
+   unidades sempre olham para o viewport real, nunca para o ancestral. */
+width: 100vw;
+height: 100dvh;
+padding: calc(var(--sp-16) + 56px) var(--sp-6) var(--sp-8);
+background: var(--paper-100);
+overflow-y: auto;
+z-index: 1;
+transform: translateY(-8px);
+opacity: 0;
+visibility: hidden;
+transition: opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo), visibility 0s linear var(--dur-base);
+}
+.navbar.is-aberto .navbar__links {
+transform: translateY(0);
+opacity: 1;
+visibility: visible;
+transition: opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo), visibility 0s;
+}
+.navbar__links .nav-link { font-size: var(--fs-h5); padding-block: var(--sp-2); }
+.navbar__cta-menu { margin-top: var(--sp-4); align-self: stretch; justify-content: center; }
+.navbar__cta-topo { display: none; }
+
+@media (min-width: 940px) {
+.navbar__toggle, .navbar__cta-menu { display: none; }
+.navbar__cta-topo { display: block; }
+.navbar__links {
+position: static;
+width: auto;
+height: auto;
+flex-direction: row;
+align-items: center;
+gap: var(--sp-8);
+padding: 0;
+background: none;
+overflow: visible;
+transform: none;
+opacity: 1;
+visibility: visible;
+transition: none;
+}
+.navbar__links .nav-link { font-size: var(--fs-body-sm); padding-block: 0; }
+}
+
+/* Trava a rolagem de fundo enquanto o painel está aberto */
+body.menu-aberto { overflow: hidden; }
 
 .nav-link {
 position: relative;

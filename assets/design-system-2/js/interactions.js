@@ -69,6 +69,34 @@
     onScroll();
   }
 
+  // ---------- Menu do celular (painel de tela cheia) ----------
+  // Abaixo de 940px os links do navbar viram um painel cheio, aberto por
+  // este botão. Sem isso não havia nenhum jeito de navegar entre seções
+  // no celular — os links só existiam a partir de 940px de largura.
+  const menuToggle = document.querySelector('.navbar__toggle');
+  const menuPainel = document.getElementById('navbar-links');
+  if (navbar && menuToggle && menuPainel) {
+    function fecharMenu() {
+      navbar.classList.remove('is-aberto');
+      document.body.classList.remove('menu-aberto');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+    function alternarMenu() {
+      const abrir = !navbar.classList.contains('is-aberto');
+      navbar.classList.toggle('is-aberto', abrir);
+      document.body.classList.toggle('menu-aberto', abrir);
+      menuToggle.setAttribute('aria-expanded', String(abrir));
+    }
+    menuToggle.addEventListener('click', alternarMenu);
+    // Clicar num link fecha o painel — sem isso a pessoa toca um link,
+    // a página rola por baixo do painel ainda aberto, e parece travado.
+    menuPainel.querySelectorAll('a').forEach((a) => a.addEventListener('click', fecharMenu));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharMenu(); });
+    // Se a tela crescer para o layout de mesa com o painel aberto (giro de
+    // tablet, por exemplo), o estado de "aberto" não faz mais sentido.
+    window.matchMedia('(min-width: 940px)').addEventListener('change', (e) => { if (e.matches) fecharMenu(); });
+  }
+
   // ---------- Modal ----------
   const overlay = document.querySelector('.modal-overlay');
   if (overlay) {
