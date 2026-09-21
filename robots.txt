@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fricheiago-ux.github.io/site-caio-melki/sitemap.xml

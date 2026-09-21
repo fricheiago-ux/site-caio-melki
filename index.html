@@ -5,6 +5,45 @@
 <title>Dr. Caio Melki — Médico de Família e Comunidade | Belo Horizonte</title>
 <meta name="description" content="Dr. Caio Ribeiro Melki, médico de família e comunidade em Belo Horizonte (CRM-MG 78461, RQE 57161). Veja se o seu problema de saúde é acompanhado por um médico de família."/>
 
+<!-- SEO: link canônico e cartão de pré-visualização (redes sociais/WhatsApp).
+     Aponta para a URL do GitHub Pages, que é onde o site está de fato no ar hoje.
+     Se o domínio caiomelkimfc.com.br for conectado no futuro, atualizar aqui e
+     também no CLAUDE.md (ver seção "Ao publicar"). -->
+<link rel="canonical" href="https://fricheiago-ux.github.io/site-caio-melki/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="pt_BR"/>
+<meta property="og:url" content="https://fricheiago-ux.github.io/site-caio-melki/"/>
+<meta property="og:title" content="Dr. Caio Melki — Médico de Família e Comunidade | Belo Horizonte"/>
+<meta property="og:description" content="Dr. Caio Ribeiro Melki, médico de família e comunidade em Belo Horizonte (CRM-MG 78461, RQE 57161). Veja se o seu problema de saúde é acompanhado por um médico de família."/>
+<meta property="og:image" content="https://fricheiago-ux.github.io/site-caio-melki/assets/img/fotos-caio/foto-principal-caio.jpeg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+
+<!-- Dado estruturado (schema.org/Physician): só com o que já está publicado
+     na própria página (nome, CRM/RQE, cidade, especialidade, link de
+     agendamento). Sem endereço nem telefone, porque a página não os
+     divulga hoje (o rodapé marca "WhatsApp a definir"). Se um endereço de
+     consultório for divulgado no futuro, completar o bloco "address" aqui. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Physician",
+  "name": "Dr. Caio Ribeiro Melki",
+  "url": "https://fricheiago-ux.github.io/site-caio-melki/",
+  "image": "https://fricheiago-ux.github.io/site-caio-melki/assets/img/fotos-caio/foto-principal-caio.jpeg",
+  "medicalSpecialty": "Medicina de Família e Comunidade",
+  "identifier": [
+    { "@type": "PropertyValue", "name": "CRM-MG", "value": "78461" },
+    { "@type": "PropertyValue", "name": "RQE", "value": "57161" }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Belo Horizonte",
+    "addressRegion": "MG",
+    "addressCountry": "BR"
+  }
+}
+</script>
+
 <!-- fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
@@ -117,7 +156,7 @@
 
 <div class="reveal">
 <div class="hero-foto">
-<img src="assets/img/fotos-caio/foto-principal-caio.jpeg" alt="Dr. Caio Ribeiro Melki, médico de família e comunidade"/>
+<img src="assets/img/fotos-caio/foto-principal-caio.jpeg" alt="Dr. Caio Ribeiro Melki, médico de família e comunidade" fetchpriority="high" decoding="async"/>
 <div class="hero-foto__selo">
 <div class="on-dark">
 <p class="label" style="margin-bottom:2px">Belo Horizonte · MG</p>
@@ -408,27 +447,27 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 </div>
 
 <button class="pilar-card" type="button" data-n="01" data-titulo="O histórico, não só a queixa de hoje" data-texto="Continuidade é acompanhar a mesma pessoa por anos, não resolver um problema isolado por vez. Isso muda o que se enxerga numa queixa simples." data-texto2="Quem já te atendeu sabe o que você já tentou, o que funcionou e o que piora com estresse. Uma consulta nova não começa do zero." aria-label="Pilar 01 — O histórico, não só a queixa de hoje">
-<img src="assets/img/pilares/card-1.jpeg" alt="Uma mulher conversa com a vizinha no portão de casa" draggable="false"/>
+<img src="assets/img/pilares/card-1.jpeg" alt="Uma mulher conversa com a vizinha no portão de casa" loading="lazy" decoding="async" draggable="false"/>
 <span class="pilar-card__veu"></span>
 <span class="pilar-card__n">01</span>
 </button>
 <button class="pilar-card" type="button" data-n="02" data-titulo="A conversa como técnica" data-texto="Comunicação, apoio à mudança de hábitos e adesão ao cuidado são estudados a fundo na formação. Não é jeito bom com as pessoas, é treino." data-texto2="Um plano de cuidado só funciona se couber na sua vida. Por isso ele é construído junto, e não entregue pronto no fim da consulta." aria-label="Pilar 02 — A conversa como técnica">
-<img src="assets/img/pilares/card-2.jpeg" alt="Um homem escuta a explicação do médico numa consulta" draggable="false"/>
+<img src="assets/img/pilares/card-2.jpeg" alt="Um homem escuta a explicação do médico numa consulta" loading="lazy" decoding="async" draggable="false"/>
 <span class="pilar-card__veu"></span>
 <span class="pilar-card__n">02</span>
 </button>
 <button class="pilar-card" type="button" data-n="03" data-titulo="O mais comum de todas as áreas" data-texto="Proficiência no diagnóstico e na conduta dos problemas de saúde mais frequentes de todas as especialidades, e não os de uma só." data-texto2="A profundidade não está em um órgão, e sim na largura do que aparece de verdade num consultório: da pressão alta à ansiedade, da dor nas costas à tireoide." aria-label="Pilar 03 — O mais comum de todas as áreas">
-<img src="assets/img/pilares/card-3.jpeg" alt="Pessoas de idades diferentes aguardam numa sala de espera" draggable="false"/>
+<img src="assets/img/pilares/card-3.jpeg" alt="Pessoas de idades diferentes aguardam numa sala de espera" loading="lazy" decoding="async" draggable="false"/>
 <span class="pilar-card__veu"></span>
 <span class="pilar-card__n">03</span>
 </button>
 <button class="pilar-card" type="button" data-n="04" data-titulo="Resolver sem precisar de outro médico" data-texto="De 80 a 90% dos casos se resolvem ali mesmo, na consulta. É o resultado dos três primeiros pilares, e não um atalho." data-texto2="Menos encaminhamento por reflexo, menos fila de espera, menos exame pedido para ganhar tempo. Você sai com uma conduta, e não com uma lista de próximos passos." aria-label="Pilar 04 — Resolver sem precisar de outro médico">
-<img src="assets/img/pilares/card-4.jpeg" alt="Uma mulher desce a escada de uma unidade de saúde de mãos dadas com o filho" draggable="false"/>
+<img src="assets/img/pilares/card-4.jpeg" alt="Uma mulher desce a escada de uma unidade de saúde de mãos dadas com o filho" loading="lazy" decoding="async" draggable="false"/>
 <span class="pilar-card__veu"></span>
 <span class="pilar-card__n">04</span>
 </button>
 <button class="pilar-card" type="button" data-n="05" data-titulo="O encaminhamento certo, e o que vem depois" data-texto="Quando o especialista focal precisa entrar, você sabe quando e qual. O encaminhamento é direcionado, e não um chute na direção de uma agenda qualquer." data-texto2="E o médico de família não sai de cena. Ele segue como gerente do cuidado, acompanhando em conjunto e juntando as pontas do que cada especialista recomenda." aria-label="Pilar 05 — O encaminhamento certo, e o que vem depois">
-<img src="assets/img/pilares/card-5.jpeg" alt="Duas mãos seguram a mesma folha sobre uma mesa" draggable="false"/>
+<img src="assets/img/pilares/card-5.jpeg" alt="Duas mãos seguram a mesma folha sobre uma mesa" loading="lazy" decoding="async" draggable="false"/>
 <span class="pilar-card__veu"></span>
 <span class="pilar-card__n">05</span>
 </button>
@@ -507,7 +546,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/ufmg.png" alt="Faculdade de Medicina da UFMG"/>
+<img class="inst-card__logo" src="assets/img/formacao/ufmg.png" alt="Faculdade de Medicina da UFMG" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -523,7 +562,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/hertfordshire.png" alt="University of Hertfordshire"/>
+<img class="inst-card__logo" src="assets/img/formacao/hertfordshire.png" alt="University of Hertfordshire" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -539,7 +578,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/mcgill.png" alt="McGill University"/>
+<img class="inst-card__logo" src="assets/img/formacao/mcgill.png" alt="McGill University" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -555,7 +594,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/hc-ufmg.png" alt="Hospital das Clínicas da UFMG"/>
+<img class="inst-card__logo" src="assets/img/formacao/hc-ufmg.png" alt="Hospital das Clínicas da UFMG" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -571,7 +610,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/cruzeiro.png" alt="Cruzeiro Esporte Clube"/>
+<img class="inst-card__logo" src="assets/img/formacao/cruzeiro.png" alt="Cruzeiro Esporte Clube" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -640,7 +679,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="atuacao__baralho">
 
 <div class="atuacao__card">
-<div class="atuacao__marca"><img src="assets/img/atuacao/logo-alice.png" alt="Alice Saúde"/></div>
+<div class="atuacao__marca"><img src="assets/img/atuacao/logo-alice.jpg" alt="Alice Saúde" loading="lazy" decoding="async"/></div>
 <div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
 <div class="atuacao__legenda">
 <span class="atuacao__selo">01 • Alice Saúde</span>
@@ -649,7 +688,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 </div>
 
 <div class="atuacao__card">
-<div class="atuacao__marca"><img src="assets/img/atuacao/logo-unifap.png" alt="UNIFAP"/></div>
+<div class="atuacao__marca"><img src="assets/img/atuacao/logo-unifap.jpg" alt="UNIFAP" loading="lazy" decoding="async"/></div>
 <div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
 <div class="atuacao__legenda">
 <span class="atuacao__selo">02 • UNIFAP</span>
@@ -658,7 +697,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 </div>
 
 <div class="atuacao__card">
-<div class="atuacao__marca"><img src="assets/img/atuacao/logo-faseh-puc-unibh.png" alt="Faseh, PUC Minas e Uni-BH"/></div>
+<div class="atuacao__marca"><img src="assets/img/atuacao/logo-faseh-puc-unibh.jpg" alt="Faseh, PUC Minas e Uni-BH" loading="lazy" decoding="async"/></div>
 <div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
 <div class="atuacao__legenda">
 <span class="atuacao__selo">03 • PUC-MG · Faseh · Uni-BH</span>
@@ -667,7 +706,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 </div>
 
 <div class="atuacao__card">
-<div class="atuacao__marca"><img src="assets/img/atuacao/logo-mais-medicos.png" alt="Mais Médicos"/></div>
+<div class="atuacao__marca"><img src="assets/img/atuacao/logo-mais-medicos.jpg" alt="Mais Médicos" loading="lazy" decoding="async"/></div>
 <div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
 <div class="atuacao__legenda">
 <span class="atuacao__selo">04 • Mais Médicos</span>
@@ -676,7 +715,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 </div>
 
 <div class="atuacao__card">
-<div class="atuacao__marca"><img src="assets/img/atuacao/logo-unimed.png" alt="Unimed-BH"/></div>
+<div class="atuacao__marca"><img src="assets/img/atuacao/logo-unimed.png" alt="Unimed-BH" loading="lazy" decoding="async"/></div>
 <div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
 <div class="atuacao__legenda">
 <span class="atuacao__selo">05 • Unimed-BH</span>
@@ -685,7 +724,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 </div>
 
 <div class="atuacao__card">
-<div class="atuacao__marca"><img src="assets/img/atuacao/logo-nescon.png" alt="NESCON UFMG"/></div>
+<div class="atuacao__marca"><img src="assets/img/atuacao/logo-nescon.jpg" alt="NESCON UFMG" loading="lazy" decoding="async"/></div>
 <div class="atuacao__vivo"><i></i><span>Em atividade</span></div>
 <div class="atuacao__legenda">
 <span class="atuacao__selo">06 • NESCON UFMG</span>

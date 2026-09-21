@@ -36,6 +36,10 @@ bater com o disco, o disco está certo e isto ficou desatualizado.
 
 ```
 index.html                     ← a página inteira; site de uma página só
+robots.txt, sitemap.xml        ← adicionados na revisão de SEO/performance
+                                  (22/09/2026); apontam para a URL do GitHub
+                                  Pages — atualizar se o domínio próprio for
+                                  conectado (ver "Ao publicar")
 assets/
   css/design-system/           ← tokens, animações, efeitos, componentes
   css/site/                    ← CSS específico de cada seção do site
@@ -53,7 +57,15 @@ assets/
     certificados/               ← logos usados na seção de certificados, e
                                   os originais em certificados/originais/
     atuacao/                   ← logos da seção "Minha trajetória" (Alice,
-                                  Unimed, Mais Médicos, Nescon, Unifap, Faseh)
+                                  Unimed, Mais Médicos, Nescon, Unifap, Faseh).
+                                  Todas em .jpg, exceto logo-unimed.png — na
+                                  revisão de performance (22/09/2026), 5 das 6
+                                  eram PNG opaco (sem transparência) mal
+                                  comprimido; convertidas para JPEG 85%
+                                  cortou ~1,3 MB no total. logo-unimed.png
+                                  ficou PNG porque, nesse caso específico, o
+                                  JPEG saiu maior — sempre comparar os dois,
+                                  não assumir que JPEG é sempre menor.
     formacao/                  ← logos da seção de instituições acadêmicas
                                   (UFMG, Hertfordshire, McGill, HC-UFMG,
                                   Cruzeiro)
@@ -142,6 +154,34 @@ Sem padrão fechado ainda para fotos novas (JPEG, ~85% de qualidade, lado maior 
 volta de 1600–1900px vem sendo usado nas imagens dos cards e da hero, mas não foi
 formalizado). Perguntar/definir se entrar mais fotos no projeto.
 
+Na revisão de performance de 22/09/2026 (`/revisar-performance`), os 5 cards de
+`img/pilares/` estavam em ~85% de qualidade mas com dimensão maior que o
+necessário para o tamanho exibido — recomprimidos para JPEG 82% (848×1264px
+mantidos), cortando ~65% do peso (de ~3,2 MB para ~1,07 MB somados) sem perda
+visível. Checado antes de aplicar: comparação lado a lado da imagem
+recomprimida com a original.
+
+## SEO e performance
+
+Revisão feita em 22/09/2026 (`/revisar-performance`). O que já está no ar:
+- `<link rel="canonical">`, tags Open Graph e `twitter:card` no `<head>`,
+  apontando para a URL do GitHub Pages.
+- Dado estruturado `schema.org/Physician` (JSON-LD) com nome, CRM/RQE,
+  cidade/UF e especialidade — só com dado que já estava na própria página.
+  **Sem endereço nem telefone**, porque a página não os divulga (rodapé marca
+  "WhatsApp a definir"); completar o bloco `address` no `<head>` do
+  `index.html` se isso mudar.
+- `fetchpriority="high"` na foto da hero (candidata real a LCP — a mais
+  importante da primeira tela) e `loading="lazy"` + `decoding="async"` nas
+  imagens abaixo da dobra que ainda não tinham (cards do baralho de pilares
+  no desktop, logos de formação e de trajetória).
+- `robots.txt` e `sitemap.xml` na raiz, publicados pelo workflow (ver "Ao
+  publicar").
+
+**Pendência, adiada de propósito:** seção de perguntas frequentes — o Caio
+quer adicionar, mas como conteúdo novo (perguntas + respostas certas), não
+como parte desta revisão técnica.
+
 ## Duplicação — saber antes de mexer
 
 Sem duplicação relevante — página única, sem header/rodapé repetido em outro
@@ -166,8 +206,9 @@ Como funciona por baixo:
 1. O workflow roda a cada `git push` na branch `main` (também dá para forçar
    manualmente pela aba **Actions** do repositório no GitHub, botão
    "Run workflow", sem precisar de commit novo).
-2. Ele monta uma cópia limpa só com `index.html` + `assets/css/` +
-   `assets/js/` + `assets/img/`, e publica só essa cópia — **nunca** `assets/templates/` (182 MB, sites de terceiros clonados,
+2. Ele monta uma cópia limpa só com `index.html` + `robots.txt` +
+   `sitemap.xml` + `assets/css/` + `assets/js/` + `assets/img/`, e publica só
+   essa cópia — **nunca** `assets/templates/` (182 MB, sites de terceiros clonados,
    está no `.gitignore` e nem chega a entrar no repositório) nem os arquivos
    soltos de rascunho listados em "Estrutura" acima.
 3. Autenticação com o GitHub é feita pelo GitHub CLI (`gh`), já autorizado

@@ -152,4 +152,30 @@ portas). Um evento que "quase sempre" dispara ainda não é garantia.
 **Vale generalizar para o CLAUDE.md global?** Sim — adicionei uma linha na
 regra 13 (cuidados de CSS que já causaram bug de site inteiro).
 
+## 2026-09-22 — Imagem "de reserva" versus imagem em uso: só a que está em uso pesa
+
+**O que aconteceu:** ao revisar performance (`/revisar-performance`), achei
+imagens bem pesadas em uso real na página: os 5 cards de "Os pilares"
+(500–760 KB cada, ~3,2 MB juntos) e 5 dos 6 logos da seção de trajetória
+eram PNG opaco mal comprimido (dois deles com quase 870 KB e 680 KB cada) —
+e nenhum dos cards do baralho desktop tinha `loading="lazy"`, então tudo
+isso carregava de cara, mesmo estando bem abaixo da dobra. As imagens
+"de reserva" guardadas na reorganização de pastas não pesam nada nisso,
+porque nunca chegam ao navegador — só o que está de fato referenciado no
+`index.html` conta para a nota de performance.
+
+**O que eu entendi:** vale sempre checar se um PNG realmente precisa ser PNG
+(hasAlpha) antes de aceitar o tamanho dele — convertendo os 5 logos opacos
+para JPEG 85% e recomprimindo os cards para JPEG 82%, o total caiu de ~4 MB
+para ~1,5 MB sem perda visível (conferido comparando as imagens lado a
+lado, não só confiando no número de qualidade). Um caso (`logo-unimed.png`)
+o JPEG saiu *maior* que o PNG original — comparar os dois sempre, nunca
+assumir qual formato vai vencer.
+
+**Vale generalizar para o CLAUDE.md global?** Parcialmente — a regra 9 já
+cobre padrões de mídia definidos *antes* da primeira imagem entrar; o que
+falta lá é reforçar que revisão de performance de fim de projeto deve
+checar imagem por imagem já em uso (tamanho de arquivo vs. tamanho de
+exibição), não só o que ainda vai entrar.
+
 <!-- próximas entradas vão aqui -->

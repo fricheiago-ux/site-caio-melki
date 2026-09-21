@@ -39,10 +39,14 @@ jobs:
         # design-system-2/, site/, imagens/, logos/ — agora é só css/, js/,
         # img/, com o de sempre e o de reserva dentro de img/. Nada em
         # _nao-publicar/ entra aqui.
+        # robots.txt e sitemap.xml adicionados na revisão de SEO/performance
+        # (22/09/2026) — arquivos soltos na raiz, igual o index.html.
         run: |
           set -e
           mkdir -p _site/assets
           cp index.html _site/
+          cp robots.txt _site/
+          cp sitemap.xml _site/
           cp -R assets/css _site/assets/
           cp -R assets/js  _site/assets/
           cp -R assets/img _site/assets/
