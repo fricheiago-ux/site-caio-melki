@@ -130,4 +130,26 @@ unidades sempre olham para a janela de verdade, nunca para o elemento pai.
 genérica, não específica deste site, e already há uma seção "Cuidados de CSS"
 no `CLAUDE.md` global para exatamente esse tipo de regra.
 
+## 2026-09-22 — Altura calculada por JS trava para sempre se o "solta" não vier
+
+**O que aconteceu:** o Caio reportou que, na seção de sintomas, clicar numa
+palavra fazia a parte de baixo da seção ficar maior que devia, com um espaço
+em branco sobrando antes da próxima seção. Investigando, a ficha que abre
+mede a própria altura uma vez (em pixels) e conta com o evento
+`transitionend` do CSS para depois soltar essa altura para `auto` (livre,
+acompanhando o conteúdo de verdade). O problema: se esse evento não
+disparasse — por qualquer motivo, incluindo um simplesmente não previsto —
+a altura ficava presa para sempre naquele número medido, e qualquer coisa
+que mudasse o conteúdo depois (fonte do Google ainda trocando, ícone
+chegando um instante depois) deixava uma sobra sem nunca se corrigir.
+
+**O que eu entendi:** qualquer altura calculada por JavaScript e "solta"
+depois por um evento (em vez de simplesmente `height: auto` sempre) precisa
+de um plano B com temporizador — o mesmo padrão de rede de segurança que já
+usamos em outros lugares deste projeto (a digitação da hero, a abertura das
+portas). Um evento que "quase sempre" dispara ainda não é garantia.
+
+**Vale generalizar para o CLAUDE.md global?** Sim — adicionei uma linha na
+regra 13 (cuidados de CSS que já causaram bug de site inteiro).
+
 <!-- próximas entradas vão aqui -->
