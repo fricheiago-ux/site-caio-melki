@@ -76,15 +76,38 @@ assets/
                                   caio/dr/melki-hero, logo-unimed duplicado)
 ```
 
-`_nao-publicar/` (raiz do projeto, fora de `assets/`) guarda o que não é o site:
-material de referência (`templates/`, 182 MB de sites de terceiros clonados —
-gitignored, nunca teve histórico), rascunhos e versões antigas
-(`design_system2.html`, `teste-sintomas.html`, `section-nuvem-aura.html`,
-`certificados-caio-melki.html`, `conduct.dc.html`, `main.dc.html`,
-`canvas.json`, `sincronizar-certificados.py`) e o brief original
-(`estrutura-e-conteudo-site-caio-melki.md`). `CLAUDE.md`, `aprendizados.md` e
-`memoria.md` ficam soltos na raiz — não são o site, mas também não são
-descartável.
+`_nao-publicar/` (raiz do projeto, fora de `assets/`) guarda o que não é o
+site, organizada por assunto (reorganizada em 21/09/2026, revisitando a skill
+`/organizar-projeto` — a raiz do projeto ainda tinha `robots.txt`/
+`sitemap.xml`/`CLAUDE.md` soltos, mas esses ficam ali de propósito, ver abaixo):
+
+```
+_nao-publicar/
+  templates/        ← 182 MB de sites de terceiros clonados como referência
+                       de design — gitignored, nunca teve histórico
+  certificados/      ← fonte de produção do bloco de certificados: os
+                       artboards de design (main.dc.html = ACLS,
+                       conduct.dc.html = CONDUCT, canvas.json os organiza),
+                       o certificados-caio-melki.html (canvas publicado via
+                       Claude Code com o estado editável) e o
+                       sincronizar-certificados.py que injeta o resultado no
+                       index.html entre os marcadores certificados:inicio/fim
+  rascunhos/         ← versões antigas/testes sem uso (design_system2.html,
+                       teste-sintomas.html, section-nuvem-aura.html)
+  brief/             ← o brief original do projeto
+                       (estrutura-e-conteudo-site-caio-melki.md)
+  relatorios/         ← saídas de comandos de revisão (ex.: os relatórios do
+                       /revisar-performance, um por data)
+```
+
+`CLAUDE.md`, `DECISOES.md`, `aprendizados.md` e `memoria.md` ficam soltos na
+raiz do projeto (fora de `_nao-publicar/` e de `assets/`), de propósito — é
+onde a skill `/organizar-projeto` os deixa e onde o Claude Code carrega o
+`CLAUDE.md` automaticamente. `robots.txt` e `sitemap.xml` também ficam soltos
+na raiz porque só funcionam ali (é assim que o Google os encontra) — nenhum
+desses seis arquivos é o site, mas nenhum é descartável, e nenhum pode virar
+subpasta sem quebrar alguma coisa (ver `DECISOES.md` se quiser o raciocínio
+completo).
 
 Nada em `img/` marcado acima como "de reserva" é lixo — é material mantido de
 propósito para o Caio trocar fotos/logos depois sem precisar gerar de novo.
@@ -181,6 +204,14 @@ Revisão feita em 22/09/2026 (`/revisar-performance`). O que já está no ar:
 **Pendência, adiada de propósito:** seção de perguntas frequentes — o Caio
 quer adicionar, mas como conteúdo novo (perguntas + respostas certas), não
 como parte desta revisão técnica.
+
+**Teste real do PageSpeed Insights (21/09/2026), depois das correções acima
+já publicadas:** Desempenho 62 (celular) / 94 (computador), Acessibilidade
+96/93, Práticas recomendadas 100/100, SEO 100/100. Relatório completo em
+`_nao-publicar/relatorios/pagespeed-report-2026-09-21.md`. Maior oportunidade que ainda
+falta: os 3 scripts de CDN (lucide, three.js, GSAP) têm cache curto — hospedar
+localmente em `assets/js/vendor/` é o próximo ganho de performance mais óbvio,
+não feito ainda.
 
 ## Duplicação — saber antes de mexer
 

@@ -124,10 +124,11 @@ HTML final fica entre os marcadores `<!-- certificados:inicio -->` e
 
 **Descoberto, não decidido nesta sessão** — verificado agora ao investigar
 onde a seção morava (não tinha sido localizada quando o plano de mobile foi
-escrito). Os dois arquivos de origem (`certificados-caio-melki.html`,
-`sincronizar-certificados.py`) foram movidos para `_nao-publicar/` na
-reorganização de pastas, por não serem HTML/CSS/JS que o navegador carrega —
-mas continuam sendo a fonte de verdade daquele trecho.
+escrito). Os arquivos de origem (`certificados-caio-melki.html`,
+`sincronizar-certificados.py`, e os artboards de design `main.dc.html`/
+`conduct.dc.html`/`canvas.json` que geraram as imagens dos certificados) estão
+em `_nao-publicar/certificados/`, por não serem HTML/CSS/JS que o navegador
+carrega — mas continuam sendo a fonte de verdade daquele trecho.
 
 **Se for editado sem saber disso:** alguém pode editar o bloco de
 certificados direto no `index.html` manualmente, e essa edição some na
