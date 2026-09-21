@@ -118,7 +118,7 @@ git commit -m "explicando o que mudou e por quê"
 git push
 ```
 
-Em até um minuto o workflow `.github/workflows/deploy.yml` publica sozinho a
+Em alguns minutos (observado entre 1 e 6 minutos, o Pages costuma ser mais lento na primeira publicação e nas seguintes varia) o workflow `.github/workflows/deploy.yml` publica sozinho a
 versão nova em https://fricheiago-ux.github.io/site-caio-melki/ — não existe
 passo manual depois do push, e ninguém precisa entrar no GitHub para nada.
 

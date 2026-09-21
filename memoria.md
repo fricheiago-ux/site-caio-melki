@@ -43,3 +43,9 @@ Formato: uma linha por fato, com data.
   `git push` na branch main, sem passo manual. Verificado ao vivo: página
   carrega, título certo, assets das 4 pastas resolvem, e rascunhos/pasta
   templates confirmadamente fora do ar (404).
+- 2026-09-22 — Segundo deploy (via push normal, não manual) testado de ponta a
+  ponta: funcionou sozinho, sem nenhum passo manual, mas levou uns 6 minutos
+  até o link público mostrar a versão nova (confirmado pelo cabeçalho
+  Last-Modified da página, não só pelo status do GitHub Actions). Vale
+  esperar alguns minutos depois de um push antes de checar se "não
+  funcionou".
