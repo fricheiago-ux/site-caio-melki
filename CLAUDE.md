@@ -95,6 +95,28 @@ GSAP Flip) → formação/instituições (03) → trajetória (carrossel) → cu
   (`portas:abertas`) disparado por `intro.js`. Qualquer efeito que precise
   esperar a abertura terminar deve ouvir esse evento, e não inventar seu próprio
   cronômetro.
+- `.navbar` tem `transform: translateY(0)` depois do fade-in de entrada
+  (`nav-load`/`.loaded` em `animations.css`) — parece "sem efeito", mas
+  qualquer elemento com `.navbar` como ancestral que use
+  `position: fixed; inset: 0` vai se posicionar em relação ao `.navbar` (bem
+  menor que a tela), não à janela. É por isso que `.navbar__links` no modo
+  celular usa `width: 100vw; height: 100dvh` em vez de `inset: 0`. Qualquer
+  novo painel/overlay de tela cheia dentro do navbar precisa do mesmo cuidado.
+- Larguras de corte (`@media`) usadas hoje no site, por arquivo — **não são
+  um padrão, são o estado real**, herdado de quando cada seção foi construída
+  em momentos diferentes: 640, 660, 720, 767, 860, 900, 1000, 1080, 1100,
+  1140, 1279px. Ao mexer numa seção, não inventar uma largura nova — checar
+  o que as seções vizinhas já usam com `grep -n "@media" assets/site/css/*.css`
+  antes de decidir.
+
+## Mobile
+
+Em andamento (começado em 22/09/2026) — o site foi construído pensando em
+desktop primeiro. Plano de trabalho e o que já foi feito/falta: ver
+`memoria.md`. Primeira correção feita: existia um buraco funcional grave,
+não só estético — abaixo de 940px o menu de navegação simplesmente
+desaparecia, sem nenhum jeito de trocar de seção no celular (corrigido com
+um menu de painel cheio, ver `assets/design-system-2/js/interactions.js`).
 
 ## Mídia
 

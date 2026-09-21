@@ -49,3 +49,33 @@ Formato: uma linha por fato, com data.
   Last-Modified da página, não só pelo status do GitHub Actions). Vale
   esperar alguns minutos depois de um push antes de checar se "não
   funcionou".
+- 2026-09-22 — PLANO DE AÇÃO DO MOBILE (auditoria feita, execução em
+  andamento, ordem por severidade e não pela ordem da página):
+  1. [FEITO] Menu de navegação mobile — não existia nenhum. Corrigido com
+     painel de tela cheia (ver aprendizados.md).
+  2. [A FAZER, alta prioridade — provável causa comum] Investigar os
+     "buracos" de espaço em branco grandes antes de pelo menos duas seções
+     (sintomas e pilares) — suspeita: `.section { padding-block: var(--sp-32) }`
+     não reduz em telas estreitas. Corrigir isso pode resolver as duas de
+     uma vez.
+  3. [A FAZER] sintomas: campo de busca com o placeholder cortado
+     ("Pesquise o que você está sentin...") em 375px de largura.
+  4. [NÃO VERIFICADO] especialidade — tem 3 regras @media, não confirmadas
+     visualmente ainda.
+  5. [NÃO VERIFICADO] formacao/instituicoes — tem regras @media (1080/720px),
+     não confirmadas visualmente.
+  6. [NÃO VERIFICADO] trajetoria (carrossel `atuacao.css/js`) — funciona por
+     arraste/toque, tem regras @media, comportamento touch não testado.
+  7. [NÃO VERIFICADO] agendar + rodapé (`fechamento.css`) — só 1 regra
+     @media no arquivo inteiro; seção com vários cartões/colunas, risco alto
+     de não caber bem em tela de celular.
+  8. [A LOCALIZAR] certificados — existe `certificados.css`/`.js` mas a
+     seção não tem id próprio visível na varredura; achar onde ela mora na
+     página antes de avaliar o mobile dela.
+  9. [INVESTIGAR, não é bug de mobile] `assets/site/css/busca.css` tem 0
+     regras @media e o seletor `.busca` não foi encontrado na página ao
+     vivo — pode ser código morto de uma versão anterior da busca de
+     sintomas. Confirmar antes de decidir se apaga.
+  Larguras de corte hoje em uso, sem padrão único (ver CLAUDE.md, seção
+  Cuidados de CSS): 640, 660, 720, 767, 860, 900, 1000, 1080, 1100, 1140,
+  1279px.
