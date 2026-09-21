@@ -607,14 +607,31 @@
       // altura explícita para a transição e depois solta, para o conteúdo
       // poder crescer sozinho (imagem, quebra de linha em outro zoom)
       painel.style.height = medir() + 'px';
-      const soltar = (e) => {
+      let soltou = false;
+      const soltar = () => {
+        if (soltou) return;
+        soltou = true;
+        painel.removeEventListener('transitionend', aoTransicionar);
+        if (aberto === id) painel.style.height = 'auto';
+      };
+      const aoTransicionar = (e) => {
         // opacity da caixa também borbulha até aqui; só a altura interessa
         if (e.propertyName !== 'height' || e.target !== painel) return;
-        if (aberto === id) painel.style.height = 'auto';
-        painel.removeEventListener('transitionend', soltar);
+        soltar();
       };
       if (semMovimento) { painel.style.height = 'auto'; }
-      else { painel.addEventListener('transitionend', soltar); }
+      else {
+        painel.addEventListener('transitionend', aoTransicionar);
+        // Rede de segurança: se o transitionend não disparar por qualquer
+        // motivo (troca rápida de palavra, aba em segundo plano, o que
+        // for), a altura ficava travada num valor medido só naquele
+        // instante — e qualquer coisa que mude a altura de verdade depois
+        // (a fonte do Google terminando de trocar, um ícone carregando)
+        // deixava uma sobra de espaço em branco embaixo da ficha, sem
+        // nunca mais se corrigir sozinha. Isso soltava para 'auto' de
+        // qualquer jeito, um pouco depois da duração da transição.
+        window.setTimeout(soltar, 550);
+      }
 
       if (origem === 'busca') fecharResultados();
       if (origem !== 'scroll-off') aproximar();
