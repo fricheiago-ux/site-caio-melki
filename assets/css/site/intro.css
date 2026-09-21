@@ -15,8 +15,8 @@
 .marca {
 display: block;
 background-color: currentColor;
--webkit-mask-image: url('../../logos/logo-sem-fundo.png');
-mask-image: url('../../logos/logo-sem-fundo.png');
+-webkit-mask-image: url('../../img/marca/logo-sem-fundo.png');
+mask-image: url('../../img/marca/logo-sem-fundo.png');
 -webkit-mask-repeat: no-repeat;
 mask-repeat: no-repeat;
 -webkit-mask-position: left center;

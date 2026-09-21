@@ -31,34 +31,52 @@ tudo.
 
 ## Estrutura
 
+Reorganizada em 22/09/2026 pela skill `/organizar-projeto` — se algo abaixo não
+bater com o disco, o disco está certo e isto ficou desatualizado.
+
 ```
 index.html                     ← a página inteira; site de uma página só
 assets/
-  design-system-2/css, js/     ← tokens, animações, efeitos, componentes
-  site/css, js/                ← CSS/JS específico de cada seção do site
-  imagens/                     ← TODA imagem do site
-    fotos-caio/                ← fotos do próprio Caio, dentro de imagens/
-  logos/                       ← marca (creme sobre escuro) e ícone da Unimed
-  templates/                   ← ⚠️ material de referência (sites clonados para
-                                  extrair design system). NUNCA faz parte do
-                                  site publicado. 182 MB — não deployar, e
-                                  provavelmente não deve nem entrar no git
-                                  (ver "Ao publicar" e o registro em
-                                  aprendizados.md sobre isso).
+  css/design-system/           ← tokens, animações, efeitos, componentes
+  css/site/                    ← CSS específico de cada seção do site
+  js/design-system/            ← idem, em JS
+  js/site/                     ← idem, em JS
+  img/
+    hero/                      ← imagens da manchete + originais brutos antes
+                                  do recorte (caio-cuidando.png,
+                                  comunidade-header.png, pessoa-por-inteiro.png)
+    pilares/                   ← card-1 a card-5, os 5 cards de "Os pilares"
+    especialidade/              ← esp-apoio.jpeg
+    fotos-caio/                ← todas as fotos do Caio — a que está em uso
+                                  hoje (foto-principal-caio) e as demais, de
+                                  reserva para trocar depois
+    certificados/               ← logos usados na seção de certificados, e
+                                  os originais em certificados/originais/
+    atuacao/                   ← logos da seção "Minha trajetória" (Alice,
+                                  Unimed, Mais Médicos, Nescon, Unifap, Faseh)
+    formacao/                  ← logos da seção de instituições acadêmicas
+                                  (UFMG, Hertfordshire, McGill, HC-UFMG,
+                                  Cruzeiro)
+    marca/                     ← a logo do site em uso (logo-sem-fundo.png,
+                                  usada como máscara) e o ícone da Unimed, +
+                                  variantes de reserva não usadas hoje
+                                  (logo-fundo-preto, os três recortes antigos
+                                  caio/dr/melki-hero, logo-unimed duplicado)
 ```
 
-Também existem na raiz e em `assets/` alguns arquivos soltos que são rascunho ou
-material de trabalho, não parte do site ao vivo (nada em `index.html` referencia
-eles): `Conduct.dc.html`, `Main.dc.html`, `canvas.json`,
-`certificados-caio-melki.html`, `section-nuvem-aura.html`,
-`sincronizar-certificados.py`, `assets/_teste-sintomas.html`,
-`assets/design_system2.html`, `assets/Estrutura e Conteúdo - Site Caio Melki.md`.
-Manter fora do que for publicado.
+`_nao-publicar/` (raiz do projeto, fora de `assets/`) guarda o que não é o site:
+material de referência (`templates/`, 182 MB de sites de terceiros clonados —
+gitignored, nunca teve histórico), rascunhos e versões antigas
+(`design_system2.html`, `teste-sintomas.html`, `section-nuvem-aura.html`,
+`certificados-caio-melki.html`, `conduct.dc.html`, `main.dc.html`,
+`canvas.json`, `sincronizar-certificados.py`) e o brief original
+(`estrutura-e-conteudo-site-caio-melki.md`). `CLAUDE.md`, `aprendizados.md` e
+`memoria.md` ficam soltos na raiz — não são o site, mas também não são
+descartável.
 
-A convenção de pastas de imagem está registrada também na memória global do
-usuário (`site-caio-melki-imagens.md`): tudo em `assets/imagens/`, fotos do Caio
-em `assets/imagens/fotos-caio/`. As únicas exceções são `assets/logos/` (marca e
-ícones de parceiro) e ícones/brasões institucionais que ficam em `assets/site/img/`.
+Nada em `img/` marcado acima como "de reserva" é lixo — é material mantido de
+propósito para o Caio trocar fotos/logos depois sem precisar gerar de novo.
+Só não está linkado em `index.html` hoje.
 
 ## Identidade visual
 
@@ -75,7 +93,7 @@ depoimentos — nunca em interface), **Courier Prime** (só valores técnicos/to
 --moss-700: #39423A    --sand-500: #CDBFA2  --sky-200: #C7DAE4
 ```
 
-Definidas em `assets/design-system-2/css/tokens.css` — essa é a fonte da verdade,
+Definidas em `assets/css/design-system/tokens.css` — essa é a fonte da verdade,
 esta tabela é só um resumo de consulta rápida.
 
 ## Estrutura de uma página tipo
@@ -87,7 +105,7 @@ GSAP Flip) → formação/instituições (03) → trajetória (carrossel) → cu
 
 ## Cuidados de CSS
 
-- O cursor customizado (`assets/design-system-2/js/cursor.js`) mede a luminância
+- O cursor customizado (`assets/js/design-system/cursor.js`) mede a luminância
   do que está *de fato* sob o ponteiro (elemento real, gradiente incluído) para
   decidir se fica claro ou escuro — não é uma lista fixa de seções. Seção nova
   escura já funciona sozinha; não precisa (e não deve) adicionar caso especial.
@@ -106,7 +124,7 @@ GSAP Flip) → formação/instituições (03) → trajetória (carrossel) → cu
   um padrão, são o estado real**, herdado de quando cada seção foi construída
   em momentos diferentes: 640, 660, 720, 767, 860, 900, 1000, 1080, 1100,
   1140, 1279px. Ao mexer numa seção, não inventar uma largura nova — checar
-  o que as seções vizinhas já usam com `grep -n "@media" assets/site/css/*.css`
+  o que as seções vizinhas já usam com `grep -n "@media" assets/css/site/*.css`
   antes de decidir.
 
 ## Mobile
@@ -116,7 +134,7 @@ desktop primeiro. Plano de trabalho e o que já foi feito/falta: ver
 `memoria.md`. Primeira correção feita: existia um buraco funcional grave,
 não só estético — abaixo de 940px o menu de navegação simplesmente
 desaparecia, sem nenhum jeito de trocar de seção no celular (corrigido com
-um menu de painel cheio, ver `assets/design-system-2/js/interactions.js`).
+um menu de painel cheio, ver `assets/js/design-system/interactions.js`).
 
 ## Mídia
 
@@ -148,9 +166,8 @@ Como funciona por baixo:
 1. O workflow roda a cada `git push` na branch `main` (também dá para forçar
    manualmente pela aba **Actions** do repositório no GitHub, botão
    "Run workflow", sem precisar de commit novo).
-2. Ele monta uma cópia limpa só com `index.html` + `assets/design-system-2/` +
-   `assets/site/` + `assets/imagens/` + `assets/logos/`, e publica só essa
-   cópia — **nunca** `assets/templates/` (182 MB, sites de terceiros clonados,
+2. Ele monta uma cópia limpa só com `index.html` + `assets/css/` +
+   `assets/js/` + `assets/img/`, e publica só essa cópia — **nunca** `assets/templates/` (182 MB, sites de terceiros clonados,
    está no `.gitignore` e nem chega a entrar no repositório) nem os arquivos
    soltos de rascunho listados em "Estrutura" acima.
 3. Autenticação com o GitHub é feita pelo GitHub CLI (`gh`), já autorizado

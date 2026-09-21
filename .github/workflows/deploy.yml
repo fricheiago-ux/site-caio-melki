@@ -35,14 +35,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Montar a pasta pública (só o que o site usa)
+        # Pastas atualizadas em 22/09/2026 (reorganização): antes eram
+        # design-system-2/, site/, imagens/, logos/ — agora é só css/, js/,
+        # img/, com o de sempre e o de reserva dentro de img/. Nada em
+        # _nao-publicar/ entra aqui.
         run: |
           set -e
           mkdir -p _site/assets
           cp index.html _site/
-          cp -R assets/design-system-2 _site/assets/
-          cp -R assets/site           _site/assets/
-          cp -R assets/imagens        _site/assets/
-          cp -R assets/logos          _site/assets/
+          cp -R assets/css _site/assets/
+          cp -R assets/js  _site/assets/
+          cp -R assets/img _site/assets/
 
       - name: Empacotar para o Pages
         uses: actions/upload-pages-artifact@v3
