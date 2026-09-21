@@ -4,10 +4,11 @@ Complementa o `CLAUDE.md` global. Onde houver conflito, **este arquivo vence**.
 
 Site institucional do Dr. Caio Ribeiro Melki, médico de família e comunidade em
 Belo Horizonte. Estático, sem etapa de build — é `index.html` puro com CSS e JS
-próprios. Domínio **caiomelkimfc.com.br** já registrado na Hostinger; a
-hospedagem em si **ainda não foi contratada** (checado em 22/09/2026 — ver
-`memoria.md`). Forma de publicação **ainda em definição** (ver seção
-"Ao publicar").
+próprios. No ar em **https://fricheiago-ux.github.io/site-caio-melki/**, via
+GitHub Pages, publicado automaticamente a partir do repositório
+[fricheiago-ux/site-caio-melki](https://github.com/fricheiago-ux/site-caio-melki)
+(público). O domínio **caiomelkimfc.com.br** está registrado na Hostinger mas
+ainda não aponta para cá — apontar é um passo futuro opcional, não feito ainda.
 
 ---
 
@@ -108,19 +109,36 @@ arquivo.
 
 ## Ao publicar
 
-**Em definição — ver `aprendizados.md`.** Domínio e hospedagem já existem na
-Hostinger; falta decidir e configurar o mecanismo de publicação (deploy nativo via
-Git do hPanel, ou script de SFTP). Quando isso for fechado, os passos exatos vêm
-aqui.
+**Publicação automática via GitHub Pages + GitHub Actions.** Basta enviar o
+código:
 
-Já sabido, independente da rota escolhida:
-1. **Nunca publicar `assets/templates/`** (material de referência, 182 MB, sites
-   de terceiros clonados) nem os arquivos soltos de rascunho listados em
-   "Estrutura" acima.
-2. Publicar apenas: `index.html` + `assets/design-system-2/` + `assets/site/` +
-   `assets/imagens/` + `assets/logos/`.
-3. Conferir que nenhuma referência aponta para arquivo inexistente e que o nome
-   bate com o do disco letra por letra (Linux diferencia maiúscula/minúscula;
-   macOS não).
-4. Nunca colar senha de FTP/Hostinger em conversa com o Claude. Ver
-   `aprendizados.md` para como a credencial deve ficar guardada.
+```bash
+git add -A
+git commit -m "explicando o que mudou e por quê"
+git push
+```
+
+Em até um minuto o workflow `.github/workflows/deploy.yml` publica sozinho a
+versão nova em https://fricheiago-ux.github.io/site-caio-melki/ — não existe
+passo manual depois do push, e ninguém precisa entrar no GitHub para nada.
+
+Como funciona por baixo:
+1. O workflow roda a cada `git push` na branch `main` (também dá para forçar
+   manualmente pela aba **Actions** do repositório no GitHub, botão
+   "Run workflow", sem precisar de commit novo).
+2. Ele monta uma cópia limpa só com `index.html` + `assets/design-system-2/` +
+   `assets/site/` + `assets/imagens/` + `assets/logos/`, e publica só essa
+   cópia — **nunca** `assets/templates/` (182 MB, sites de terceiros clonados,
+   está no `.gitignore` e nem chega a entrar no repositório) nem os arquivos
+   soltos de rascunho listados em "Estrutura" acima.
+3. Autenticação com o GitHub é feita pelo GitHub CLI (`gh`), já autorizado
+   nesta máquina — nenhuma senha ou token é digitado em lugar nenhum a cada
+   publicação.
+4. Conferir sempre, depois de qualquer mudança de nome de arquivo, que nenhuma
+   referência no HTML/CSS/JS aponta para um caminho inexistente e que o nome
+   bate letra por letra com o do disco (Linux diferencia maiúscula/minúscula;
+   macOS não) — GitHub Pages roda em servidor Linux.
+5. Domínio próprio (`caiomelkimfc.com.br`) ainda não está conectado a este
+   Pages. Se isso for feito no futuro, documentar aqui o procedimento (arquivo
+   `CNAME` no repositório + registro DNS na Hostinger apontando para o
+   GitHub).

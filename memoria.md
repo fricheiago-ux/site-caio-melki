@@ -37,3 +37,9 @@ Formato: uma linha por fato, com data.
 - 2026-09-22 — Branch local renomeada de `master` para `main`. GitHub CLI
   (`gh`) instalado via Homebrew nesta máquina para criar o repositório e
   autenticar sem precisar colar senha/token em lugar nenhum.
+- 2026-09-22 — CONFIGURADO E NO AR: repositório
+  github.com/fricheiago-ux/site-caio-melki (público). Link fixo de revisão:
+  https://fricheiago-ux.github.io/site-caio-melki/ — atualiza sozinho a cada
+  `git push` na branch main, sem passo manual. Verificado ao vivo: página
+  carrega, título certo, assets das 4 pastas resolvem, e rascunhos/pasta
+  templates confirmadamente fora do ar (404).
