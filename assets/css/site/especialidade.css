@@ -159,6 +159,7 @@ object-position: center 42%;
 transition: transform 0.7s var(--ease-out-expo);
 }
 .esp-apoio:hover img { transform: scale(1.05); }
+.esp-apoio picture { display: block; width: 100%; height: 100%; }
 
 .esp-nota {
 flex-shrink: 0;
@@ -372,4 +373,9 @@ margin: var(--sp-3) 0 var(--sp-2);
 }
 @media (max-width: 640px) {
 .esp-pilares { grid-template-columns: 1fr; }
+/* No celular o espaço assume o formato da imagem própria (3:2), em vez de
+   uma altura fixa. Assim a foto aparece inteira em qualquer largura de
+   aparelho, sem cortar ninguém. Acima de 640px volta a tira larga, que é
+   o formato que ali se encaixa melhor. */
+.esp-apoio { flex: 0 0 auto; height: auto; min-height: 0; aspect-ratio: 3 / 2; }
 }

@@ -50,28 +50,28 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
 
 <!-- design system -->
-<link rel="stylesheet" href="assets/css/design-system/tokens.css?v=61"/>
-<link rel="stylesheet" href="assets/css/design-system/animations.css?v=61"/>
-<link rel="stylesheet" href="assets/css/design-system/effects.css?v=61"/>
-<link rel="stylesheet" href="assets/css/design-system/components.css?v=61"/>
+<link rel="stylesheet" href="assets/css/design-system/tokens.css?v=63"/>
+<link rel="stylesheet" href="assets/css/design-system/animations.css?v=63"/>
+<link rel="stylesheet" href="assets/css/design-system/effects.css?v=63"/>
+<link rel="stylesheet" href="assets/css/design-system/components.css?v=63"/>
 <!-- específico do site -->
 <!-- hero.css: retrato à esquerda, busca de condições e faixa de instituições -->
 <!-- intro.css: loader reutilizável, portas de abertura e a marca como máscara -->
-<link rel="stylesheet" href="assets/css/site/intro.css?v=61"/>
-<link rel="stylesheet" href="assets/css/site/hero.css?v=61"/>
+<link rel="stylesheet" href="assets/css/site/intro.css?v=63"/>
+<link rel="stylesheet" href="assets/css/site/hero.css?v=63"/>
 <!-- especialidade.css: tríptico da seção A especialidade -->
-<link rel="stylesheet" href="assets/css/site/especialidade.css?v=61"/>
-<link rel="stylesheet" href="assets/css/site/sintomas.css?v=61"/>
+<link rel="stylesheet" href="assets/css/site/especialidade.css?v=63"/>
+<link rel="stylesheet" href="assets/css/site/sintomas.css?v=63"/>
 <!-- fechamento.css: minicurrículo, canais de agendamento e rodapé -->
-<link rel="stylesheet" href="assets/css/site/fechamento.css?v=61"/>
+<link rel="stylesheet" href="assets/css/site/fechamento.css?v=63"/>
 <!-- instituicoes.css: cards com dobradiça 3D (logo vira descrição) -->
 <!-- pilares.css: baralho GSAP Flip da seção 02 -->
-<link rel="stylesheet" href="assets/css/site/pilares.css?v=61"/>
-<link rel="stylesheet" href="assets/css/site/instituicoes.css?v=61"/>
+<link rel="stylesheet" href="assets/css/site/pilares.css?v=63"/>
+<link rel="stylesheet" href="assets/css/site/instituicoes.css?v=63"/>
 <!-- atuacao.css: carrossel da seção Minha trajetória profissional -->
-<link rel="stylesheet" href="assets/css/site/atuacao.css?v=61"/>
+<link rel="stylesheet" href="assets/css/site/atuacao.css?v=63"/>
 <!-- certificados.css: as peças de certificado no fim da seção de experiência -->
-<link rel="stylesheet" href="assets/css/site/certificados.css?v=61"/>
+<link rel="stylesheet" href="assets/css/site/certificados.css?v=63"/>
 </head>
 <body>
 
@@ -171,7 +171,7 @@
 <span class="badge badge--sage"><span class="badge__dot"><span></span><span></span></span>CRM-MG 78461 · RQE 57161</span>
 </div>
 
-<h1 id="hero-title" class="hero-frase type-reveal" style="margin-bottom:var(--sp-6)">Oi, sou o Caio<img class="hero-slot" data-slot="1" src="assets/img/hero/slot-1-caio.jpeg?v=61" alt="Retrato do Dr. Caio Ribeiro Melki" draggable="false"/>, médico de família e comunidade.<img class="hero-slot hero-slot--cine" data-slot="2" src="assets/img/hero/slot-2-comunidade.jpeg?v=61" alt="Fachadas de casas simples numa rua residencial" draggable="false"/> <span class="hero-frase__quieta">Busco tratar as pessoas por inteiro<img class="hero-slot hero-slot--tall" data-slot="3" src="assets/img/hero/slot-3-inteiro.jpeg?v=61" alt="Uma pessoa de corpo inteiro no vão de uma porta" draggable="false"/>, não apenas pelos&nbsp;seus sintomas.</span></h1>
+<h1 id="hero-title" class="hero-frase type-reveal" style="margin-bottom:var(--sp-6)">Oi, sou o Caio<img class="hero-slot" data-slot="1" src="assets/img/hero/slot-1-caio.jpeg?v=63" alt="Retrato do Dr. Caio Ribeiro Melki" draggable="false"/>, médico de família e comunidade.<img class="hero-slot hero-slot--cine" data-slot="2" src="assets/img/hero/slot-2-comunidade.jpeg?v=63" alt="Fachadas de casas simples numa rua residencial" draggable="false"/> <span class="hero-frase__quieta">Busco tratar as pessoas por inteiro<img class="hero-slot hero-slot--tall" data-slot="3" src="assets/img/hero/slot-3-inteiro.jpeg?v=63" alt="Uma pessoa de corpo inteiro no vão de uma porta" draggable="false"/>, não apenas pelos&nbsp;seus sintomas.</span></h1>
 
 <div class="blur-reveal" style="margin-bottom:var(--sp-6)">
 <p class="body-lg" style="max-width:56ch;margin:0">Com a sua história, a sua família e a sua rotina na equação, a maior parte dos problemas se resolvem antes de envolver outro médico.</p>
@@ -235,7 +235,11 @@
 
 <!-- tira de apoio, ~4:1 — ocupa a folga da coluna e encolhe com ela -->
 <div class="esp-apoio">
-<img src="assets/img/especialidade/esp-apoio.jpeg?v=61" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy"/>
+<picture>
+<!-- no celular o espaço vira quase 3:2; a tira 4:1 do computador mostraria só a estante do meio -->
+<source media="(max-width: 640px)" srcset="assets/img/especialidade/esp-apoio-mobile.jpeg?v=63"/>
+<img src="assets/img/especialidade/esp-apoio.jpeg?v=63" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy" decoding="async"/>
+</picture>
 </div>
 
 <div class="esp-nota">
@@ -1039,24 +1043,24 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
 <!-- design system -->
-<script src="assets/js/design-system/reveal.js?v=61"></script>
-<script src="assets/js/design-system/cursor.js?v=61"></script>
-<script src="assets/js/design-system/particles.js?v=61"></script>
-<script src="assets/js/design-system/interactions.js?v=61"></script>
+<script src="assets/js/design-system/reveal.js?v=63"></script>
+<script src="assets/js/design-system/cursor.js?v=63"></script>
+<script src="assets/js/design-system/particles.js?v=63"></script>
+<script src="assets/js/design-system/interactions.js?v=63"></script>
 <!-- hero-type.js: surgimento palavra a palavra do título e da subhead -->
-<script src="assets/js/site/hero-type.js?v=61"></script>
+<script src="assets/js/site/hero-type.js?v=63"></script>
 <!-- esp-painel.js: contador e sintomas girando no card da especialidade -->
-<script src="assets/js/site/esp-painel.js?v=61"></script>
+<script src="assets/js/site/esp-painel.js?v=63"></script>
 <!-- corpo-3d.js: nuvem de pontos que se registra na seção A especialidade -->
-<script src="assets/js/site/corpo-3d.js?v=61"></script>
+<script src="assets/js/site/corpo-3d.js?v=63"></script>
 <!-- intro.js: loader, portas que abrem no clique e o aviso portas:abertas -->
-<script src="assets/js/site/intro.js?v=61"></script>
+<script src="assets/js/site/intro.js?v=63"></script>
 <script>document.getElementById("ano-agora").textContent = new Date().getFullYear();</script>
-<script src="assets/js/site/pilares.js?v=61"></script>
-<script src="assets/js/site/pilares-particulas.js?v=61"></script>
+<script src="assets/js/site/pilares.js?v=63"></script>
+<script src="assets/js/site/pilares-particulas.js?v=63"></script>
 <!-- atuacao.js: roda de pílulas + baralho da trajetória profissional -->
-<script src="assets/js/site/sintomas.js?v=61"></script>
-<script src="assets/js/site/atuacao.js?v=61"></script>
+<script src="assets/js/site/sintomas.js?v=63"></script>
+<script src="assets/js/site/atuacao.js?v=63"></script>
 <!-- certificados.js: escala das peças de certificado -->
-<script src="assets/js/site/certificados.js?v=61"></script>
+<script src="assets/js/site/certificados.js?v=63"></script>
 </body></html>
