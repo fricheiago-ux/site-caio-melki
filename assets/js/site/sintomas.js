@@ -663,7 +663,12 @@
 
   function aproximar() {
     const topo = painel.getBoundingClientRect().top;
-    const fora = topo < 70 || topo > window.innerHeight - 160;
+    // "fora de vista" em cima = escondido atras da barra fixa, nao so acima
+    // da janela. O numero antigo (70px) era menor que a barra (~83px), entao
+    // uma ficha parada embaixo dela contava como visivel e nao rolava.
+    const barra = document.querySelector('.navbar');
+    const limite = barra ? barra.getBoundingClientRect().bottom : 0;
+    const fora = topo < limite || topo > window.innerHeight - 160;
     if (!fora) return;
     painel.scrollIntoView({ behavior: semMovimento ? 'auto' : 'smooth', block: 'start' });
   }

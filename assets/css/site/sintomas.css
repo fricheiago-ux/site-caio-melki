@@ -187,6 +187,12 @@ height: 0;
 overflow: hidden;
 margin-top: var(--sp-6);
 transition: height var(--dur-base) var(--ease-out-expo);
+/* Ao abrir, o JS rola a pagina ate a ficha (scrollIntoView). Sem isto o
+   navegador encosta a ficha no topo da janela — e a barra de navegacao,
+   que e fixa e tem ~83px, cobria o cabecalho da ficha ("Possiveis
+   causas" + o nome do sintoma). O scroll-margin faz a rolagem parar
+   abaixo da barra. */
+scroll-margin-top: 96px;
 }
 .sint-painel__caixa {
 opacity: 0;
