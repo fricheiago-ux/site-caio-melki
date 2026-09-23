@@ -750,3 +750,11 @@ color: var(--sage-700);
 .gap-4 { gap: var(--sp-4); }
 .gap-6 { gap: var(--sp-6); }
 .gap-8 { gap: var(--sp-8); }
+
+/* Cabeçalho de seção no celular: a etiqueta [ ... ] desce para baixo do
+   título em vez de espremer ao lado dele — lado a lado ela quebrava em
+   três linhas e deixava o "]" sozinho na última. */
+@media (max-width: 660px) {
+.section-head { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
+.section-head > .label { white-space: nowrap; }
+}
