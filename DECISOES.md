@@ -134,9 +134,15 @@ carrega — mas continuam sendo a fonte de verdade daquele trecho.
 certificados direto no `index.html` manualmente, e essa edição some na
 próxima vez que o script rodar de novo a partir do arquivo de origem.
 
-**Status:** vigente, mas **pendência de documentação** — isso ainda não está
-descrito na seção "Estrutura" do `CLAUDE.md`. Registrar lá é o próximo passo
-óbvio, fora do escopo desta skill.
+**Status:** **superado** em 23/09/2026 — a pedido do Iago, a seção de
+certificados foi removida do `index.html` (o bloco entre os marcadores e o
+`<script>` de `certificados.js`, que só existia para redimensionar essas
+peças). O título da seção voltou a ser só "Experiência profissional" (era
+"Experiência profissional e certificados") e o contador "[ 6 frentes · 2
+certificações ]" virou "[ 6 frentes ]". Nada foi apagado do disco — os
+arquivos de origem citados acima continuam em `_nao-publicar/certificados/`
+e as imagens em `assets/img/certificados/`, como reserva. Documentado na
+seção "Estrutura de uma página tipo" do `CLAUDE.md`.
 
 ---
 

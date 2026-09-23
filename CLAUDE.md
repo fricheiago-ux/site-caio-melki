@@ -54,8 +54,11 @@ assets/
     fotos-caio/                ← todas as fotos do Caio — a que está em uso
                                   hoje (foto-principal-caio) e as demais, de
                                   reserva para trocar depois
-    certificados/               ← logos usados na seção de certificados, e
-                                  os originais em certificados/originais/
+    certificados/               ← logos que eram usados na seção de
+                                  certificados (removida do index.html em
+                                  23/09/2026, ver "Estrutura de uma página tipo"); e os
+                                  originais em certificados/originais/. Mantidas
+                                  como reserva, não deletadas.
     atuacao/                   ← logos da seção "Minha trajetória" (Alice,
                                   Unimed, Mais Médicos, Nescon, Unifap, Faseh).
                                   Todas em .jpg, exceto logo-unimed.png — na
@@ -85,13 +88,17 @@ site, organizada por assunto (reorganizada em 21/09/2026, revisitando a skill
 _nao-publicar/
   templates/        ← 182 MB de sites de terceiros clonados como referência
                        de design — gitignored, nunca teve histórico
-  certificados/      ← fonte de produção do bloco de certificados: os
-                       artboards de design (main.dc.html = ACLS,
-                       conduct.dc.html = CONDUCT, canvas.json os organiza),
-                       o certificados-caio-melki.html (canvas publicado via
-                       Claude Code com o estado editável) e o
-                       sincronizar-certificados.py que injeta o resultado no
-                       index.html entre os marcadores certificados:inicio/fim
+  certificados/      ← fonte do bloco de certificados que existiu no
+                       index.html até 23/09/2026 (removido, ver "Estrutura de
+                       uma página tipo"): os artboards de design (main.dc.html =
+                       ACLS, conduct.dc.html = CONDUCT, canvas.json os
+                       organiza), o certificados-caio-melki.html (canvas
+                       publicado via Claude Code com o estado editável) e o
+                       sincronizar-certificados.py que injetava o resultado
+                       no index.html entre os marcadores
+                       certificados:inicio/fim — esses marcadores não existem
+                       mais no index.html; para trazer a seção de volta,
+                       teriam que ser recriados antes de rodar o script
   rascunhos/         ← versões antigas/testes sem uso (design_system2.html,
                        teste-sintomas.html, section-nuvem-aura.html)
   brief/             ← o brief original do projeto
@@ -135,8 +142,24 @@ esta tabela é só um resumo de consulta rápida.
 
 Não se aplica — é site de página única. As seções de `index.html`, na ordem:
 hero → especialidade (01) → sintomas/nuvem de busca (02) → pilares (5 cards,
-GSAP Flip) → formação/instituições (03) → trajetória (carrossel) → currículo (04)
-→ agendar (05) → rodapé.
+GSAP Flip) → formação/instituições (03) → experiência profissional (05,
+carrossel de atuação + link do Lattes como fecho) → agendar (06) → rodapé.
+
+**Seção de certificados removida em 23/09/2026** (a pedido do Iago) — ficava
+dentro da seção de experiência, entre o carrossel e o link do Lattes, com o
+título "Experiência profissional **e certificados**" e o contador
+"[ 6 frentes · 2 certificações ]". Removido do `index.html`: o bloco gerado
+por `sincronizar-certificados.py` (incluindo os marcadores
+`certificados:inicio`/`:fim`) e o `<script>` de `certificados.js` (que só
+existia para redimensionar essas peças — sem elas, virou código morto).
+**Mantido, sem alteração:** `certificados.css` continua linkado (o link do
+Lattes usa a classe `.cert-lattes` dele); as imagens em
+`assets/img/certificados/` e a fonte de produção em
+`_nao-publicar/certificados/` (artboards, script) seguem guardadas como
+reserva — nada foi apagado, só desconectado da página. Verificado com o
+script de referências (0 quebradas) e navegador local (sem sobra de espaço
+entre o carrossel e o Lattes, sem erro no console, sem requisição do JS
+removido).
 
 ## Cuidados de CSS
 
