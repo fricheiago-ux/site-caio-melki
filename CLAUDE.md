@@ -50,7 +50,10 @@ assets/
                                   do recorte (caio-cuidando.png,
                                   comunidade-header.png, pessoa-por-inteiro.png)
     pilares/                   ← card-1 a card-5, os 5 cards de "Os pilares"
-    especialidade/              ← esp-apoio.jpeg
+    especialidade/              ← esp-apoio.jpeg (desktop, tira 4:1) e
+                                  esp-apoio-mobile.jpeg (celular, 3:2, ver
+                                  commit af2fb3f) + o original bruto antes do
+                                  corte (esp-apoio-mobile-original.jpeg)
     fotos-caio/                ← todas as fotos do Caio — a que está em uso
                                   hoje (foto-principal-caio) e as demais, de
                                   reserva para trocar depois
