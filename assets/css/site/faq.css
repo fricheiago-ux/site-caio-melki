@@ -1,0 +1,107 @@
+/* ============================================================
+   06 — PERGUNTAS FREQUENTES
+   Coluna esquerda: texto curto + botão Unimed + ícones de contato.
+   Coluna direita: acordeão de perguntas, num cartão claro.
+   Baseado no padrão de FAQ de maiscuidados.com.br/clinicas/, restilizado
+   com o design system do site (nada do roxo/Tailwind original sobrou).
+   ============================================================ */
+
+.faq-grid {
+display: grid;
+grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+gap: var(--sp-16);
+align-items: start;
+}
+
+.faq-intro { display: flex; flex-direction: column; }
+.faq-intro > p {
+margin: 0 0 var(--sp-6);
+max-width: 42ch;
+font-size: var(--fs-body);
+line-height: 1.6;
+color: var(--ink-500);
+}
+.faq-intro .btn-canal { align-self: flex-start; margin-bottom: var(--sp-6); }
+
+.faq-canais { display: flex; gap: var(--sp-3); }
+.faq-canal {
+display: grid;
+place-items: center;
+width: 44px;
+height: 44px;
+border-radius: 50%;
+border: 1px solid var(--line);
+background: var(--paper-100);
+color: var(--ink-700);
+cursor: none;
+transition: transform var(--dur-fast) var(--ease-out-expo),
+background var(--dur-fast) ease,
+color var(--dur-fast) ease,
+border-color var(--dur-fast) ease;
+}
+.faq-canal:hover { transform: translateY(-3px); background: var(--sage-600); color: var(--paper-100); border-color: var(--sage-600); }
+.faq-canal svg, .faq-canal i { width: 18px; height: 18px; }
+/* Ícones de marca (WhatsApp, LinkedIn) escritos à mão em fill; os do lucide
+   (Lattes, e-mail) são de contorno (stroke) e já vêm com fill="none" — não
+   dar `fill` genérico aqui, ou os ícones do lucide viram blocos sólidos. */
+.faq-canal__marca-svg { fill: currentColor; }
+
+/* ---------- Acordeão ---------- */
+.faq-lista {
+border: 1px solid var(--line);
+border-radius: var(--r-xl);
+background: var(--paper-100);
+box-shadow: var(--shadow-sm);
+padding: 0 var(--sp-6);
+}
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item:last-child { border-bottom: none; }
+
+.faq-item__pergunta {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: var(--sp-4);
+width: 100%;
+padding: var(--sp-6) 0;
+background: none;
+border: none;
+text-align: left;
+font-family: var(--font-sans);
+font-size: var(--fs-h5);
+font-weight: 500;
+letter-spacing: -0.01em;
+color: var(--ink-900);
+cursor: none;
+}
+.faq-item__seta {
+flex-shrink: 0;
+width: 18px;
+height: 18px;
+color: var(--sage-600);
+transition: transform var(--dur-base) var(--ease-out-expo);
+}
+.faq-item.is-aberto .faq-item__seta { transform: rotate(180deg); }
+
+.faq-item__resposta { height: 0; overflow: hidden; transition: height var(--dur-base) var(--ease-out-expo); }
+.faq-item__resposta p {
+margin: 0;
+padding: 0 0 var(--sp-6);
+max-width: 62ch;
+font-size: var(--fs-body-sm);
+line-height: 1.7;
+color: var(--ink-500);
+}
+.faq-item__resposta p.faq-pendente {
+color: var(--warning);
+font-family: var(--font-mono);
+font-size: var(--fs-label);
+letter-spacing: 0.02em;
+}
+
+@media (max-width: 1000px) {
+.faq-grid { grid-template-columns: 1fr; gap: var(--sp-8); }
+}
+@media (max-width: 480px) {
+.faq-item__pergunta { font-size: var(--fs-body); padding: var(--sp-5) 0; }
+}
