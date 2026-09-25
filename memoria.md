@@ -210,3 +210,23 @@ Formato: uma linha por fato, com data.
   `getBoundingClientRect`, não só no olho), confirmada igual em mobile
   (375px) e desktop (1200px), 0px de estouro horizontal, sem erro no
   console.
+
+- 2026-09-25 — REVERTIDO o tamanho dos cards do carrossel de atuação: a
+  redução de 15% (420px → 357px) de 24/09 voltou pro valor original (420px).
+  Causa: a legenda de cada card tem altura fixa em px/rem — encolher o CARD
+  sem encolher a legenda junto faz o texto ocupar uma fatia bem maior da
+  imagem. No card do NESCON, a legenda passou a cobrir 63% do card (era
+  ~48%) e tapou a palavra "Preceptoria"; no card PUC-MG·Faseh·UniBH voltou a
+  cobrir o "unibh" que já tinha sido resolvido no dia anterior. O Iago
+  reportou visualmente e pediu pra voltar. Verificado nos 6 cards, desktop e
+  mobile: card de volta a 420×525 (proporção mantida), legenda de volta a
+  ~51,6% nos 5 cards padrão, folga de +2,0pp (desktop) / +5,9pp (mobile)
+  acima do "unibh" no card compacto — mesma faixa seguro medida em 24/09.
+  **Descoberta nova sobre o ambiente de teste desta sessão:** o navegador
+  usado para verificar mudou a se recusar a rebuscar `index.html`
+  (o documento em si, não só os CSS/JS com `?v=`) mesmo depois de trocar a
+  versão e navegar de novo pra mesma URL — o servidor sempre respondia
+  certo (confirmado com `fetch`/`curl` direto), mas o DOM carregado ficava
+  preso numa versão anterior do HTML. Só resolveu navegando pra uma URL
+  com uma query string nunca usada antes (`?forcar=N`). Se isso voltar a
+  acontecer, tentar isso antes de desconfiar do código.

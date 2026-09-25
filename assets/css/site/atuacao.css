@@ -127,8 +127,7 @@ overflow: hidden;
 .atuacao__baralho {
 position: relative;
 width: 100%;
-max-width: 357px; /* 420px - 15%, a pedido do Iago (24/09/2026) — os
-                      cards estavam grandes demais em relação ao painel. */
+max-width: 420px;
 aspect-ratio: 4 / 5;
 }
 
