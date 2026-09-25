@@ -56,27 +56,46 @@ assets/
                                   corte (esp-apoio-mobile-original.jpeg)
     fotos-caio/                ← todas as fotos do Caio — a que está em uso
                                   hoje (foto-principal-caio) e as demais, de
-                                  reserva para trocar depois
+                                  reserva para trocar depois. A foto-8 tem
+                                  versão sem fundo (recorte com IA, `rembg`,
+                                  24/09/2026): foto-8-caio-sem-fundo.webp
+                                  (em uso na divisória, 66 KB) e o .png
+                                  original do recorte (reserva)
     certificados/               ← logos que eram usados na seção de
                                   certificados (removida do index.html em
                                   23/09/2026, ver "Estrutura de uma página tipo"); e os
                                   originais em certificados/originais/. Mantidas
                                   como reserva, não deletadas.
-    atuacao/                   ← logos da seção "Minha trajetória" (Alice,
-                                  Unimed, Mais Médicos, Nescon, Unifap, Faseh).
-                                  Todas em .jpg, exceto logo-unimed.png — na
-                                  revisão de performance (22/09/2026), 5 das 6
-                                  eram PNG opaco (sem transparência) mal
-                                  comprimido; convertidas para JPEG 85%
-                                  cortou ~1,3 MB no total. logo-unimed.png
-                                  ficou PNG porque, nesse caso específico, o
-                                  JPEG saiu maior — sempre comparar os dois,
-                                  não assumir que JPEG é sempre menor.
+    atuacao/                   ← logos da seção "Experiência profissional"
+                                  (carrossel `atuacao.css`/`.js`). Estado em
+                                  23/09/2026, um arquivo por card, nessa ordem:
+                                  logo-alice.jpg, logo-unifap.png,
+                                  logo-faseh-puc-unibh.png,
+                                  logo-nesocon-mais-medicos.png (Mais Médicos —
+                                  a arte já traz a marca da NESCON, que
+                                  coordena o programa),
+                                  logo-unimed.png,
+                                  logo-nesocon-preceptoria-mfc.png (NESCON
+                                  UFMG). logo-nescon.jpg (a logo genérica
+                                  antiga do card NESCON UFMG) ficou sem uso,
+                                  mantida como reserva. Na revisão de
+                                  performance de 22/09/2026, 5 das logos de
+                                  então eram PNG opaco mal comprimido;
+                                  convertidas para JPEG 85% cortou ~1,3 MB —
+                                  sempre comparar JPEG x PNG, não assumir que
+                                  um é sempre menor (foi por isso que
+                                  logo-unimed.png ficou PNG).
     formacao/                  ← logos da seção de instituições acadêmicas
                                   (UFMG, Hertfordshire, McGill, HC-UFMG,
                                   Cruzeiro)
-    marca/                     ← a logo do site em uso (logo-sem-fundo.png,
-                                  usada como máscara) e o ícone da Unimed, +
+    marca/                     ← logo-creme-recortada.webp (a logo creme,
+                                  sem margem, como <img> na divisória) e a
+                                  logo do site em uso (logo-sem-fundo.png,
+                                  usada como máscara), o ícone da Unimed e a
+                                  logo do CNPq (cnpq-logo.png, 24/09/2026 —
+                                  recortada e reduzida do PNG enviado pelo
+                                  Iago; usada no card "Currículo Lattes
+                                  completo" da seção de experiência) +
                                   variantes de reserva não usadas hoje
                                   (logo-fundo-preto, os três recortes antigos
                                   caio/dr/melki-hero, logo-unimed duplicado)
@@ -145,8 +164,23 @@ esta tabela é só um resumo de consulta rápida.
 
 Não se aplica — é site de página única. As seções de `index.html`, na ordem:
 hero → especialidade (01) → sintomas/nuvem de busca (02) → pilares (5 cards,
-GSAP Flip) → formação/instituições (03) → experiência profissional (05,
+GSAP Flip) → **divisória "sobre mim"** (`#divisoria`, faixa verde curta) →
+formação/instituições (03) → experiência profissional (05,
 carrossel de atuação + link do Lattes como fecho) → agendar (06) → rodapé.
+
+**Divisória "sobre mim" (24/09/2026, `divisoria.css`).** Separa os temas
+gerais de MFC do currículo do Caio. Layout da ref-1 (dralexandre): logo à
+esquerda, foto do Caio no centro, nome + CRM/RQE + frase à direita; no
+celular empilha (logo → texto → foto). A logo vira "Sobre mim" no hover e é
+um link para `#formacao`. Fundo verde diagonal (135°, `--sage-600` →
+`--sage-700`, o mesmo verde dos cards de formação). **Topo esfumaçado,
+base reta, de propósito** (decisão do Iago): o topo nasce do creme da página
+e vira verde aos poucos; a base encosta em "Formação" numa linha reta, com a
+foto apoiada nela — a imagem é 14% maior que o espaço e desce para fora da
+seção (zoom, corte exatamente na borda). A sombra da foto fica no contêiner
+`.divisoria__foto`, não na `<img>` (com máscara na img, a sombra saía
+recortada num retângulo). Frase (definida pelo Iago, 24/09/2026): "Antes do
+eco da queixa, vem o silêncio da escuta."
 
 **Seção de certificados removida em 23/09/2026** (a pedido do Iago) — ficava
 dentro da seção de experiência, entre o carrossel e o link do Lattes, com o
@@ -164,12 +198,49 @@ script de referências (0 quebradas) e navegador local (sem sobra de espaço
 entre o carrossel e o Lattes, sem erro no console, sem requisição do JS
 removido).
 
+**Selo de status dos cards do carrossel de atuação, corrigido em
+23/09/2026.** Antes, o texto "Em atividade" no topo do card não dizia
+respeito ao vínculo em si — vinha do estado do carrossel
+(`data-estado='ativo'`, ou seja, "é a vez desse card aparecer em foco"), então
+todo card mostrava essa mesma frase, inclusive vínculos já encerrados. Agora
+cada `.atuacao__vivo` carrega uma classe própria por card —
+`--ativo` (bolinha verde pulsando, `@keyframes atuacaoPulsoVivo` em
+`atuacao.css`, mesma mecânica de `.esp-painel__ponto` em `especialidade.css`)
+ou `--encerrado` (bolinha cinza parada + o período, ex. "2024 – 2026") —
+fixada no HTML, independente da posição no carrossel. Dados tirados do Lattes
+do Caio (colado pelo Iago na conversa). Os dois cards que ficaram sem data na
+primeira rodada foram fechados em 24/09/2026, direto pelo Iago (não pelo
+Lattes): UNIFAP → ativo; PUC-MG · Faseh · Uni-BH → encerrado, 2023–2024.
+
+**Card "PUC-MG · Faseh · Uni-BH", legenda compacta (24/09/2026).** É o único
+card cuja arte (3 logos empilhadas) ocupa até o rodapé da imagem — os outros
+5 são um símbolo só, centralizado, com espaço vazio embaixo — então o
+degradê padrão da legenda (7rem de respiro antes do texto) tapava a palavra
+"unibh". A imagem continua de sangria (`cover`, igual aos outros cards — uma
+tentativa de encolhê-la pro topo foi revertida a pedido do Iago); o ajuste
+ficou só na legenda: classe `.atuacao__legenda--compacta` (`atuacao.css`)
+tira o respiro de cima, e o selo desse card foi encurtado ("03 • PUC · Faseh
+· UniBH" em vez do nome completo — sem isso ele quebrava em 2 linhas no
+celular e a legenda voltava a invadir a imagem). Duas armadilhas de CSS que
+valeram a pena registrar em `memoria.md` (24/09/2026): medir a altura de um
+elemento logo após um clique que dispara transição dá número instável até a
+transição terminar de verdade; e duas regras de mesma especificidade — a que
+vem depois no arquivo ganha, mesmo "parecendo" menos específica (por isso o
+seletor ficou `.atuacao__legenda.atuacao__legenda--compacta`, reforçado, pra
+não perder pra regra de celular que fica no fim do arquivo).
+
 ## Cuidados de CSS
 
 - O cursor customizado (`assets/js/design-system/cursor.js`) mede a luminância
   do que está *de fato* sob o ponteiro (elemento real, gradiente incluído) para
   decidir se fica claro ou escuro — não é uma lista fixa de seções. Seção nova
   escura já funciona sozinha; não precisa (e não deve) adicionar caso especial.
+- `.marca` (logo do header e do rodapé) é desenhada com `mask-image:
+  url(...)` — isso só funciona com o site servido por HTTP (servidor local
+  ou publicado). Abrindo o `index.html` com duplo clique (`file://`), o
+  navegador bloqueia a máscara e **a logo some sem aviso**. Se a logo
+  "sumiu", conferir primeiro como a página foi aberta. Logo nova em seção
+  nova: preferir `<img>` (como na divisória), que funciona em qualquer caso.
 - A abertura da hero (portas + digitação do título) depende de um aviso
   (`portas:abertas`) disparado por `intro.js`. Qualquer efeito que precise
   esperar a abertura terminar deve ouvir esse evento, e não inventar seu próprio

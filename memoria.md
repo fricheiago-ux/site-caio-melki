@@ -79,3 +79,134 @@ Formato: uma linha por fato, com data.
   Larguras de corte hoje em uso, sem padrão único (ver CLAUDE.md, seção
   Cuidados de CSS): 640, 660, 720, 767, 860, 900, 1000, 1080, 1100, 1140,
   1279px.
+
+- 2026-09-23 — Seção "Experiência profissional" (`#trajetoria`): reescrito o
+  selo de status de cada card (antes era texto fixo "Em atividade" preso ao
+  estado do carrossel — todo card dizia isso quando ficava em foco, mesmo
+  vínculo já encerrado). Agora cada card tem classe própria
+  `.atuacao__vivo--ativo` (bolinha verde pulsando, mesma animação de
+  `.esp-painel__ponto` em especialidade.css) ou `.atuacao__vivo--encerrado`
+  (bolinha cinza parada + o período). Fonte dos dados: Lattes do Caio,
+  colado pelo Iago nesta conversa. Confirmado com o Iago (AskUserQuestion):
+  os cards "Mais Médicos" e "NESCON UFMG" continuam sendo 2 cards
+  separados — não veio um 7º card — só trocaram de logo para a arte que já
+  vem com as duas marcas (NESCON+Mais Médicos e NESCON+Preceptoria),
+  refletindo que são as duas experiências do Caio na NESCON.
+  Mapeamento aplicado:
+  - Alice Saúde → ativo, desde 2023.
+  - Unimed-BH → ativo, desde 2026. Texto do corpo trocado para "Médico
+    cooperado & Coordenador de operações em saúde digital" (pedido
+    explícito do Iago).
+  - Mais Médicos → encerrado, 2024–2026. Logo trocada para
+    `logo-nesocon-mais-medicos.png`.
+  - NESCON UFMG → ativo, desde 2026 (Coordenador Adjunto de Atividades
+    Síncronas + Supervisor de Tutoria/Facilitação, Preceptoria em MFC).
+    Logo trocada para `logo-nesocon-preceptoria-mfc.png`.
+  - **UNIFAP → GAP, não preenchido.** Esse card não aparece em nenhum lugar
+    do texto do Lattes que o Iago colou (nem a instituição, nem o período).
+    O selo hoje mostra `[PERÍODO]` em vermelho (cor --danger), de propósito,
+    em vez de eu inventar uma data. Precisa perguntar ao Caio.
+  - **PUC-MG · Faseh · Uni-BH → GAP parcial, não preenchido.** O Lattes só
+    tem entradas de PUC Minas (2020 e 2022, ambas isoladas, sem "Atual" —
+    logo já encerradas) — nada de Faseh nem de Uni-BH. Como o card combina
+    as 3 instituições num período só, não dá pra afirmar um intervalo sem
+    saber quando começou/terminou em cada uma. Selo também em `[PERÍODO]`
+    vermelho. Precisa perguntar ao Caio.
+  `logo-nescon.jpg` (a logo antiga, genérica, do card NESCON UFMG) ficou sem
+  uso — mantida em `assets/img/atuacao/` como reserva, não apagada (mesma
+  convenção do resto do projeto).
+  Verificado: servidor local, 6 imagens carregando (HTTP 200, complete=true,
+  1080×1350 cada), dot com animation-name `atuacaoPulsoVivo` presente de
+  fato no card ativo, texto/classe de cada badge lido via JS (não só
+  olhando print), 0px de estouro horizontal em 375px de largura, sem erro
+  no console.
+
+- 2026-09-24 — Card "PUC-MG · Faseh · Uni-BH" (carrossel de atuação): a
+  legenda (degradê + texto no rodapé do card) tapava a palavra "unibh" da
+  imagem — único card cujas 3 logos empilhadas ocupam até o rodapé da arte
+  (os outros 5 são um símbolo só, centralizado, com espaço vazio embaixo).
+  Tentativa inicial (23/09): encolher a imagem pro topo do card
+  (`object-fit: contain`) — o Iago pediu pra reverter, a imagem devia
+  continuar de sangria (`cover`) como os outros cards. Revertido. Solução
+  final: só a LEGENDA desse card ficou mais compacta — nova classe
+  `.atuacao__legenda--compacta` (`atuacao.css`) tira o respiro de 7rem do
+  degradê antes do texto, e o selo do card teve o texto encurtado ("03 •
+  PUC · Faseh · UniBH" em vez de "03 • PUC-MG · Faseh · Uni-BH" — sem isso,
+  o selo quebrava em 2 linhas no celular e a legenda voltava a invadir o
+  "unibh"). Os outros 5 cards não têm a classe, continuam com o degradê
+  padrão.
+  Duas armadilhas encontradas no caminho, candidatas a virar regra global
+  (perguntar ao Iago se registra em `~/.claude/CLAUDE.md`):
+  1. **Medir imediatamente após um clique que dispara transição CSS dá
+     número errado.** A legenda tem `transition: opacity/transform`; medir
+     a altura logo após o clique (mesmo com `setTimeout` de ~900ms) pegou
+     o card ainda em transição mais de uma vez, com valores que não se
+     repetiam entre execuções idênticas. Só estabilizou esperando a
+     transição terminar de verdade e conferindo `opacity:1`/
+     `transform:none` computados antes de confiar na medida.
+  2. **Duas regras de mesma especificidade (uma classe só) — a que vem
+     depois no arquivo ganha, independente de qual "parece" mais
+     específica.** `.atuacao__legenda--compacta` e a
+     `@media(max-width:640px) .atuacao__legenda` (a media query vem depois
+     no arquivo, por causa da regra de media queries no fim do bloco) têm a
+     mesma especificidade (0,1,0) — a media query ganhava no celular,
+     silenciosamente. Corrigido reforçando a especificidade do modifier
+     para `.atuacao__legenda.atuacao__legenda--compacta` (0,2,0), que
+     ganha em qualquer ordem.
+  Verificado: servidor local, card em estado assentado (não em transição):
+  desktop 1100px de folga +5,4pp entre o fim do "unibh" e o topo da
+  legenda; mobile 375px +0,8pp; 0px de estouro horizontal; sem erro no
+  console; os outros 5 cards confirmados sem a classe `--compacta`,
+  continuam com os 112px de respiro padrão.
+
+- 2026-09-24 — Os dois GAPs de período do carrossel de atuação (ver entrada
+  de 2026-09-23) foram fechados pelo Iago, direto no chat (não veio do
+  Lattes — o Lattes continua sem UNIFAP e sem Faseh/Uni-BH, só cobre PUC
+  Minas isolada): **UNIFAP → ativo** ("Em atividade"); **PUC-MG · Faseh ·
+  Uni-BH → encerrado, 2023 – 2024**. Os dois `[PERÍODO]` em vermelho
+  sumiram do site. Verificado nos 6 cards via servidor local (texto, classe
+  --ativo/--encerrado e cor de cada selo lidos do DOM), sem erro no
+  console.
+
+- 2026-09-24 — Três ajustes visuais na seção "Experiência profissional",
+  pedidos pelo Iago: (1) fundo da seção agora é `var(--paper-200)`, igual à
+  seção "Formação" logo acima — as duas ficam com o mesmo tom bege, uma
+  emenda visual mais suave entre elas; (2) os cards do baralho (`.atuacao__
+  baralho`) encolheram 15%, de 420px pra 357px de largura máxima; (3) os
+  cards de trás no baralho perderam o filtro `grayscale+blur+brightness`
+  que tinham — ficam só com a opacidade 0.4 que já existia (herdada de
+  `.atuacao__card[data-estado='antes'/'depois']`), sem desfoque.
+  Verificado no servidor local, desktop e mobile: fundo das duas seções
+  idêntico (`rgb(244,242,236)`), `max-width` do baralho em 357px nos dois
+  tamanhos de tela, `filter: none` nos cards de trás com a opacidade 0.4
+  mantida, 0px de estouro horizontal no mobile, sem erro no console.
+  **Soluço de cache à parte, sem explicação clara:** ao subir o `?v=` de 79
+  pra 80 (mudança normal, uma vez só), o navegador serviu a versão VELHA do
+  CSS mesmo com a query string nova — confirmado comparando a resposta real
+  do servidor (`curl`/`fetch` direto bateu certo) contra o que o
+  `document.styleSheets` do navegador tinha carregado (errado). Bumpar de
+  novo pra `?v=81` resolveu. Não investiguei a causa raiz a fundo (não valia
+  o tempo desta vez) — se acontecer de novo, vale investigar se é algo
+  específico do navegador de teste desta sessão ou do próprio
+  `python3 -m http.server`.
+
+- 2026-09-24 — Período do card "PUC-MG · Faseh · Uni-BH" corrigido de novo
+  pelo Iago: era 2023–2024, agora **2020–2025**. Mesmo dia da rodada
+  anterior — ele reconsiderou a data depois de já ter enviado a primeira.
+  Verificado direto no card via servidor local.
+
+- 2026-09-24 — Espaçamento entre "Minha formação acadêmica" e "Experiência
+  profissional" reduzido pela metade, a pedido do Iago (achou grande
+  demais). Cada seção tem 8rem (128px) de respiro padrão em cima e embaixo
+  (`.section { padding-block: var(--sp-32) }` em `components.css` — existe
+  até um `.section--tight` pronto pra 6rem, mas não usei porque afetaria os
+  DOIS lados de cada seção, e eu só queria apertar o lado que elas dividem).
+  Em vez disso, só as bordas que se tocam encolheram, via style inline:
+  `padding-bottom:var(--sp-16)` (4rem) no `#formacao` e
+  `padding-top:var(--sp-16)` no `#trajetoria` — o respiro contra os
+  vizinhos de cada uma (pilares acima, FAQ abaixo) ficou intocado.
+  Verificado: a distância real entre o fim da grade de instituições e o
+  título "Experiência profissional" caiu de 256px pra 128px (medida com
+  `getBoundingClientRect`, não só no olho), confirmada igual em mobile
+  (375px) e desktop (1200px), 0px de estouro horizontal, sem erro no
+  console.
