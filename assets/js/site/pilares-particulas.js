@@ -1,23 +1,30 @@
 /*
   PARTÍCULAS DE FUNDO — só dentro de #pilares
-  Porte fiel do efeito de fundo da hero de mirelle-fashion.aura.build:
-  não é a rede de pontos+linhas de design-system-2/js/particles.js (isso
-  foi tentativa 1, rejeitada — lia como "polígonos voando"). É uma nuvem
-  de pontos em Three.js/WebGL, sem linha nenhuma entre eles, girando bem
-  devagar. Mesma biblioteca (three.js r134, cdnjs), mesma contagem, mesmo
-  tamanho de ponto, mesma velocidade de giro, mesmo balanço vertical —
-  isso tudo foi copiado 1:1 do código-fonte deles (lido do atributo
-  srcdoc do iframe de preview, já que o site nunca renderiza puro).
+  Porte fiel do efeito de fundo da hero de mirelle-fashion.aura.build: uma
+  nuvem de pontos em Three.js/WebGL girando bem devagar (não a rede de
+  pontos+linhas de particles.js — isso foi tentativa 1, rejeitada, lia
+  como "polígonos voando"). Mesma biblioteca (three.js r134, cdnjs), mesma
+  contagem, mesma câmera, fog e velocidade de giro/balanço do original
+  (lido do atributo srcdoc do iframe de preview deles).
 
-  Duas cores foram adaptadas, e só elas:
-  - partícula: 0x173f22 (verde-escuro) → --sand-300. O deles é claro por
-    trás de partícula escura; #pilares é o oposto (fundo escuro), então
-    manter a cor original apagaria o efeito por completo.
-  - fog: 0xf4f8e9 (creme claro, a cor de fundo do hero deles) → um tom do
-    nosso próprio gradiente (#2A302A), pro ponto que se afasta desbotar
-    no NOSSO fundo, e não crie um halo claro estranho no meio do verde.
-  Contagem, tamanho, opacidade, blending, câmera, fog (densidade) e a
-  animação inteira são os valores exatos do original.
+  Cores adaptadas (só elas): partícula 0x173f22→--sand-300 e fog
+  0xf4f8e9→#2A302A, porque o fundo deles é claro e o nosso é escuro —
+  manter as cores originais apagaria o efeito por completo.
+
+  Ajuste de 23/09 (a pedido do Iago — estava competindo com as imagens e
+  o texto dos cards):
+  1. Quadrado → círculo macio. THREE.PointsMaterial sem `map` desenha cada
+     ponto como um quadrado sólido — é o padrão da biblioteca, não uma
+     escolha nossa. Uma textura circular com degradê (criarTexturaPonto)
+     corrige isso.
+  2. Opacidade 0,3 → 0,18: mais discreto, sem sumir.
+  3. Sem mais "partícula gigante passando na frente da tela": isso era
+     `sizeAttenuation` (ligado por padrão) fazendo o tamanho do ponto
+     crescer conforme ele girava para perto da câmera, em perspectiva —
+     como os pontos vivem numa nuvem 3D que gira sozinha, de tempos em
+     tempos um deles passava bem perto da lente e inflava. Desligado
+     (`sizeAttenuation: false`): todo ponto nasce do mesmo tamanho na
+     tela, não importa a distância.
 */
 (function () {
   const secao = document.querySelector('.pilares');
@@ -45,11 +52,32 @@
   }
   geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
+  // Ponto branco com degradê radial (centro cheio, borda some): usado como
+  // "carimbo" de cada partícula. Sem isso, THREE.PointsMaterial desenha um
+  // quadrado sólido — é o formato padrão da biblioteca para pontos.
+  function criarTexturaPonto() {
+    const c = document.createElement('canvas');
+    c.width = c.height = 64;
+    const ctx = c.getContext('2d');
+    const grad = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.5, 'rgba(255,255,255,0.55)');
+    grad.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 64, 64);
+    const tex = new THREE.CanvasTexture(c);
+    tex.needsUpdate = true;
+    return tex;
+  }
+
   const material = new THREE.PointsMaterial({
-    size: 0.04,
+    size: 2.4, // pixels na tela — ver sizeAttenuation abaixo
+    map: criarTexturaPonto(),
     color: 0xe8dfcd, // --sand-300
     transparent: true,
-    opacity: 0.3,
+    opacity: 0.18,
+    sizeAttenuation: false, // tamanho fixo: sem "bolha gigante" ao girar perto da câmera
+    depthWrite: false, // evita risco de sobreposição esquisita entre pontos transparentes
     blending: THREE.NormalBlending
   });
 

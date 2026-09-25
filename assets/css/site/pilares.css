@@ -111,8 +111,8 @@ position: absolute;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
-width: 32px;
-height: 32px;
+width: 26px; /* era 32px — reduzido a pedido do Iago (24/09), só no desktop */
+height: 26px;
 color: var(--sand-300);
 stroke-width: 1.5;
 }
