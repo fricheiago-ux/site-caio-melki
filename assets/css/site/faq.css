@@ -21,7 +21,6 @@ font-size: var(--fs-body);
 line-height: 1.6;
 color: var(--ink-500);
 }
-.faq-intro .btn-canal { align-self: flex-start; margin-bottom: var(--sp-6); }
 
 .faq-canais { display: flex; gap: var(--sp-3); }
 .faq-canal {
