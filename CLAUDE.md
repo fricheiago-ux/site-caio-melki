@@ -8,9 +8,9 @@ próprios. No ar em **https://fricheiago-ux.github.io/site-caio-melki/**, via
 GitHub Pages, publicado automaticamente a partir do repositório
 [fricheiago-ux/site-caio-melki](https://github.com/fricheiago-ux/site-caio-melki)
 (público). O domínio **caiomelkimfc.com.br** está registrado na Hostinger;
-conexão com o Pages em andamento desde 25/09/2026 (lado do GitHub pronto —
-arquivo `CNAME` + domínio registrado via API —, falta o DNS na Hostinger,
-que só o Iago pode configurar; ver "Ao publicar", item 5).
+conectado ao Pages em 25/09/2026 — o site já abre em caiomelkimfc.com.br;
+falta só o certificado HTTPS sair (automático) e marcar "Enforce HTTPS"
+nas configurações do Pages (ver "Ao publicar", item 5).
 
 ---
 
@@ -372,10 +372,14 @@ Como funciona por baixo:
    apagaria a configuração de domínio do Pages. `gh api -X PUT
    repos/fricheiago-ux/site-caio-melki/pages -f cname=caiomelkimfc.com.br`
    registrou o domínio nas configurações do Pages (o mesmo que preencher
-   Settings → Pages → Custom domain na interface). **Falta o lado da
-   Hostinger** — isso só o Iago pode fazer, direto no painel dele: apontar o
-   DNS do domínio para o GitHub Pages (registros A do domínio raiz para os 4
-   IPs do GitHub — 185.199.108.153, .109.153, .110.153, .111.153 — e/ou um
-   CNAME de `www` para `fricheiago-ux.github.io`). Depois de propagar (pode
-   levar de minutos a algumas horas), o GitHub emite o certificado HTTPS
-   sozinho — sem passo manual nenhum além de esperar.
+   Settings → Pages → Custom domain na interface). **DNS na Hostinger:
+   feito e conferido em 25/09/2026** — domínio raiz com só os 4 registros A
+   do GitHub (185.199.108.153, .109.153, .110.153, .111.153, sem AAAA
+   sobrando) e `www` também resolvendo para o GitHub. O site já abre em
+   http://caiomelkimfc.com.br, ainda "Não seguro": o GitHub emite o
+   certificado HTTPS sozinho (de minutos a ~24h). **Último passo, só o
+   Iago:** quando o cadeado aparecer, marcar "Enforce HTTPS" em
+   github.com/fricheiago-ux/site-caio-melki/settings/pages (a caixa fica
+   cinza até o certificado sair). Depois disso, trocar a URL do GitHub
+   Pages pela do domínio em `canonical`/Open Graph/JSON-LD do `index.html`,
+   `robots.txt` e `sitemap.xml`.
