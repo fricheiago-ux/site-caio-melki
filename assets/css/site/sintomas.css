@@ -499,6 +499,19 @@ color: var(--sage-400);
 .sint-ficha__pe { flex-direction: column; align-items: flex-start; }
 }
 
+/* Celular: a nuvem inteira (38 palavras) passava de 640px de altura — muita
+   rolagem só para ela. Letras um pouco menores fazem caber mais palavras por
+   linha, e o respiro entre linhas e em volta da nuvem encolhe junto. Iago
+   pediu 20–25% a menos, só no celular (25/09/2026). */
+@media (max-width: 640px) {
+.sint-nuvem { gap: 0.35rem var(--sp-3); margin: var(--sp-8) auto var(--sp-6); }
+.sint-palavra { line-height: 1; }
+.sint-palavra[data-peso="5"] { font-size: 1.72rem; }
+.sint-palavra[data-peso="4"] { font-size: 1.28rem; }
+.sint-palavra[data-peso="3"] { font-size: 0.98rem; }
+.sint-palavra[data-peso="2"] { font-size: 0.84rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
 .sint-palavra,
 .sint-painel,
