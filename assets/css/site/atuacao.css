@@ -245,6 +245,9 @@ line-height: 1.2;
 letter-spacing: -0.01em;
 }
 
+/* Versão curta da frase: só aparece no celular (ver @media 640px). */
+.atuacao__frase-curta { display: none; }
+
 /* O selo de período: sempre visível (não depende mais do estado do
    carrossel — antes ficava preso a data-estado='ativo', que é a posição
    no baralho, não o status real do vínculo; toda logo em foco dizia
@@ -334,11 +337,18 @@ border-left: 1px solid var(--line);
 .atuacao__card { border-width: 6px; border-radius: 30px; }
 .atuacao__legenda { padding: 5rem var(--sp-5) var(--sp-6); }
 .atuacao__frase { font-size: 1.25rem; }
-/* Card "PUC-MG · Faseh · Uni-BH": no celular o selo do card quebra em
-   2 linhas (card mais estreito), o que já não cabia na folga calculada
-   pro desktop — aperta mais um pouco aqui. */
-.atuacao__legenda.atuacao__legenda--compacta { padding-bottom: 0; }
-.atuacao__legenda--compacta .atuacao__selo { margin-bottom: 2px; font-size: 0.625rem; }
+/* Cards de arte empilhada (03, 04, 06): no celular a frase longa ocupava
+   3 linhas e a legenda chegava a zerar a margem de baixo para não tampar
+   a logo. Aqui entra a versão curta da frase (texto do Iago, 25/09/2026),
+   e a margem de baixo volta a ser igual à dos outros cards. */
+.atuacao__frase-longa { display: none; }
+.atuacao__frase-curta { display: inline; }
+.atuacao__legenda.atuacao__legenda--compacta { padding: 0 var(--sp-5) var(--sp-6); }
+/* Card 03: em duas linhas a legenda subia e voltava a tampar o "unibh" da
+   arte — fica numa linha só, e a letra encolhe um pouco só nos celulares
+   estreitos (abaixo de ~410px) para caber. */
+.atuacao__frase-curta--linha { white-space: nowrap; font-size: min(1.25rem, 4.9vw); }
+.atuacao__legenda--compacta .atuacao__selo { margin-bottom: var(--sp-2); font-size: 0.625rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
