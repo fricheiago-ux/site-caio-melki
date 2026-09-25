@@ -40,13 +40,16 @@ jobs:
         # img/, com o de sempre e o de reserva dentro de img/. Nada em
         # _nao-publicar/ entra aqui.
         # robots.txt e sitemap.xml adicionados na revisão de SEO/performance
-        # (22/09/2026) — arquivos soltos na raiz, igual o index.html.
+        # (22/09/2026) — arquivos soltos na raiz, igual o index.html. CNAME
+        # adicionado na conexão do domínio próprio (25/09/2026) — sem ele
+        # aqui, cada publicação apagaria a configuração de domínio do Pages.
         run: |
           set -e
           mkdir -p _site/assets
           cp index.html _site/
           cp robots.txt _site/
           cp sitemap.xml _site/
+          cp CNAME _site/
           cp -R assets/css _site/assets/
           cp -R assets/js  _site/assets/
           cp -R assets/img _site/assets/

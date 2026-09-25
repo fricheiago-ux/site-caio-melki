@@ -7,8 +7,10 @@ Belo Horizonte. Estático, sem etapa de build — é `index.html` puro com CSS e
 próprios. No ar em **https://fricheiago-ux.github.io/site-caio-melki/**, via
 GitHub Pages, publicado automaticamente a partir do repositório
 [fricheiago-ux/site-caio-melki](https://github.com/fricheiago-ux/site-caio-melki)
-(público). O domínio **caiomelkimfc.com.br** está registrado na Hostinger mas
-ainda não aponta para cá — apontar é um passo futuro opcional, não feito ainda.
+(público). O domínio **caiomelkimfc.com.br** está registrado na Hostinger;
+conexão com o Pages em andamento desde 25/09/2026 (lado do GitHub pronto —
+arquivo `CNAME` + domínio registrado via API —, falta o DNS na Hostinger,
+que só o Iago pode configurar; ver "Ao publicar", item 5).
 
 ---
 
@@ -346,7 +348,16 @@ Como funciona por baixo:
    referência no HTML/CSS/JS aponta para um caminho inexistente e que o nome
    bate letra por letra com o do disco (Linux diferencia maiúscula/minúscula;
    macOS não) — GitHub Pages roda em servidor Linux.
-5. Domínio próprio (`caiomelkimfc.com.br`) ainda não está conectado a este
-   Pages. Se isso for feito no futuro, documentar aqui o procedimento (arquivo
-   `CNAME` no repositório + registro DNS na Hostinger apontando para o
-   GitHub).
+5. Domínio próprio: conexão iniciada em 25/09/2026. Arquivo `CNAME` na raiz
+   do repositório (conteúdo: `caiomelkimfc.com.br`) — o workflow copia ele
+   para `_site/` igual ao `robots.txt`/`sitemap.xml`, senão cada publicação
+   apagaria a configuração de domínio do Pages. `gh api -X PUT
+   repos/fricheiago-ux/site-caio-melki/pages -f cname=caiomelkimfc.com.br`
+   registrou o domínio nas configurações do Pages (o mesmo que preencher
+   Settings → Pages → Custom domain na interface). **Falta o lado da
+   Hostinger** — isso só o Iago pode fazer, direto no painel dele: apontar o
+   DNS do domínio para o GitHub Pages (registros A do domínio raiz para os 4
+   IPs do GitHub — 185.199.108.153, .109.153, .110.153, .111.153 — e/ou um
+   CNAME de `www` para `fricheiago-ux.github.io`). Depois de propagar (pode
+   levar de minutos a algumas horas), o GitHub emite o certificado HTTPS
+   sozinho — sem passo manual nenhum além de esperar.
