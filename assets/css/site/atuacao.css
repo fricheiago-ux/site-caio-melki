@@ -127,7 +127,8 @@ overflow: hidden;
 .atuacao__baralho {
 position: relative;
 width: 100%;
-max-width: 420px;
+max-width: 357px; /* 420px - 15%, a pedido do Iago (24/09/2026) — os
+                      cards estavam grandes demais em relação ao painel. */
 aspect-ratio: 4 / 5;
 }
 
@@ -165,16 +166,16 @@ opacity: 0.4;
 }
 
 /* Cada logo já vem com o fundo da própria marca, no formato do card:
-   entra em sangria, sem moldura nossa por baixo. */
+   entra em sangria, sem moldura nossa por baixo. Os cards de trás já
+   ficam com opacity:0.4 (herdado de .atuacao__card[data-estado='antes'/
+   'depois'], mais acima neste arquivo) — sem filtro nenhum aqui em cima:
+   antes tinham grayscale+blur+brightness, tirado a pedido do Iago
+   (24/09/2026) por ficar pesado demais. */
 .atuacao__marca {
 display: block;
 width: 100%;
 height: 100%;
 background: var(--paper-300);
-transition: filter 0.7s ease;
-}
-.atuacao__card:not([data-estado='ativo']) .atuacao__marca {
-filter: grayscale(1) blur(2px) brightness(0.75);
 }
 .atuacao__marca img {
 display: block;
@@ -182,6 +183,8 @@ width: 100%;
 height: 100%;
 object-fit: cover;
 }
+
+
 
 /* Legenda que sobe sobre a imagem do card ativo */
 .atuacao__legenda {
@@ -202,6 +205,21 @@ transition: opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-o
 .atuacao__card[data-estado='ativo'] .atuacao__legenda {
 opacity: 1;
 transform: none;
+}
+
+/* Card "PUC-MG · Faseh · Uni-BH": a arte empilha as 3 marcas até o
+   rodapé da imagem (as outras logos são um símbolo só, centralizado,
+   com espaço vazio embaixo — só essa tem conteúdo até embaixo mesmo).
+   O degradê padrão sobe 7rem antes do texto pra dar contraste em fundos
+   variados, mas nessa arte esse respiro cai bem em cima da palavra
+   "unibh". Só nesse card, o degradê fica coladinho no texto (sem o
+   respiro de cima) — a imagem continua de sangria (cover), sem cortar
+   nada, igual às outras. */
+.atuacao__legenda.atuacao__legenda--compacta {
+padding: 0 var(--sp-8) 1rem;
+}
+.atuacao__legenda--compacta .atuacao__selo {
+margin-bottom: var(--sp-2);
 }
 
 .atuacao__selo {
@@ -228,10 +246,18 @@ line-height: 1.2;
 letter-spacing: -0.01em;
 }
 
+/* O selo de período: sempre visível (não depende mais do estado do
+   carrossel — antes ficava preso a data-estado='ativo', que é a posição
+   no baralho, não o status real do vínculo; toda logo em foco dizia
+   "Em atividade", inclusive vínculos já encerrados).
+   .atuacao__vivo--ativo tem a bolinha verde pulsando (mesma animação
+   de .esp-painel__ponto, em especialidade.css); um vínculo encerrado
+   mostra o período com um traço estático no lugar da bolinha. */
 .atuacao__vivo {
 position: absolute;
 top: var(--sp-6);
 left: var(--sp-6);
+z-index: 5;
 display: flex;
 align-items: center;
 gap: var(--sp-3);
@@ -245,16 +271,27 @@ font-family: var(--font-mono);
 font-size: 10px;
 letter-spacing: 0.3em;
 text-transform: uppercase;
-opacity: 0;
-transition: opacity var(--dur-fast) ease;
 }
-.atuacao__card[data-estado='ativo'] .atuacao__vivo { opacity: 1; }
 .atuacao__vivo i {
-width: 8px;
-height: 8px;
+width: 7px;
+height: 7px;
 border-radius: var(--r-full);
-background: var(--paper-100);
-box-shadow: 0 0 10px rgba(251, 250, 247, 0.9);
+flex: none;
+}
+.atuacao__vivo--ativo i {
+background: var(--sage-400);
+animation: atuacaoPulsoVivo 2.4s ease-in-out infinite;
+}
+.atuacao__vivo--encerrado i {
+background: rgba(251, 250, 247, 0.4);
+box-shadow: none;
+}
+@keyframes atuacaoPulsoVivo {
+0%, 100% { opacity: 1; transform: scale(1); }
+50% { opacity: 0.35; transform: scale(0.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+.atuacao__vivo--ativo i { animation: none; }
 }
 
 /* ---------- Respiro ---------- */
@@ -288,6 +325,11 @@ border-left: 1px solid var(--line);
 .atuacao__card { border-width: 6px; border-radius: 30px; }
 .atuacao__legenda { padding: 5rem var(--sp-5) var(--sp-6); }
 .atuacao__frase { font-size: 1.25rem; }
+/* Card "PUC-MG · Faseh · Uni-BH": no celular o selo do card quebra em
+   2 linhas (card mais estreito), o que já não cabia na folga calculada
+   pro desktop — aperta mais um pouco aqui. */
+.atuacao__legenda.atuacao__legenda--compacta { padding-bottom: 0; }
+.atuacao__legenda--compacta .atuacao__selo { margin-bottom: 2px; font-size: 0.625rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
