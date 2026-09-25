@@ -1,0 +1,160 @@
+/* ============================================================
+   DIVISÓRIA — "Sobre mim" / início do currículo
+   Seção curta entre "Os pilares" e "Formação acadêmica": separa os
+   temas gerais de MFC do currículo do Caio. Layout da ref-1
+   (dralexandre.com.br): logo à esquerda, foto no centro encostada na
+   base, nome e frase à direita. A logo vira "Sobre mim" no hover e
+   leva para a formação acadêmica (o site é de página única).
+
+   Entrada sem linha reta: o topo do fundo nasce do creme da página
+   (paper-100, a mesma cor em volta do cartão de pilares) e vira verde
+   aos poucos, conforme se rola. A saída para "Formação" é reta de
+   propósito (pedido do Iago, 24/09/2026): a foto do Caio fica apoiada
+   nessa borda, como na ref-1.
+
+   Logo e foto são <img> comuns (não mask-image): máscara com url()
+   exige mesma origem e some quando o arquivo é aberto direto do disco.
+   ============================================================ */
+
+.divisoria {
+--fade-topo: clamp(140px, 15vw, 240px);
+--foto-h: clamp(420px, 42vw, 600px);
+position: relative;
+overflow: hidden;
+color: var(--paper-100);
+/* Degradês com várias paradas (curva suave), não 2 pontos: a mistura
+   linear creme→verde forma uma "faixa" visível no meio do caminho. */
+background:
+linear-gradient(to bottom,
+  var(--paper-100) 0%,
+  rgba(251, 250, 247, 0.74) 19%,
+  rgba(251, 250, 247, 0.54) 34%,
+  rgba(251, 250, 247, 0.38) 47%,
+  rgba(251, 250, 247, 0.19) 65%,
+  rgba(251, 250, 247, 0.075) 80%,
+  rgba(251, 250, 247, 0.02) 91%,
+  rgba(251, 250, 247, 0) 100%) top / 100% var(--fade-topo) no-repeat,
+linear-gradient(135deg, var(--sage-600), var(--sage-700));
+}
+
+.divisoria__grade {
+display: grid;
+grid-template-columns: 1fr auto 1fr;
+align-items: center;
+column-gap: clamp(var(--sp-8), 5vw, var(--sp-24));
+min-height: calc(var(--foto-h) + var(--fade-topo) * 0.35);
+}
+
+/* ---------- Logo → "Sobre mim" ---------- */
+.divisoria__logo {
+position: relative;
+justify-self: center;
+display: block;
+width: clamp(150px, 14vw, 210px);
+cursor: none;
+outline-offset: 8px;
+}
+.divisoria__logo-img {
+display: block;
+width: 100%;
+height: auto;
+transition: opacity var(--dur-base) var(--ease-out-expo), transform var(--dur-base) var(--ease-out-expo);
+}
+.divisoria__logo-hover {
+position: absolute;
+inset: 50% auto auto 50%;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 0.85rem 1.6rem;
+white-space: nowrap;
+font-family: var(--font-sans);
+font-size: var(--fs-label);
+font-weight: 500;
+letter-spacing: 0.14em;
+text-transform: uppercase;
+color: var(--paper-100);
+border: 1px solid rgba(251, 250, 247, 0.55);
+border-radius: var(--r-full);
+opacity: 0;
+transform: translate(-50%, -50%) scale(0.9);
+transition: opacity var(--dur-base) var(--ease-out-expo), transform var(--dur-base) var(--ease-out-expo);
+pointer-events: none;
+}
+.divisoria__logo:hover .divisoria__logo-img,
+.divisoria__logo:focus-visible .divisoria__logo-img { opacity: 0; transform: scale(0.94); }
+.divisoria__logo:hover .divisoria__logo-hover,
+.divisoria__logo:focus-visible .divisoria__logo-hover { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+/* ---------- Foto: encostada na base da seção ----------
+   A imagem é 14% mais alta que o espaço e desce esses 14% para fora da
+   seção (cortados pelo overflow): é o "zoom" que deixa o busto maior e
+   corta o corpo exatamente na borda de baixo, sem vão. */
+.divisoria__foto {
+position: relative;
+align-self: end;
+height: var(--foto-h);
+width: calc(var(--foto-h) * 1.14 * 707 / 1300);
+pointer-events: none;
+/* Sombra no contêiner, não na <img>: se um dia a imagem ganhar
+   mask-image de novo, a máscara recortaria a sombra num retângulo. */
+filter: drop-shadow(0 24px 40px rgba(20, 30, 22, 0.28));
+}
+.divisoria__foto img {
+position: absolute;
+left: 0;
+bottom: calc(var(--foto-h) * -0.14);
+height: calc(var(--foto-h) * 1.14);
+width: auto;
+max-width: none;
+}
+
+/* ---------- Nome e frase ---------- */
+.divisoria__texto {
+justify-self: center;
+max-width: 32ch;
+}
+.divisoria__nome {
+margin: 0 0 var(--sp-1);
+font-family: var(--font-sans);
+font-weight: 600;
+font-size: var(--fs-h4);
+line-height: 1.2;
+}
+.divisoria__crm {
+margin: 0 0 var(--sp-6);
+font-family: var(--font-mono);
+font-size: var(--fs-caption);
+color: rgba(251, 250, 247, 0.75);
+}
+.divisoria__frase {
+margin: 0;
+font-family: var(--font-serif);
+font-style: italic;
+font-size: clamp(1.15rem, 1.7vw, 1.6rem);
+line-height: 1.34;
+}
+
+/* ---------- Tablet e celular: empilha, foto por último, na base ---------- */
+@media (max-width: 900px) {
+.divisoria {
+--fade-topo: 110px;
+--foto-h: clamp(340px, 78vw, 460px);
+}
+.divisoria__grade {
+grid-template-columns: 1fr;
+justify-items: center;
+row-gap: var(--sp-8);
+min-height: 0;
+padding-top: calc(var(--fade-topo) + var(--sp-4));
+text-align: center;
+}
+.divisoria__logo { justify-self: center; order: 1; }
+.divisoria__texto { justify-self: center; order: 2; }
+.divisoria__foto { justify-self: center; order: 3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+.divisoria__logo-img,
+.divisoria__logo-hover { transition: none; }
+}
