@@ -17,7 +17,9 @@
   elas somem.
 
   Quem precisa esperar a abertura ouve o evento 'portas:abertas' no window,
-  ou consulta window.portasAbertas.
+  ou consulta window.portasAbertas. Quem pode começar com as portas ainda
+  se mexendo (a digitação da hero) ouve 'portas:meio' / window.portasMeio,
+  disparado na metade do movimento — sempre antes de 'portas:abertas'.
 
   Para desligar as portas: <div class="abertura" data-portas="off">
 */
@@ -100,9 +102,19 @@
 
   let agendada = null;
 
+  // Metade do caminho: a curva das portas é simétrica, então na metade do
+  // tempo cada folha já descobriu metade da sua metade da tela. A digitação
+  // da hero larga daqui, com as portas ainda saindo, em vez de esperar o fim.
+  function anunciarMeio() {
+    if (window.portasMeio) return;
+    window.portasMeio = true;
+    window.dispatchEvent(new Event('portas:meio'));
+  }
+
   function concluir() {
     if (estado === 'aberta') return;
     estado = 'aberta';
+    anunciarMeio();
     portas.setAttribute('data-aberto', '1');
     portas.removeAttribute('tabindex');
     portas.setAttribute('aria-hidden', 'true');
@@ -118,6 +130,7 @@
     portas.classList.add('is-abrindo');
     // O transitionend não é confiável quando a aba está em segundo plano,
     // então quem manda é o relógio; a transição só precisa caber nele.
+    setTimeout(anunciarMeio, DURACAO / 2);
     setTimeout(concluir, DURACAO);
   }
 

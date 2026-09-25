@@ -246,7 +246,9 @@ não perder pra regra de celular que fica no fim do arquivo).
 - A abertura da hero (portas + digitação do título) depende de um aviso
   (`portas:abertas`) disparado por `intro.js`. Qualquer efeito que precise
   esperar a abertura terminar deve ouvir esse evento, e não inventar seu próprio
-  cronômetro.
+  cronômetro. Existe também `portas:meio` (25/09/2026), disparado na metade do
+  movimento das portas — é dele que a digitação "Oi, sou o Caio" larga, a
+  pedido do Iago (antes esperava o fim + 160ms, ~1,2s parada; agora ~0,5s).
 - `.navbar` tem `transform: translateY(0)` depois do fade-in de entrada
   (`nav-load`/`.loaded` em `animations.css`) — parece "sem efeito", mas
   qualquer elemento com `.navbar` como ancestral que use
