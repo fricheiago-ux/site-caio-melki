@@ -135,7 +135,8 @@ opacity: 0.6;
 transition: opacity var(--dur-base) ease, background-color var(--dur-base) ease;
 }
 .inst-card:hover .inst-card__dica,
-.inst-card:focus-visible .inst-card__dica { opacity: 1; background: rgba(251, 250, 247, 0.16); }
+.inst-card:focus-visible .inst-card__dica,
+.inst-card.is-open .inst-card__dica { opacity: 1; background: rgba(251, 250, 247, 0.16); }
 
 /* ---------- Legenda sob a grade ---------- */
 .inst-nome {
@@ -159,13 +160,14 @@ transition: color var(--dur-fast) ease;
 .inst-card { height: 160px; }
 .inst-card__logo { max-height: 72px; }
 .inst-card__face { padding: var(--sp-4); }
+/* 5 itens em grade de 2 colunas sobra 1 sozinho na última linha, grudado
+   à esquerda — parece que falta um card à direita. Ocupando as duas
+   colunas só nesse item e limitando a largura dele à metade, ele fica
+   centralizado em vez de encostado. */
+.inst-item:last-child { grid-column: 1 / -1; width: calc(50% - var(--sp-3) / 2); margin-inline: auto; }
 }
 
-/* Sem hover (toque): a descrição vira a face visível ao tocar */
-@media (hover: none) {
-.inst-card__face--logo { transform: rotateX(0deg) !important; }
-.inst-card__face--desc { display: none; }
-.inst-card__dica { display: none; }
-.inst-toque { display: block; }
-}
-.inst-toque { display: none; margin-top: var(--sp-2); }
+/* Sem mouse (toque): a virada não usa :hover — :hover não se desfaz
+   sozinho depois de um toque (ver CLAUDE.md). Quem abre e fecha aqui é
+   instituicoes.js, adicionando/tirando .inst-card.is-open no tap; o CSS
+   acima já reage a essa classe do mesmo jeito que reage ao :hover. */

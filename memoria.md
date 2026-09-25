@@ -62,8 +62,22 @@ Formato: uma linha por fato, com data.
      ("Pesquise o que você está sentin...") em 375px de largura.
   4. [NÃO VERIFICADO] especialidade — tem 3 regras @media, não confirmadas
      visualmente ainda.
-  5. [NÃO VERIFICADO] formacao/instituicoes — tem regras @media (1080/720px),
-     não confirmadas visualmente.
+  5. [FEITO, 2026-09-25] formacao/instituicoes — verificado e corrigido: (1) a
+     virada 3D dependia de :hover puro e por isso não funcionava no toque —
+     agora `instituicoes.js` abre/fecha cada card no tap via classe
+     `.inst-card.is-open`, e o primeiro card faz uma demonstração automática
+     de virar-e-voltar uma vez (desktop e mobile) ao entrar na tela, para
+     ensinar que são interativos; (2) o logo da Hertfordshire tinha fundo
+     roxo opaco no PNG (os outros 4 têm fundo branco) — o filtro CSS
+     (grayscale→invert→brightness→contrast) que devia apagar o fundo contra
+     o `mix-blend-mode: screen` estava, nesse caso, transformando o fundo em
+     branco sólido em vez de preto, aparecendo como um retângulo branco
+     visível atrás do logo (mais óbvio no mobile pelo tamanho menor do
+     card). Corrigido reprocessando `hertfordshire.png` para o mesmo padrão
+     dos outros (fundo branco, marca escura) em vez de mexer no CSS; (3) com
+     5 cards em grade de 2 colunas no mobile, o último ficava sozinho e
+     colado à esquerda — `.inst-item:last-child` agora ocupa a linha
+     inteira e centraliza a própria largura.
   6. [NÃO VERIFICADO] trajetoria (carrossel `atuacao.css/js`) — funciona por
      arraste/toque, tem regras @media, comportamento touch não testado.
   7. [NÃO VERIFICADO] agendar + rodapé (`fechamento.css`) — só 1 regra
@@ -230,3 +244,40 @@ Formato: uma linha por fato, com data.
   preso numa versão anterior do HTML. Só resolveu navegando pra uma URL
   com uma query string nunca usada antes (`?forcar=N`). Se isso voltar a
   acontecer, tentar isso antes de desconfiar do código.
+
+- 2026-09-25 — No celular, a roda de pílulas ("o rolador com os nomes dos
+  lugares") e o card com a logo ficavam em "dobras" diferentes — juntas
+  passavam de 820px de altura, mais alto que a tela de qualquer celular, e
+  o Iago tinha que rolar dentro do próprio carrossel pra ver os dois. Só no
+  `@media (max-width:640px)` de `atuacao.css`: a roda (`.atuacao__trilho`)
+  caiu de 360px pra 230px de piso, e o `.atuacao__roda` (que tinha um piso
+  PRÓPRIO de 320px, escondido — zerado aqui, senão ele empurrava o trilho
+  de volta pra cima de 230px sozinho); os véus de esmaecimento no topo/
+  base da roda caíram de 76px pra 48px; o palco dos cards
+  (`.atuacao__palco`) perdeu um pouco de respiro vertical (padding
+  `--sp-8`→`--sp-6`, piso 460px→340px). Resultado: o conjunto caiu de 822px
+  pra 637px (-22,5%), medido de verdade (`getBoundingClientRect`), e
+  confirmado por print que a roda inteira + o card inteiro cabem juntos
+  numa tela de 812px de altura com sobra.
+  **Bug adicional encontrado no caminho, não pedido mas real** (print
+  revelou): nos cards "Mais Médicos" e "NESCON UFMG" — as duas artes que
+  empilham a logo da NESCON com uma segunda marca (Mais Médicos / SUS;
+  Preceptoria em MFC) — o selo do card ("04 • Mais Médicos" /
+  "06 • NESCON UFMG") tampava boa parte do texto de baixo da própria
+  imagem no celular ("MÉDICOS PARA O BRASIL" e o símbolo do SUS num;
+  "PRECEPTORIA EM MFC" no outro). Mesma causa da correção de 24/09 no card
+  PUC-MG·Faseh·UniBH (arte com conteúdo até o rodapé + legenda de altura
+  fixa). Apliquei a mesma classe `.atuacao__legenda--compacta` nesses dois
+  cards também — 3 dos 6 cards têm ela agora (03, 04, 06); os outros 3
+  (Alice, UNIFAP, Unimed) têm logo única e centralizada, sem esse
+  problema, confirmado por print de cada um.
+  **Cache-busting, de novo:** o número de versão (`?v=`) estava
+  visivelmente sendo bumpado por outra sessão trabalhando neste mesmo
+  projeto ao mesmo tempo (pulou de 87 pra 90 sozinho, sem eu mexer, no
+  meio desta verificação) — meus próprios `sed` de bump viraram no-op mais
+  de uma vez por eu estar mirando num número que já não era mais o atual.
+  A partir de agora, sempre conferir o número REAL no arquivo com `grep`
+  antes de rodar o `sed`, nunca assumir qual é a partir da última leitura.
+  Verificado: os 3 cards recém-corrigidos conferidos em desktop (1100px) e
+  mobile (375px), com print mostrando o texto de baixo de cada logo
+  inteiro, sem sobreposição; sem erro no console em nenhuma etapa.

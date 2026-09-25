@@ -243,13 +243,19 @@
     })();
   }
 
-  /* ---------- Espera a abertura ---------- */
+  /* ---------- Espera a abertura ----------
+     Não espera as portas saírem de vez — só o meio do caminho
+     ('portas:metade', disparado por intro.js na metade da transição). Cada
+     porta cobre metade da tela e a frase fica do lado direito, então bem
+     antes delas terminarem de sair aquele lado já está aberto o bastante
+     para a digitação começar por cima. Esperar o fim inteiro (mais o
+     respiro de antes) atrasava o começo em quase 1,2s sem necessidade. */
   const portas = document.querySelector('.hero-portas');
   const abertura = document.querySelector('.abertura');
   const temPortas = portas && abertura &&
     abertura.dataset.portas !== 'off' &&
     portas.getAttribute('data-aberto') !== '1' &&
-    !window.portasAbertas;
+    !window.portasMetade;
 
   if (!temPortas) { correr(); return; }
 
@@ -257,12 +263,12 @@
   function largar() {
     if (comecou) return;
     comecou = true;
-    window.removeEventListener('portas:abertas', largar);
-    // um respiro depois das portas, para a hero assentar antes de escrever
-    setTimeout(correr, 160);
+    window.removeEventListener('portas:metade', largar);
+    // um respiro curto, só pra digitação não nascer no exato instante do clique
+    setTimeout(correr, 90);
   }
 
-  window.addEventListener('portas:abertas', largar);
+  window.addEventListener('portas:metade', largar);
   // Rede de segurança: se o aviso não vier, o texto não fica preso
   setTimeout(largar, 40000);
 })();

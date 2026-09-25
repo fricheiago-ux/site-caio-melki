@@ -5,8 +5,12 @@
   2. as portas, com "dr. Caio Melki mfc". Loader e portas dividem o mesmo
      fundo, então a troca entre 1 e 2 é só um desfoque — não parece que o
      site carregou duas páginas;
-  3. um segundo e meio depois elas se afastam sozinhas e, ao terminarem, o
-     site avisa quem estava esperando (a digitação da hero, por exemplo).
+  3. um segundo e meio depois elas se afastam sozinhas. Dois avisos saem no
+     meio do caminho: 'portas:metade' já na metade do movimento (a
+     digitação da hero começa aqui — as portas cobrem metade da tela cada
+     uma, e o lado da frase já está bem aberto nesse ponto, não precisa
+     esperar o resto) e 'portas:abertas' só quando elas terminam de sumir de
+     vez (para quem depende da tela inteira livre, como o fundo animado).
 
   Nada de clicar nem de rolar para abrir. A primeira versão puxava a
   abertura pelo scroll, o que exigia um trilho de uma tela e meia com a
@@ -16,8 +20,10 @@
   fica travada enquanto as portas cobrem a tela e volta ao normal quando
   elas somem.
 
-  Quem precisa esperar a abertura ouve o evento 'portas:abertas' no window,
-  ou consulta window.portasAbertas.
+  Quem só precisa da metade do movimento (efeitos que já cabem no vão que
+  se abre, como a digitação) ouve 'portas:metade' ou consulta
+  window.portasMetade. Quem precisa da tela inteira livre ouve
+  'portas:abertas' ou consulta window.portasAbertas.
 
   Para desligar as portas: <div class="abertura" data-portas="off">
 */
@@ -100,9 +106,25 @@
 
   let agendada = null;
 
+  function meioCaminho() {
+    // A digitação da hero não precisa esperar as portas saírem de vez: elas
+    // cobrem exatamente metade da tela cada uma (grid de 2 colunas) e a
+    // frase fica do lado direito, então na metade do movimento aquele lado
+    // já está bem aberto. cubic-bezier(0.76,0,0.24,1) é simétrica (os dois
+    // pontos de controle são espelhados), então 50% do tempo é mesmo 50%
+    // do deslocamento — sem essa simetria o instante certo seria outro.
+    if (window.portasMetade) return;
+    window.portasMetade = true;
+    window.dispatchEvent(new Event('portas:metade'));
+  }
+
   function concluir() {
     if (estado === 'aberta') return;
     estado = 'aberta';
+    // Rede de segurança: nos atalhos que chamam concluir() direto (motion
+    // reduzido, portas="off"), sem passar por abrir(), ninguém teria
+    // disparado o meio-caminho — e quem espera só por ele ficaria preso.
+    meioCaminho();
     portas.setAttribute('data-aberto', '1');
     portas.removeAttribute('tabindex');
     portas.setAttribute('aria-hidden', 'true');
@@ -118,6 +140,7 @@
     portas.classList.add('is-abrindo');
     // O transitionend não é confiável quando a aba está em segundo plano,
     // então quem manda é o relógio; a transição só precisa caber nele.
+    setTimeout(meioCaminho, DURACAO / 2);
     setTimeout(concluir, DURACAO);
   }
 
