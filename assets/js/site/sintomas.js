@@ -502,6 +502,8 @@
      ---------------------------------------------------------- */
   let aberto = null;     // id do sintoma aberto
   let trocando = false;
+  // palavra clicada enquanto uma troca estava em andamento (ver abrir())
+  let pedido = null;
 
   function montar(id) {
     const ficha = FICHAS[id];
@@ -588,7 +590,11 @@
   }
 
   function abrir(id, origem) {
-    if (trocando) return;
+    // Durante a troca (200ms) o clique era simplesmente descartado: quem
+    // navegava clicando de palavra em palavra via a ficha parar numa que
+    // nao era a que clicou. Agora o ultimo pedido fica guardado e e
+    // atendido assim que a troca em curso termina.
+    if (trocando) { pedido = { id: id, origem: origem }; return; }
 
     // mesma palavra: funciona como toggle
     if (aberto === id) { recolher(); return; }
@@ -636,6 +642,13 @@
       if (origem === 'busca') fecharResultados();
       if (origem !== 'scroll-off') aproximar();
       trocando = false;
+
+      // atende o clique que chegou no meio da troca, se houve
+      if (pedido) {
+        const proximo = pedido;
+        pedido = null;
+        abrir(proximo.id, proximo.origem);
+      }
     };
 
     if (!jaAberto) { pintar(); return; }
@@ -664,13 +677,28 @@
   function aproximar() {
     const topo = painel.getBoundingClientRect().top;
     // "fora de vista" em cima = escondido atras da barra fixa, nao so acima
-    // da janela. O numero antigo (70px) era menor que a barra (~83px), entao
-    // uma ficha parada embaixo dela contava como visivel e nao rolava.
+    // da janela. Por isso o limite e a borda de baixo real da barra, medida
+    // na hora: ela nao tem altura fixa (ja medi 83px e 105px na mesma pagina).
     const barra = document.querySelector('.navbar');
     const limite = barra ? barra.getBoundingClientRect().bottom : 0;
+
+    // A secao esta sempre com overflow:hidden (recorta as auroras de fundo),
+    // e isso a torna uma area rolavel: "hidden" esconde a barra de rolagem,
+    // mas o navegador ainda rola por programa. Se ela tiver sido rolada por
+    // dentro alguma vez, o conteudo fica escorregado pra cima e sobra um
+    // vazio embaixo. Desfaz isso antes de qualquer conta de posicao.
+    if (secao.scrollTop) secao.scrollTop = 0;
+
     const fora = topo < limite || topo > window.innerHeight - 160;
     if (!fora) return;
-    painel.scrollIntoView({ behavior: semMovimento ? 'auto' : 'smooth', block: 'start' });
+
+    // NAO usar scrollIntoView aqui. Ele sobe pela arvore e rola TODOS os
+    // ancestrais rolaveis — inclusive a propria secao, pelo overflow:hidden
+    // acima. Era exatamente isso que fazia o titulo sumir e aparecer um
+    // espaco grande no fim da secao, piorando a cada clique. Rolando a
+    // janela pela posicao calculada, so a pagina se move.
+    const alvo = window.scrollY + painel.getBoundingClientRect().top - (limite + 16);
+    window.scrollTo({ top: Math.max(0, alvo), behavior: semMovimento ? 'auto' : 'smooth' });
   }
 
   /* ----------------------------------------------------------

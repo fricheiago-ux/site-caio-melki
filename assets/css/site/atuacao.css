@@ -318,9 +318,19 @@ border-left: 1px solid var(--line);
 
 @media (max-width: 640px) {
 .atuacao__quadro { border-radius: 28px; }
-.atuacao__trilho { padding: 0 var(--sp-5); }
+/* A roda de pílulas e o baralho de cards encolheram pra caber juntos na
+   mesma tela do celular, sem precisar rolar dentro do próprio componente
+   pra ver os dois — antes eram 360px (roda) + 460px (baralho) = 820px,
+   mais alto que a tela de qualquer celular. Iago pediu (25/09/2026). */
+.atuacao__trilho { padding: 0 var(--sp-5); min-height: 230px; }
+.atuacao__trilho::before,
+.atuacao__trilho::after { height: 48px; }
+/* .atuacao__roda tem seu próprio piso de 320px (pra caber a roda toda
+   de pílulas no desktop) — sem baixar ele junto, o trilho crescia além
+   dos 230px que acabaram de ser fixados aqui em cima. */
+.atuacao__roda { min-height: 0; }
 .atuacao__chip { padding: 0.75rem 1.15rem; font-size: 0.75rem; }
-.atuacao__palco { padding: var(--sp-12) var(--sp-5); min-height: 460px; }
+.atuacao__palco { padding: var(--sp-6) var(--sp-5); min-height: 340px; }
 .atuacao__card { border-width: 6px; border-radius: 30px; }
 .atuacao__legenda { padding: 5rem var(--sp-5) var(--sp-6); }
 .atuacao__frase { font-size: 1.25rem; }
