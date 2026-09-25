@@ -249,19 +249,24 @@
   const temPortas = portas && abertura &&
     abertura.dataset.portas !== 'off' &&
     portas.getAttribute('data-aberto') !== '1' &&
+    !window.portasMeio &&
     !window.portasAbertas;
 
   if (!temPortas) { correr(); return; }
 
+  // Larga com as portas na metade do caminho (ver intro.js), com a hero já
+  // se descobrindo. Esperar o fim da abertura (+160ms de respiro) deixava
+  // ~1,2s de hero parada antes da primeira letra.
   let comecou = false;
   function largar() {
     if (comecou) return;
     comecou = true;
+    window.removeEventListener('portas:meio', largar);
     window.removeEventListener('portas:abertas', largar);
-    // um respiro depois das portas, para a hero assentar antes de escrever
-    setTimeout(correr, 160);
+    correr();
   }
 
+  window.addEventListener('portas:meio', largar);
   window.addEventListener('portas:abertas', largar);
   // Rede de segurança: se o aviso não vier, o texto não fica preso
   setTimeout(largar, 40000);

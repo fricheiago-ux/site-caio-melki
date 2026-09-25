@@ -214,22 +214,38 @@ do Caio (colado pelo Iago na conversa). Os dois cards que ficaram sem data na
 primeira rodada foram fechados em 24/09/2026, direto pelo Iago (não pelo
 Lattes): UNIFAP → ativo; PUC-MG · Faseh · Uni-BH → encerrado, 2023–2024.
 
-**Card "PUC-MG · Faseh · Uni-BH", legenda compacta (24/09/2026).** É o único
-card cuja arte (3 logos empilhadas) ocupa até o rodapé da imagem — os outros
-5 são um símbolo só, centralizado, com espaço vazio embaixo — então o
-degradê padrão da legenda (7rem de respiro antes do texto) tapava a palavra
-"unibh". A imagem continua de sangria (`cover`, igual aos outros cards — uma
-tentativa de encolhê-la pro topo foi revertida a pedido do Iago); o ajuste
-ficou só na legenda: classe `.atuacao__legenda--compacta` (`atuacao.css`)
-tira o respiro de cima, e o selo desse card foi encurtado ("03 • PUC · Faseh
-· UniBH" em vez do nome completo — sem isso ele quebrava em 2 linhas no
-celular e a legenda voltava a invadir a imagem). Duas armadilhas de CSS que
-valeram a pena registrar em `memoria.md` (24/09/2026): medir a altura de um
-elemento logo após um clique que dispara transição dá número instável até a
-transição terminar de verdade; e duas regras de mesma especificidade — a que
-vem depois no arquivo ganha, mesmo "parecendo" menos específica (por isso o
-seletor ficou `.atuacao__legenda.atuacao__legenda--compacta`, reforçado, pra
-não perder pra regra de celular que fica no fim do arquivo).
+**Legenda compacta nos cards com arte "empilhada" (24 e 25/09/2026).** 3
+dos 6 cards do carrossel usam artes que empilham 2–3 marcas até o rodapé da
+imagem — "03 PUC-MG·Faseh·Uni-BH", "04 Mais Médicos" (NESCON+Mais Médicos)
+e "06 NESCON UFMG" (NESCON+Preceptoria). Nesses, o degradê padrão da
+legenda (7rem de respiro antes do texto) tampa texto importante da própria
+imagem ("unibh", "MÉDICOS PARA O BRASIL", "PRECEPTORIA EM MFC" — cada um
+descoberto num momento diferente, sempre por print, nunca só medindo). Os
+outros 3 (Alice, UNIFAP, Unimed) são um símbolo só, centralizado, com
+espaço vazio embaixo — sem esse problema, não levam a classe. A imagem
+continua de sangria (`cover`, igual em todos os 6 — uma tentativa de
+encolhê-la pro topo só no card 03 foi revertida a pedido do Iago); o ajuste
+é só na legenda: classe `.atuacao__legenda--compacta` (`atuacao.css`) tira
+o respiro de cima. No card 03 o selo também foi encurtado ("03 • PUC ·
+Faseh · UniBH" em vez do nome completo — sem isso ele quebrava em 2 linhas
+no celular e a legenda voltava a invadir a imagem); os outros dois não
+precisaram disso (selo mais curto).
+Também 25/09/2026: a roda de pílulas e o baralho de cards encolheram no
+celular (`@media max-width:640px`) pra caber juntos numa tela só — antes
+passavam de 820px de altura somados. Cuidado se for mexer de novo:
+`.atuacao__roda` tem um piso de altura PRÓPRIO (320px, separado do piso do
+`.atuacao__trilho` que o contém) — bloqueado no mobile por dentro desse
+mesmo bloco, senão ele sozinho anula qualquer redução no trilho.
+Armadilhas de CSS registradas em `memoria.md`, vale reler antes de mexer
+de novo nesse componente: medir a altura de um elemento logo após um
+clique que dispara transição dá número instável até a transição terminar
+de verdade; duas regras de mesma especificidade — a que vem depois no
+arquivo ganha, mesmo "parecendo" menos específica (por isso o seletor
+`.atuacao__legenda.atuacao__legenda--compacta` é reforçado, pra não perder
+pra regra de celular que fica no fim do arquivo); e o número de versão
+(`?v=`) é compartilhado com outras sessões trabalhando no mesmo projeto ao
+mesmo tempo — sempre conferir o valor real com `grep` antes de bumpar, não
+assumir a partir da última leitura.
 
 ## Cuidados de CSS
 
@@ -246,7 +262,9 @@ não perder pra regra de celular que fica no fim do arquivo).
 - A abertura da hero (portas + digitação do título) depende de um aviso
   (`portas:abertas`) disparado por `intro.js`. Qualquer efeito que precise
   esperar a abertura terminar deve ouvir esse evento, e não inventar seu próprio
-  cronômetro.
+  cronômetro. Existe também `portas:meio` (25/09/2026), disparado na metade do
+  movimento das portas — é dele que a digitação "Oi, sou o Caio" larga, a
+  pedido do Iago (antes esperava o fim + 160ms, ~1,2s parada; agora ~0,5s).
 - `.navbar` tem `transform: translateY(0)` depois do fade-in de entrada
   (`nav-load`/`.loaded` em `animations.css`) — parece "sem efeito", mas
   qualquer elemento com `.navbar` como ancestral que use

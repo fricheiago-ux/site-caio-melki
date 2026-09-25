@@ -187,12 +187,11 @@ height: 0;
 overflow: hidden;
 margin-top: var(--sp-6);
 transition: height var(--dur-base) var(--ease-out-expo);
-/* Ao abrir, o JS rola a pagina ate a ficha (scrollIntoView). Sem isto o
-   navegador encosta a ficha no topo da janela — e a barra de navegacao,
-   que e fixa e tem ~83px, cobria o cabecalho da ficha ("Possiveis
-   causas" + o nome do sintoma). O scroll-margin faz a rolagem parar
-   abaixo da barra. */
-scroll-margin-top: 96px;
+/* O respiro abaixo da barra fixa agora e calculado no JS (aproximar()),
+   a partir da altura real da barra — ela varia (ja medi 83px e 105px na
+   mesma pagina), entao um numero fixo aqui errava. Ficou so como reserva
+   para quando quem rola e o navegador (foco pelo teclado, por exemplo). */
+scroll-margin-top: 7rem;
 }
 .sint-painel__caixa {
 opacity: 0;
@@ -498,6 +497,19 @@ color: var(--sage-400);
 .sint-grupos { columns: 1; margin-top: var(--sp-6); }
 .sint-grupo { padding-bottom: var(--sp-6); }
 .sint-ficha__pe { flex-direction: column; align-items: flex-start; }
+}
+
+/* Celular: a nuvem inteira (38 palavras) passava de 640px de altura — muita
+   rolagem só para ela. Letras um pouco menores fazem caber mais palavras por
+   linha, e o respiro entre linhas e em volta da nuvem encolhe junto. Iago
+   pediu 20–25% a menos, só no celular (25/09/2026). */
+@media (max-width: 640px) {
+.sint-nuvem { gap: 0.35rem var(--sp-3); margin: var(--sp-8) auto var(--sp-6); }
+.sint-palavra { line-height: 1; }
+.sint-palavra[data-peso="5"] { font-size: 1.72rem; }
+.sint-palavra[data-peso="4"] { font-size: 1.28rem; }
+.sint-palavra[data-peso="3"] { font-size: 0.98rem; }
+.sint-palavra[data-peso="2"] { font-size: 0.84rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
