@@ -758,3 +758,23 @@ color: var(--sage-700);
 .section-head { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
 .section-head > .label { white-space: nowrap; }
 }
+
+/* Selo "em breve": diferente de .pendente (âmbar tracejado — "falta
+   configurar"), este é neutro/sálvia — "existe, só está pausado por
+   escolha do Caio". Usado nos canais de agendamento particular enquanto
+   ele não atende particular. */
+.tag-em-breve {
+display: inline-flex;
+align-items: center;
+flex: none;
+padding: 0.15rem 0.55rem;
+border-radius: var(--r-full);
+background: var(--sage-100);
+color: var(--sage-700);
+font-family: var(--font-sans);
+font-size: 0.6875rem;
+font-weight: 600;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+white-space: nowrap;
+}
