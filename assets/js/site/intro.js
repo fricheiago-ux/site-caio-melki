@@ -69,10 +69,21 @@
     if (reduzido) {
       encerrarLoader();
     } else {
-      const minimo = new Promise((r) => setTimeout(r, 1500));
-      const carregou = document.readyState === 'complete'
-        ? Promise.resolve()
-        : new Promise((r) => window.addEventListener('load', r, { once: true }));
+      // 1,5s contados desde a abertura da página, não desde que este script rodou
+      const minimo = new Promise((r) => setTimeout(r, Math.max(0, 1500 - performance.now())));
+      // Espera só o que a primeira tela mostra (fotos da hero e fontes), não
+      // o 'load' da página inteira: no celular em 4G o 'load' incluía
+      // bibliotecas e imagens de seções lá de baixo e segurava o loader ~3s
+      // a mais (medido em 26/09/2026).
+      const carregou = Promise.all(
+        Array.from(document.querySelectorAll('#hero img'))
+          .filter((img) => img.loading !== 'lazy' && !img.complete)
+          .map((img) => new Promise((r) => {
+            img.addEventListener('load', r, { once: true });
+            img.addEventListener('error', r, { once: true });
+          }))
+          .concat(document.fonts ? [document.fonts.ready] : [])
+      );
       Promise.all([minimo, carregou]).then(encerrarLoader);
       setTimeout(encerrarLoader, 6000);   // rede de segurança
     }

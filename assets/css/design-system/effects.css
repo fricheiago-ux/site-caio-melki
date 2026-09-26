@@ -96,16 +96,26 @@ background-repeat: repeat;
 }
 
 /* ---------- Auroras suaves (luz natural) ---------- */
+/* Até 26/09/2026 cada aurora era um degradê com filter: blur(110px) por
+   cima. Com 12 auroras de 420–680px se mexendo, esse desfoque era de longe
+   o que mais pesava no site: no celular derrubava a animação para ~14
+   quadros por segundo (sem ele, 60). Agora o desfoque vem "pronto" no
+   próprio degradê — os valores abaixo são o perfil do degradê antigo depois
+   do blur(110px), calculado numericamente — num ::before 70% maior (o
+   espaço que o desfoque ocupava além da borda). Mesma luz, sem filtro. */
 .aurora {
 position: absolute;
-border-radius: 50%;
-filter: blur(110px);
 pointer-events: none;
 will-change: transform;
 }
-.aurora--sage { background: radial-gradient(circle, rgba(127, 163, 130, 0.46), transparent 66%); }
-.aurora--sand { background: radial-gradient(circle, rgba(232, 223, 205, 0.85), transparent 66%); }
-.aurora--sky { background: radial-gradient(circle, rgba(127, 163, 184, 0.34), transparent 66%); }
+.aurora::before {
+content: "";
+position: absolute;
+inset: -35%;
+}
+.aurora--sage::before { background: radial-gradient(circle closest-side, rgba(127, 163, 130, 0.236) 0%, rgba(127, 163, 130, 0.225) 10%, rgba(127, 163, 130, 0.195) 20%, rgba(127, 163, 130, 0.153) 30%, rgba(127, 163, 130, 0.108) 40%, rgba(127, 163, 130, 0.068) 50%, rgba(127, 163, 130, 0.037) 60%, rgba(127, 163, 130, 0.018) 70%, rgba(127, 163, 130, 0.007) 80%, rgba(127, 163, 130, 0.003) 90%, rgba(127, 163, 130, 0.0) 100%); }
+.aurora--sand::before { background: radial-gradient(circle closest-side, rgba(232, 223, 205, 0.436) 0%, rgba(232, 223, 205, 0.416) 10%, rgba(232, 223, 205, 0.36) 20%, rgba(232, 223, 205, 0.283) 30%, rgba(232, 223, 205, 0.2) 40%, rgba(232, 223, 205, 0.126) 50%, rgba(232, 223, 205, 0.069) 60%, rgba(232, 223, 205, 0.033) 70%, rgba(232, 223, 205, 0.014) 80%, rgba(232, 223, 205, 0.005) 90%, rgba(232, 223, 205, 0.0) 100%); }
+.aurora--sky::before { background: radial-gradient(circle closest-side, rgba(127, 163, 184, 0.174) 0%, rgba(127, 163, 184, 0.166) 10%, rgba(127, 163, 184, 0.144) 20%, rgba(127, 163, 184, 0.113) 30%, rgba(127, 163, 184, 0.08) 40%, rgba(127, 163, 184, 0.05) 50%, rgba(127, 163, 184, 0.028) 60%, rgba(127, 163, 184, 0.013) 70%, rgba(127, 163, 184, 0.005) 80%, rgba(127, 163, 184, 0.002) 90%, rgba(127, 163, 184, 0.0) 100%); }
 
 /* ---------- Painel translúcido (ref-7, tema claro) ---------- */
 .glass-panel {

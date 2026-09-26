@@ -29,8 +29,24 @@
 (function () {
   const secao = document.querySelector('.pilares');
   const canvas = secao && secao.querySelector('.pilares__particulas');
-  if (!secao || !canvas || typeof THREE === 'undefined') return;
+  if (!secao || !canvas) return;
 
+  // three.js (~150 KB comprimido) só serve para esta nuvem, bem abaixo da
+  // primeira tela. Antes era carregado no início junto com tudo e atrasava a
+  // abertura do site no celular; agora só é baixado quando a seção dos
+  // pilares chega a ~1 tela e meia de distância.
+  if (typeof THREE !== 'undefined') { iniciar(); return; }
+  const perto = new IntersectionObserver((entradas) => {
+    if (!entradas.some((e) => e.isIntersecting)) return;
+    perto.disconnect();
+    const s = document.createElement('script');
+    s.src = 'assets/js/vendor/three.min.js?v=1';
+    s.onload = iniciar;
+    document.head.appendChild(s);
+  }, { rootMargin: '150% 0px' });
+  perto.observe(secao);
+
+  function iniciar() {
   const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const scene = new THREE.Scene();
@@ -122,4 +138,5 @@
     camera.updateProjectionMatrix();
     renderer.setSize(newRect.width, newRect.height);
   });
+  }
 })();

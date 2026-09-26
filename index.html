@@ -51,32 +51,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
 
 <!-- design system -->
-<link rel="stylesheet" href="assets/css/design-system/tokens.css?v=97"/>
-<link rel="stylesheet" href="assets/css/design-system/animations.css?v=97"/>
-<link rel="stylesheet" href="assets/css/design-system/effects.css?v=97"/>
-<link rel="stylesheet" href="assets/css/design-system/components.css?v=97"/>
+<link rel="stylesheet" href="assets/css/design-system/tokens.css?v=99"/>
+<link rel="stylesheet" href="assets/css/design-system/animations.css?v=99"/>
+<link rel="stylesheet" href="assets/css/design-system/effects.css?v=99"/>
+<link rel="stylesheet" href="assets/css/design-system/components.css?v=99"/>
 <!-- específico do site -->
 <!-- hero.css: retrato à esquerda, busca de condições e faixa de instituições -->
 <!-- intro.css: loader reutilizável, portas de abertura e a marca como máscara -->
-<link rel="stylesheet" href="assets/css/site/intro.css?v=97"/>
-<link rel="stylesheet" href="assets/css/site/hero.css?v=97"/>
+<link rel="stylesheet" href="assets/css/site/intro.css?v=99"/>
+<link rel="stylesheet" href="assets/css/site/hero.css?v=99"/>
 <!-- especialidade.css: tríptico da seção A especialidade -->
-<link rel="stylesheet" href="assets/css/site/especialidade.css?v=97"/>
-<link rel="stylesheet" href="assets/css/site/sintomas.css?v=97"/>
+<link rel="stylesheet" href="assets/css/site/especialidade.css?v=99"/>
+<link rel="stylesheet" href="assets/css/site/sintomas.css?v=99"/>
 <!-- fechamento.css: minicurrículo, canais de agendamento e rodapé -->
-<link rel="stylesheet" href="assets/css/site/fechamento.css?v=97"/>
+<link rel="stylesheet" href="assets/css/site/fechamento.css?v=99"/>
 <!-- instituicoes.css: cards com dobradiça 3D (logo vira descrição) -->
 <!-- pilares.css: baralho GSAP Flip da seção 02 -->
-<link rel="stylesheet" href="assets/css/site/pilares.css?v=97"/>
-<link rel="stylesheet" href="assets/css/site/instituicoes.css?v=97"/>
+<link rel="stylesheet" href="assets/css/site/pilares.css?v=99"/>
+<link rel="stylesheet" href="assets/css/site/instituicoes.css?v=99"/>
 <!-- atuacao.css: carrossel da seção Minha trajetória profissional -->
-<link rel="stylesheet" href="assets/css/site/atuacao.css?v=97"/>
+<link rel="stylesheet" href="assets/css/site/atuacao.css?v=99"/>
 <!-- certificados.css: as peças de certificado no fim da seção de experiência -->
-<link rel="stylesheet" href="assets/css/site/certificados.css?v=97"/>
+<link rel="stylesheet" href="assets/css/site/certificados.css?v=99"/>
 <!-- divisoria.css: seção verde "sobre mim" entre pilares e formação -->
-<link rel="stylesheet" href="assets/css/site/divisoria.css?v=97"/>
+<link rel="stylesheet" href="assets/css/site/divisoria.css?v=99"/>
 <!-- faq.css: acordeão de perguntas frequentes, seção 06 -->
-<link rel="stylesheet" href="assets/css/site/faq.css?v=97"/>
+<link rel="stylesheet" href="assets/css/site/faq.css?v=99"/>
 </head>
 <body>
 
@@ -176,7 +176,7 @@
 <span class="badge badge--sage"><span class="badge__dot"><span></span><span></span></span>CRM-MG 78461 · RQE 57161</span>
 </div>
 
-<h1 id="hero-title" class="hero-frase type-reveal" style="margin-bottom:var(--sp-6)">Oi, sou o Caio<img class="hero-slot" data-slot="1" src="assets/img/hero/slot-1-caio.jpeg?v=97" alt="Retrato do Dr. Caio Ribeiro Melki" draggable="false"/>, médico de família e comunidade.<img class="hero-slot hero-slot--cine" data-slot="2" src="assets/img/hero/slot-2-comunidade.jpeg?v=97" alt="Fachadas de casas simples numa rua residencial" draggable="false"/> <span class="hero-frase__quieta">Busco tratar as pessoas por inteiro<img class="hero-slot hero-slot--tall" data-slot="3" src="assets/img/hero/slot-3-inteiro.jpeg?v=97" alt="Uma pessoa de corpo inteiro no vão de uma porta" draggable="false"/>, não apenas pelos&nbsp;seus sintomas.</span></h1>
+<h1 id="hero-title" class="hero-frase type-reveal" style="margin-bottom:var(--sp-6)">Oi, sou o Caio<img class="hero-slot" data-slot="1" src="assets/img/hero/slot-1-caio.jpeg?v=99" alt="Retrato do Dr. Caio Ribeiro Melki" draggable="false"/>, médico de família e comunidade.<img class="hero-slot hero-slot--cine" data-slot="2" src="assets/img/hero/slot-2-comunidade.jpeg?v=99" alt="Fachadas de casas simples numa rua residencial" draggable="false"/> <span class="hero-frase__quieta">Busco tratar as pessoas por inteiro<img class="hero-slot hero-slot--tall" data-slot="3" src="assets/img/hero/slot-3-inteiro.jpeg?v=99" alt="Uma pessoa de corpo inteiro no vão de uma porta" draggable="false"/>, não apenas pelos&nbsp;seus sintomas.</span></h1>
 
 <div class="blur-reveal" style="margin-bottom:var(--sp-6)">
 <p class="body-lg" style="max-width:56ch;margin:0">Com a sua história, a sua família e a sua rotina na equação, a maior parte dos problemas se resolvem antes de envolver outro médico.</p>
@@ -204,6 +204,13 @@
 <!-- ============================================================
      A ESPECIALIDADE — tríptico, estrutura da seção "O Caminho" da ref-6
      ============================================================ -->
+<!-- Abertura (loader, portas e digitação) logo depois da hero, e não no fim
+     da página com os outros scripts: assim ela não espera os ~20 arquivos de
+     baixo baixarem para começar — no celular em 4G isso atrasava a primeira
+     letra em ~2s (medido em 26/09/2026). Os dois só mexem na hero. -->
+<script src="assets/js/site/hero-type.js?v=99"></script>
+<script src="assets/js/site/intro.js?v=99"></script>
+
 <section id="especialidade" class="section">
 <div class="aurora aurora--sage animate-aurora" style="width:520px;height:520px;top:-12%;left:-10%;opacity:.45"></div>
 <div class="aurora aurora--sand animate-aurora-slow" style="width:600px;height:600px;bottom:-26%;right:-12%;opacity:.5"></div>
@@ -242,8 +249,8 @@
 <div class="esp-apoio">
 <picture>
 <!-- no celular o espaço vira quase 3:2; a tira 4:1 do computador mostraria só a estante do meio -->
-<source media="(max-width: 640px)" srcset="assets/img/especialidade/esp-apoio-mobile.jpeg?v=97"/>
-<img src="assets/img/especialidade/esp-apoio.jpeg?v=97" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy" decoding="async"/>
+<source media="(max-width: 640px)" srcset="assets/img/especialidade/esp-apoio-mobile.jpeg?v=99"/>
+<img src="assets/img/especialidade/esp-apoio.jpeg?v=99" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy" decoding="async"/>
 </picture>
 </div>
 
@@ -967,33 +974,33 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 </div>
 
 <!-- js -->
-<script src="https://unpkg.com/lucide@latest"></script>
+<!-- Bibliotecas servidas pelo próprio site (assets/js/vendor/), não por CDN:
+     no celular, cada servidor externo custava uma conexão nova (~0,5s em 4G).
+     lucide-icones: só os 32 ícones usados (lucide 1.48.0), 4 KB em vez de 104 KB.
+     three.js NÃO entra aqui: pilares-particulas.js carrega sob demanda,
+     quando a seção dos pilares se aproxima da tela. -->
+<script src="assets/js/vendor/lucide-icones.min.js?v=99"></script>
 <script>lucide.createIcons();</script>
 <!-- GSAP + Flip: motor do baralho dos pilares -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="assets/js/vendor/gsap.min.js?v=99"></script>
+<script src="assets/js/vendor/Flip.min.js?v=99"></script>
 <!-- design system -->
-<script src="assets/js/design-system/reveal.js?v=97"></script>
-<script src="assets/js/design-system/cursor.js?v=97"></script>
-<script src="assets/js/design-system/particles.js?v=97"></script>
-<script src="assets/js/design-system/interactions.js?v=97"></script>
-<!-- hero-type.js: surgimento palavra a palavra do título e da subhead -->
-<script src="assets/js/site/hero-type.js?v=97"></script>
+<script src="assets/js/design-system/reveal.js?v=99"></script>
+<script src="assets/js/design-system/cursor.js?v=99"></script>
+<script src="assets/js/design-system/particles.js?v=99"></script>
+<script src="assets/js/design-system/interactions.js?v=99"></script>
 <!-- esp-painel.js: contador e sintomas girando no card da especialidade -->
-<script src="assets/js/site/esp-painel.js?v=97"></script>
+<script src="assets/js/site/esp-painel.js?v=99"></script>
 <!-- corpo-3d.js: nuvem de pontos que se registra na seção A especialidade -->
-<script src="assets/js/site/corpo-3d.js?v=97"></script>
-<!-- intro.js: loader, portas que abrem no clique e o aviso portas:abertas -->
-<script src="assets/js/site/intro.js?v=97"></script>
+<script src="assets/js/site/corpo-3d.js?v=99"></script>
 <script>document.getElementById("ano-agora").textContent = new Date().getFullYear();</script>
-<script src="assets/js/site/pilares.js?v=97"></script>
-<script src="assets/js/site/pilares-particulas.js?v=97"></script>
+<script src="assets/js/site/pilares.js?v=99"></script>
+<script src="assets/js/site/pilares-particulas.js?v=99"></script>
 <!-- instituicoes.js: virada dos cards de formação no toque + demonstração automática do primeiro -->
-<script src="assets/js/site/instituicoes.js?v=97"></script>
+<script src="assets/js/site/instituicoes.js?v=99"></script>
 <!-- atuacao.js: roda de pílulas + baralho da trajetória profissional -->
-<script src="assets/js/site/sintomas.js?v=97"></script>
-<script src="assets/js/site/atuacao.js?v=97"></script>
+<script src="assets/js/site/sintomas.js?v=99"></script>
+<script src="assets/js/site/atuacao.js?v=99"></script>
 <!-- faq.js: acordeão exclusivo da seção de perguntas frequentes -->
-<script src="assets/js/site/faq.js?v=97"></script>
+<script src="assets/js/site/faq.js?v=99"></script>
 </body></html>

@@ -47,6 +47,9 @@ assets/
   css/site/                    ← CSS específico de cada seção do site
   js/design-system/            ← idem, em JS
   js/site/                     ← idem, em JS
+  js/vendor/                   ← bibliotecas de terceiros servidas pelo site
+                                  (GSAP, Flip, three.js, ícones lucide) — ver
+                                  "SEO e performance"
   img/
     hero/                      ← imagens da manchete + originais brutos antes
                                   do recorte (caio-cuidando.png,
@@ -326,10 +329,35 @@ como parte desta revisão técnica.
 **Teste real do PageSpeed Insights (21/09/2026), depois das correções acima
 já publicadas:** Desempenho 62 (celular) / 94 (computador), Acessibilidade
 96/93, Práticas recomendadas 100/100, SEO 100/100. Relatório completo em
-`_nao-publicar/relatorios/pagespeed-report-2026-09-21.md`. Maior oportunidade que ainda
-falta: os 3 scripts de CDN (lucide, three.js, GSAP) têm cache curto — hospedar
-localmente em `assets/js/vendor/` é o próximo ganho de performance mais óbvio,
-não feito ainda.
+`_nao-publicar/relatorios/pagespeed-report-2026-09-21.md`.
+
+**Revisão de performance no celular, 26/09/2026** (queixa do Iago: abertura
+lenta e travando). Medido com Playwright simulando celular intermediário
+(CPU 4x mais lenta, rede Slow 4G do Lighthouse, arquivos comprimidos como no
+GitHub Pages): primeira letra da hero de 5,65s → 4,6s, 584 → 373 KB, animação
+da abertura de ~14 → 55–60 quadros/s. O que foi feito:
+- **Auroras sem `filter: blur(110px)`** (`effects.css`) — era de longe o que
+  mais pesava (sozinho derrubava para ~14 fps). O desfoque agora vem pronto
+  no degradê de um `::before` 70% maior, com o perfil do blur calculado
+  numericamente; comparado por print, mesma luz. **Não voltar a pôr
+  `filter: blur` grande em elemento que se mexe.**
+- **Bibliotecas em `assets/js/vendor/`**, não mais em CDN (cada domínio
+  externo custava uma conexão nova no 4G): GSAP 3.13.0 + Flip, three.js r134
+  e `lucide-icones.min.js` — lucide 1.48.0 só com os 32 ícones usados (4 KB
+  em vez de 104 KB; mesma API `lucide.createIcons()`, SVG idêntico conferido).
+  **Ícone novo = regerar esse arquivo** (esbuild, lista de ícones no topo do
+  arquivo); sem isso o `<i data-lucide>` novo não desenha.
+- **three.js sob demanda**: só serve à nuvem de `pilares-particulas.js`, que
+  agora baixa `vendor/three.min.js` quando a seção chega a ~1,5 tela.
+- **Logo-máscara** `logo-sem-fundo.png`: 1250px/266 KB → 420px/14 KB (só o
+  canal alfa, que é o que a máscara usa). O original bruto não foi mantido
+  no repositório — a versão antiga está no histórico do git.
+- **Abertura não espera mais a página inteira**: `hero-type.js` e `intro.js`
+  carregam logo depois da `#hero` (não no fim com os outros ~20 scripts), e
+  o loader espera só as imagens da hero + fontes, com o mínimo de 1,5s
+  contado desde a abertura da página.
+Não mexido (é desenho, não técnica): as durações da coreografia (loader
+1,5s, nomes nas portas 1,5s, portas 1,05s).
 
 ## Duplicação — saber antes de mexer
 
