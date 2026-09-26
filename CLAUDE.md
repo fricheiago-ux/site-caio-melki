@@ -8,9 +8,10 @@ próprios. No ar em **https://fricheiago-ux.github.io/site-caio-melki/**, via
 GitHub Pages, publicado automaticamente a partir do repositório
 [fricheiago-ux/site-caio-melki](https://github.com/fricheiago-ux/site-caio-melki)
 (público). O domínio **caiomelkimfc.com.br** está registrado na Hostinger;
-conectado ao Pages em 25/09/2026 — o site já abre em caiomelkimfc.com.br;
-falta só o certificado HTTPS sair (automático) e marcar "Enforce HTTPS"
-nas configurações do Pages (ver "Ao publicar", item 5).
+conectado ao Pages em 25/09/2026, com HTTPS desde 26/09/2026 — **o endereço
+oficial agora é https://caiomelkimfc.com.br/** (o do GitHub Pages redireciona
+para ele). canonical, Open Graph, JSON-LD, `robots.txt` e `sitemap.xml`
+apontam para o domínio (ver "Ao publicar", item 5).
 
 ---
 
@@ -39,9 +40,8 @@ bater com o disco, o disco está certo e isto ficou desatualizado.
 ```
 index.html                     ← a página inteira; site de uma página só
 robots.txt, sitemap.xml        ← adicionados na revisão de SEO/performance
-                                  (22/09/2026); apontam para a URL do GitHub
-                                  Pages — atualizar se o domínio próprio for
-                                  conectado (ver "Ao publicar")
+                                  (22/09/2026); apontam para
+                                  https://caiomelkimfc.com.br/ desde 26/09/2026
 assets/
   css/design-system/           ← tokens, animações, efeitos, componentes
   css/site/                    ← CSS específico de cada seção do site
@@ -305,7 +305,8 @@ recomprimida com a original.
 
 Revisão feita em 22/09/2026 (`/revisar-performance`). O que já está no ar:
 - `<link rel="canonical">`, tags Open Graph e `twitter:card` no `<head>`,
-  apontando para a URL do GitHub Pages.
+  apontando para https://caiomelkimfc.com.br/ (até 26/09/2026 apontavam
+  para a URL do GitHub Pages).
 - Dado estruturado `schema.org/Physician` (JSON-LD) com nome, CRM/RQE,
   cidade/UF e especialidade — só com dado que já estava na própria página.
   **Sem endereço nem telefone**, porque a página não os divulga (rodapé marca
@@ -376,10 +377,11 @@ Como funciona por baixo:
    feito e conferido em 25/09/2026** — domínio raiz com só os 4 registros A
    do GitHub (185.199.108.153, .109.153, .110.153, .111.153, sem AAAA
    sobrando) e `www` também resolvendo para o GitHub. O site já abre em
-   http://caiomelkimfc.com.br, ainda "Não seguro": o GitHub emite o
-   certificado HTTPS sozinho (de minutos a ~24h). **Último passo, só o
-   Iago:** quando o cadeado aparecer, marcar "Enforce HTTPS" em
-   github.com/fricheiago-ux/site-caio-melki/settings/pages (a caixa fica
-   cinza até o certificado sair). Depois disso, trocar a URL do GitHub
-   Pages pela do domínio em `canonical`/Open Graph/JSON-LD do `index.html`,
-   `robots.txt` e `sitemap.xml`.
+   https://caiomelkimfc.com.br. **HTTPS: certificado emitido em 26/09/2026**,
+   mas só depois de ~12h travado — o domínio tinha sido cadastrado no Pages
+   antes de o DNS existir, e o pedido de certificado não tentou de novo
+   sozinho. Destravou removendo e recolocando o domínio em
+   github.com/fricheiago-ux/site-caio-melki/settings/pages (se voltar a
+   acontecer, é o primeiro passo). "Enforce HTTPS" marcado pelo Iago nessa
+   mesma página. URLs do site (canonical, OG, JSON-LD, robots, sitemap)
+   trocadas para o domínio no mesmo dia.
