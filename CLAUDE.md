@@ -48,8 +48,9 @@ assets/
   js/design-system/            ← idem, em JS
   js/site/                     ← idem, em JS
   js/vendor/                   ← bibliotecas de terceiros servidas pelo site
-                                  (GSAP, Flip, three.js, ícones lucide) — ver
-                                  "SEO e performance"
+                                  (GSAP, Flip, three.js), carregadas sob
+                                  demanda — ver "SEO e performance"
+scripts/montar-site.py         ← roda só na publicação: junta os CSS
   img/
     hero/                      ← imagens da manchete + originais brutos antes
                                   do recorte (caio-cuidando.png,
@@ -342,13 +343,23 @@ da abertura de ~14 → 55–60 quadros/s. O que foi feito:
   numericamente; comparado por print, mesma luz. **Não voltar a pôr
   `filter: blur` grande em elemento que se mexe.**
 - **Bibliotecas em `assets/js/vendor/`**, não mais em CDN (cada domínio
-  externo custava uma conexão nova no 4G): GSAP 3.13.0 + Flip, three.js r134
-  e `lucide-icones.min.js` — lucide 1.48.0 só com os 32 ícones usados (4 KB
-  em vez de 104 KB; mesma API `lucide.createIcons()`, SVG idêntico conferido).
-  **Ícone novo = regerar esse arquivo** (esbuild, lista de ícones no topo do
-  arquivo); sem isso o `<i data-lucide>` novo não desenha.
-- **three.js sob demanda**: só serve à nuvem de `pilares-particulas.js`, que
-  agora baixa `vendor/three.min.js` quando a seção chega a ~1,5 tela.
+  externo custava uma conexão nova no 4G): GSAP 3.13.0 + Flip e three.js
+  r134. **Nenhuma carrega na abertura**: `carrega-pilares.js` baixa as três
+  (e depois `pilares.js` e `pilares-particulas.js`) só quando a seção dos
+  pilares chega a ~2 telas, ou 12s após o carregamento.
+- **Ícones em `assets/js/design-system/icons.js`** (feito em outro chat,
+  28/09/2026): só os 32 ícones usados, desenhados à mão a partir do lucide
+  1.48.0, mesma API `lucide.createIcons()`. Conferido contra a biblioteca
+  original: SVG idêntico em todos os ícones da página. **Ícone novo =
+  acrescentar em `ICONES` nesse arquivo** (instrução no topo); sem isso o
+  `<i data-lucide>` novo não desenha e aparece um aviso no console.
+- **CSS num arquivo só, só na publicação**: `scripts/montar-site.py` (roda
+  no `deploy.yml`, sobre a cópia em `_site/`) junta e minifica os ~15 CSS
+  do `index.html` em `assets/css/site/bundle.css`. No repositório nada
+  muda — edita-se cada CSS separado. Conferido por print, seção a seção,
+  celular e computador: idêntico ao site sem o bundle.
+- Scripts do fim da página com `defer`; fontes do Google sem bloquear a
+  pintura (`media="print"` + `onload`).
 - **Logo-máscara** `logo-sem-fundo.png`: 1250px/266 KB → 420px/14 KB (só o
   canal alfa, que é o que a máscara usa). O original bruto não foi mantido
   no repositório — a versão antiga está no histórico do git.
@@ -356,6 +367,9 @@ da abertura de ~14 → 55–60 quadros/s. O que foi feito:
   carregam logo depois da `#hero` (não no fim com os outros ~20 scripts), e
   o loader espera só as imagens da hero + fontes, com o mínimo de 1,5s
   contado desde a abertura da página.
+Resultado final medido em 28/09/2026 (mesma simulação, contra a versão no
+ar): primeira letra 5,9s → 4,1s; 584 → 311 KB; quadros travados na abertura
+44/48 → 6/228.
 Não mexido (é desenho, não técnica): as durações da coreografia (loader
 1,5s, nomes nas portas 1,5s, portas 1,05s).
 

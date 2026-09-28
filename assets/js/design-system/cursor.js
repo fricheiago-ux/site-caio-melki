@@ -107,8 +107,10 @@
 
   let sobEscuro = null;
   let ultimoAlvo = null;
+  let ultimoX = -1, ultimoY = -1;
 
   function conferirFundo(x, y) {
+    ultimoX = x; ultimoY = y;
     // Só recalcula quando o elemento sob o ponteiro muda: a conta envolve
     // getComputedStyle, e a cada mousemove seria desperdício puro.
     const alvo = document.elementFromPoint(x, y);
@@ -121,6 +123,17 @@
     cursorDot.classList.toggle('em-fundo-escuro', escuro);
     cursorOutline.classList.toggle('em-fundo-escuro', escuro);
   }
+
+  // O fundo também muda com o mouse PARADO: um cartão que fica verde ao
+  // passar o ponteiro troca de cor debaixo dele. Sem reavaliar, o cursor
+  // continuaria verde em cima do verde e sumiria. Quando uma transição de
+  // cor de fundo termina, esquece o alvo guardado e confere de novo — só
+  // nesse evento, então não pesa no movimento normal do mouse.
+  document.addEventListener('transitionend', (e) => {
+    if (e.propertyName !== 'background-color' || ultimoX < 0) return;
+    ultimoAlvo = null;
+    conferirFundo(ultimoX, ultimoY);
+  });
 
   const clickables = document.querySelectorAll(
     'a, button, input, textarea, select, .class-item, .toggle-faq, .swatch, .icon-tile, .tag, [data-cursor="hover"]'
