@@ -401,10 +401,9 @@ certo, e todos os caminhos do site são relativos. Não publica nada nem mexe
 no Pages. Diferenças em relação ao site no ar: sem o `bundle.css` (o CSS
 vem em arquivos separados, igual ao repositório) e sem o `favicon.ico` da
 raiz — o resto é idêntico. Primeira abertura pode demorar alguns segundos.
-**Status: usado pela primeira vez em 28/09/2026, ainda sem confirmação do
-Iago de que abriu certo no celular** — atualizar aqui quando confirmar (ou,
-se não funcionar, registrar a alternativa). O ambiente de nuvem do Claude
-Code não alcança o githack (proxy bloqueia), então quem confere é o Iago.
+**Status: funciona — confirmado pelo Iago em 28/09/2026** (abriu no celular;
+o mesmo link serve para o computador). O ambiente de nuvem do Claude Code não
+alcança o githack (proxy bloqueia), então quem confere é o Iago.
 
 Alternativa sem serviço externo: no Mac, `git switch <branch>` + `git pull`
 + `python3 -m http.server 8880 --bind 0.0.0.0`, e no celular (mesma rede

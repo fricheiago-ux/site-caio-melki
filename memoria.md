@@ -334,4 +334,4 @@ Formato: uma linha por fato, com data.
 
 - 2026-09-28 — Pré-visualização no celular antes de publicar: link
   raw.githack.com com o hash do commit (ver CLAUDE.md, "Pré-visualizar no
-  celular"). Primeiro uso hoje; confirmação do Iago pendente.
+  celular"). Confirmado pelo Iago: abriu no celular.
