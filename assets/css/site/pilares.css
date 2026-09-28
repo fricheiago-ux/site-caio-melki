@@ -92,11 +92,19 @@ pointer-events: none;
    o estado inicial antes do JS rodar — sem ele, sem JS, o selo cairia
    direto no topo da seção, que é o bug que a régua dinâmica corrige. */
 .pilares__selo { position: absolute; top: 0; left: 50px; width: 150px; height: 150px; z-index: 3; }
-.pilares__selo-disco { width: 100%; height: 100%; display: block; }
-.pilares__selo-anel {
+/* O giro é do <svg> inteiro, não do <g> do anel lá dentro (28/09/2026):
+   transform animado em elemento INTERNO de SVG obriga o navegador a
+   redesenhar o SVG a cada quadro no processador principal — dava
+   "travadinhas" no celular. Girando o <svg> (um elemento HTML comum), a
+   placa de vídeo só roda uma imagem pronta. Visualmente é igual: o anel é
+   um círculo centrado no viewBox, e o miolo (a casa) continua de fora,
+   parado, porque é irmão do <svg>. */
+.pilares__selo-disco {
+width: 100%;
+height: 100%;
+display: block;
 animation: pilares-selo-gira 20s linear infinite;
-transform-box: view-box;
-transform-origin: 150px 150px;
+will-change: transform;
 }
 .pilares__selo-texto {
 font-family: var(--font-sans);
@@ -343,13 +351,18 @@ margin: var(--sp-2) 0 var(--sp-3);
    Não "conserte" aumentando a fonte: a tinta já está a 5,5 unidades da
    borda do viewBox de 300 e passaria a ser cortada. */
 @media (max-width: 767px) {
-.pilares__selo { width: 72px; height: 72px; }
+/* 14px para dentro nas duas direções (28/09/2026, pedido do Iago): colado
+   no canto arredondado do card, o texto do anel quase saía pela borda. O
+   conteúdo da seção desce 12px junto, para o selo não chegar mais perto do
+   rótulo "/ 03 os princípios" do que chegava antes (~22px de folga). */
+.pilares__selo { width: 72px; height: 72px; top: 14px; left: 14px; }
 .pilares__selo-miolo { width: 16px; height: 16px; }
+.pilares { padding-top: calc(var(--sp-16) + 12px); }
 }
 
 /* Sem movimento: o Flip é desligado no JS; aqui só garantimos leitura */
 @media (prefers-reduced-motion: reduce) {
 .pilares__painel, .pilares__contador { opacity: 1 !important; transition: none; }
 .pilares__troca { animation: none; }
-.pilares__selo-anel { animation: none; }
+.pilares__selo-disco { animation: none; }
 }

@@ -59,32 +59,32 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap"/></noscript>
 
 <!-- design system -->
-<link rel="stylesheet" href="assets/css/design-system/tokens.css?v=115"/>
-<link rel="stylesheet" href="assets/css/design-system/animations.css?v=115"/>
-<link rel="stylesheet" href="assets/css/design-system/effects.css?v=115"/>
-<link rel="stylesheet" href="assets/css/design-system/components.css?v=115"/>
+<link rel="stylesheet" href="assets/css/design-system/tokens.css?v=118"/>
+<link rel="stylesheet" href="assets/css/design-system/animations.css?v=118"/>
+<link rel="stylesheet" href="assets/css/design-system/effects.css?v=118"/>
+<link rel="stylesheet" href="assets/css/design-system/components.css?v=118"/>
 <!-- específico do site -->
 <!-- hero.css: retrato à esquerda, busca de condições e faixa de instituições -->
 <!-- intro.css: loader reutilizável, portas de abertura e a marca como máscara -->
-<link rel="stylesheet" href="assets/css/site/intro.css?v=115"/>
-<link rel="stylesheet" href="assets/css/site/hero.css?v=115"/>
+<link rel="stylesheet" href="assets/css/site/intro.css?v=118"/>
+<link rel="stylesheet" href="assets/css/site/hero.css?v=118"/>
 <!-- especialidade.css: tríptico da seção A especialidade -->
-<link rel="stylesheet" href="assets/css/site/especialidade.css?v=115"/>
-<link rel="stylesheet" href="assets/css/site/sintomas.css?v=115"/>
+<link rel="stylesheet" href="assets/css/site/especialidade.css?v=118"/>
+<link rel="stylesheet" href="assets/css/site/sintomas.css?v=118"/>
 <!-- fechamento.css: minicurrículo, canais de agendamento e rodapé -->
-<link rel="stylesheet" href="assets/css/site/fechamento.css?v=115"/>
+<link rel="stylesheet" href="assets/css/site/fechamento.css?v=118"/>
 <!-- instituicoes.css: cards com dobradiça 3D (logo vira descrição) -->
 <!-- pilares.css: baralho GSAP Flip da seção 02 -->
-<link rel="stylesheet" href="assets/css/site/pilares.css?v=115"/>
-<link rel="stylesheet" href="assets/css/site/instituicoes.css?v=115"/>
+<link rel="stylesheet" href="assets/css/site/pilares.css?v=118"/>
+<link rel="stylesheet" href="assets/css/site/instituicoes.css?v=118"/>
 <!-- atuacao.css: carrossel da seção Minha trajetória profissional -->
-<link rel="stylesheet" href="assets/css/site/atuacao.css?v=115"/>
+<link rel="stylesheet" href="assets/css/site/atuacao.css?v=118"/>
 <!-- certificados.css: as peças de certificado no fim da seção de experiência -->
-<link rel="stylesheet" href="assets/css/site/certificados.css?v=115"/>
+<link rel="stylesheet" href="assets/css/site/certificados.css?v=118"/>
 <!-- divisoria.css: seção verde "sobre mim" entre pilares e formação -->
-<link rel="stylesheet" href="assets/css/site/divisoria.css?v=115"/>
+<link rel="stylesheet" href="assets/css/site/divisoria.css?v=118"/>
 <!-- faq.css: acordeão de perguntas frequentes, seção 06 -->
-<link rel="stylesheet" href="assets/css/site/faq.css?v=115"/>
+<link rel="stylesheet" href="assets/css/site/faq.css?v=118"/>
 </head>
 <body>
 
@@ -119,7 +119,7 @@
 <header class="navbar nav-load">
 <div class="wrap navbar__inner">
 <a href="#hero" aria-label="Dr. Caio Melki: início">
-<img class="marca marca--header" src="assets/img/marca/logo-escura.webp?v=115" alt="Dr. Caio Melki" width="118" height="50" decoding="async"/>
+<img class="marca marca--header" src="assets/img/marca/logo-escura.webp?v=118" alt="Dr. Caio Melki" width="118" height="50" decoding="async"/>
 </a>
 <nav class="navbar__links" id="navbar-links">
 <a class="nav-link" href="#especialidade">A especialidade</a>
@@ -216,8 +216,8 @@
      da página com os outros scripts: assim ela não espera os ~20 arquivos de
      baixo baixarem para começar — no celular em 4G isso atrasava a primeira
      letra em ~2s (medido em 26/09/2026). Os dois só mexem na hero. -->
-<script src="assets/js/site/hero-type.js?v=115"></script>
-<script src="assets/js/site/intro.js?v=115"></script>
+<script src="assets/js/site/hero-type.js?v=118"></script>
+<script src="assets/js/site/intro.js?v=118"></script>
 
 <section id="especialidade" class="section">
 <div class="aurora aurora--sage animate-aurora" style="width:520px;height:520px;top:-12%;left:-10%;opacity:.45"></div>
@@ -257,8 +257,8 @@
 <div class="esp-apoio">
 <picture>
 <!-- no celular o espaço vira quase 3:2; a tira 4:1 do computador mostraria só a estante do meio -->
-<source media="(max-width: 640px)" srcset="assets/img/especialidade/esp-apoio-mobile.jpeg?v=115"/>
-<img src="assets/img/especialidade/esp-apoio.jpeg?v=115" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy" decoding="async"/>
+<source media="(max-width: 640px)" srcset="assets/img/especialidade/esp-apoio-mobile.jpeg?v=118"/>
+<img src="assets/img/especialidade/esp-apoio.jpeg?v=118" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy" decoding="async"/>
 </picture>
 </div>
 
@@ -570,7 +570,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 </section>
 
 <!-- formação acadêmica -->
-<section id="formacao" class="section" style="background:var(--paper-200);padding-bottom:var(--sp-16)">
+<section id="formacao" class="section" style="background:var(--paper-200);padding-top:var(--sp-32)">
 <div class="aurora aurora--sage animate-aurora" style="width:560px;height:560px;top:-14%;right:-10%;opacity:.5"></div>
 <div class="aurora aurora--sand animate-aurora-slow" style="width:620px;height:620px;bottom:-24%;left:-12%;opacity:.6"></div>
 <div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.55"></div>
@@ -590,7 +590,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/fgv.png?v=115" alt="Fundação Getulio Vargas (FGV)" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/fgv.png?v=118" alt="Fundação Getulio Vargas (FGV)" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -604,7 +604,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/ufmg.png?v=115" alt="Faculdade de Medicina da UFMG" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/ufmg.png?v=118" alt="Faculdade de Medicina da UFMG" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -619,7 +619,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/hertfordshire.png?v=115" alt="University of Hertfordshire" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/hertfordshire.png?v=118" alt="University of Hertfordshire" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -634,7 +634,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/mcgill.png?v=115" alt="McGill University" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/mcgill.png?v=118" alt="McGill University" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -649,7 +649,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/hc-ufmg.png?v=115" alt="Hospital das Clínicas da UFMG" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/hc-ufmg.png?v=118" alt="Hospital das Clínicas da UFMG" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -664,7 +664,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/cruzeiro.png?v=115" alt="Cruzeiro Esporte Clube" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/cruzeiro.png?v=118" alt="Cruzeiro Esporte Clube" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -686,7 +686,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
      As imagens usam a marca do site como provisório até as logos
      das instituições chegarem (assets/css/site/atuacao.css).
      ============================================================ -->
-<section id="trajetoria" class="section" style="background:var(--paper-200);padding-top:var(--sp-16)">
+<section id="trajetoria" class="section" style="background:var(--paper-200)">
 <div class="aurora aurora--sage animate-aurora" style="width:600px;height:600px;bottom:-22%;left:-12%;opacity:.45"></div>
 <div class="contour-bg animate-aurora-slow" style="position:absolute;inset:0;opacity:.45"></div>
 <div class="sweep" style="top:0"></div>
@@ -935,7 +935,7 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 <div class="rodape__topo">
 
 <div>
-<img class="marca marca--rodape" src="assets/img/marca/logo-creme.webp?v=115" alt="Dr. Caio Melki" width="180" height="54" loading="lazy" decoding="async"/>
+<img class="marca marca--rodape" src="assets/img/marca/logo-creme.webp?v=118" alt="Dr. Caio Melki" width="180" height="54" loading="lazy" decoding="async"/>
 <p class="rodape__fala">Médico de família e comunidade em Belo Horizonte. Especialista em coordenar o cuidado da pessoa em sua integralidade.</p>
 <div class="rodape__registro">
 <span class="rodape__selo">CRM-MG 78461</span>
@@ -996,24 +996,24 @@ placeholder="Pesquise o que você está sentindo, ex.: dor de cabeça"/>
 </div>
 
 <!-- js -->
-<script defer src="assets/js/design-system/icons.js?v=115"></script>
+<script defer src="assets/js/design-system/icons.js?v=118"></script>
 <!-- GSAP + Flip: motor do baralho dos pilares -->
 <!-- design system -->
-<script defer src="assets/js/design-system/reveal.js?v=115"></script>
-<script defer src="assets/js/design-system/cursor.js?v=115"></script>
-<script defer src="assets/js/design-system/particles.js?v=115"></script>
-<script defer src="assets/js/design-system/interactions.js?v=115"></script>
+<script defer src="assets/js/design-system/reveal.js?v=118"></script>
+<script defer src="assets/js/design-system/cursor.js?v=118"></script>
+<script defer src="assets/js/design-system/particles.js?v=118"></script>
+<script defer src="assets/js/design-system/interactions.js?v=118"></script>
 <!-- esp-painel.js: contador e sintomas girando no card da especialidade -->
-<script defer src="assets/js/site/esp-painel.js?v=115"></script>
+<script defer src="assets/js/site/esp-painel.js?v=118"></script>
 <!-- corpo-3d.js: nuvem de pontos que se registra na seção A especialidade -->
-<script defer src="assets/js/site/corpo-3d.js?v=115"></script>
+<script defer src="assets/js/site/corpo-3d.js?v=118"></script>
 <script>document.getElementById("ano-agora").textContent = new Date().getFullYear();</script>
-<script defer src="assets/js/site/carrega-pilares.js?v=115"></script>
+<script defer src="assets/js/site/carrega-pilares.js?v=118"></script>
 <!-- instituicoes.js: virada dos cards de formação no toque + demonstração automática do primeiro -->
-<script defer src="assets/js/site/instituicoes.js?v=115"></script>
+<script defer src="assets/js/site/instituicoes.js?v=118"></script>
 <!-- atuacao.js: roda de pílulas + baralho da trajetória profissional -->
-<script defer src="assets/js/site/sintomas.js?v=115"></script>
-<script defer src="assets/js/site/atuacao.js?v=115"></script>
+<script defer src="assets/js/site/sintomas.js?v=118"></script>
+<script defer src="assets/js/site/atuacao.js?v=118"></script>
 <!-- faq.js: acordeão exclusivo da seção de perguntas frequentes -->
-<script defer src="assets/js/site/faq.js?v=115"></script>
+<script defer src="assets/js/site/faq.js?v=118"></script>
 </body></html>
