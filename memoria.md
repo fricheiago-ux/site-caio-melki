@@ -398,3 +398,10 @@ Formato: uma linha por fato, com data.
   quebrou o url(#n) do SVG de ruído — trocado por varredura que respeita
   aspas); foto da hero e da especialidade em WebP; logos 360px; partículas
   a 30 fps no toque. Resultado local: 69–76 → 91–93, CLS 0,002.
+
+- 2026-09-28 — Projeto irmão criado: `fricheiago-ux/site-sell-prime`
+  (privado), site novo do zero. Herdou deste projeto as regras (CLAUDE.md),
+  as lições (aprendizados.md) e seis skills em `.claude/skills/`, entre
+  elas `medir-performance/pagespeed-aprendizados.md`, que resume a rodada de
+  PageSpeed daqui (62 → 81 → 91–93). Lição nova que valer para os dois
+  projetos deve ser registrada nos dois.
