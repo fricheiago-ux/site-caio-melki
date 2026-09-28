@@ -472,7 +472,7 @@
   const ajustarDica = () => {
     campo.placeholder = estreito.matches
       ? 'Pesquise o que você está sentindo'
-      : 'Pesquise o que você está sentindo — ex.: dor de cabeça';
+      : 'Pesquise o que você está sentindo, ex.: dor de cabeça';
   };
   ajustarDica();
   estreito.addEventListener('change', ajustarDica);
@@ -888,6 +888,72 @@
 
     secao.addEventListener('mouseenter', () => secao.classList.add('is-aura'));
     secao.addEventListener('mouseleave', () => secao.classList.remove('is-aura'));
+
+    /* ---------- Tela de toque (28/09/2026) ----------
+       Sem mouse, a aura nunca acendia. Agora: (1) na primeira vez que a
+       nuvem aparece, ela passa uma vez de cima para baixo por cima dela,
+       balançando de leve para os lados, e apaga; (2) depois, segue o dedo
+       enquanto ele encosta na seção (inclusive rolando a página) e apaga
+       um pouco depois de soltar. O CSS de (hover: none) move a aura por
+       transform, para não repintar a seção inteira a cada quadro. */
+    if (!window.matchMedia('(hover: none)').matches) return;
+
+    const nuvem = secao.querySelector('[data-nuvem]');
+    let varrendo = null, apagar = null;
+
+    function acender() { clearTimeout(apagar); secao.classList.add('is-aura'); }
+    function apagarDepois(ms) {
+      clearTimeout(apagar);
+      apagar = setTimeout(() => secao.classList.remove('is-aura'), ms);
+    }
+
+    function varrer() {
+      const r = secao.getBoundingClientRect();
+      const n = (nuvem || secao).getBoundingClientRect();
+      const y0 = n.top - r.top - 140, y1 = n.bottom - r.top + 60;
+      const meio = r.width / 2, balanco = r.width * 0.18;
+      const DURACAO = 2800;
+      let inicio = null;
+      acender();
+      function quadroVarredura(t) {
+        if (inicio === null) inicio = t;
+        const p = Math.min(1, (t - inicio) / DURACAO);
+        const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;   // entra e sai devagar
+        x = alvoX = meio + Math.sin(p * Math.PI * 2) * balanco;
+        y = alvoY = y0 + (y1 - y0) * e;
+        pintar();
+        if (p < 1) varrendo = requestAnimationFrame(quadroVarredura);
+        else { varrendo = null; apagarDepois(250); }
+      }
+      varrendo = requestAnimationFrame(quadroVarredura);
+    }
+
+    if (!semMovimento && nuvem) {
+      const vigia = new IntersectionObserver((entradas) => {
+        if (!entradas.some((en) => en.isIntersecting)) return;
+        vigia.disconnect();
+        varrer();
+      }, { threshold: 0.3 });
+      vigia.observe(nuvem);
+    }
+
+    function dedo(e) {
+      const t = e.touches[0];
+      if (!t) return;
+      // a passada de entrada vai até o fim: a seção costuma aparecer com o
+      // dedo ainda rolando a página, e interromper ali seria nunca vê-la
+      if (varrendo !== null) return;
+      const r = secao.getBoundingClientRect();
+      alvoX = t.clientX - r.left;
+      alvoY = t.clientY - r.top;
+      acender();
+      if (semMovimento || x === null) { x = alvoX; y = alvoY; pintar(); return; }
+      if (quadro === null) quadro = requestAnimationFrame(passo);
+    }
+    secao.addEventListener('touchstart', dedo, { passive: true });
+    secao.addEventListener('touchmove', dedo, { passive: true });
+    secao.addEventListener('touchend', () => apagarDepois(600), { passive: true });
+    secao.addEventListener('touchcancel', () => apagarDepois(600), { passive: true });
   })();
 
   // o painel fica com height: auto depois de aberto; se a janela muda de

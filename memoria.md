@@ -335,3 +335,15 @@ Formato: uma linha por fato, com data.
 - 2026-09-28 — Pré-visualização no celular antes de publicar: link
   raw.githack.com com o hash do commit (ver CLAUDE.md, "Pré-visualizar no
   celular"). Confirmado pelo Iago: abriu no celular.
+
+- 2026-09-28 — Aura verde da seção de sintomas também no celular (pedido do
+  Iago): passada única de cima para baixo sobre a nuvem ao aparecer (2,8s,
+  balançando de leve; não é interrompida pelo dedo que ainda está rolando) e
+  depois segue o dedo (touchstart/touchmove, apaga 0,6s após soltar). No
+  celular a aura é um círculo movido por transform (não repinta a seção) e
+  um tom mais forte (sage-200 no centro) — com sage-100 quase não aparecia.
+  Custo medido: nenhum (mesma fluidez com e sem, CPU 4x). Conferido por
+  vídeo gravado no emulador (print sozinho engana: cada captura trava o
+  emulador ~1s e "pula" a animação). Também: sem travessões no texto de
+  abertura, na dica da busca e no aviso da seção ("travessão parece IA",
+  Iago) — os 38 resumos das fichas ainda têm, pendente decidir.
