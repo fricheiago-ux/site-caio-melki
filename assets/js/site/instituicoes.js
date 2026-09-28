@@ -41,11 +41,14 @@
   if (reduzido) return;
 
   const primeiro = cards[0];
+  // Só um clique/toque de verdade tira a demonstração do automático (aí
+  // quem manda é a pessoa). Antes, touchstart e mouseenter também
+  // cancelavam — e cancelar pulava a volta: no celular, rolar a página com
+  // o dedo em cima do 1º card (o do canto, onde o dedo cai) deixava o card
+  // virado para sempre; no computador, bastava o mouse passar por cima.
   let cancelada = false;
-  const cancelar = () => { cancelada = true; };
-  ['click', 'touchstart', 'mouseenter', 'focus'].forEach((ev) =>
-    primeiro.addEventListener(ev, cancelar, { once: true })
-  );
+  primeiro.addEventListener('click', () => { cancelada = true; }, { once: true });
+  const VIRADO = 2600;   // tempo no verso: dá para ler a frase antes de voltar
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -57,7 +60,7 @@
         primeiro.classList.add('is-open');
         setTimeout(() => {
           if (!cancelada) primeiro.classList.remove('is-open');
-        }, 1500);
+        }, VIRADO);
       }, 500);
     });
   }, { root: null, rootMargin: '0px 0px -8% 0px', threshold: 0.4 });
