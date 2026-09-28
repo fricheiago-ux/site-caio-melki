@@ -347,3 +347,15 @@ Formato: uma linha por fato, com data.
   emulador ~1s e "pula" a animação). Também: sem travessões no texto de
   abertura, na dica da busca e no aviso da seção ("travessão parece IA",
   Iago) — os 38 resumos das fichas ainda têm, pendente decidir.
+
+- 2026-09-28 — Foto da hero reenquadrada (pedido do Iago): cabeça
+  centralizada e cabelo a 6% do topo do quadro, em todas as larguras. A foto
+  tem a cabeça em 54,3% da largura, e com object-fit: cover não havia folga
+  lateral — a <img> agora é 12% mais larga que o quadro e posicionada por
+  conta (hero.css, comentário com os números; trocar a foto = refazer a
+  conta). No celular/tablet o quadro passou de 16:10 (máx. 300px) para 4:3
+  (máx. 360px) para caber mais corpo: agora mostra até a cintura. FAQ no
+  celular: o "retângulo preto que pisca" era o realce de toque padrão do
+  Safari (-webkit-tap-highlight-color) — desligado; no lugar, a faixa verde
+  do hover acende no toque via data-toque (o :active não é confiável no
+  iPhone). Rolar por cima não acende.

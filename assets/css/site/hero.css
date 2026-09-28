@@ -32,11 +32,26 @@ aspect-ratio: 4 / 5;
 box-shadow: var(--shadow-lg);
 border: 1px solid var(--line);
 }
+/* Enquadramento (28/09/2026, pedido do Iago): cabeça centralizada e perto
+   do topo, sem cortar. Na foto (896×1195) o centro da cabeça fica em 54,3%
+   da largura e o alto do cabelo em 19,1% da altura — um pouco à direita, e
+   com "cover" não havia folga lateral para centralizar. Então a imagem fica
+   --z vezes mais larga que o quadro e é posicionada pela conta:
+   - left: o centro da cabeça cai em 50% do quadro;
+   - top 6% + margin-top: o alto do cabelo fica a 6% do topo do quadro
+     (margin-top em % é relativo à LARGURA, que é de onde sai a altura da
+     imagem: 1,3337 = 1195/896).
+   --z = 1,12 cobre o quadro inteiro em 4:5 (computador) e em 4:3 (celular),
+   conferido nas larguras de 320 a 1920px. Trocar a foto = refazer a conta. */
 .hero-foto img {
-width: 100%;
-height: 100%;
-object-fit: cover;
-object-position: center 22%;
+--z: 1.12;
+position: absolute;
+left: calc(50% - 54.3% * var(--z));
+top: 6%;
+width: calc(100% * var(--z));
+max-width: none;
+height: auto;
+margin-top: calc(-0.191 * 1.3337 * 100% * var(--z));
 }
 .hero-foto::after {
 content: "";
@@ -289,7 +304,9 @@ pointer-events: none;
    ============================================================ */
 @media (max-width: 1080px) {
 .hero-grid { grid-template-columns: 1fr; gap: var(--sp-8); }
-.hero-foto { aspect-ratio: 16 / 10; max-height: 300px; }
+/* 4:3 (antes 16:10, até 300px): mais alto, para caber mais do corpo com a
+   cabeça centralizada e perto do topo */
+.hero-foto { aspect-ratio: 4 / 3; max-height: 360px; }
 .hero-site { min-height: auto; padding-block: calc(var(--sp-16) + 44px) var(--sp-16); }
 }
 @media (max-width: 640px) {

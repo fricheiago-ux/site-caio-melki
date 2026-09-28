@@ -88,7 +88,11 @@ transition: transform var(--dur-base) var(--ease-out-expo);
    pelo teclado ganha o mesmo destaque. */
 /* Faixa verde clara atrás da pergunta: sai um pouco para as laterais (a
    lista tem --sp-6 de respiro) e não encosta nas linhas divisórias. */
-.faq-item__pergunta { position: relative; }
+/* Sem isso o Safari do iPhone pinta um retângulo escuro translúcido por
+   cima da pergunta enquanto o dedo está nela — o "retângulo preto que
+   pisca" que o Iago viu (28/09/2026). No toque, quem responde é a mesma
+   faixa verde do hover (ver :active abaixo). */
+.faq-item__pergunta { position: relative; -webkit-tap-highlight-color: transparent; }
 .faq-item__pergunta::before {
 content: "";
 position: absolute;
@@ -109,6 +113,10 @@ pointer-events: none;
 .faq-item__pergunta:hover .faq-item__seta { color: var(--sage-700); transform: translateY(2px); }
 .faq-item.is-aberto .faq-item__pergunta:hover .faq-item__seta { transform: rotate(180deg) translateY(2px); }
 }
+/* Toque: a faixa acende pela classe .is-ativo, ligada por data-toque
+   (interactions.js, o mesmo do cartão "Gerente do cuidado") — :active não é
+   confiável no Safari do iPhone. Rolar a página por cima não acende. */
+.faq-item__pergunta.is-ativo::before { opacity: 1; transform: none; }
 .faq-item__pergunta:focus-visible::before { opacity: 1; transform: none; }
 .faq-item__pergunta:focus-visible span { color: var(--sage-700); transform: translateX(6px); }
 
