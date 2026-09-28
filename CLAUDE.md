@@ -383,6 +383,35 @@ Não mexido (é desenho, não técnica): as durações da coreografia (loader
 Sem duplicação relevante — página única, sem header/rodapé repetido em outro
 arquivo.
 
+## Pré-visualizar no celular antes de publicar
+
+Quando o Iago quiser ver/aprovar no celular algo que ainda não está na
+`main` (ou seja, não está no ar): enviar a branch para o GitHub e mandar o
+link do **raw.githack.com** apontando para o **hash do commit** (não para o
+nome da branch — nome com barra, como `claude/...`, confunde o serviço, e o
+hash não muda nem fica em cache velho):
+
+```
+https://raw.githack.com/fricheiago-ux/site-caio-melki/<HASH-DO-COMMIT>/index.html
+```
+
+(`git rev-parse HEAD` dá o hash, depois do `git push`.) Funciona porque o
+repositório é público: o githack serve os arquivos do GitHub com o tipo
+certo, e todos os caminhos do site são relativos. Não publica nada nem mexe
+no Pages. Diferenças em relação ao site no ar: sem o `bundle.css` (o CSS
+vem em arquivos separados, igual ao repositório) e sem o `favicon.ico` da
+raiz — o resto é idêntico. Primeira abertura pode demorar alguns segundos.
+**Status: usado pela primeira vez em 28/09/2026, ainda sem confirmação do
+Iago de que abriu certo no celular** — atualizar aqui quando confirmar (ou,
+se não funcionar, registrar a alternativa). O ambiente de nuvem do Claude
+Code não alcança o githack (proxy bloqueia), então quem confere é o Iago.
+
+Alternativa sem serviço externo: no Mac, `git switch <branch>` + `git pull`
++ `python3 -m http.server 8880 --bind 0.0.0.0`, e no celular (mesma rede
+Wi-Fi) abrir `http://<IP-do-Mac>:8880`. **Atenção ao `git pull` depois do
+`git switch`** — em 28/09 o Mac tinha uma cópia antiga da branch e mostrou
+a versão de dias antes ("Your branch is behind … by 15 commits").
+
 ## Ao publicar
 
 **Publicação automática via GitHub Pages + GitHub Actions.** Basta enviar o

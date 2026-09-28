@@ -331,3 +331,7 @@ Formato: uma linha por fato, com data.
   FAQ ganhou hover (só mouse). Logo do cabeçalho/rodapé virou <img>: com o
   index.html aberto direto do disco a máscara sumia (também na versão
   anterior — não foi a atualização que quebrou).
+
+- 2026-09-28 — Pré-visualização no celular antes de publicar: link
+  raw.githack.com com o hash do commit (ver CLAUDE.md, "Pré-visualizar no
+  celular"). Primeiro uso hoje; confirmação do Iago pendente.
