@@ -36,6 +36,13 @@ mask-size: contain;
 .loader {
 position: fixed;
 inset: 0;
+/* Sem isso, no Safari do iPhone o miolo (place-content:center) às vezes
+   centraliza contra a altura "grande" da tela (a barra de endereço
+   recolhida), que é maior que a área visível de verdade quando a página
+   acaba de carregar (barra ainda expandida) — o conteúdo fica um pouco
+   abaixo do centro real. .hero-portas já usa o mesmo 100svh, pelo mesmo
+   motivo. */
+height: 100svh;
 z-index: 9998;
 display: grid;
 place-content: center;

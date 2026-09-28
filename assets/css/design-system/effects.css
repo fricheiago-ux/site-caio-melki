@@ -178,3 +178,22 @@ mask-composite: exclude;
 background: var(--border-gradient);
 pointer-events: none;
 }
+
+/* ---------- Alívio para celular e telas de toque ----------
+   Duas camadas decorativas custam caro no Safari do iPhone e não fazem
+   falta visual em tela pequena (achado ao investigar travadas na abertura,
+   27/09/2026 — por leitura do código, não medido em aparelho):
+
+   1. .noise-overlay é uma camada fixa de tela cheia com mix-blend-mode e
+      imagem gerada por filtro SVG (feTurbulence, 3 oitavas): o navegador
+      refaz a mistura com tudo que está por baixo a cada quadro em que
+      algo muda (digitação, rolagem, luzes). A 4,5% de opacidade, tirar o
+      blend não muda o que se enxerga.
+   2. .aurora usa blur(110px) em círculos de 420–680px, 4 só na hero e 12
+      na página. Cada um já é um radial-gradient que some antes da borda,
+      então o blur quase não acrescenta nada — e o custo cresce com o raio.
+      60px mantém o mesmo visual e reduz bastante a superfície borrada. */
+@media (hover: none), (max-width: 900px) {
+.noise-overlay { mix-blend-mode: normal; }
+.aurora { filter: blur(60px); }
+}
