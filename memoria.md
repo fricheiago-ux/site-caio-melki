@@ -367,3 +367,15 @@ Formato: uma linha por fato, com data.
   ponto ou parênteses, sem mudar o sentido médico. Ficou o traço de
   intervalo de datas ("2024 – 2026", é o certo) e um aviso técnico de
   console em icons.js. **Texto novo no site: não usar travessão.**
+
+- 2026-09-28 — Espaçamento entre seções padronizado (pedido do Iago): `.section`
+  passou de 128px fixos para clamp(56px, 6vw, 80px) em cima e embaixo; saíram
+  os ajustes inline de formação/trajetória (Lattes → FAQ dava 265px, maior que
+  o resto). Exceção pedida: pilares → faixa verde → formação continua igual
+  (#formacao com padding-top 128px inline; alturas de pilares e divisória
+  conferidas idênticas antes/depois). Página ~430px mais curta no computador,
+  ~600px no celular. Ícones do FAQ (WhatsApp, LinkedIn, e-mail) em sage-600 já
+  em repouso. Carrossel de experiência: demonstração única ao chegar — a
+  pílula "Alice Saúde" é "clicada" sozinha e o card passa de NESCON para
+  Alice, sem voltar; o giro automático espera a demonstração (senão podia
+  avançar antes) e recomeça com o intervalo cheio; clique antes cancela.

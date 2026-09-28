@@ -10,7 +10,12 @@
 /* ---------- Layout ---------- */
 .wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: var(--sp-6); }
 .wrap-wide { width: 100%; max-width: var(--wrap-wide); margin-inline: auto; padding-inline: var(--sp-6); }
-.section { position: relative; padding-block: var(--sp-32); overflow: hidden; }
+/* Respiro das seções (28/09/2026, pedido do Iago: padronizar e aproximar).
+   Antes 128px em cima e embaixo em qualquer tela — no celular, 256px de
+   vazio entre uma seção e outra. Agora 80px no computador, descendo
+   sozinho até 56px no celular. A passagem pilares → faixa verde → formação
+   NÃO segue isto de propósito (ver padding-top inline de #formacao). */
+.section { position: relative; padding-block: clamp(3.5rem, 6vw, 5rem); overflow: hidden; }
 .section--tight { padding-block: var(--sp-24); }
 
 .section-head {

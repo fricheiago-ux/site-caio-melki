@@ -110,6 +110,16 @@ color: var(--sage-700);
 .atuacao__item.is-ativo .atuacao__chip i,
 .atuacao__item.is-ativo .atuacao__chip svg { color: var(--sage-700); }
 
+/* Demonstração de entrada (28/09/2026): a pílula "Alice Saúde" é
+   "clicada" sozinha uma vez — afunda e acende um anel — para mostrar que
+   dá para escolher o card pela roda. Ver atuacao.js. */
+@keyframes atuacaoToqueDemo {
+0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 250, 247, 0.55); }
+35% { transform: scale(0.92); box-shadow: 0 0 0 6px rgba(251, 250, 247, 0.35); }
+100% { transform: scale(1); box-shadow: 0 0 0 14px rgba(251, 250, 247, 0); }
+}
+.atuacao__chip.is-demo { animation: atuacaoToqueDemo 0.6s var(--ease-out-expo); }
+
 /* ---------- Coluna direita: o baralho ---------- */
 .atuacao__palco {
 position: relative;

@@ -30,6 +30,9 @@
   let pausadoPorHover = false;
   let pausadoPorFoco = false;
   let naTela = true;
+  // Enquanto a demonstração de entrada não roda, o giro automático espera —
+  // senão a roda podia avançar sozinha antes e estragar o "clique".
+  let demoFeita = semMovimento;
   let distancias = new Array(TOTAL).fill(null);
 
   // Mesma função do original: joga v para dentro da faixa [min, max).
@@ -94,7 +97,7 @@
 
   function tocar() {
     parar();
-    if (semMovimento || pausadoPorHover || pausadoPorFoco || !naTela || document.hidden) return;
+    if (semMovimento || !demoFeita || pausadoPorHover || pausadoPorFoco || !naTela || document.hidden) return;
     relogio = setInterval(seguinte, INTERVALO);
   }
   function parar() {
@@ -105,7 +108,7 @@
   itens.forEach((item, indice) => {
     const chip = item.querySelector('.atuacao__chip');
     if (!chip) return;
-    chip.addEventListener('click', () => { irPara(indice); tocar(); });
+    chip.addEventListener('click', () => { demoFeita = true; irPara(indice); tocar(); });
   });
 
   raiz.addEventListener('mouseenter', () => { pausadoPorHover = true; parar(); });
@@ -132,6 +135,40 @@
     new IntersectionObserver((entradas) => {
       entradas.forEach((entrada) => { naTela = entrada.isIntersecting; naTela ? tocar() : parar(); });
     }, { threshold: 0 }).observe(raiz);
+  }
+
+  /* ---------- Demonstração de entrada (28/09/2026, pedido do Iago) ----------
+     Na primeira vez que a seção aparece de verdade (o topo dela passa de
+     60% da altura da tela),
+     a pílula do 2º card ("Alice Saúde") é "clicada" sozinha: afunda, acende
+     um anel e o baralho passa de NESCON para Alice — o mesmo que um clique.
+     Diferente da demonstração da formação, NÃO volta: fica em Alice, e o
+     giro automático recomeça dali, com o intervalo cheio. Só uma vez; se a
+     pessoa clicar antes, a demonstração é cancelada. */
+  if (!semMovimento && 'IntersectionObserver' in window && TOTAL > 1) {
+    const vigia = new IntersectionObserver((entradas) => {
+      if (!entradas.some((e) => e.isIntersecting)) return;
+      vigia.disconnect();
+      setTimeout(() => {
+        if (demoFeita) return;
+        const chip = itens[1].querySelector('.atuacao__chip');
+        if (chip) {
+          chip.classList.remove('is-demo');
+          void chip.offsetWidth;
+          chip.classList.add('is-demo');
+          chip.addEventListener('animationend', () => chip.classList.remove('is-demo'), { once: true });
+        }
+        setTimeout(() => {
+          if (demoFeita) return;
+          demoFeita = true;
+          irPara(1);
+          tocar();
+        }, 260);
+      }, 900);
+    }, { rootMargin: '0px 0px -40% 0px', threshold: 0 });   // topo da roda chegou a 60% da tela
+    vigia.observe(raiz);
+  } else {
+    demoFeita = true;
   }
 
   pintar(false);

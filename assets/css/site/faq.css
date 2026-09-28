@@ -31,7 +31,8 @@ height: 44px;
 border-radius: 50%;
 border: 1px solid var(--line);
 background: var(--paper-100);
-color: var(--ink-700);
+/* verde do hover (sage-600) já em repouso, pedido do Iago (28/09/2026) */
+color: var(--sage-600);
 cursor: none;
 transition: transform var(--dur-fast) var(--ease-out-expo),
 background var(--dur-fast) ease,

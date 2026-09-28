@@ -287,6 +287,11 @@ assumir a partir da última leitura.
   menor que a tela), não à janela. É por isso que `.navbar__links` no modo
   celular usa `width: 100vw; height: 100dvh` em vez de `inset: 0`. Qualquer
   novo painel/overlay de tela cheia dentro do navbar precisa do mesmo cuidado.
+- Respiro entre seções: `.section` usa `clamp(3.5rem, 6vw, 5rem)` em cima e
+  embaixo (80px no computador, 56px no celular), desde 28/09/2026. Não pôr
+  padding inline em seção nova para "ajustar" — foi assim que Lattes → FAQ
+  ficou maior que o resto. Única exceção, de propósito: pilares → faixa
+  verde → formação (`#formacao` com `padding-top: var(--sp-32)`).
 - Larguras de corte (`@media`) usadas hoje no site, por arquivo — **não são
   um padrão, são o estado real**, herdado de quando cada seção foi construída
   em momentos diferentes: 640, 660, 720, 767, 860, 900, 1000, 1080, 1100,
