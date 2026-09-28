@@ -92,8 +92,14 @@ scripts/montar-site.py         ← roda só na publicação: junta os CSS
                                   um é sempre menor (foi por isso que
                                   logo-unimed.png ficou PNG).
     formacao/                  ← logos da seção de instituições acadêmicas
-                                  (UFMG, Hertfordshire, McGill, HC-UFMG,
-                                  Cruzeiro)
+                                  (FGV, UFMG, Hertfordshire, McGill, HC-UFMG,
+                                  Cruzeiro) — silhuetas brancas com alfa real
+                                  (ver memoria.md, 28/09/2026). Logo nova:
+                                  mesma conta (cinza → inverte → brilho 1,6 →
+                                  contraste 1,25 vira alfa) e ZERAR o fundo —
+                                  a da FGV veio com quadriculado de
+                                  "transparência" embutido (branco/cinza 230)
+                                  que viraria retângulo no card
     marca/                     ← logo-creme-recortada.webp (a logo creme,
                                   sem margem, como <img> na divisória) e a
                                   logo do site em uso (logo-sem-fundo.png,
@@ -147,6 +153,12 @@ completo).
 Nada em `img/` marcado acima como "de reserva" é lixo — é material mantido de
 propósito para o Caio trocar fotos/logos depois sem precisar gerar de novo.
 Só não está linkado em `index.html` hoje.
+
+## Texto
+
+**Sem travessão (—) em texto visível** (pedido do Iago, 28/09/2026: "parece
+que foi IA que escreveu"). Usar vírgula, dois-pontos, ponto ou parênteses.
+Intervalo de datas continua com traço ("2024 – 2026").
 
 ## Identidade visual
 
@@ -257,12 +269,11 @@ assumir a partir da última leitura.
   do que está *de fato* sob o ponteiro (elemento real, gradiente incluído) para
   decidir se fica claro ou escuro — não é uma lista fixa de seções. Seção nova
   escura já funciona sozinha; não precisa (e não deve) adicionar caso especial.
-- `.marca` (logo do header e do rodapé) é desenhada com `mask-image:
-  url(...)` — isso só funciona com o site servido por HTTP (servidor local
-  ou publicado). Abrindo o `index.html` com duplo clique (`file://`), o
-  navegador bloqueia a máscara e **a logo some sem aviso**. Se a logo
-  "sumiu", conferir primeiro como a página foi aberta. Logo nova em seção
-  nova: preferir `<img>` (como na divisória), que funciona em qualquer caso.
+- `.marca` (logo do header e do rodapé) é `<img>` desde 28/09/2026
+  (`marca/logo-escura.webp` e `logo-creme.webp`). Antes era `mask-image`, que
+  some sem aviso com o `index.html` aberto por duplo clique (`file://`) — foi
+  o que o Iago viu. **Não voltar para máscara**; logo em seção nova também
+  como `<img>`. `logo-sem-fundo.png` ficou sem uso, como reserva.
 - A abertura da hero (portas + digitação do título) depende de um aviso
   (`portas:abertas`) disparado por `intro.js`. Qualquer efeito que precise
   esperar a abertura terminar deve ouvir esse evento, e não inventar seu próprio
@@ -377,6 +388,34 @@ Não mexido (é desenho, não técnica): as durações da coreografia (loader
 
 Sem duplicação relevante — página única, sem header/rodapé repetido em outro
 arquivo.
+
+## Pré-visualizar no celular antes de publicar
+
+Quando o Iago quiser ver/aprovar no celular algo que ainda não está na
+`main` (ou seja, não está no ar): enviar a branch para o GitHub e mandar o
+link do **raw.githack.com** apontando para o **hash do commit** (não para o
+nome da branch — nome com barra, como `claude/...`, confunde o serviço, e o
+hash não muda nem fica em cache velho):
+
+```
+https://raw.githack.com/fricheiago-ux/site-caio-melki/<HASH-DO-COMMIT>/index.html
+```
+
+(`git rev-parse HEAD` dá o hash, depois do `git push`.) Funciona porque o
+repositório é público: o githack serve os arquivos do GitHub com o tipo
+certo, e todos os caminhos do site são relativos. Não publica nada nem mexe
+no Pages. Diferenças em relação ao site no ar: sem o `bundle.css` (o CSS
+vem em arquivos separados, igual ao repositório) e sem o `favicon.ico` da
+raiz — o resto é idêntico. Primeira abertura pode demorar alguns segundos.
+**Status: funciona — confirmado pelo Iago em 28/09/2026** (abriu no celular;
+o mesmo link serve para o computador). O ambiente de nuvem do Claude Code não
+alcança o githack (proxy bloqueia), então quem confere é o Iago.
+
+Alternativa sem serviço externo: no Mac, `git switch <branch>` + `git pull`
++ `python3 -m http.server 8880 --bind 0.0.0.0`, e no celular (mesma rede
+Wi-Fi) abrir `http://<IP-do-Mac>:8880`. **Atenção ao `git pull` depois do
+`git switch`** — em 28/09 o Mac tinha uma cópia antiga da branch e mostrou
+a versão de dias antes ("Your branch is behind … by 15 commits").
 
 ## Ao publicar
 

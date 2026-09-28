@@ -80,7 +80,7 @@
       painel.innerHTML =
         '<div class="busca-vazio">' +
         '<p class="body-sm"><strong>Não encontrei "' + q.replace(/</g, '&lt;') + '" na lista.</strong></p>' +
-        '<p class="helper">A lista cobre os quadros mais comuns, mas não é exaustiva — o médico de família também coordena o cuidado de quem já tem diagnóstico. Vale conversar.</p>' +
+        '<p class="helper">A lista cobre os quadros mais comuns, mas não é exaustiva: o médico de família também coordena o cuidado de quem já tem diagnóstico. Vale conversar.</p>' +
         '<a class="btn btn--primary" href="#agendar"><span class="btn__shine"></span>Perguntar numa consulta</a>' +
         '</div>';
     } else {

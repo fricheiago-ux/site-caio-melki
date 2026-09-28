@@ -8,7 +8,7 @@
 
 .inst-grid {
 display: grid;
-grid-template-columns: repeat(5, minmax(0, 1fr));
+grid-template-columns: repeat(6, minmax(0, 1fr));
 gap: var(--sp-4);
 }
 
@@ -153,7 +153,9 @@ transition: color var(--dur-fast) ease;
 /* ============================================================
    RESPONSIVO
    ============================================================ */
-@media (max-width: 1080px) {
+/* 1279 (não 1080) desde 28/09/2026: com 6 cards, entre ~1080 e 1240px as
+   colunas ficavam estreitas e o verso de 2 cards vazava do card. */
+@media (max-width: 1279px) {
 .inst-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 @media (max-width: 720px) {
@@ -167,11 +169,8 @@ transition: color var(--dur-fast) ease;
    compacto (28/09/2026, medido em 360 e 390px). */
 .inst-card__face--desc { padding: var(--sp-3) var(--sp-4); gap: var(--sp-1); }
 .inst-card__texto { font-size: min(0.8125rem, 3.65vw); line-height: 1.4; }
-/* 5 itens em grade de 2 colunas sobra 1 sozinho na última linha, grudado
-   à esquerda — parece que falta um card à direita. Ocupando as duas
-   colunas só nesse item e limitando a largura dele à metade, ele fica
-   centralizado em vez de encostado. */
-.inst-item:last-child { grid-column: 1 / -1; width: calc(50% - var(--sp-3) / 2); margin-inline: auto; }
+/* Com 6 instituições (FGV entrou em 28/09/2026) a grade fecha certinho em
+   6 / 3 / 2 colunas; saiu a regra que centralizava o 5º card sozinho. */
 }
 
 /* Sem mouse (toque): a virada não usa :hover — :hover não se desfaz

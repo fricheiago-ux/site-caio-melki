@@ -322,3 +322,48 @@ Formato: uma linha por fato, com data.
   1–2px dentro do padding). Cartão verde testado de verdade em emulação de
   toque: toque acende e apaga sozinho (~0,4s), rolagem começando nele não
   acende nem prende, mouse acende/apaga, ícone gira 90°, cursor clareia.
+
+- 2026-09-28 — Formação ganhou a FGV (MBA em Gestão de Saúde, em curso),
+  como 1º card; grade 6/3/2 colunas (3 até 1279px, porque entre 1080 e 1240
+  o verso de 2 cards vazava). A logo enviada pelo Iago tinha o quadriculado
+  de "transparência" desenhado na imagem (branco + cinza 230): a conversão
+  zera tudo até o tom 230 — conferido 0 pixel com opacidade fora do desenho.
+  FAQ ganhou hover (só mouse). Logo do cabeçalho/rodapé virou <img>: com o
+  index.html aberto direto do disco a máscara sumia (também na versão
+  anterior — não foi a atualização que quebrou).
+
+- 2026-09-28 — Pré-visualização no celular antes de publicar: link
+  raw.githack.com com o hash do commit (ver CLAUDE.md, "Pré-visualizar no
+  celular"). Confirmado pelo Iago: abriu no celular.
+
+- 2026-09-28 — Aura verde da seção de sintomas também no celular (pedido do
+  Iago): passada única de cima para baixo sobre a nuvem ao aparecer (2,8s,
+  balançando de leve; não é interrompida pelo dedo que ainda está rolando) e
+  depois segue o dedo (touchstart/touchmove, apaga 0,6s após soltar). No
+  celular a aura é um círculo movido por transform (não repinta a seção) e
+  um tom mais forte (sage-200 no centro) — com sage-100 quase não aparecia.
+  Custo medido: nenhum (mesma fluidez com e sem, CPU 4x). Conferido por
+  vídeo gravado no emulador (print sozinho engana: cada captura trava o
+  emulador ~1s e "pula" a animação). Também: sem travessões no texto de
+  abertura, na dica da busca e no aviso da seção ("travessão parece IA",
+  Iago) — os 38 resumos das fichas ainda têm, pendente decidir.
+
+- 2026-09-28 — Foto da hero reenquadrada (pedido do Iago): cabeça
+  centralizada e cabelo a 6% do topo do quadro, em todas as larguras. A foto
+  tem a cabeça em 54,3% da largura, e com object-fit: cover não havia folga
+  lateral — a <img> agora é 12% mais larga que o quadro e posicionada por
+  conta (hero.css, comentário com os números; trocar a foto = refazer a
+  conta). No celular/tablet o quadro passou de 16:10 (máx. 300px) para 4:3
+  (máx. 360px) para caber mais corpo: agora mostra até a cintura. FAQ no
+  celular: o "retângulo preto que pisca" era o realce de toque padrão do
+  Safari (-webkit-tap-highlight-color) — desligado; no lugar, a faixa verde
+  do hover acende no toque via data-toque (o :active não é confiável no
+  iPhone). Rolar por cima não acende.
+
+- 2026-09-28 — Travessões (—) removidos de todo texto visível do site a
+  pedido do Iago ("travessão parece IA"): 53 ocorrências no index.html
+  (título da aba, FAQ, textos alternativos) e nos resumos/alertas das 38
+  fichas de sintomas e na busca. Trocados um a um por vírgula, dois-pontos,
+  ponto ou parênteses, sem mudar o sentido médico. Ficou o traço de
+  intervalo de datas ("2024 – 2026", é o certo) e um aviso técnico de
+  console em icons.js. **Texto novo no site: não usar travessão.**
