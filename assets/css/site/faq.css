@@ -82,6 +82,19 @@ transition: transform var(--dur-base) var(--ease-out-expo);
 }
 .faq-item.is-aberto .faq-item__seta { transform: rotate(180deg); }
 
+/* Hover nas perguntas (28/09/2026, pedido do Iago): a pergunta fica verde e
+   anda um pouco para a direita, a seta desce um passo. Só com mouse de
+   verdade — em tela de toque o :hover fica preso depois do toque. O foco
+   pelo teclado ganha o mesmo destaque. */
+.faq-item__pergunta span { transition: color var(--dur-fast) ease, transform var(--dur-base) var(--ease-out-expo); }
+.faq-item__seta { transition: transform var(--dur-base) var(--ease-out-expo), color var(--dur-fast) ease; }
+@media (hover: hover) {
+.faq-item__pergunta:hover span { color: var(--sage-700); transform: translateX(6px); }
+.faq-item__pergunta:hover .faq-item__seta { color: var(--sage-700); transform: translateY(2px); }
+.faq-item.is-aberto .faq-item__pergunta:hover .faq-item__seta { transform: rotate(180deg) translateY(2px); }
+}
+.faq-item__pergunta:focus-visible span { color: var(--sage-700); transform: translateX(6px); }
+
 .faq-item__resposta { height: 0; overflow: hidden; transition: height var(--dur-base) var(--ease-out-expo); }
 .faq-item__resposta p {
 margin: 0;
