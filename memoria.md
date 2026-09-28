@@ -322,3 +322,12 @@ Formato: uma linha por fato, com data.
   1–2px dentro do padding). Cartão verde testado de verdade em emulação de
   toque: toque acende e apaga sozinho (~0,4s), rolagem começando nele não
   acende nem prende, mouse acende/apaga, ícone gira 90°, cursor clareia.
+
+- 2026-09-28 — Formação ganhou a FGV (MBA em Gestão de Saúde, em curso),
+  como 1º card; grade 6/3/2 colunas (3 até 1279px, porque entre 1080 e 1240
+  o verso de 2 cards vazava). A logo enviada pelo Iago tinha o quadriculado
+  de "transparência" desenhado na imagem (branco + cinza 230): a conversão
+  zera tudo até o tom 230 — conferido 0 pixel com opacidade fora do desenho.
+  FAQ ganhou hover (só mouse). Logo do cabeçalho/rodapé virou <img>: com o
+  index.html aberto direto do disco a máscara sumia (também na versão
+  anterior — não foi a atualização que quebrou).
