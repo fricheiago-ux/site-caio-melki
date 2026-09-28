@@ -154,6 +154,12 @@ Nada em `img/` marcado acima como "de reserva" é lixo — é material mantido d
 propósito para o Caio trocar fotos/logos depois sem precisar gerar de novo.
 Só não está linkado em `index.html` hoje.
 
+## Texto
+
+**Sem travessão (—) em texto visível** (pedido do Iago, 28/09/2026: "parece
+que foi IA que escreveu"). Usar vírgula, dois-pontos, ponto ou parênteses.
+Intervalo de datas continua com traço ("2024 – 2026").
+
 ## Identidade visual
 
 Fontes: **Inter** (interface e títulos), **Instrument Serif** (só citações e

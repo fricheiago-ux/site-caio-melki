@@ -23,7 +23,7 @@
   const FICHAS = {
     'dor-de-cabeca': {
       sin: ['cefaleia', 'enxaqueca', 'migranea', 'cabeca doendo', 'dor na cabeca', 'dor na nuca'],
-      resumo: 'A maior parte das dores de cabeça é <strong>primária</strong> — não tem uma doença por trás, e sim um padrão próprio, que se trata. O trabalho da consulta é separar essas do grupo menor em que a dor é sinal de outra coisa: sono, pressão, seios da face, uso excessivo de analgésico.',
+      resumo: 'A maior parte das dores de cabeça é <strong>primária</strong>: não tem uma doença por trás, e sim um padrão próprio, que se trata. O trabalho da consulta é separar essas do grupo menor em que a dor é sinal de outra coisa: sono, pressão, seios da face, uso excessivo de analgésico.',
       grupos: [
         { area: 'Neurologia', causas: ['Cefaleia tensional', 'Enxaqueca (migrânea)'] },
         { area: 'Saúde mental e psiquiatria', causas: ['Transtorno de ansiedade generalizada (TAG)', 'Insônia e outros distúrbios do sono', 'Esgotamento profissional (burnout)', 'Episódios de estresse agudo'] },
@@ -36,7 +36,7 @@
 
     'cansaco': {
       sin: ['fadiga', 'fraqueza', 'sem energia', 'indisposicao', 'moleza', 'canseira', 'sem disposicao'],
-      resumo: 'Cansaço é o sintoma mais inespecífico da medicina — e por isso mesmo é onde o olhar de quem enxerga a pessoa inteira rende mais. Tireoide, sono, humor, vitaminas e coração entram na mesma conversa, e a investigação se dirige pelo que a história aponta, não por um pacote de exames.',
+      resumo: 'Cansaço é o sintoma mais inespecífico da medicina, e por isso mesmo é onde o olhar de quem enxerga a pessoa inteira rende mais. Tireoide, sono, humor, vitaminas e coração entram na mesma conversa, e a investigação se dirige pelo que a história aponta, não por um pacote de exames.',
       grupos: [
         { area: 'Endocrinologia e metabolismo', causas: ['Hipotireoidismo', 'Hipertireoidismo', 'Diabetes mellitus tipo 2', 'Obesidade e sobrepeso', 'Deficiências vitamínicas (vitamina D e B12)', 'Desnutrição'] },
         { area: 'Saúde mental e psiquiatria', causas: ['Transtorno depressivo maior', 'Distimia', 'Transtorno de ansiedade generalizada (TAG)', 'Insônia e outros distúrbios do sono', 'Esgotamento profissional (burnout)', 'Transtorno por uso de álcool'] },
@@ -49,7 +49,7 @@
 
     'ansiedade': {
       sin: ['nervosismo', 'angustia', 'crise de ansiedade', 'preocupacao', 'aflicao', 'panico', 'nervoso'],
-      resumo: 'Ansiedade é uma reação normal que vira diagnóstico quando toma conta da rotina. Boa parte é tratada na atenção primária, do começo ao fim — e quando o caso pede psiquiatra, o encaminhamento é direcionado, não genérico. Vale checar tireoide antes de fechar o diagnóstico.',
+      resumo: 'Ansiedade é uma reação normal que vira diagnóstico quando toma conta da rotina. Boa parte é tratada na atenção primária, do começo ao fim. Quando o caso pede psiquiatra, o encaminhamento é direcionado, não genérico. Vale checar tireoide antes de fechar o diagnóstico.',
       grupos: [
         { area: 'Saúde mental e psiquiatria', causas: ['Transtorno de ansiedade generalizada (TAG)', 'Síndrome do pânico', 'Transtorno de ansiedade social', 'Fobias específicas', 'Episódios de estresse agudo', 'Insônia e outros distúrbios do sono', 'Esgotamento profissional (burnout)', 'Transtorno por uso de álcool', 'Transtorno de déficit de atenção e hiperatividade (TDAH)'] },
         { area: 'Endocrinologia e metabolismo', causas: ['Hipertireoidismo'] },
@@ -84,7 +84,7 @@
 
     'dor-no-peito': {
       sin: ['aperto no peito', 'dor toracica', 'peito doendo', 'pontada no peito', 'coracao doendo'],
-      resumo: 'Dor no peito não é sinônimo de coração — a maioria vem de estômago, musculatura da parede torácica ou ansiedade. Mas a conduta começa sempre descartando o que é grave, e essa triagem é rápida.',
+      resumo: 'Dor no peito não é sinônimo de coração: a maioria vem de estômago, musculatura da parede torácica ou ansiedade. Mas a conduta começa sempre descartando o que é grave, e essa triagem é rápida.',
       grupos: [
         { area: 'Cardiovascular', causas: ['Doença isquêmica do coração (acompanhamento e prevenção secundária)', 'Hipertensão arterial sistêmica', 'Arritmias benignas'] },
         { area: 'Gastroenterologia', causas: ['Doença do refluxo gastroesofágico (DRGE)', 'Gastrite', 'Dispepsia', 'Úlcera péptica'] },
@@ -110,7 +110,7 @@
 
     'insonia': {
       sin: ['nao consigo dormir', 'sono ruim', 'acordo de madrugada', 'dormir mal', 'sem sono', 'sono picado'],
-      resumo: 'Antes do remédio vem a pergunta de por que o sono quebrou — e a resposta quase nunca é "falta de indutor". Ansiedade, álcool, apneia, próstata, menopausa e o próprio horário das telas explicam a maior parte. O tratamento de primeira linha é comportamental, e funciona.',
+      resumo: 'Antes do remédio vem a pergunta de por que o sono quebrou, e a resposta quase nunca é "falta de indutor". Ansiedade, álcool, apneia, próstata, menopausa e o próprio horário das telas explicam a maior parte. O tratamento de primeira linha é comportamental, e funciona.',
       grupos: [
         { area: 'Saúde mental e psiquiatria', causas: ['Insônia e outros distúrbios do sono', 'Transtorno depressivo maior', 'Transtorno de ansiedade generalizada (TAG)', 'Transtorno por uso de álcool', 'Esgotamento profissional (burnout)'] },
         { area: 'Saúde respiratória', causas: ['Apneia obstrutiva do sono', 'Rinite alérgica', 'Asma'] },
@@ -122,7 +122,7 @@
 
     'desanimo': {
       sin: ['tristeza', 'depressao', 'sem vontade', 'choro facil', 'vazio', 'anedonia', 'desesperanca'],
-      resumo: 'Desânimo que dura mais de duas semanas e tira o prazer das coisas tem nome e tem tratamento. O médico de família acompanha a maior parte dos casos do início ao fim, com ou sem medicação, e chama o psiquiatra quando o caso pede — não por não saber, e sim por complexidade.',
+      resumo: 'Desânimo que dura mais de duas semanas e tira o prazer das coisas tem nome e tem tratamento. O médico de família acompanha a maior parte dos casos do início ao fim, com ou sem medicação, e chama o psiquiatra quando o caso pede, não por não saber, e sim por complexidade.',
       grupos: [
         { area: 'Saúde mental e psiquiatria', causas: ['Transtorno depressivo maior', 'Distimia', 'Luto complicado', 'Esgotamento profissional (burnout)', 'Transtorno por uso de álcool', 'Dependência de tabaco e outras drogas', 'Transtorno de déficit de atenção e hiperatividade (TDAH)'] },
         { area: 'Endocrinologia e metabolismo', causas: ['Hipotireoidismo', 'Deficiências vitamínicas (vitamina D e B12)', 'Diabetes mellitus tipo 2'] },
@@ -145,7 +145,7 @@
 
     'azia': {
       sin: ['refluxo', 'queimacao no estomago', 'pirose', 'ma digestao', 'acidez', 'estomago queimando', 'empachamento'],
-      resumo: 'Refluxo e gastrite são dois dos motivos mais comuns de consulta — e dois dos mais medicados por conta própria. Vale identificar o gatilho antes de cronificar o omeprazol: peso, horário das refeições, álcool, anti-inflamatório.',
+      resumo: 'Refluxo e gastrite são dois dos motivos mais comuns de consulta, e dois dos mais medicados por conta própria. Vale identificar o gatilho antes de cronificar o omeprazol: peso, horário das refeições, álcool, anti-inflamatório.',
       grupos: [
         { area: 'Gastroenterologia', causas: ['Doença do refluxo gastroesofágico (DRGE)', 'Gastrite', 'Dispepsia', 'Úlcera péptica', 'Esteatose hepática (gordura no fígado)', 'Colelitíase (pedra na vesícula)', 'Intolerância à lactose'] },
         { area: 'Endocrinologia e metabolismo', causas: ['Obesidade e sobrepeso', 'Síndrome metabólica'] }
@@ -166,18 +166,18 @@
 
     'diarreia': {
       sin: ['intestino solto', 'disenteria', 'evacuacao liquida', 'desarranjo', 'barriga solta'],
-      resumo: 'Diarreia aguda quase sempre é viral e se resolve sozinha — o que salva é hidratar, não é antibiótico. Quando passa de quatro semanas, a lógica vira outra e a investigação começa.',
+      resumo: 'Diarreia aguda quase sempre é viral e se resolve sozinha: o que salva é hidratar, não é antibiótico. Quando passa de quatro semanas, a lógica vira outra e a investigação começa.',
       grupos: [
         { area: 'Gastroenterologia', causas: ['Gastroenterite aguda', 'Intoxicação alimentar', 'Diarreia aguda e crônica', 'Síndrome do intestino irritável', 'Intolerância à lactose', 'Parasitoses intestinais (verminoses)'] },
         { area: 'Pediatria', causas: ['Diarreia aguda infantil', 'Parasitoses'] },
         { area: 'Endocrinologia e metabolismo', causas: ['Hipertireoidismo', 'Diabetes mellitus tipo 2'] }
       ],
-      alerta: 'Sinais de desidratação (boca seca, urina escura, moleza), sangue nas fezes ou febre alta — sobretudo em crianças e idosos — pedem <strong>avaliação no mesmo dia</strong>.'
+      alerta: 'Sinais de desidratação (boca seca, urina escura, moleza), sangue nas fezes ou febre alta (sobretudo em crianças e idosos) pedem <strong>avaliação no mesmo dia</strong>.'
     },
 
     'febre': {
       sin: ['temperatura alta', 'calafrios', 'febril', 'corpo quente', 'tremedeira'],
-      resumo: 'Febre é resposta, não doença. O que importa é onde está a infecção e se há sinal de gravidade — e isso se descobre pelo exame, não pelo número do termômetro.',
+      resumo: 'Febre é resposta, não doença. O que importa é onde está a infecção e se há sinal de gravidade, e isso se descobre pelo exame, não pelo número do termômetro.',
       grupos: [
         { area: 'Saúde respiratória', causas: ['Gripe (influenza)', 'COVID-19', 'Resfriado comum', 'Faringite', 'Amigdalite', 'Rinossinusite aguda', 'Pneumonias adquiridas na comunidade'] },
         { area: 'Doenças infecciosas', causas: ['Dengue', 'Zika', 'Chikungunya', 'Tuberculose', 'Hepatites virais (B e C)', 'Toxoplasmose', 'Infecção pelo HIV'] },
@@ -190,7 +190,7 @@
 
     'tosse': {
       sin: ['tosse seca', 'tosse com catarro', 'pigarro', 'tossindo', 'tosse persistente'],
-      resumo: 'Tosse de até três semanas quase sempre é infecção que passa. Depois disso, as três causas campeãs são outras: gotejamento pós-nasal, asma e refluxo — e nenhuma delas melhora com xarope.',
+      resumo: 'Tosse de até três semanas quase sempre é infecção que passa. Depois disso, as três causas campeãs são outras: gotejamento pós-nasal, asma e refluxo. E nenhuma delas melhora com xarope.',
       grupos: [
         { area: 'Saúde respiratória', causas: ['Resfriado comum', 'Gripe (influenza)', 'COVID-19', 'Bronquite aguda', 'Asma', 'Doença pulmonar obstrutiva crônica (DPOC)', 'Pneumonias adquiridas na comunidade', 'Rinite alérgica', 'Rinossinusite crônica', 'Tabagismo (cessação)'] },
         { area: 'Gastroenterologia', causas: ['Doença do refluxo gastroesofágico (DRGE)'] },
@@ -203,7 +203,7 @@
 
     'dor-de-garganta': {
       sin: ['garganta inflamada', 'dor para engolir', 'amigdalite', 'garganta doendo', 'placas na garganta'],
-      resumo: 'A maioria é viral e não precisa de antibiótico — existem critérios clínicos simples para decidir isso, e usá-los evita tanto o antibiótico desnecessário quanto o atraso quando ele é preciso.',
+      resumo: 'A maioria é viral e não precisa de antibiótico: existem critérios clínicos simples para decidir isso, e usá-los evita tanto o antibiótico desnecessário quanto o atraso quando ele é preciso.',
       grupos: [
         { area: 'Saúde respiratória', causas: ['Faringite', 'Amigdalite', 'Laringite', 'Resfriado comum', 'Gripe (influenza)', 'COVID-19', 'Rinossinusite aguda'] },
         { area: 'Gastroenterologia', causas: ['Doença do refluxo gastroesofágico (DRGE)'] },
@@ -214,7 +214,7 @@
 
     'nariz-entupido': {
       sin: ['coriza', 'congestao nasal', 'espirros', 'alergia no nariz', 'sinusite', 'rinite', 'nariz escorrendo'],
-      resumo: 'Nariz entupido o ano inteiro raramente é "sinusite de repetição" — costuma ser rinite alérgica mal controlada. Identificar o alérgeno e usar o spray do jeito certo muda o ano da pessoa.',
+      resumo: 'Nariz entupido o ano inteiro raramente é "sinusite de repetição": costuma ser rinite alérgica mal controlada. Identificar o alérgeno e usar o spray do jeito certo muda o ano da pessoa.',
       grupos: [
         { area: 'Saúde respiratória', causas: ['Rinite alérgica', 'Rinossinusite aguda e crônica', 'Resfriado comum', 'Gripe (influenza)', 'COVID-19'] },
         { area: 'Oftalmologia e otorrino', causas: ['Epistaxe (sangramento nasal simples)'] },
@@ -224,13 +224,13 @@
 
     'manchas-na-pele': {
       sin: ['pintas', 'mancha', 'lesao de pele', 'pano branco', 'pinta nova', 'sinal na pele', 'vermelhidao'],
-      resumo: 'Boa parte das manchas tem diagnóstico à vista, sem biópsia. O papel do médico de família aqui é duplo: resolver o comum e reconhecer cedo o que não pode esperar — melanoma e hanseníase entram nessa lista.',
+      resumo: 'Boa parte das manchas tem diagnóstico à vista, sem biópsia. O papel do médico de família aqui é duplo: resolver o comum e reconhecer cedo o que não pode esperar, e melanoma e hanseníase entram nessa lista.',
       grupos: [
         { area: 'Dermatologia', causas: ['Pitiríase versicolor', 'Tínea', 'Dermatite seborreica', 'Dermatite de contato', 'Psoríase (casos leves a moderados)', 'Rosácea', 'Rastreio de câncer de pele (melanoma e não melanoma)'] },
         { area: 'Doenças infecciosas', causas: ['Hanseníase (diagnóstico e tratamento)', 'Sífilis', 'Dengue', 'Zika'] },
         { area: 'Pediatria', causas: ['Doenças exantemáticas da infância (sarampo, rubéola, roséola, eritema infeccioso, varicela)'] }
       ],
-      alerta: 'Pinta que muda de cor, formato ou tamanho, tem bordas irregulares, coça ou sangra — e mancha com <strong>perda de sensibilidade</strong>, que sugere hanseníase — devem ser avaliadas logo.'
+      alerta: 'Pinta que muda de cor, formato ou tamanho, tem bordas irregulares, coça ou sangra, e mancha com <strong>perda de sensibilidade</strong> (que sugere hanseníase), devem ser avaliadas logo.'
     },
 
     'coceira': {
@@ -268,7 +268,7 @@
 
     'dor-no-joelho': {
       sin: ['joelho doendo', 'joelho inchado', 'joelho travando', 'dor ao subir escada'],
-      resumo: 'Joelho é a junta que mais responde a tratamento conservador bem feito — fortalecimento, controle de peso e analgesia na dose certa resolvem a maioria dos casos antes de qualquer cirurgia.',
+      resumo: 'Joelho é a junta que mais responde a tratamento conservador bem feito: fortalecimento, controle de peso e analgesia na dose certa resolvem a maioria dos casos antes de qualquer cirurgia.',
       grupos: [
         { area: 'Ortopedia e reumatologia', causas: ['Osteoartrite (artrose)', 'Tendinopatias (tendinite, bursite)', 'Entorses leves a moderados (joelho)', 'Contraturas e espasmos musculares', 'Fibromialgia'] },
         { area: 'Endocrinologia e metabolismo', causas: ['Gota e hiperuricemia', 'Obesidade e sobrepeso'] },
@@ -286,7 +286,7 @@
         { area: 'Doenças infecciosas', causas: ['Hanseníase', 'Infecção pelo HIV'] },
         { area: 'Saúde mental e psiquiatria', causas: ['Síndrome do pânico'] }
       ],
-      alerta: 'Dormência que aparece de repente em um lado do corpo, com fraqueza, boca torta ou fala enrolada: <strong>AVC — ligue 192</strong>. Tempo é cérebro.'
+      alerta: 'Dormência que aparece de repente em um lado do corpo, com fraqueza, boca torta ou fala enrolada: <strong>AVC, ligue 192</strong>. Tempo é cérebro.'
     },
 
     'palpitacao': {
@@ -302,19 +302,19 @@
 
     'pressao-alta': {
       sin: ['hipertensao', 'pressao nas alturas', 'pressao subiu', '14 por 9', 'pressao descontrolada'],
-      resumo: 'Pressão alta quase nunca dói — por isso a medida em casa vale mais que a do consultório, e o diagnóstico não se faz com uma aferição só. Tratar bem é menos sobre o remédio e mais sobre o conjunto: sono, sal, álcool, peso e risco cardiovascular somado.',
+      resumo: 'Pressão alta quase nunca dói. Por isso, a medida em casa vale mais que a do consultório, e o diagnóstico não se faz com uma aferição só. Tratar bem é menos sobre o remédio e mais sobre o conjunto: sono, sal, álcool, peso e risco cardiovascular somado.',
       grupos: [
         { area: 'Cardiovascular', causas: ['Hipertensão arterial sistêmica', 'Doença isquêmica do coração', 'Insuficiência cardíaca', 'Dislipidemias'] },
         { area: 'Endocrinologia e metabolismo', causas: ['Obesidade e sobrepeso', 'Síndrome metabólica', 'Diabetes mellitus tipo 2', 'Hipertireoidismo'] },
         { area: 'Saúde respiratória', causas: ['Apneia obstrutiva do sono'] },
         { area: 'Saúde mental e psiquiatria', causas: ['Transtorno por uso de álcool', 'Episódios de estresse agudo', 'Insônia'] }
       ],
-      alerta: 'Pressão muito alta <strong>com</strong> dor no peito, falta de ar, dor de cabeça intensa, alteração da visão ou da fala: emergência. Sem sintomas, não é caso de correr ao pronto-socorro — é caso de consulta.'
+      alerta: 'Pressão muito alta <strong>com</strong> dor no peito, falta de ar, dor de cabeça intensa, alteração da visão ou da fala: emergência. Sem sintomas, não é caso de correr ao pronto-socorro, e sim de consulta.'
     },
 
     'colesterol-alto': {
       sin: ['dislipidemia', 'trigliceridios', 'ldl alto', 'gordura no sangue', 'colesterol'],
-      resumo: 'Colesterol não se trata por um número isolado: trata-se pelo risco cardiovascular somado da pessoa. Dois pacientes com o mesmo LDL podem ter condutas completamente diferentes — e é isso que a consulta define.',
+      resumo: 'Colesterol não se trata por um número isolado: trata-se pelo risco cardiovascular somado da pessoa. Dois pacientes com o mesmo LDL podem ter condutas completamente diferentes, e é isso que a consulta define.',
       grupos: [
         { area: 'Endocrinologia e metabolismo', causas: ['Dislipidemias (colesterol e triglicerídeos altos)', 'Síndrome metabólica', 'Obesidade e sobrepeso', 'Hipotireoidismo', 'Diabetes mellitus tipo 2'] },
         { area: 'Gastroenterologia', causas: ['Esteatose hepática (gordura no fígado)'] },
@@ -324,7 +324,7 @@
 
     'acucar-alto': {
       sin: ['glicemia', 'diabetes', 'glicose alta', 'pre diabetes', 'hemoglobina glicada', 'sede excessiva'],
-      resumo: 'Entre a glicemia normal e o diabetes existe uma faixa larga em que dá para mudar o desfecho — e é ali que o acompanhamento longitudinal, aquele que vê a pessoa ano após ano, vale mais do que qualquer exame isolado.',
+      resumo: 'Entre a glicemia normal e o diabetes existe uma faixa larga em que dá para mudar o desfecho. É ali que o acompanhamento longitudinal, aquele que vê a pessoa ano após ano, vale mais do que qualquer exame isolado.',
       grupos: [
         { area: 'Endocrinologia e metabolismo', causas: ['Diabetes mellitus tipo 2', 'Diabetes mellitus tipo 1 (acompanhamento conjunto)', 'Síndrome metabólica', 'Obesidade e sobrepeso'] },
         { area: 'Ginecologia', causas: ['Síndrome dos ovários policísticos (SOP)'] },
@@ -335,7 +335,7 @@
 
     'ganho-de-peso': {
       sin: ['engordei', 'obesidade', 'barriga', 'emagrecer', 'nao consigo emagrecer', 'sobrepeso'],
-      resumo: 'Peso é assunto clínico, não moral. A consulta olha o que sustenta o ganho — sono, medicação em uso, tireoide, humor, hormônios — e trata obesidade como a doença crônica que ela é, com plano de longo prazo.',
+      resumo: 'Peso é assunto clínico, não moral. A consulta olha o que sustenta o ganho (sono, medicação em uso, tireoide, humor, hormônios) e trata obesidade como a doença crônica que ela é, com plano de longo prazo.',
       grupos: [
         { area: 'Endocrinologia e metabolismo', causas: ['Obesidade', 'Sobrepeso', 'Síndrome metabólica', 'Hipotireoidismo', 'Diabetes mellitus tipo 2'] },
         { area: 'Ginecologia', causas: ['Síndrome dos ovários policísticos (SOP)', 'Menopausa e climatério'] },
@@ -356,7 +356,7 @@
 
     'corrimento': {
       sin: ['corrimento vaginal', 'secrecao', 'odor vaginal', 'coceira vaginal', 'ardencia vaginal'],
-      resumo: 'Três quadros explicam quase todos os corrimentos, e o tratamento de cada um é diferente — por isso o autotratamento de farmácia erra tanto. Dá para diagnosticar e tratar na mesma consulta, e testar ISTs junto quando faz sentido.',
+      resumo: 'Três quadros explicam quase todos os corrimentos, e o tratamento de cada um é diferente. Por isso o autotratamento de farmácia erra tanto. Dá para diagnosticar e tratar na mesma consulta, e testar ISTs junto quando faz sentido.',
       grupos: [
         { area: 'Ginecologia e saúde da mulher', causas: ['Candidíase vaginal', 'Vaginose bacteriana', 'Tricomoníase', 'Doença inflamatória pélvica', 'Rastreamento de câncer de colo de útero (papanicolau)'] },
         { area: 'Doenças infecciosas', causas: ['Gonorreia', 'Clamídia', 'Sífilis', 'Infecção pelo HIV (diagnóstico, aconselhamento, PrEP e PEP)'] }
@@ -366,7 +366,7 @@
 
     'ardencia-para-urinar': {
       sin: ['dor para urinar', 'infeccao urinaria', 'cistite', 'urina ardendo', 'urinar muito', 'vontade de urinar', 'sangue na urina'],
-      resumo: 'Cistite em mulher jovem e sem complicadores pode ser diagnosticada e tratada na própria consulta, sem exame de urina. Em homem, criança ou nas repetições, a regra muda — e a investigação vai além da bexiga.',
+      resumo: 'Cistite em mulher jovem e sem complicadores pode ser diagnosticada e tratada na própria consulta, sem exame de urina. Em homem, criança ou nas repetições, a regra muda, e a investigação vai além da bexiga.',
       grupos: [
         { area: 'Urologia e saúde do homem', causas: ['Infecção do trato urinário', 'Prostatite', 'Hiperplasia prostática benigna (HPB)', 'Litíase renal (cólica nefrética não complicada)', 'Incontinência urinária', 'Balanopostite'] },
         { area: 'Ginecologia', causas: ['Infecção do trato urinário inferior (cistite)', 'Candidíase vaginal', 'Vaginose bacteriana', 'Menopausa e climatério'] },
@@ -378,7 +378,7 @@
 
     'dificuldade-de-erecao': {
       sin: ['disfuncao eretil', 'impotencia', 'libido baixa', 'ejaculacao precoce', 'sem desejo', 'brochar'],
-      resumo: 'Disfunção erétil é, com frequência, o <strong>primeiro aviso</strong> de um problema vascular — as artérias do pênis são mais finas que as do coração e reclamam antes. É um dos assuntos em que a consulta rende mais do que a pessoa espera.',
+      resumo: 'Disfunção erétil é, com frequência, o <strong>primeiro aviso</strong> de um problema vascular: as artérias do pênis são mais finas que as do coração e reclamam antes. É um dos assuntos em que a consulta rende mais do que a pessoa espera.',
       grupos: [
         { area: 'Urologia e saúde do homem', causas: ['Disfunção erétil', 'Ejaculação precoce', 'Hiperplasia prostática benigna (HPB)', 'Prostatite', 'Varicocele (diagnóstico inicial)'] },
         { area: 'Cardiovascular', causas: ['Doença isquêmica do coração', 'Hipertensão arterial sistêmica', 'Dislipidemias'] },
@@ -389,7 +389,7 @@
 
     'esquecimento': {
       sin: ['memoria', 'esquecendo as coisas', 'demencia', 'falta de concentracao', 'tdah', 'desatencao', 'memoria fraca'],
-      resumo: 'Esquecer onde deixou a chave é diferente de esquecer para que serve a chave. A consulta aplica testes simples que separam queixa de memória por ansiedade, depressão e sono do declínio cognitivo de verdade — e trata as causas reversíveis primeiro.',
+      resumo: 'Esquecer onde deixou a chave é diferente de esquecer para que serve a chave. A consulta aplica testes simples que separam queixa de memória por ansiedade, depressão e sono do declínio cognitivo de verdade, e trata as causas reversíveis primeiro.',
       grupos: [
         { area: 'Neurologia', causas: ['Rastreio e acompanhamento inicial de demências', 'Doença de Alzheimer (diagnóstico inicial e suporte à família)', 'Doença de Parkinson', 'Acidente vascular cerebral (prevenção e reabilitação)'] },
         { area: 'Saúde mental e psiquiatria', causas: ['Transtorno de déficit de atenção e hiperatividade (TDAH)', 'Transtorno depressivo maior', 'Transtorno de ansiedade generalizada (TAG)', 'Insônia e outros distúrbios do sono', 'Esgotamento profissional (burnout)', 'Transtorno por uso de álcool'] },
@@ -400,14 +400,14 @@
 
     'dor-de-ouvido': {
       sin: ['ouvido', 'zumbido', 'ouvido entupido', 'otite', 'cera no ouvido', 'ouvido tampado', 'surdez'],
-      resumo: 'Ouvido entupido com cera se resolve na hora, no consultório, com lavagem. Dor de ouvido em adulto, sem alteração no exame, costuma vir de outro lugar — garganta, mandíbula ou dente.',
+      resumo: 'Ouvido entupido com cera se resolve na hora, no consultório, com lavagem. Dor de ouvido em adulto, sem alteração no exame, costuma vir de outro lugar: garganta, mandíbula ou dente.',
       grupos: [
-        { area: 'Oftalmologia e otorrino', causas: ['Otite externa', 'Cerúmen impactado (rolha de cera — inclui a lavagem de ouvido)', 'Labirintite'] },
+        { area: 'Oftalmologia e otorrino', causas: ['Otite externa', 'Cerúmen impactado (rolha de cera; inclui a lavagem de ouvido)', 'Labirintite'] },
         { area: 'Pediatria', causas: ['Otite média aguda'] },
         { area: 'Saúde respiratória', causas: ['Rinossinusite aguda e crônica', 'Rinite alérgica', 'Faringite', 'Amigdalite'] },
         { area: 'Cardiovascular', causas: ['Hipertensão arterial sistêmica'] }
       ],
-      alerta: 'Perda súbita de audição de um ouvido só é <strong>urgência</strong> otorrinolaringológica — o tratamento precoce muda o resultado.'
+      alerta: 'Perda súbita de audição de um ouvido só é <strong>urgência</strong> otorrinolaringológica: o tratamento precoce muda o resultado.'
     },
 
     'olho-vermelho': {
@@ -434,7 +434,7 @@
 
     'ronco': {
       sin: ['apneia', 'ronco alto', 'para de respirar dormindo', 'sono nao descansa', 'sonolencia de dia'],
-      resumo: 'Ronco alto com pausas na respiração e sono que não descansa é apneia até prova em contrário — e apneia não tratada puxa pressão alta, arritmia e acidente de trânsito atrás dela. O rastreio é feito em consulta, com questionário validado.',
+      resumo: 'Ronco alto com pausas na respiração e sono que não descansa é apneia até prova em contrário. E apneia não tratada puxa pressão alta, arritmia e acidente de trânsito atrás dela. O rastreio é feito em consulta, com questionário validado.',
       grupos: [
         { area: 'Saúde respiratória', causas: ['Apneia obstrutiva do sono (rastreio e manejo inicial)', 'Rinite alérgica', 'Rinossinusite crônica', 'Tabagismo (cessação)'] },
         { area: 'Endocrinologia e metabolismo', causas: ['Obesidade e sobrepeso', 'Hipotireoidismo', 'Síndrome metabólica'] },
@@ -445,7 +445,7 @@
 
     'crianca-doente': {
       sin: ['meu filho', 'bebe', 'crianca com febre', 'puericultura', 'vacina', 'pediatria', 'crianca doente'],
-      resumo: 'O médico de família acompanha a criança desde o nascimento — crescimento, vacina, alimentação — e é quem conhece a casa inteira. Isso muda a conversa quando a criança adoece: não se começa do zero a cada consulta.',
+      resumo: 'O médico de família acompanha a criança desde o nascimento (crescimento, vacina, alimentação) e é quem conhece a casa inteira. Isso muda a conversa quando a criança adoece: não se começa do zero a cada consulta.',
       grupos: [
         { area: 'Pediatria (saúde da criança)', causas: ['Acompanhamento de crescimento e desenvolvimento (puericultura)', 'Orientações de amamentação e introdução alimentar', 'Calendário vacinal', 'Febre a esclarecer em crianças', 'Otite média aguda', 'Bronquiolite', 'Crupe (laringotraqueobronquite)', 'Diarreia aguda infantil', 'Asma infantil', 'Dermatite das fraldas', 'Parasitoses'] },
         { area: 'Doenças exantemáticas', causas: ['Sarampo', 'Rubéola', 'Roséola', 'Eritema infeccioso', 'Varicela'] }
@@ -539,7 +539,7 @@
         '<div class="sint-grupos">' + grupos + '</div>' +
         alerta +
         '<div class="sint-ficha__pe">' +
-          '<p>Esta lista mostra o que costuma estar por trás do sintoma — não é diagnóstico. Quem fecha o diagnóstico é a consulta, com a sua história inteira.</p>' +
+          '<p>Esta lista mostra o que costuma estar por trás do sintoma, mas não é diagnóstico. Quem fecha o diagnóstico é a consulta, com a sua história inteira.</p>' +
           '<a class="btn btn--primary" href="https://calendly.com/caio-melki" target="_blank" rel="noopener">' +
             '<span class="btn__shine"></span>Agendar consulta' +
             '<i data-lucide="arrow-right" class="btn__arrow" style="width:15px;height:15px"></i>' +
@@ -768,7 +768,7 @@
     if (!achados.length) {
       resultados.innerHTML =
         '<div class="sint-vazio">' +
-        '<p>Não achei esse termo na lista — o que não quer dizer que não seja comigo.</p>' +
+        '<p>Não achei esse termo na lista, o que não quer dizer que não seja comigo.</p>' +
         '<p>A medicina de família cobre cerca de 90% dos problemas de saúde do dia a dia. Se está sentindo algo, vale a consulta.</p>' +
         '</div>';
     } else {

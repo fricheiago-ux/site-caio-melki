@@ -359,3 +359,11 @@ Formato: uma linha por fato, com data.
   Safari (-webkit-tap-highlight-color) — desligado; no lugar, a faixa verde
   do hover acende no toque via data-toque (o :active não é confiável no
   iPhone). Rolar por cima não acende.
+
+- 2026-09-28 — Travessões (—) removidos de todo texto visível do site a
+  pedido do Iago ("travessão parece IA"): 53 ocorrências no index.html
+  (título da aba, FAQ, textos alternativos) e nos resumos/alertas das 38
+  fichas de sintomas e na busca. Trocados um a um por vírgula, dois-pontos,
+  ponto ou parênteses, sem mudar o sentido médico. Ficou o traço de
+  intervalo de datas ("2024 – 2026", é o certo) e um aviso técnico de
+  console em icons.js. **Texto novo no site: não usar travessão.**
