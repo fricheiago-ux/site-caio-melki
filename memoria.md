@@ -387,3 +387,14 @@ Formato: uma linha por fato, com data.
   processador a cada quadro. Medido no celular emulado (CPU 4x): trabalho de
   estilo/layout 490 → 173 ms a cada 3s. Visual idêntico (anel simétrico;
   a casa é irmã do <svg> e segue parada).
+
+- 2026-09-28 (tarde) — PageSpeed celular 81 (Iago mandou o relatório). Lighthouse
+  local (devtools throttling) reproduziu e apontou: CSS bloqueando a pintura,
+  foto da hero (LCP) pedida tarde e em JPEG, e o CLS 0,1 no parágrafo da hero
+  causado por "Web font loaded". Feito: fontes no próprio site + preload da
+  Inter; .hero-fala invisível até a Inter carregar (só o preload não
+  bastou — o parágrafo já estava diagramado com a fonte de reserva);
+  montar-site.py embute o CSS no HTML (1ª versão do reancorador de url()
+  quebrou o url(#n) do SVG de ruído — trocado por varredura que respeita
+  aspas); foto da hero e da especialidade em WebP; logos 360px; partículas
+  a 30 fps no toque. Resultado local: 69–76 → 91–93, CLS 0,002.

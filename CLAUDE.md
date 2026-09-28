@@ -50,7 +50,9 @@ assets/
   js/vendor/                   ← bibliotecas de terceiros servidas pelo site
                                   (GSAP, Flip, three.js), carregadas sob
                                   demanda — ver "SEO e performance"
-scripts/montar-site.py         ← roda só na publicação: junta os CSS
+scripts/montar-site.py         ← roda só na publicação: embute os CSS no HTML
+assets/fonts/                  ← fontes do site (Inter, Instrument Serif,
+                                  Courier Prime), subconjunto latino
   img/
     hero/                      ← imagens da manchete + originais brutos antes
                                   do recorte (caio-cuidando.png,
@@ -369,13 +371,26 @@ da abertura de ~14 → 55–60 quadros/s. O que foi feito:
   original: SVG idêntico em todos os ícones da página. **Ícone novo =
   acrescentar em `ICONES` nesse arquivo** (instrução no topo); sem isso o
   `<i data-lucide>` novo não desenha e aparece um aviso no console.
-- **CSS num arquivo só, só na publicação**: `scripts/montar-site.py` (roda
+- **CSS embutido no HTML, só na publicação**: `scripts/montar-site.py` (roda
   no `deploy.yml`, sobre a cópia em `_site/`) junta e minifica os ~15 CSS
-  do `index.html` em `assets/css/site/bundle.css`. No repositório nada
-  muda — edita-se cada CSS separado. Conferido por print, seção a seção,
-  celular e computador: idêntico ao site sem o bundle.
-- Scripts do fim da página com `defer`; fontes do Google sem bloquear a
-  pintura (`media="print"` + `onload`).
+  do `index.html` e, desde 28/09/2026, os coloca num `<style>` dentro do
+  próprio HTML (antes era um `bundle.css` à parte, que o PageSpeed apontava
+  como bloqueio de renderização, ~0,6s). Reancora `url()` relativos para a
+  raiz, ignorando os que estão dentro de imagens embutidas (o `url(#n)` do
+  ruído). No repositório nada muda — edita-se cada CSS separado. Conferido
+  por print, seção a seção: idêntico.
+- Scripts do fim da página com `defer`.
+- **Fontes servidas pelo site** (`assets/fonts/`, só o subconjunto latino,
+  OFL), desde 28/09/2026 — antes Google Fonts. `@font-face` num `<style>`
+  no `<head>`; Inter pré-carregada; `.hero-fala` fica `visibility: hidden`
+  até a Inter carregar (classe `fontes-ok`, teto de 3s) — era o "layout
+  shift" do PageSpeed (texto trocando de fonte e pulando). **Fonte nova =
+  baixar o .woff2 latino para `assets/fonts/` e declarar ali**; o
+  `deploy.yml` copia `assets/fonts/`.
+- **Foto da hero em WebP** (`foto-principal-caio.webp`, 65 KB, antes JPEG
+  105 KB) e pré-carregada no `<head>`; o `.jpeg` fica para o og:image.
+  Fotos da especialidade também em WebP. Partículas do fundo a 30 fps em
+  tela de toque (canvas de tela inteira, sempre ligado).
 - **Logo-máscara** `logo-sem-fundo.png`: 1250px/266 KB → 420px/14 KB (só o
   canal alfa, que é o que a máscara usa). O original bruto não foi mantido
   no repositório — a versão antiga está no histórico do git.
@@ -386,6 +401,12 @@ da abertura de ~14 → 55–60 quadros/s. O que foi feito:
 Resultado final medido em 28/09/2026 (mesma simulação, contra a versão no
 ar): primeira letra 5,9s → 4,1s; 584 → 311 KB; quadros travados na abertura
 44/48 → 6/228.
+PageSpeed real no celular: 62 (21/09) → 81 (28/09, antes da rodada abaixo).
+Rodada de 28/09 à tarde (fontes locais, CSS embutido, WebP, partículas a
+30 fps no toque), Lighthouse local com limitação real de rede/CPU: 69–76 →
+91–93; CLS 0,066 → 0,002; FCP 1,7 → 1,0s. O que ainda pesa é o Speed Index
+(~4,7s), que vem da coreografia de abertura (loader + portas) — decisão de
+desenho, não técnica.
 Não mexido (é desenho, não técnica): as durações da coreografia (loader
 1,5s, nomes nas portas 1,5s, portas 1,05s).
 
