@@ -18,14 +18,28 @@
   let alvoX = -100, alvoY = -100;
   let anelX = -100, anelY = -100;
   let rodando = false;
+  let ultimoT = 0;
 
-  function seguir() {
-    anelX += (alvoX - anelX) * 0.16;
-    anelY += (alvoY - anelY) * 0.16;
+  // Suavizado por TEMPO, não por quadro. Antes: 16% do caminho a cada
+  // quadro — o atraso dependia da taxa de quadros (~95ms de constante de
+  // tempo a 60Hz, ~50ms a 120Hz) e o anel levava ~0,5s para assentar, o
+  // que o Iago sentia como "muito lento". Agora a constante é fixa em
+  // TAU ms em qualquer tela: o anel ainda acompanha com um leve rastro,
+  // mas alcança o ponteiro em uma fração do tempo. Para mais rastro, suba
+  // TAU; para colar no ponteiro, desça.
+  const TAU = 32;
+
+  function seguir(t) {
+    const dt = ultimoT ? Math.min(t - ultimoT, 64) : 16;
+    ultimoT = t;
+    const k = 1 - Math.exp(-dt / TAU);
+    anelX += (alvoX - anelX) * k;
+    anelY += (alvoY - anelY) * k;
     cursorOutline.style.transform = `translate3d(${anelX}px, ${anelY}px, 0) translate(-50%, -50%)`;
 
     if (Math.abs(alvoX - anelX) < 0.4 && Math.abs(alvoY - anelY) < 0.4) {
       rodando = false;
+      ultimoT = 0;
       return;
     }
     requestAnimationFrame(seguir);

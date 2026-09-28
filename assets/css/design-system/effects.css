@@ -188,3 +188,21 @@ mask-composite: exclude;
 background: var(--border-gradient);
 pointer-events: none;
 }
+
+/* ---------- Alívio para celular e telas de toque ----------
+   Camadas decorativas que custam caro no Safari do iPhone e não fazem
+   falta visual em tela pequena (achado ao investigar travadas na abertura,
+   27/09/2026 — por leitura do código, não medido em aparelho):
+
+   1. .noise-overlay é uma camada fixa de tela cheia com mix-blend-mode e
+      imagem gerada por filtro SVG (feTurbulence, 3 oitavas): o navegador
+      refaz a mistura com tudo que está por baixo a cada quadro em que
+      algo muda (digitação, rolagem, luzes). A 4,5% de opacidade, tirar o
+      blend não muda o que se enxerga.
+   (As auroras também estavam aqui, com blur(60px) no celular; saíram em
+   28/09/2026 porque desde 26/09 elas não usam mais filter nenhum — o
+   desfoque vem pronto no degradê, ver .aurora acima. Um blur aqui voltaria
+   a pesar e borraria o degradê duas vezes.) */
+@media (hover: none), (max-width: 900px) {
+.noise-overlay { mix-blend-mode: normal; }
+}
