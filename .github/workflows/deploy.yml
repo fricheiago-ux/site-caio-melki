@@ -56,6 +56,7 @@ jobs:
           cp -R assets/css _site/assets/
           cp -R assets/js  _site/assets/
           cp -R assets/img _site/assets/
+          cp -R assets/fonts _site/assets/
 
       - name: Juntar os CSS num arquivo só (só na cópia publicada)
         # Os ~16 CSS do index.html viram um bundle.css minificado: o

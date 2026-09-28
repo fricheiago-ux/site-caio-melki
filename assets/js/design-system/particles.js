@@ -37,7 +37,17 @@
     }));
   }
 
+  // Celular/toque: 30 quadros por segundo em vez de 60 (28/09/2026). As
+  // partículas andam devagar — a diferença não aparece —, e o canvas ocupa
+  // a tela inteira o tempo todo, então cada quadro poupado é processador
+  // livre para a rolagem. No computador segue a 60.
+  const toque = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  const INTERVALO = toque ? 1000 / 30 - 2 : 0;
+  let ultimo = 0;
+
   function frame(t) {
+    if (INTERVALO && t - ultimo < INTERVALO) { requestAnimationFrame(frame); return; }
+    ultimo = t;
     // Durante a abertura as portas cobrem o canvas. Desenhar ali custaria
     // o quadro inteiro (são milhares de pares de partículas por quadro)
     // e é justamente o que fazia a rolagem engasgar.

@@ -14,6 +14,7 @@ index.html continua ligando cada um, e local (localhost) funciona como sempre.
 Uso: python3 scripts/montar-site.py _site
 """
 import hashlib
+import os
 import re
 import sys
 from pathlib import Path
@@ -40,6 +41,46 @@ def minificar(css: str) -> str:
     css = ''.join(partes).replace(';}', '}')
     return css.strip()
 
+
+def reancorar_urls(css: str, base: Path) -> str:
+    """Troca url(relativo) por url(relativo-à-raiz), só nos url() de verdade.
+
+    Anda pelo CSS caractere a caractere guardando se está dentro de aspas:
+    assim um url() que aparece DENTRO de uma imagem embutida (ex.: o
+    url(#n) do filtro de ruído, dentro de url("data:image/svg+xml,...")) não
+    é tocado — foi exatamente o que um regex simples quebrou no primeiro
+    teste (28/09/2026)."""
+    saida, i, n, aspas = [], 0, len(css), None
+    while i < n:
+        c = css[i]
+        if aspas:
+            saida.append(c)
+            if c == '\\' and i + 1 < n:
+                saida.append(css[i + 1]); i += 2; continue
+            if c == aspas: aspas = None
+            i += 1; continue
+        if c in '"\'':
+            aspas = c; saida.append(c); i += 1; continue
+        if css.startswith('url(', i):
+            j, dentro = i + 4, None
+            while j < n:
+                if dentro:
+                    if css[j] == '\\': j += 2; continue
+                    if css[j] == dentro: dentro = None
+                elif css[j] in '"\'': dentro = css[j]
+                elif css[j] == ')': break
+                j += 1
+            bruto = css[i + 4:j]
+            alvo = bruto.strip().strip('"\'')
+            if alvo and not re.match(r'^(data:|https?:|/|#)', alvo):
+                alvo = os.path.normpath(str(base / alvo)).replace(os.sep, '/')
+                saida.append(f'url({alvo})')
+            else:
+                saida.append(f'url({bruto})')
+            i = j + 1; continue
+        saida.append(c); i += 1
+    return ''.join(saida)
+
 pedacos = []
 for m in achados:
     arq = raiz / m.group(1)
@@ -47,15 +88,26 @@ for m in achados:
         sys.exit(f"montar-site: {m.group(1)} está no index.html mas não existe em {raiz}/")
     if 'media=' in m.group(0):
         sys.exit(f"montar-site: {m.group(1)} tem media= — o empacotador não trata isso")
-    pedacos.append(minificar(arq.read_text(encoding="utf-8")))
+    css = minificar(arq.read_text(encoding="utf-8"))
+    # O CSS vai para DENTRO do index.html (raiz): url() relativo ao arquivo
+    # CSS original precisa virar relativo à raiz, senão aponta para o lugar
+    # errado. Hoje nenhum CSS usa url(), mas fica garantido.
+    base = Path(m.group(1)).parent
+    css = reancorar_urls(css, base)
+    pedacos.append(css)
 
 bundle = '\n'.join(pedacos) + '\n'
 selo = hashlib.sha1(bundle.encode()).hexdigest()[:8]
-destino = raiz / "assets/css/site/bundle.css"   # mesma profundidade dos originais: url(../../img/...) continua valendo
-destino.write_text(bundle, encoding="utf-8")
+if '</style' in bundle.lower():
+    sys.exit("montar-site: algum CSS contém '</style' — não dá para embutir no HTML")
 
-# troca o primeiro <link> pelo bundle e apaga os demais
-nova = f'<link rel="stylesheet" href="assets/css/site/bundle.css?v={selo}"/>\n'
+# Desde 28/09/2026 o CSS vai EMBUTIDO no index.html (<style>), e não num
+# bundle.css à parte: o PageSpeed apontava o bundle.css como "solicitação
+# que bloqueia a renderização" (~0,6s no 4G) — a página esperava uma segunda
+# ida ao servidor antes de pintar qualquer coisa. Embutido, chega junto com
+# o HTML (~20 KB comprimido a mais nele).
+nova = f'<style data-css="{selo}">\n{bundle}</style>\n'
+
 primeiro = achados[0]
 saida, cursor = [], 0
 for i, m in enumerate(achados):
@@ -69,4 +121,4 @@ index.write_text(''.join(saida), encoding="utf-8")
 for m in achados:
     (raiz / m.group(1)).unlink()
 
-print(f"montar-site: {len(achados)} CSS -> bundle.css ({len(bundle)/1024:.1f} KB, v={selo})")
+print(f"montar-site: {len(achados)} CSS embutidos no index.html ({len(bundle)/1024:.1f} KB, v={selo})")

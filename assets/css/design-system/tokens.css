@@ -58,7 +58,7 @@
 --shadow-lg: 0 28px 70px -24px rgba(31, 36, 32, 0.28);
 
 /* ---------- Tipografia / famílias ---------- */
---font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+--font-sans: 'Inter', 'Inter Fallback', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
 --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
 --font-mono: 'Courier Prime', 'Courier New', Courier, monospace;
 
