@@ -78,6 +78,18 @@ Formato: uma linha por fato, com data.
      5 cards em grade de 2 colunas no mobile, o último ficava sozinho e
      colado à esquerda — `.inst-item:last-child` agora ocupa a linha
      inteira e centraliza a própria largura.
+     **Segunda rodada (2026-09-28)** — o retângulo voltou a ser reportado, agora
+     nos outros logos (só no celular). Diagnóstico refeito do zero: medindo os
+     pixels, `hc-ufmg.png` e `cruzeiro.png` tinham 33–40% do "fundo" fora do
+     branco puro (só ~2–4% nos outros); o truque filtro+`mix-blend-mode:
+     screen` só apaga o fundo se ele for exatamente branco, e a imagem opaca
+     inteira participa da mistura, então qualquer resíduo vira um retângulo
+     de outro tom de verde. Correção definitiva: os 5 PNGs de
+     `assets/img/formacao/` viraram silhuetas brancas com transparência real
+     (alfa calculado com a mesma conta do filtro antigo) e o CSS perdeu o
+     `filter` e o `mix-blend-mode`. Originais guardados em
+     `_nao-publicar/backup-logos-formacao-antes-alpha/`. As 5 `<img>` ganharam
+     `?v=N` (antes não tinham, e o PNG antigo ficaria em cache).
   6. [NÃO VERIFICADO] trajetoria (carrossel `atuacao.css/js`) — funciona por
      arraste/toque, tem regras @media, comportamento touch não testado.
   7. [NÃO VERIFICADO] agendar + rodapé (`fechamento.css`) — só 1 regra

@@ -75,14 +75,15 @@ max-height: 96px;
 width: auto;
 height: auto;
 object-fit: contain;
-mix-blend-mode: screen;
-/* Logos são marcas escuras sobre fundo branco. Sobre o verde principal,
-   multiply as apagaria — então invertemos para branco e usamos screen,
-   mesma técnica da ref-1. Valores calibrados para as cinco ficarem
-   com o mesmo peso (~5.4:1 de contraste contra o verde). */
-filter: grayscale(1) invert(1) brightness(1.6) contrast(1.25);
+/* Os PNGs em assets/img/formacao/ são silhuetas brancas com transparência
+   real (alfa), não mais imagens opacas de fundo branco. Antes, um filtro
+   (invert + brightness + contrast) somado a mix-blend-mode: screen tentava
+   apagar o fundo — mas qualquer pixel de fundo que não fosse branco puro
+   (compressão, antialiasing) não zerava e aparecia como um retângulo de
+   outro tom de verde atrás do logo, mais visível no celular. Com alfa, só
+   a tinta do logo aparece; não existe mais fundo para vazar. */
 opacity: 1;
-transition: filter var(--dur-base) ease, opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo);
+transition: opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo);
 }
 .inst-card:hover .inst-card__logo,
 .inst-card:focus-visible .inst-card__logo,

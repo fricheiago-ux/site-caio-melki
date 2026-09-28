@@ -135,6 +135,38 @@
     document.querySelectorAll('.meter__fill').forEach((f) => { f.style.width = f.dataset.value || '0%'; });
   }, 8000);
 
+  // ---------- Cartões que reagem ao mouse e ao dedo ([data-toque]) ----------
+  // Liga a classe .is-ativo enquanto o ponteiro está em cima. Não usa :hover
+  // de propósito: em tela de toque o :hover fica preso depois do toque e o
+  // cartão nunca volta ao normal. Com eventos de ponteiro o mesmo código
+  // serve ao mouse e ao dedo, e quem desenha o estado é o CSS de cada cartão.
+  document.querySelectorAll('[data-toque]').forEach((el) => {
+    let soltar = null;
+
+    const ligar = () => {
+      clearTimeout(soltar);
+      el.classList.add('is-ativo');
+    };
+    // Um toque dura ~100ms: sem uma pausa antes de apagar, o verde piscaria
+    // rápido demais para ser visto. O mouse apaga na hora.
+    const desligar = (e) => {
+      clearTimeout(soltar);
+      const espera = e && e.pointerType === 'touch' ? 380 : 0;
+      soltar = setTimeout(() => el.classList.remove('is-ativo'), espera);
+    };
+
+    el.addEventListener('pointerenter', ligar);
+    el.addEventListener('pointerdown', ligar);
+    el.addEventListener('pointerup', desligar);
+    el.addEventListener('pointerleave', desligar);
+    // pointercancel = o navegador assumiu o gesto (rolagem). Não foi um
+    // toque no cartão, então apaga sem esperar.
+    el.addEventListener('pointercancel', () => {
+      clearTimeout(soltar);
+      el.classList.remove('is-ativo');
+    });
+  });
+
   // ---------- Âncoras suaves ----------
   document.querySelectorAll('a[href^="#"]').forEach((a) => {
     a.addEventListener('click', (e) => {

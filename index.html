@@ -5,6 +5,13 @@
 <title>Dr. Caio Melki — Médico de Família e Comunidade | Belo Horizonte</title>
 <meta name="description" content="Dr. Caio Ribeiro Melki, médico de família e comunidade em Belo Horizonte (CRM-MG 78461, RQE 57161). Veja se o seu problema de saúde é acompanhado por um médico de família."/>
 
+<!-- favicon: círculo verde com a marca (ver assets/img/marca/favicon-*.png). O
+     .ico fica na raiz porque buscadores e o Safari o pedem direto. -->
+<link rel="icon" href="favicon.ico" sizes="48x48"/>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/marca/favicon-32.png"/>
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/marca/favicon-192.png"/>
+<link rel="apple-touch-icon" href="assets/img/marca/apple-touch-icon.png"/>
+
 <!-- SEO: link canônico e cartão de pré-visualização (redes sociais/WhatsApp).
      Aponta para a URL do GitHub Pages, que é onde o site está de fato no ar hoje.
      Se o domínio caiomelkimfc.com.br for conectado no futuro, atualizar aqui e
@@ -48,35 +55,36 @@
 <!-- fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Courier+Prime:wght@400;700&display=swap"/></noscript>
 
 <!-- design system -->
-<link rel="stylesheet" href="assets/css/design-system/tokens.css?v=102"/>
-<link rel="stylesheet" href="assets/css/design-system/animations.css?v=102"/>
-<link rel="stylesheet" href="assets/css/design-system/effects.css?v=102"/>
-<link rel="stylesheet" href="assets/css/design-system/components.css?v=102"/>
+<link rel="stylesheet" href="assets/css/design-system/tokens.css?v=105"/>
+<link rel="stylesheet" href="assets/css/design-system/animations.css?v=105"/>
+<link rel="stylesheet" href="assets/css/design-system/effects.css?v=105"/>
+<link rel="stylesheet" href="assets/css/design-system/components.css?v=105"/>
 <!-- específico do site -->
 <!-- hero.css: retrato à esquerda, busca de condições e faixa de instituições -->
 <!-- intro.css: loader reutilizável, portas de abertura e a marca como máscara -->
-<link rel="stylesheet" href="assets/css/site/intro.css?v=102"/>
-<link rel="stylesheet" href="assets/css/site/hero.css?v=102"/>
+<link rel="stylesheet" href="assets/css/site/intro.css?v=105"/>
+<link rel="stylesheet" href="assets/css/site/hero.css?v=105"/>
 <!-- especialidade.css: tríptico da seção A especialidade -->
-<link rel="stylesheet" href="assets/css/site/especialidade.css?v=102"/>
-<link rel="stylesheet" href="assets/css/site/sintomas.css?v=102"/>
+<link rel="stylesheet" href="assets/css/site/especialidade.css?v=105"/>
+<link rel="stylesheet" href="assets/css/site/sintomas.css?v=105"/>
 <!-- fechamento.css: minicurrículo, canais de agendamento e rodapé -->
-<link rel="stylesheet" href="assets/css/site/fechamento.css?v=102"/>
+<link rel="stylesheet" href="assets/css/site/fechamento.css?v=105"/>
 <!-- instituicoes.css: cards com dobradiça 3D (logo vira descrição) -->
 <!-- pilares.css: baralho GSAP Flip da seção 02 -->
-<link rel="stylesheet" href="assets/css/site/pilares.css?v=102"/>
-<link rel="stylesheet" href="assets/css/site/instituicoes.css?v=102"/>
+<link rel="stylesheet" href="assets/css/site/pilares.css?v=105"/>
+<link rel="stylesheet" href="assets/css/site/instituicoes.css?v=105"/>
 <!-- atuacao.css: carrossel da seção Minha trajetória profissional -->
-<link rel="stylesheet" href="assets/css/site/atuacao.css?v=102"/>
+<link rel="stylesheet" href="assets/css/site/atuacao.css?v=105"/>
 <!-- certificados.css: as peças de certificado no fim da seção de experiência -->
-<link rel="stylesheet" href="assets/css/site/certificados.css?v=102"/>
+<link rel="stylesheet" href="assets/css/site/certificados.css?v=105"/>
 <!-- divisoria.css: seção verde "sobre mim" entre pilares e formação -->
-<link rel="stylesheet" href="assets/css/site/divisoria.css?v=102"/>
+<link rel="stylesheet" href="assets/css/site/divisoria.css?v=105"/>
 <!-- faq.css: acordeão de perguntas frequentes, seção 06 -->
-<link rel="stylesheet" href="assets/css/site/faq.css?v=102"/>
+<link rel="stylesheet" href="assets/css/site/faq.css?v=105"/>
 </head>
 <body>
 
@@ -242,12 +250,12 @@
 <div class="esp-apoio">
 <picture>
 <!-- no celular o espaço vira quase 3:2; a tira 4:1 do computador mostraria só a estante do meio -->
-<source media="(max-width: 640px)" srcset="assets/img/especialidade/esp-apoio-mobile.jpeg?v=102"/>
-<img src="assets/img/especialidade/esp-apoio.jpeg?v=102" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy" decoding="async"/>
+<source media="(max-width: 640px)" srcset="assets/img/especialidade/esp-apoio-mobile.jpeg?v=105"/>
+<img src="assets/img/especialidade/esp-apoio.jpeg?v=105" alt="Médico e paciente sentados frente a frente, conversando numa sala com estante e luz de janela" loading="lazy" decoding="async"/>
 </picture>
 </div>
 
-<div class="esp-nota">
+<div class="esp-nota" data-toque>
 <span class="esp-nota__rotulo"><i data-lucide="git-merge" style="width:13px;height:13px"></i>Gerente do cuidado</span>
 <p>O papel do médico de família não é substituir o especialista focal, e sim conduzir. Quando o caso pede intervenção, o encaminhamento é direcionado e o acompanhamento segue em conjunto.</p>
 </div>
@@ -266,7 +274,7 @@
 <p class="esp-painel__legenda">dos casos se resolvem na própria consulta, sem envolver outro médico.</p>
 
 <div class="esp-giro" aria-hidden="true">
-<span class="esp-giro__rotulo">Trato sintomas como</span>
+<span class="esp-giro__rotulo">Trato problemas como</span>
 <span class="esp-giro__palavra" data-giro>ansiedade</span>
 </div>
 
@@ -470,7 +478,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <span class="pilar-card__veu"></span>
 <span class="pilar-card__n">03</span>
 </button>
-<button class="pilar-card" type="button" data-n="04" data-titulo="Resolver sem precisar de outro médico" data-texto="De 80 a 90% dos casos se resolvem ali mesmo, na consulta. É o resultado dos três primeiros pilares, e não um atalho." data-texto2="Menos encaminhamento por reflexo, menos fila de espera, menos exame pedido para ganhar tempo. Você sai com uma conduta, e não com uma lista de próximos passos." aria-label="Pilar 04 — Resolver sem precisar de outro médico">
+<button class="pilar-card" type="button" data-n="04" data-titulo="Resolver sem precisar de outro médico" data-texto="Te apoio com 80% a 90% dos problemas de qualquer natureza." data-texto2="Menos encaminhamentos desnecessários, menos exames e procedimentos fúteis, mais segurança e atenção baseada em ciência de boa qualidade." aria-label="Pilar 04 — Resolver sem precisar de outro médico">
 <img src="assets/img/pilares/card-4.jpeg" alt="Uma mulher desce a escada de uma unidade de saúde de mãos dadas com o filho" loading="lazy" decoding="async" draggable="false"/>
 <span class="pilar-card__veu"></span>
 <span class="pilar-card__n">04</span>
@@ -517,8 +525,8 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="pilar-m__corpo">
 <span class="pilar-m__n">04</span>
 <h3 class="pilar-m__t">Resolver sem precisar de outro médico</h3>
-<p class="pilar-m__d">De 80 a 90% dos casos se resolvem ali mesmo, na consulta. É o resultado dos três primeiros pilares, e não um atalho.</p>
-<p class="pilar-m__d">Menos encaminhamento por reflexo, menos fila de espera, menos exame pedido para ganhar tempo. Você sai com uma conduta, e não com uma lista de próximos passos.</p>
+<p class="pilar-m__d">Te apoio com 80% a 90% dos problemas de qualquer natureza.</p>
+<p class="pilar-m__d">Menos encaminhamentos desnecessários, menos exames e procedimentos fúteis, mais segurança e atenção baseada em ciência de boa qualidade.</p>
 </div>
 </article>
 <article class="pilar-m">
@@ -575,7 +583,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/ufmg.png" alt="Faculdade de Medicina da UFMG" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/ufmg.png?v=105" alt="Faculdade de Medicina da UFMG" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -590,7 +598,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/hertfordshire.png" alt="University of Hertfordshire" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/hertfordshire.png?v=105" alt="University of Hertfordshire" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -605,7 +613,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/mcgill.png" alt="McGill University" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/mcgill.png?v=105" alt="McGill University" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -620,7 +628,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/hc-ufmg.png" alt="Hospital das Clínicas da UFMG" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/hc-ufmg.png?v=105" alt="Hospital das Clínicas da UFMG" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -635,7 +643,7 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 <div class="inst-item">
 <div class="inst-card" tabindex="0">
 <div class="inst-card__face inst-card__face--logo">
-<img class="inst-card__logo" src="assets/img/formacao/cruzeiro.png" alt="Cruzeiro Esporte Clube" loading="lazy" decoding="async"/>
+<img class="inst-card__logo" src="assets/img/formacao/cruzeiro.png?v=105" alt="Cruzeiro Esporte Clube" loading="lazy" decoding="async"/>
 <span class="inst-card__dica"><i data-lucide="corner-right-down" style="width:12px;height:12px"></i></span>
 </div>
 <div class="inst-card__face inst-card__face--desc">
@@ -967,33 +975,28 @@ placeholder="Pesquise o que você está sentindo — ex.: dor de cabeça"/>
 </div>
 
 <!-- js -->
-<script src="https://unpkg.com/lucide@latest"></script>
-<script>lucide.createIcons();</script>
+<script defer src="assets/js/design-system/icons.js?v=105"></script>
 <!-- GSAP + Flip: motor do baralho dos pilares -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
 <!-- design system -->
-<script src="assets/js/design-system/reveal.js?v=102"></script>
-<script src="assets/js/design-system/cursor.js?v=102"></script>
-<script src="assets/js/design-system/particles.js?v=102"></script>
-<script src="assets/js/design-system/interactions.js?v=102"></script>
+<script defer src="assets/js/design-system/reveal.js?v=105"></script>
+<script defer src="assets/js/design-system/cursor.js?v=105"></script>
+<script defer src="assets/js/design-system/particles.js?v=105"></script>
+<script defer src="assets/js/design-system/interactions.js?v=105"></script>
 <!-- hero-type.js: surgimento palavra a palavra do título e da subhead -->
-<script src="assets/js/site/hero-type.js?v=102"></script>
+<script defer src="assets/js/site/hero-type.js?v=105"></script>
 <!-- esp-painel.js: contador e sintomas girando no card da especialidade -->
-<script src="assets/js/site/esp-painel.js?v=102"></script>
+<script defer src="assets/js/site/esp-painel.js?v=105"></script>
 <!-- corpo-3d.js: nuvem de pontos que se registra na seção A especialidade -->
-<script src="assets/js/site/corpo-3d.js?v=102"></script>
+<script defer src="assets/js/site/corpo-3d.js?v=105"></script>
 <!-- intro.js: loader, portas que abrem no clique e o aviso portas:abertas -->
-<script src="assets/js/site/intro.js?v=102"></script>
+<script defer src="assets/js/site/intro.js?v=105"></script>
 <script>document.getElementById("ano-agora").textContent = new Date().getFullYear();</script>
-<script src="assets/js/site/pilares.js?v=102"></script>
-<script src="assets/js/site/pilares-particulas.js?v=102"></script>
+<script defer src="assets/js/site/carrega-pilares.js?v=105"></script>
 <!-- instituicoes.js: virada dos cards de formação no toque + demonstração automática do primeiro -->
-<script src="assets/js/site/instituicoes.js?v=102"></script>
+<script defer src="assets/js/site/instituicoes.js?v=105"></script>
 <!-- atuacao.js: roda de pílulas + baralho da trajetória profissional -->
-<script src="assets/js/site/sintomas.js?v=102"></script>
-<script src="assets/js/site/atuacao.js?v=102"></script>
+<script defer src="assets/js/site/sintomas.js?v=105"></script>
+<script defer src="assets/js/site/atuacao.js?v=105"></script>
 <!-- faq.js: acordeão exclusivo da seção de perguntas frequentes -->
-<script src="assets/js/site/faq.js?v=102"></script>
+<script defer src="assets/js/site/faq.js?v=105"></script>
 </body></html>
