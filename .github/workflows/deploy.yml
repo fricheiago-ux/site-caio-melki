@@ -43,6 +43,8 @@ jobs:
         # (22/09/2026) — arquivos soltos na raiz, igual o index.html. CNAME
         # adicionado na conexão do domínio próprio (25/09/2026) — sem ele
         # aqui, cada publicação apagaria a configuração de domínio do Pages.
+        # favicon.ico (28/09/2026) fica na raiz porque buscadores e o Safari
+        # o pedem direto em /favicon.ico.
         run: |
           set -e
           mkdir -p _site/assets
@@ -50,9 +52,18 @@ jobs:
           cp robots.txt _site/
           cp sitemap.xml _site/
           cp CNAME _site/
+          cp favicon.ico _site/
           cp -R assets/css _site/assets/
           cp -R assets/js  _site/assets/
           cp -R assets/img _site/assets/
+
+      - name: Juntar os CSS num arquivo só (só na cópia publicada)
+        # Os ~16 CSS do index.html viram um bundle.css minificado: o
+        # navegador só pinta a primeira tela depois de baixar todo CSS do
+        # <head>, e no celular cada arquivo a mais pesa. No repositório nada
+        # muda — continua-se editando cada CSS separado. Ver
+        # scripts/montar-site.py.
+        run: python3 scripts/montar-site.py _site
 
       - name: Empacotar para o Pages
         uses: actions/upload-pages-artifact@v3

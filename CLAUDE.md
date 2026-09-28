@@ -8,9 +8,10 @@ próprios. No ar em **https://fricheiago-ux.github.io/site-caio-melki/**, via
 GitHub Pages, publicado automaticamente a partir do repositório
 [fricheiago-ux/site-caio-melki](https://github.com/fricheiago-ux/site-caio-melki)
 (público). O domínio **caiomelkimfc.com.br** está registrado na Hostinger;
-conectado ao Pages em 25/09/2026 — o site já abre em caiomelkimfc.com.br;
-falta só o certificado HTTPS sair (automático) e marcar "Enforce HTTPS"
-nas configurações do Pages (ver "Ao publicar", item 5).
+conectado ao Pages em 25/09/2026, com HTTPS desde 26/09/2026 — **o endereço
+oficial agora é https://caiomelkimfc.com.br/** (o do GitHub Pages redireciona
+para ele). canonical, Open Graph, JSON-LD, `robots.txt` e `sitemap.xml`
+apontam para o domínio (ver "Ao publicar", item 5).
 
 ---
 
@@ -39,14 +40,17 @@ bater com o disco, o disco está certo e isto ficou desatualizado.
 ```
 index.html                     ← a página inteira; site de uma página só
 robots.txt, sitemap.xml        ← adicionados na revisão de SEO/performance
-                                  (22/09/2026); apontam para a URL do GitHub
-                                  Pages — atualizar se o domínio próprio for
-                                  conectado (ver "Ao publicar")
+                                  (22/09/2026); apontam para
+                                  https://caiomelkimfc.com.br/ desde 26/09/2026
 assets/
   css/design-system/           ← tokens, animações, efeitos, componentes
   css/site/                    ← CSS específico de cada seção do site
   js/design-system/            ← idem, em JS
   js/site/                     ← idem, em JS
+  js/vendor/                   ← bibliotecas de terceiros servidas pelo site
+                                  (GSAP, Flip, three.js), carregadas sob
+                                  demanda — ver "SEO e performance"
+scripts/montar-site.py         ← roda só na publicação: junta os CSS
   img/
     hero/                      ← imagens da manchete + originais brutos antes
                                   do recorte (caio-cuidando.png,
@@ -305,7 +309,8 @@ recomprimida com a original.
 
 Revisão feita em 22/09/2026 (`/revisar-performance`). O que já está no ar:
 - `<link rel="canonical">`, tags Open Graph e `twitter:card` no `<head>`,
-  apontando para a URL do GitHub Pages.
+  apontando para https://caiomelkimfc.com.br/ (até 26/09/2026 apontavam
+  para a URL do GitHub Pages).
 - Dado estruturado `schema.org/Physician` (JSON-LD) com nome, CRM/RQE,
   cidade/UF e especialidade — só com dado que já estava na própria página.
   **Sem endereço nem telefone**, porque a página não os divulga (rodapé marca
@@ -325,10 +330,48 @@ como parte desta revisão técnica.
 **Teste real do PageSpeed Insights (21/09/2026), depois das correções acima
 já publicadas:** Desempenho 62 (celular) / 94 (computador), Acessibilidade
 96/93, Práticas recomendadas 100/100, SEO 100/100. Relatório completo em
-`_nao-publicar/relatorios/pagespeed-report-2026-09-21.md`. Maior oportunidade que ainda
-falta: os 3 scripts de CDN (lucide, three.js, GSAP) têm cache curto — hospedar
-localmente em `assets/js/vendor/` é o próximo ganho de performance mais óbvio,
-não feito ainda.
+`_nao-publicar/relatorios/pagespeed-report-2026-09-21.md`.
+
+**Revisão de performance no celular, 26/09/2026** (queixa do Iago: abertura
+lenta e travando). Medido com Playwright simulando celular intermediário
+(CPU 4x mais lenta, rede Slow 4G do Lighthouse, arquivos comprimidos como no
+GitHub Pages): primeira letra da hero de 5,65s → 4,6s, 584 → 373 KB, animação
+da abertura de ~14 → 55–60 quadros/s. O que foi feito:
+- **Auroras sem `filter: blur(110px)`** (`effects.css`) — era de longe o que
+  mais pesava (sozinho derrubava para ~14 fps). O desfoque agora vem pronto
+  no degradê de um `::before` 70% maior, com o perfil do blur calculado
+  numericamente; comparado por print, mesma luz. **Não voltar a pôr
+  `filter: blur` grande em elemento que se mexe.**
+- **Bibliotecas em `assets/js/vendor/`**, não mais em CDN (cada domínio
+  externo custava uma conexão nova no 4G): GSAP 3.13.0 + Flip e three.js
+  r134. **Nenhuma carrega na abertura**: `carrega-pilares.js` baixa as três
+  (e depois `pilares.js` e `pilares-particulas.js`) só quando a seção dos
+  pilares chega a ~2 telas, ou 12s após o carregamento.
+- **Ícones em `assets/js/design-system/icons.js`** (feito em outro chat,
+  28/09/2026): só os 32 ícones usados, desenhados à mão a partir do lucide
+  1.48.0, mesma API `lucide.createIcons()`. Conferido contra a biblioteca
+  original: SVG idêntico em todos os ícones da página. **Ícone novo =
+  acrescentar em `ICONES` nesse arquivo** (instrução no topo); sem isso o
+  `<i data-lucide>` novo não desenha e aparece um aviso no console.
+- **CSS num arquivo só, só na publicação**: `scripts/montar-site.py` (roda
+  no `deploy.yml`, sobre a cópia em `_site/`) junta e minifica os ~15 CSS
+  do `index.html` em `assets/css/site/bundle.css`. No repositório nada
+  muda — edita-se cada CSS separado. Conferido por print, seção a seção,
+  celular e computador: idêntico ao site sem o bundle.
+- Scripts do fim da página com `defer`; fontes do Google sem bloquear a
+  pintura (`media="print"` + `onload`).
+- **Logo-máscara** `logo-sem-fundo.png`: 1250px/266 KB → 420px/14 KB (só o
+  canal alfa, que é o que a máscara usa). O original bruto não foi mantido
+  no repositório — a versão antiga está no histórico do git.
+- **Abertura não espera mais a página inteira**: `hero-type.js` e `intro.js`
+  carregam logo depois da `#hero` (não no fim com os outros ~20 scripts), e
+  o loader espera só as imagens da hero + fontes, com o mínimo de 1,5s
+  contado desde a abertura da página.
+Resultado final medido em 28/09/2026 (mesma simulação, contra a versão no
+ar): primeira letra 5,9s → 4,1s; 584 → 311 KB; quadros travados na abertura
+44/48 → 6/228.
+Não mexido (é desenho, não técnica): as durações da coreografia (loader
+1,5s, nomes nas portas 1,5s, portas 1,05s).
 
 ## Duplicação — saber antes de mexer
 
@@ -376,10 +419,11 @@ Como funciona por baixo:
    feito e conferido em 25/09/2026** — domínio raiz com só os 4 registros A
    do GitHub (185.199.108.153, .109.153, .110.153, .111.153, sem AAAA
    sobrando) e `www` também resolvendo para o GitHub. O site já abre em
-   http://caiomelkimfc.com.br, ainda "Não seguro": o GitHub emite o
-   certificado HTTPS sozinho (de minutos a ~24h). **Último passo, só o
-   Iago:** quando o cadeado aparecer, marcar "Enforce HTTPS" em
-   github.com/fricheiago-ux/site-caio-melki/settings/pages (a caixa fica
-   cinza até o certificado sair). Depois disso, trocar a URL do GitHub
-   Pages pela do domínio em `canonical`/Open Graph/JSON-LD do `index.html`,
-   `robots.txt` e `sitemap.xml`.
+   https://caiomelkimfc.com.br. **HTTPS: certificado emitido em 26/09/2026**,
+   mas só depois de ~12h travado — o domínio tinha sido cadastrado no Pages
+   antes de o DNS existir, e o pedido de certificado não tentou de novo
+   sozinho. Destravou removendo e recolocando o domínio em
+   github.com/fricheiago-ux/site-caio-melki/settings/pages (se voltar a
+   acontecer, é o primeiro passo). "Enforce HTTPS" marcado pelo Iago nessa
+   mesma página. URLs do site (canonical, OG, JSON-LD, robots, sitemap)
+   trocadas para o domínio no mesmo dia.

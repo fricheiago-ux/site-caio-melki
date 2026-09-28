@@ -96,16 +96,26 @@ background-repeat: repeat;
 }
 
 /* ---------- Auroras suaves (luz natural) ---------- */
+/* Até 26/09/2026 cada aurora era um degradê com filter: blur(110px) por
+   cima. Com 12 auroras de 420–680px se mexendo, esse desfoque era de longe
+   o que mais pesava no site: no celular derrubava a animação para ~14
+   quadros por segundo (sem ele, 60). Agora o desfoque vem "pronto" no
+   próprio degradê — os valores abaixo são o perfil do degradê antigo depois
+   do blur(110px), calculado numericamente — num ::before 70% maior (o
+   espaço que o desfoque ocupava além da borda). Mesma luz, sem filtro. */
 .aurora {
 position: absolute;
-border-radius: 50%;
-filter: blur(110px);
 pointer-events: none;
 will-change: transform;
 }
-.aurora--sage { background: radial-gradient(circle, rgba(127, 163, 130, 0.46), transparent 66%); }
-.aurora--sand { background: radial-gradient(circle, rgba(232, 223, 205, 0.85), transparent 66%); }
-.aurora--sky { background: radial-gradient(circle, rgba(127, 163, 184, 0.34), transparent 66%); }
+.aurora::before {
+content: "";
+position: absolute;
+inset: -35%;
+}
+.aurora--sage::before { background: radial-gradient(circle closest-side, rgba(127, 163, 130, 0.236) 0%, rgba(127, 163, 130, 0.225) 10%, rgba(127, 163, 130, 0.195) 20%, rgba(127, 163, 130, 0.153) 30%, rgba(127, 163, 130, 0.108) 40%, rgba(127, 163, 130, 0.068) 50%, rgba(127, 163, 130, 0.037) 60%, rgba(127, 163, 130, 0.018) 70%, rgba(127, 163, 130, 0.007) 80%, rgba(127, 163, 130, 0.003) 90%, rgba(127, 163, 130, 0.0) 100%); }
+.aurora--sand::before { background: radial-gradient(circle closest-side, rgba(232, 223, 205, 0.436) 0%, rgba(232, 223, 205, 0.416) 10%, rgba(232, 223, 205, 0.36) 20%, rgba(232, 223, 205, 0.283) 30%, rgba(232, 223, 205, 0.2) 40%, rgba(232, 223, 205, 0.126) 50%, rgba(232, 223, 205, 0.069) 60%, rgba(232, 223, 205, 0.033) 70%, rgba(232, 223, 205, 0.014) 80%, rgba(232, 223, 205, 0.005) 90%, rgba(232, 223, 205, 0.0) 100%); }
+.aurora--sky::before { background: radial-gradient(circle closest-side, rgba(127, 163, 184, 0.174) 0%, rgba(127, 163, 184, 0.166) 10%, rgba(127, 163, 184, 0.144) 20%, rgba(127, 163, 184, 0.113) 30%, rgba(127, 163, 184, 0.08) 40%, rgba(127, 163, 184, 0.05) 50%, rgba(127, 163, 184, 0.028) 60%, rgba(127, 163, 184, 0.013) 70%, rgba(127, 163, 184, 0.005) 80%, rgba(127, 163, 184, 0.002) 90%, rgba(127, 163, 184, 0.0) 100%); }
 
 /* ---------- Painel translúcido (ref-7, tema claro) ---------- */
 .glass-panel {
@@ -180,7 +190,7 @@ pointer-events: none;
 }
 
 /* ---------- Alívio para celular e telas de toque ----------
-   Duas camadas decorativas custam caro no Safari do iPhone e não fazem
+   Camadas decorativas que custam caro no Safari do iPhone e não fazem
    falta visual em tela pequena (achado ao investigar travadas na abertura,
    27/09/2026 — por leitura do código, não medido em aparelho):
 
@@ -189,11 +199,10 @@ pointer-events: none;
       refaz a mistura com tudo que está por baixo a cada quadro em que
       algo muda (digitação, rolagem, luzes). A 4,5% de opacidade, tirar o
       blend não muda o que se enxerga.
-   2. .aurora usa blur(110px) em círculos de 420–680px, 4 só na hero e 12
-      na página. Cada um já é um radial-gradient que some antes da borda,
-      então o blur quase não acrescenta nada — e o custo cresce com o raio.
-      60px mantém o mesmo visual e reduz bastante a superfície borrada. */
+   (As auroras também estavam aqui, com blur(60px) no celular; saíram em
+   28/09/2026 porque desde 26/09 elas não usam mais filter nenhum — o
+   desfoque vem pronto no degradê, ver .aurora acima. Um blur aqui voltaria
+   a pesar e borraria o degradê duas vezes.) */
 @media (hover: none), (max-width: 900px) {
 .noise-overlay { mix-blend-mode: normal; }
-.aurora { filter: blur(60px); }
 }

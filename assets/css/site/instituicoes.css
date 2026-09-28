@@ -75,14 +75,15 @@ max-height: 96px;
 width: auto;
 height: auto;
 object-fit: contain;
-mix-blend-mode: screen;
-/* Logos são marcas escuras sobre fundo branco. Sobre o verde principal,
-   multiply as apagaria — então invertemos para branco e usamos screen,
-   mesma técnica da ref-1. Valores calibrados para as cinco ficarem
-   com o mesmo peso (~5.4:1 de contraste contra o verde). */
-filter: grayscale(1) invert(1) brightness(1.6) contrast(1.25);
+/* Os PNGs em assets/img/formacao/ são silhuetas brancas com transparência
+   real (alfa), não mais imagens opacas de fundo branco. Antes, um filtro
+   (invert + brightness + contrast) somado a mix-blend-mode: screen tentava
+   apagar o fundo — mas qualquer pixel de fundo que não fosse branco puro
+   (compressão, antialiasing) não zerava e aparecia como um retângulo de
+   outro tom de verde atrás do logo, mais visível no celular. Com alfa, só
+   a tinta do logo aparece; não existe mais fundo para vazar. */
 opacity: 1;
-transition: filter var(--dur-base) ease, opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo);
+transition: opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out-expo);
 }
 .inst-card:hover .inst-card__logo,
 .inst-card:focus-visible .inst-card__logo,
@@ -157,9 +158,15 @@ transition: color var(--dur-fast) ease;
 }
 @media (max-width: 720px) {
 .inst-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-3); }
-.inst-card { height: 160px; }
+.inst-card { height: 200px; }
 .inst-card__logo { max-height: 72px; }
 .inst-card__face { padding: var(--sp-4); }
+/* Verso no celular: com 160px de card e o texto no tamanho do computador,
+   4 dos 5 versos passavam da borda (até 204px de conteúdo) — o "GRADUAÇÃO"
+   saía por cima e a fonte por baixo. Card um pouco mais alto, verso mais
+   compacto (28/09/2026, medido em 360 e 390px). */
+.inst-card__face--desc { padding: var(--sp-3) var(--sp-4); gap: var(--sp-1); }
+.inst-card__texto { font-size: min(0.8125rem, 3.65vw); line-height: 1.4; }
 /* 5 itens em grade de 2 colunas sobra 1 sozinho na última linha, grudado
    à esquerda — parece que falta um card à direita. Ocupando as duas
    colunas só nesse item e limitando a largura dele à metade, ele fica

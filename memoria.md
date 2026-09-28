@@ -78,6 +78,18 @@ Formato: uma linha por fato, com data.
      5 cards em grade de 2 colunas no mobile, o último ficava sozinho e
      colado à esquerda — `.inst-item:last-child` agora ocupa a linha
      inteira e centraliza a própria largura.
+     **Segunda rodada (2026-09-28)** — o retângulo voltou a ser reportado, agora
+     nos outros logos (só no celular). Diagnóstico refeito do zero: medindo os
+     pixels, `hc-ufmg.png` e `cruzeiro.png` tinham 33–40% do "fundo" fora do
+     branco puro (só ~2–4% nos outros); o truque filtro+`mix-blend-mode:
+     screen` só apaga o fundo se ele for exatamente branco, e a imagem opaca
+     inteira participa da mistura, então qualquer resíduo vira um retângulo
+     de outro tom de verde. Correção definitiva: os 5 PNGs de
+     `assets/img/formacao/` viraram silhuetas brancas com transparência real
+     (alfa calculado com a mesma conta do filtro antigo) e o CSS perdeu o
+     `filter` e o `mix-blend-mode`. Originais guardados em
+     `_nao-publicar/backup-logos-formacao-antes-alpha/`. As 5 `<img>` ganharam
+     `?v=N` (antes não tinham, e o PNG antigo ficaria em cache).
   6. [NÃO VERIFICADO] trajetoria (carrossel `atuacao.css/js`) — funciona por
      arraste/toque, tem regras @media, comportamento touch não testado.
   7. [NÃO VERIFICADO] agendar + rodapé (`fechamento.css`) — só 1 regra
@@ -292,3 +304,21 @@ Formato: uma linha por fato, com data.
   tirava o `.is-open` mas o card seguia virado — bloco `@media (hover:
   none)` no fim de `instituicoes.css` faz só `.is-open`/foco virar o card
   no toque. Cache-busting unificado em `?v=95`.
+
+- 2026-09-28 — Juntadas as pendências locais de 28/09 (branch
+  `pendentes-28-09`: cartão verde "Gerente do cuidado", favicons, logos de
+  formação com alfa real, textos novos, e uma revisão de performance feita em
+  paralelo por outro chat) com a revisão de performance desta sessão (26/09).
+  As duas tinham resolvido as mesmas coisas de jeitos diferentes; ficou:
+  ícones = `icons.js` do outro chat (SVG idêntico ao lucide, conferido; o meu
+  `vendor/lucide-icones.min.js` saiu); bibliotecas = cópias locais em
+  `vendor/`, carregadas pelo `carrega-pilares.js` do outro chat (que antes
+  apontava para CDN); auroras sem blur e abertura logo após a hero = desta
+  sessão. `scripts/montar-site.py` existia mas não estava ligado ao
+  `deploy.yml` — ligado agora, junto com a cópia do `favicon.ico` (sem ela o
+  .ico não ia para o ar). Achado na revisão: no celular, 4 dos 5 versos dos
+  cards de formação vazavam do card (até 204px de texto em 160px) — card
+  200px + verso mais compacto; cabe de 360px para cima (em 320px sobram
+  1–2px dentro do padding). Cartão verde testado de verdade em emulação de
+  toque: toque acende e apaga sozinho (~0,4s), rolagem começando nele não
+  acende nem prende, mouse acende/apaga, ícone gira 90°, cursor clareia.
